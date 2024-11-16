@@ -10,14 +10,20 @@ Clone this project
 
 Go to the project directory
 
--   Then run:
+-   Then install dependencies:
 
 ```bash
     npm i
 ```
 
-To run the project, use:
+Start the development server:
 
 ```bash
     npm run dev
+```
+
+- Open your browser and go to:
+
+```bash
+    http://localhost:8000
 ```
