@@ -1,0 +1,15 @@
+{
+  "name": "lestari-by-ithree",
+  "version": "1.0.0",
+  "description": "Final Project by iThree",
+  "main": "index.js",
+  "scripts": {
+    "dev": "concurrently  \"tailwindcss -i ./css/input.css -o ./css/styles.css --watch\" \"php -S localhost:8000\"  ",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "tailwindcss": "^3.4.15"
+  }
+}
