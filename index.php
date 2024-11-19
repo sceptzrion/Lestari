@@ -99,12 +99,12 @@
   <!-- NAVBAR END -->
 
   <!-- HERO -->
-  <div class="background w-full h-[737px] bg-gradient-to-br from-green to-dark-green flex flex-row gap-[21px]">
+  <div class="background justify-between w-full h-[737px] bg-gradient-to-br from-green to-dark-green flex flex-row gap-[21px]">
     <div class="header relative text-light pt-[204px] pl-[74px] gap-[23px] flex flex-col">
       <p class="text-5xl leading-normal font-extrabold w-[554px]">Tukarkan Sampah, Dapatkan Hadiahnya</p>
       <p class="text-2xl font-medium ">#TukarSampahUntukKebaikan</p>
     </div>
-    <img src="./images/hero banner.png" class="rounded-l-[238px] shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] h-full w-[976px] float-end" alt="Hero">
+    <img src="./images/hero banner.png" class="rounded-l-[238px] h-full w-[976px] float-end" alt="Hero">
   </div>
   <!-- HERO END -->
 </body>
