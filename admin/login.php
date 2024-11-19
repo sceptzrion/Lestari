@@ -22,7 +22,7 @@
           </label>
           <label for="password" class="flex flex-col gap-2">
             <span>Password</span>
-            <input type="password" id="password" name="password" class="w-full h-10 rounded-lg py-3 px-4 bg-transparent border-2 border-gray" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Password harus memiliki minimal 8 karakter" placeholder="Password">
+            <input type="password" id="password" name="password" class="w-full h-10 rounded-lg py-3 px-4 bg-transparent border-2 border-gray" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" placeholder="Password">
           </label>
           <button class="bg-[#009951] h-10 rounded-lg text-base font-bold items-center text-light border-2 border-dark">Masuk</button>
         </form>
