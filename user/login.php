@@ -20,7 +20,7 @@
             <div class="w-full max-w-md">
                 <!-- Logo -->
                 <div class="text-center mb-6">
-                    <img src="https://via.placeholder.com/150x50?text=Lestari" alt="Lestari Logo" class="mx-auto">
+                    <img src="../images/Logo.png" alt="Lestari Logo" class="mx-auto">
                 </div>
 
                 <!-- Title -->
@@ -31,15 +31,12 @@
                     <img src="https://via.placeholder.com/20" alt="Google Logo" class="mr-2">
                     <span class="text-sm font-medium text-gray-700">Sign in with Google</span>
                 </button>
-                
-
                 <div class="flex items-center mb-6 justify-center">
                     <hr class="w-1/4 border-gray-300">
                     <span class="mx-2 text-gray-500 text-sm">Or sign in with email</span>
                     <hr class="w-1/4 border-gray-300">
                 </div>
                 
-
                 <!-- Form -->
                 <form action="#" method="POST" class="space-y-4">
                     <!-- Nama Lengkap -->
@@ -85,7 +82,7 @@
                 </form>
 
                 <!-- Sign Up Link -->
-                <p class="mt-6 text-center text-sm text-gray-600">
+                <p class="mt-2 mb-6 text-center text-sm text-gray-600">
                     Don’t have an account? <a href="#" class="text-indigo-600 hover:underline">Sign up</a>
                 </p>
             </div>
