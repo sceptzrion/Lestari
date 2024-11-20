@@ -78,14 +78,14 @@
           </ul>
         </div>
         <!-- if user not login -->
-        <!-- <div class="navbar-end ml-[56px] flex flex-row gap-[30px] w-auto">
+        <div class="navbar-end ml-[56px] flex flex-row gap-[30px] w-auto">
           <a class="btn px-5 h-[42px] shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] rounded-[20px] bg-gradient-to-r from-green to-dark-green text-[20px] border-dark border-[1px] font-medium text-light">Sign In</a>
           <a class="btn btn-outline px-4 h-[42px] shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] border-dark border-2 rounded-[20px] text-[20px] font-medium text-dark">Sign up</a>
-        </div> -->
+        </div>
         <!-- endif -->
 
         <!-- if user login -->
-        <div class="ml-[233px] content-center">
+        <!-- <div class="ml-[233px] content-center">
           <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
             <div class="w-[50px] rounded-full">
               <img
@@ -93,7 +93,7 @@
                 src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
             </div>
           </div>
-        </div>
+        </div> -->
         <!-- endif -->
     </div>
   <!-- NAVBAR END -->
@@ -104,7 +104,7 @@
       <p class="text-5xl leading-normal font-extrabold w-[554px]">Tukarkan Sampah, Dapatkan Hadiahnya</p>
       <p class="text-2xl font-medium ">#TukarSampahUntukKebaikan</p>
     </div>
-    <img src="./images/hero banner.png" class="rounded-l-[238px] h-full w-[976px] float-end" alt="Hero">
+    <img src="./images/hero banner.png" class="rounded-l-[238px] h-full w-[791px] float-end" alt="Hero">
   </div>
   <!-- HERO END -->
 </body>
