@@ -4,7 +4,7 @@
   "description": "Final Project by iThree",
   "main": "index.js",
   "scripts": {
-    "dev": "concurrently  \"tailwindcss -i ./css/input.css -o ./css/styles.css --watch\" \"php -S localhost:8000\"  ",
+    "dev": "concurrently  \"tailwindcss -i ./css/input.css -o ./css/styles.css\" \"php -S localhost:8000\"  ",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
