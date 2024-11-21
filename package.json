@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Final Project by iThree",
   "main": "index.js",
+  "engines": { "node": "18.x" },
   "scripts": {
     "dev": "concurrently  \"tailwindcss -i ./css/input.css -o ./css/styles.css\" \"php -S localhost:8000\"  ",
     "test": "echo \"Error: no test specified\" && exit 1"
