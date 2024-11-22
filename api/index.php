@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="./css/styles.css" rel="stylesheet">
+  <link href="../css/styles.css" rel="stylesheet">
   <title>Homepage Lestari</title>
 </head>
 <body>
@@ -42,7 +42,7 @@
         </div>
         <!-- BRAND LOGO -->
         <a href="." class="">
-          <img src="./images/Logo.png" alt="Logo Lestari">
+          <img src="../images/Logo.png" alt="Logo Lestari">
         </a>
       </div>
     <!-- DESKTOP MODE -->
@@ -55,15 +55,15 @@
                 <summary>Layanan</summary>
                   <ul ul class="bg-light absolute left-1/2 transform -translate-x-1/2 rounded-[10px] border-[1px] shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] border-gray px-[14px] py-[20px] flex-wrap flex items-center gap-[11px] min-w-[475px] h-[144px]">
                     <li><button class="btn btn-success w-[142px] shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] rounded-[20px] flex px-2.5 content-center text-light text-base font-medium gap-[10px]">
-                      <img src="./images/truck.png" class="w-10" alt="">
+                      <img src="../images/truck.png" class="w-10" alt="">
                       <p>Drop Off</p>
                     </button></li>
                     <li><button class="btn btn-success w-[142px] shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] rounded-[20px] flex px-2.5 content-center text-light text-base font-medium gap-[5px]">
-                      <img src="./images/reward.png" class="w-10" alt="">
+                      <img src="../images/reward.png" class="w-10" alt="">
                       <p>Rewards</p>
                     </button></li>
                     <li><button class="btn btn-success w-[142px] shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] rounded-[20px] flex px-2.5 content-center text-light text-base font-medium gap-2">
-                      <img src="./images/Vector.png" class="w-8" alt="">
+                      <img src="../images/Vector.png" class="w-8" alt="">
                       <p>Tutorial</p>
                     </button></li>
                     <li><button class="btn btn-success w-[171px] shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] rounded-[20px] flex px-2.5 content-center text-light text-base font-medium gap-[6px]">
