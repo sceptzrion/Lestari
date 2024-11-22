@@ -13,6 +13,7 @@
         <img src="../images/Logo admin.png" class="w-[314px] h-[169px]" alt="Logo Lestari">
         <h1 class="text-[32px] font-bold self-center text-center">Admin Login</h1>
       </div>
+      
       <h2 class="text-[26px] font-light">Lestari</h2>
       <div class="flex flex-col form-bg w-[488px] h-[411px] rounded-lg border-2 border-gray p-6 gap-3">
         <form action="" class="flex flex-col gap-6">
