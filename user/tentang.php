@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link href="./css/styles.css" rel="stylesheet">
+  <link href="../css/styles.css" rel="stylesheet">
   <title>Landing Page - Lestari</title>
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
@@ -57,14 +57,14 @@
         </div>
         <!-- BRAND LOGO -->
         <a href="." class="">
-          <img src="./images/Logo.png" alt="Logo Lestari">
+          <img src="../images/Logo.png" alt="Logo Lestari">
         </a>
       </div>
     <!-- DESKTOP MODE -->
         <div class="navbar-center hidden lg:flex">
           <ul class="menu menu-horizontal px-1 text-dark text-base">
             <li><a>Home</a></li>
-            <li><a href="./user/tentang.php">Tentang kami</a></li>
+            <li><a href="./tentang.php">Tentang kami</a></li>
             <li>
               <details>
                 <summary>Layanan</summary>
@@ -113,112 +113,37 @@
     </div>
   <!-- NAVBAR END -->
 
-  <!-- Hero Section -->
-  <section class="bg-green-600 text-white py-16">
-    <div class="container mx-auto px-4">
-      <div class="flex flex-col md:flex-row items-center">
-        <div class="md:w-1/2 text-center md:text-left">
-          <h1 class="text-4xl md:text-5xl font-bold mb-4">Tukarkan Sampah, Dapatkan Hadiahnya</h1>
-          <p class="text-xl">#TukarSampahUntukKebaikan</p>
-        </div>
-        <div class="md:w-1/2 text-center mt-8 md:mt-0">
-          <img src="./images/hero banner.png" alt="Hero Image" class="rounded-lg mx-auto max-w-full h-auto" />
-        </div>
-      </div>
-    </div>
-  </section>
-
   <!-- About Section -->
+   <!-- left section -->
   <section class="bg-white py-16">
     <div class="container mx-auto px-4">
       <div class="flex flex-col md:flex-row items-center">
-        <div class="md:w-1/2 text-center mb-8 md:mb-0">
-          <img src="https://placehold.co/400x300" alt="Drop Off" class="mx-auto max-w-full h-auto" />
-        </div>
-        <div class="md:w-1/2">
-          <h2 class="text-3xl text-black font-bold mb-4">Kelola Sampah dengan Drop Off, Dapatkan Poin Berharga</h2>
-          <p class="text-black mb-6">
-            LESTARI mengajak kamu untuk melakukan Drop Off sampah di bank sampah terdekat dan mendapatkan hadiah menarik. Pilih sampahmu (plastik, kertas, logam, atau organik), bawa ke bank sampah, kumpulkan poin, dan tukarkan dengan hadiah ramah lingkungan.
-          </p>
-
-          <div class="mb-6">
-            <div class="bg-green-600 text-white p-4 rounded-lg shadow-md flex justify-between">
-              <div class="text-center">
-                <h5 class="font-bold text-xl">2jt Kg+</h5>
-                <p>Sampah di Daur Ulang</p>
-              </div>
-              <div class="text-center">
-                <h5 class="font-bold text-xl">15rb+</h5>
-                <p>Pengguna</p>
+        <div class="w-full">
+          <h2 class="text-3xl text-[#1B5E20] font-bold mb-4 text-center">Tentang LESTARI</h2>
+          <p class="text-black mb-8 text-center">
+          LESTARI adalah platform inovatif yang berkomitmen untuk menciptakan Indonesia yang lebih bersih dan berkelanjutan melalui pengelolaan sampah yang bertanggung jawab.</p>
+          <div class="flex flex-col md:flex-row">
+            <div class="w-full md:w-1/2 pr-8">
+              <h2 class="text-2xl text-[#1B5E20] font-bold mb-4">Mengapa LESTARI ?</h2>
+              <div>
+                <p class="text-black mb-4 text-justify">
+                LESTARI hadir sebagai solusi inovatif untuk mengatasi permasalahan sampah di Indonesia. Kami menggabungkan teknologi modern dengan kesadaran lingkungan untuk menciptakan ekosistem daur ulang yang efektif dan berkelanjutan.
+                </p>
+                <p class="text-black mb-4 text-justify">
+                Kami akan membangun jaringan bank sampah yang luas dan mengembangkan sistem reward yang memotivasi masyarakat untuk berpartisipasi dalam program daur ulang. Melalui platform kami, setiap orang dapat dengan mudah berkontribusi pada pelestarian lingkungan.
+                </p>
+                <p class="text-black mb-6 text-justify">
+                Bersama LESTARI, mari kita wujudkan Indonesia yang lebih bersih dan berkelanjutan untuk generasi mendatang.
+                </p>
+                <div class="mt-4 text-black font-bold cursor-pointer hover:text-green-600">
+                  Lihat Selengkapnya →
+                </div>
               </div>
             </div>
+            <!-- right section -->
+            <div class="w-full md:w-1/2 bg-gradient-to-r from-green to-dark-green rounded-lg p-6">
+            </div>
           </div>
-
-          <div class="mt-4 text-black font-bold cursor-pointer hover:text-green-600">Lihat Selengkapnya →</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Services Section -->
-  <section class="py-16 bg-gray-100">
-    <div class="container mx-auto px-4">
-      <h2 class="text-3xl text-black font-bold mb-2">Layanan</h2>
-      <p class="text-black mb-8">Revolusi daur ulang dari Mall Sampah untuk semua orang</p>
-      <div class="text-black grid md:grid-cols-3 gap-6">
-        <div class="bg-white p-6 rounded-lg shadow-md">
-          <h5 class="text-xl mb-2">🎁 Rewards</h5>
-          <p>LESTARI mengubah sampahmu menjadi poin yang bisa kamu kumpulkan dan tukarkan dengan hadiah ramah lingkungan.</p>
-        </div>
-        <div class="bg-white p-6 rounded-lg shadow-md">
-          <h5 class="text-xl mb-2">📺 Tutorial</h5>
-          <p>LESTARI menyediakan tutorial untuk mengubah limbah menjadi barang bernilai dengan gaya hidup ramah lingkungan.</p>
-        </div>
-        <div class="bg-white p-6 rounded-lg shadow-md">
-          <h5 class="text-xl mb-2">🛍️ Marketplace</h5>
-          <p>Marketplace LESTARI menyediakan produk berkualitas daur ulang. Dukungan nyata untuk gerakan ramah lingkungan.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Jenis sampah Section -->
-  <section class="bg-white py-16">
-    <div class="text-black container mx-auto px-4">
-      <h2 class="text-3xl font-bold mb-2">Jenis Sampah</h2>
-      <p class="mb-8">Lihat semua jenis sampah yang kami daur ulang.</p>
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-        <div class="bg-white p-4 rounded-lg shadow-md text-center">
-          <div class="text-4xl mb-2">📄</div>
-          <p>Kertas</p>
-        </div>
-        <div class="bg-white p-4 rounded-lg shadow-md text-center">
-          <div class="text-4xl mb-2">🛢️</div>
-          <p>Plastik</p>
-        </div>
-        <div class="bg-white p-4 rounded-lg shadow-md text-center">
-          <div class="text-4xl mb-2">🥫</div>
-          <p>Aluminium</p>
-        </div>
-        <div class="bg-white p-4 rounded-lg shadow-md text-center">
-          <div class="text-4xl mb-2">🔩</div>
-          <p>Besi & Logam</p>
-        </div>
-        <div class="bg-white p-4 rounded-lg shadow-md text-center">
-          <div class="text-4xl mb-2">💻</div>
-          <p>Elektronik</p>
-        </div>
-        <div class="bg-white p-4 rounded-lg shadow-md text-center">
-          <div class="text-4xl mb-2">🍾</div>
-          <p>Botol Kaca</p>
-        </div>
-        <div class="bg-white p-4 rounded-lg shadow-md text-center">
-          <div class="text-4xl mb-2">🏷️</div>
-          <p>Merek</p>
-        </div>
-        <div class="bg-white p-4 rounded-lg shadow-md text-center">
-          <div class="text-4xl mb-2">🍃</div>
-          <p>Khusus</p>
         </div>
       </div>
     </div>

@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign Up - Lestari</title>
+    <title>Sign In - Lestari</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -36,16 +36,22 @@
                 </div>
 
                 <!-- Title -->
-                <h1 class="text-2xl font-bold text-lg-start text-gray-800 mb-8">Sign Up to Lestari</h1>
+                <h1 class="text-2xl font-bold text-lg-start text-gray-800 mb-8">Sign In to Lestari</h1>
+
+                <!-- Google Sign In -->
+                <button class="flex items-center justify-center w-full border border-gray-00 py-2 rounded-[20px] shadow-sm hover:bg-gray-200 transition mb-4">
+                    <img src="https://via.placeholder.com/20" alt="Google Logo" class="mr-2">
+                    <span class="text-sm font-medium text-gray-700">Sign In with Google</span>
+                </button>
+                <div class="flex items-center mb-4 justify-center">
+                    <hr class="w-1/4 border-gray-300">
+                    <span class="mx-2 text-gray-500 text-sm">Or sign in with email</span>
+                    <hr class="w-1/4 border-gray-300">
+                </div>
 
                 <!-- Form -->
                 <form action="#" method="POST" class="space-y-4">
-                    <!-- Nama Lengkap -->
-                    <div>
-                        <label for="name" class="block text-sm font-medium text-gray-700">Nama Lengkap</label>
-                        <input type="text" id="name" name="name" placeholder="Masukkan Nama Lengkap"
-                            class="mt-1 block w-full px-3 py-2 border rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
-                    </div>
+                    
                     <!-- Email -->
                     <div>
                         <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
@@ -56,35 +62,24 @@
                     <div>
                         <label for="password" class="block text-sm font-medium text-gray-700 flex justify-between">
                             Password
-                            <a href="#" class="text-sm text-indigo-600 hover:underline">Forgot?</a>
                         </label>
                         <input type="password" id="password" name="password" placeholder="Password"
                             class="mt-1 block w-full px-3 py-2 border rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
+                        <a href="#" class="block mt-2 text-sm text-indigo-600 hover:underline">Forgot password?</a>
                     </div>
-                    <!-- Alamat -->
-                    <div>
-                        <label for="address" class="block text-sm font-medium text-gray-700">Alamat</label>
-                        <input type="text" id="address" name="address" placeholder="Masukkan Alamat Lengkap"
-                            class="mt-1 block w-full px-3 py-2 border rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
-                    </div>
-                    <!-- Nomor HP -->
-                    <div>
-                        <label for="phone" class="block text-sm font-medium text-gray-700">Nomor HP</label>
-                        <input type="text" id="phone" name="phone" placeholder="Contoh : +628976537899"
-                            class="mt-1 block w-full px-3 py-2 border rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
-                    </div>
-                    <!-- Sign Up Button -->
+
+                    <!-- Sign In Button -->
                     <div>
                         <button type="submit"
-                            class="w-full bg-black text-white py-2 rounded-lg shadow-md hover:bg-gray-800 transition">
-                            Register
+                            class="w-full mt-4 bg-black text-white py-2 rounded-lg shadow-md hover:bg-gray-800 transition">
+                            Sign In
                         </button>
                     </div>
                 </form>
 
-                <!-- Sign Up -->
+                <!-- Sign In -->
                 <p class="mt-2 mb-6 text-center text-sm text-gray-600">
-                Already have an account? <a href="./signin.php" class="text-indigo-600 hover:underline">Sign in</a>
+                Dont have an account? <a href="./signup.php" class="text-indigo-600 hover:underline">Sign up</a>
                 </p>
             </div>
         </div>

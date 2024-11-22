@@ -36,7 +36,7 @@
                 </div>
 
                 <!-- Title -->
-                <h1 class="text-2xl font-bold text-lg-start text-gray-800 mb-4">Sign Up to Lestari</h1>
+                <h1 class="text-2xl font-bold text-lg-start text-gray-800 mb-8">Sign Up to Lestari</h1>
 
                 <!-- Google Sign Up -->
                 <button class="flex items-center justify-center w-full border border-gray-00 py-2 rounded-[20px] shadow-sm hover:bg-gray-200 transition mb-4">
@@ -50,9 +50,10 @@
                 </div>
                 
                 <!-- Email Sign Up -->
-                <button class="flex items-center justify-center w-full border border-gray-00 py-2 rounded-[20px] shadow-sm hover:bg-gray-200 transition mb-6">
+                <a href="./signup_email.php" class="flex items-center justify-center w-full border border-gray-00 py-2 rounded-[20px] shadow-sm hover:bg-gray-200 transition mb-6">
                     <span class="text-sm font-medium text-gray-700">Continue with email</span>
-                </button>
+                </a>
+
 
                 <p class="mt-2 mb-6 text-center text-sm text-gray-600">
                     By creating an account you agree with our 
@@ -64,7 +65,7 @@
 
                  <!-- Term -->
                  <p class="mt-2 mb-6 text-center text-sm text-gray-600">
-                 Already have an account? <a href="#" class="text-indigo-600 hover:underline">Sign in</a>
+                 Already have an account? <a href="./signin.php" class="text-indigo-600 hover:underline">Sign in</a>
                 </p>
             </div>
         </div>
