@@ -8526,6 +8526,14 @@ html:has(.drawer-open.drawer-open){
   left: 50%;
 }
 
+.right-2{
+  right: 0.5rem;
+}
+
+.top-2{
+  top: 0.5rem;
+}
+
 .isolate{
   isolation: isolate;
 }
@@ -8592,35 +8600,13 @@ html:has(.drawer-open.drawer-open){
   margin-right: auto;
 }
 
-.my-2{
-  margin-top: 0.5rem;
-  margin-bottom: 0.5rem;
-}
-
-.my-5{
-  margin-top: 1.25rem;
-  margin-bottom: 1.25rem;
-}
-
 .my-6{
   margin-top: 1.5rem;
   margin-bottom: 1.5rem;
 }
 
-.mb-0{
-  margin-bottom: 0px;
-}
-
-.mb-1{
-  margin-bottom: 0.25rem;
-}
-
 .mb-2{
   margin-bottom: 0.5rem;
-}
-
-.mb-3{
-  margin-bottom: 0.75rem;
 }
 
 .mb-4{
@@ -8631,12 +8617,12 @@ html:has(.drawer-open.drawer-open){
   margin-bottom: 1.5rem;
 }
 
-.me-2{
-  margin-inline-end: 0.5rem;
+.mb-8{
+  margin-bottom: 2rem;
 }
 
-.me-3{
-  margin-inline-end: 0.75rem;
+.mb-\[15px\]{
+  margin-bottom: 15px;
 }
 
 .ml-\[233px\]{
@@ -8655,20 +8641,8 @@ html:has(.drawer-open.drawer-open){
   margin-right: 0.5rem;
 }
 
-.mr-\[17px\]{
-  margin-right: 17px;
-}
-
-.ms-auto{
-  margin-inline-start: auto;
-}
-
 .mt-1{
   margin-top: 0.25rem;
-}
-
-.mt-10{
-  margin-top: 2.5rem;
 }
 
 .mt-2{
@@ -8683,24 +8657,40 @@ html:has(.drawer-open.drawer-open){
   margin-top: 1rem;
 }
 
-.mt-\[18px\]{
-  margin-top: 18px;
+.mt-8{
+  margin-top: 2rem;
+}
+
+.mt-\[31px\]{
+  margin-top: 31px;
 }
 
 .mt-\[33px\]{
   margin-top: 33px;
 }
 
-.mt-\[7px\]{
-  margin-top: 7px;
+.mt-\[46px\]{
+  margin-top: 46px;
+}
+
+.mt-\[50px\]{
+  margin-top: 50px;
+}
+
+.mt-\[54px\]{
+  margin-top: 54px;
 }
 
 .mt-\[63px\]{
   margin-top: 63px;
 }
 
-.mb-\[15px\]{
-  margin-bottom: 15px;
+.mt-\[21px\]{
+  margin-top: 21px;
+}
+
+.mt-10{
+  margin-top: 2.5rem;
 }
 
 .box-border{
@@ -8806,6 +8796,10 @@ html:has(.drawer-open.drawer-open){
   height: 2.5rem;
 }
 
+.h-12{
+  height: 3rem;
+}
+
 .h-5{
   height: 1.25rem;
 }
@@ -8818,12 +8812,24 @@ html:has(.drawer-open.drawer-open){
   height: 144px;
 }
 
+.h-\[156px\]{
+  height: 156px;
+}
+
 .h-\[169px\]{
   height: 169px;
 }
 
 .h-\[1px\]{
   height: 1px;
+}
+
+.h-\[27px\]{
+  height: 27px;
+}
+
+.h-\[2px\]{
+  height: 2px;
 }
 
 .h-\[411px\]{
@@ -8838,12 +8844,16 @@ html:has(.drawer-open.drawer-open){
   height: 59px;
 }
 
+.h-\[62px\]{
+  height: 62px;
+}
+
 .h-\[737px\]{
   height: 737px;
 }
 
-.h-\[81px\]{
-  height: 81px;
+.h-\[88px\]{
+  height: 88px;
 }
 
 .h-\[92px\]{
@@ -8862,24 +8872,28 @@ html:has(.drawer-open.drawer-open){
   height: 100%;
 }
 
-.h-\[156px\]{
-  height: 156px;
+.h-\[349px\]{
+  height: 349px;
 }
 
-.h-\[467px\]{
-  height: 467px;
+.h-\[34px\]{
+  height: 34px;
 }
 
-.h-\[62px\]{
-  height: 62px;
+.h-\[340px\]{
+  height: 340px;
 }
 
-.h-\[27px\]{
-  height: 27px;
+.h-\[5px\]{
+  height: 5px;
 }
 
-.h-\[2px\]{
-  height: 2px;
+.h-\[17px\]{
+  height: 17px;
+}
+
+.h-\[21px\]{
+  height: 21px;
 }
 
 .min-h-screen{
@@ -8914,12 +8928,28 @@ html:has(.drawer-open.drawer-open){
   width: 142px;
 }
 
+.w-\[159px\]{
+  width: 159px;
+}
+
 .w-\[171px\]{
   width: 171px;
 }
 
+.w-\[223px\]{
+  width: 223px;
+}
+
+.w-\[233px\]{
+  width: 233px;
+}
+
 .w-\[271px\]{
   width: 271px;
+}
+
+.w-\[30px\]{
+  width: 30px;
 }
 
 .w-\[314px\]{
@@ -8946,12 +8976,12 @@ html:has(.drawer-open.drawer-open){
   width: 622px;
 }
 
-.w-\[791px\]{
-  width: 791px;
+.w-\[639px\]{
+  width: 639px;
 }
 
-.w-\[953px\]{
-  width: 953px;
+.w-\[791px\]{
+  width: 791px;
 }
 
 .w-\[this-is\\\\\]{
@@ -8974,32 +9004,28 @@ html:has(.drawer-open.drawer-open){
   width: 100%;
 }
 
-.w-\[223px\]{
-  width: 223px;
+.w-\[593px\]{
+  width: 593px;
 }
 
-.w-\[851px\]{
-  width: 851px;
+.w-\[100px\]{
+  width: 100px;
 }
 
-.w-\[159px\]{
-  width: 159px;
+.w-\[82px\]{
+  width: 82px;
 }
 
-.w-\[233px\]{
-  width: 233px;
-}
-
-.w-\[30px\]{
-  width: 30px;
-}
-
-.w-\[232px\]{
-  width: 232px;
+.w-\[72px\]{
+  width: 72px;
 }
 
 .min-w-\[475px\]{
   min-width: 475px;
+}
+
+.max-w-full{
+  max-width: 100%;
 }
 
 .max-w-md{
@@ -9069,6 +9095,10 @@ html:has(.drawer-open.drawer-open){
 
 .transform-none{
   transform: none;
+}
+
+.cursor-pointer{
+  cursor: pointer;
 }
 
 .touch-auto{
@@ -9345,6 +9375,10 @@ html:has(.drawer-open.drawer-open){
   grid-auto-flow: column dense;
 }
 
+.grid-cols-2{
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
 .flex-row{
   flex-direction: row;
 }
@@ -9537,6 +9571,10 @@ html:has(.drawer-open.drawer-open){
   gap: 0.75rem;
 }
 
+.gap-4{
+  gap: 1rem;
+}
+
 .gap-6{
   gap: 1.5rem;
 }
@@ -9561,12 +9599,20 @@ html:has(.drawer-open.drawer-open){
   gap: 21px;
 }
 
+.gap-\[22px\]{
+  gap: 22px;
+}
+
 .gap-\[23px\]{
   gap: 23px;
 }
 
 .gap-\[30px\]{
   gap: 30px;
+}
+
+.gap-\[31px\]{
+  gap: 31px;
 }
 
 .gap-\[5px\]{
@@ -9577,18 +9623,32 @@ html:has(.drawer-open.drawer-open){
   gap: 6px;
 }
 
-.gap-5{
-  gap: 1.25rem;
+.gap-\[9px\]{
+  gap: 9px;
 }
 
-.gap-\[22px\]{
-  gap: 22px;
+.gap-10{
+  gap: 2.5rem;
+}
+
+.gap-\[20px\]{
+  gap: 20px;
+}
+
+.gap-\[18px\]{
+  gap: 18px;
 }
 
 .space-x-2 > :not([hidden]) ~ :not([hidden]){
   --tw-space-x-reverse: 0;
   margin-right: calc(0.5rem * var(--tw-space-x-reverse));
   margin-left: calc(0.5rem * calc(1 - var(--tw-space-x-reverse)));
+}
+
+.space-x-4 > :not([hidden]) ~ :not([hidden]){
+  --tw-space-x-reverse: 0;
+  margin-right: calc(1rem * var(--tw-space-x-reverse));
+  margin-left: calc(1rem * calc(1 - var(--tw-space-x-reverse)));
 }
 
 .space-y-4 > :not([hidden]) ~ :not([hidden]){
@@ -9931,6 +9991,10 @@ html:has(.drawer-open.drawer-open){
   border-radius: 0.5rem;
 }
 
+.rounded-\[5px\]{
+  border-radius: 5px;
+}
+
 .rounded-b{
   border-bottom-right-radius: 0.25rem;
   border-bottom-left-radius: 0.25rem;
@@ -10082,14 +10146,29 @@ html:has(.drawer-open.drawer-open){
   border-color: rgb(217 217 217 / var(--tw-border-opacity, 1));
 }
 
-.border-light-bg-content{
+.border-\[\#828282\]{
   --tw-border-opacity: 1;
-  border-color: rgb(245 245 245 / var(--tw-border-opacity, 1));
+  border-color: rgb(130 130 130 / var(--tw-border-opacity, 1));
 }
 
 .bg-\[\#009951\]{
   --tw-bg-opacity: 1;
   background-color: rgb(0 153 81 / var(--tw-bg-opacity, 1));
+}
+
+.bg-\[\#2ECC71\]{
+  --tw-bg-opacity: 1;
+  background-color: rgb(46 204 113 / var(--tw-bg-opacity, 1));
+}
+
+.bg-\[\#F6AC0A\]{
+  --tw-bg-opacity: 1;
+  background-color: rgb(246 172 10 / var(--tw-bg-opacity, 1));
+}
+
+.bg-\[\#FFDE75\]{
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 222 117 / var(--tw-bg-opacity, 1));
 }
 
 .bg-\[rgb\(255\2c 0\2c 0\)\]{
@@ -10117,28 +10196,37 @@ html:has(.drawer-open.drawer-open){
   background-color: rgb(245 245 245 / var(--tw-bg-opacity, 1));
 }
 
-.bg-success{
-  --tw-bg-opacity: 1;
-  background-color: var(--fallback-su,oklch(var(--su)/var(--tw-bg-opacity, 1)));
-}
-
 .bg-transparent{
   background-color: transparent;
 }
 
-.bg-\[\#FFDE75\]{
+.bg-base-200{
   --tw-bg-opacity: 1;
-  background-color: rgb(255 222 117 / var(--tw-bg-opacity, 1));
+  background-color: var(--fallback-b2,oklch(var(--b2)/var(--tw-bg-opacity, 1)));
 }
 
-.bg-\[\#2ECC71\]{
+.bg-\[\#828282\]{
   --tw-bg-opacity: 1;
-  background-color: rgb(46 204 113 / var(--tw-bg-opacity, 1));
+  background-color: rgb(130 130 130 / var(--tw-bg-opacity, 1));
 }
 
-.bg-gray{
+.bg-\[\#E5E5E5\]{
   --tw-bg-opacity: 1;
-  background-color: rgb(217 217 217 / var(--tw-bg-opacity, 1));
+  background-color: rgb(229 229 229 / var(--tw-bg-opacity, 1));
+}
+
+.bg-\[\#C0392B\]{
+  --tw-bg-opacity: 1;
+  background-color: rgb(192 57 43 / var(--tw-bg-opacity, 1));
+}
+
+.bg-\[\#299E63\]{
+  --tw-bg-opacity: 1;
+  background-color: rgb(41 158 99 / var(--tw-bg-opacity, 1));
+}
+
+.bg-opacity-25{
+  --tw-bg-opacity: 0.25;
 }
 
 .bg-gradient-to-b{
@@ -10157,9 +10245,33 @@ html:has(.drawer-open.drawer-open){
   background-image: linear-gradient(to top, var(--tw-gradient-stops));
 }
 
+.from-\[\#08FCF0\]{
+  --tw-gradient-from: #08FCF0 var(--tw-gradient-from-position);
+  --tw-gradient-to: rgb(8 252 240 / 0) var(--tw-gradient-to-position);
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+}
+
+.from-\[\#0AF649\]{
+  --tw-gradient-from: #0AF649 var(--tw-gradient-from-position);
+  --tw-gradient-to: rgb(10 246 73 / 0) var(--tw-gradient-to-position);
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+}
+
 .from-\[\#1E5E3F\]{
   --tw-gradient-from: #1E5E3F var(--tw-gradient-from-position);
   --tw-gradient-to: rgb(30 94 63 / 0) var(--tw-gradient-to-position);
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+}
+
+.from-\[\#ECF310\]{
+  --tw-gradient-from: #ECF310 var(--tw-gradient-from-position);
+  --tw-gradient-to: rgb(236 243 16 / 0) var(--tw-gradient-to-position);
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+}
+
+.from-\[\#F6AC0A\]{
+  --tw-gradient-from: #F6AC0A var(--tw-gradient-from-position);
+  --tw-gradient-to: rgb(246 172 10 / 0) var(--tw-gradient-to-position);
   --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
 }
 
@@ -10175,50 +10287,6 @@ html:has(.drawer-open.drawer-open){
   --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
 }
 
-.from-\[\#F6AC0A\]{
-  --tw-gradient-from: #F6AC0A var(--tw-gradient-from-position);
-  --tw-gradient-to: rgb(246 172 10 / 0) var(--tw-gradient-to-position);
-  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
-}
-
-.from-\[\#08FCF0\]{
-  --tw-gradient-from: #08FCF0 var(--tw-gradient-from-position);
-  --tw-gradient-to: rgb(8 252 240 / 0) var(--tw-gradient-to-position);
-  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
-}
-
-.from-\[\#0AF649\]{
-  --tw-gradient-from: #0AF649 var(--tw-gradient-from-position);
-  --tw-gradient-to: rgb(10 246 73 / 0) var(--tw-gradient-to-position);
-  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
-}
-
-.from-\[\#ECF310\]{
-  --tw-gradient-from: #ECF310 var(--tw-gradient-from-position);
-  --tw-gradient-to: rgb(236 243 16 / 0) var(--tw-gradient-to-position);
-  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
-}
-
-.to-\[\#3FC483\]{
-  --tw-gradient-to: #3FC483 var(--tw-gradient-to-position);
-}
-
-.to-dark-green{
-  --tw-gradient-to: #0F3823 var(--tw-gradient-to-position);
-}
-
-.to-dark-green-admin{
-  --tw-gradient-to: #1E5D3F var(--tw-gradient-to-position);
-}
-
-.to-\[\#F6AC0A\]{
-  --tw-gradient-to: #F6AC0A var(--tw-gradient-to-position);
-}
-
-.to-\[\#906506\]{
-  --tw-gradient-to: #906506 var(--tw-gradient-to-position);
-}
-
 .to-\[\#05968F\]{
   --tw-gradient-to: #05968F var(--tw-gradient-to-position);
 }
@@ -10227,8 +10295,24 @@ html:has(.drawer-open.drawer-open){
   --tw-gradient-to: #06902B var(--tw-gradient-to-position);
 }
 
+.to-\[\#3FC483\]{
+  --tw-gradient-to: #3FC483 var(--tw-gradient-to-position);
+}
+
 .to-\[\#898D09\]{
   --tw-gradient-to: #898D09 var(--tw-gradient-to-position);
+}
+
+.to-\[\#906506\]{
+  --tw-gradient-to: #906506 var(--tw-gradient-to-position);
+}
+
+.to-dark-green{
+  --tw-gradient-to: #0F3823 var(--tw-gradient-to-position);
+}
+
+.to-dark-green-admin{
+  --tw-gradient-to: #1E5D3F var(--tw-gradient-to-position);
 }
 
 .decoration-slice{
@@ -10349,10 +10433,6 @@ html:has(.drawer-open.drawer-open){
   padding: 0.5rem;
 }
 
-.p-3{
-  padding: 0.75rem;
-}
-
 .p-4{
   padding: 1rem;
 }
@@ -10363,6 +10443,22 @@ html:has(.drawer-open.drawer-open){
 
 .p-\[15px\]{
   padding: 15px;
+}
+
+.p-\[34px\]{
+  padding: 34px;
+}
+
+.p-1{
+  padding: 0.25rem;
+}
+
+.p-1\.5{
+  padding: 0.375rem;
+}
+
+.p-0\.5{
+  padding: 0.125rem;
 }
 
 .px-1{
@@ -10405,9 +10501,29 @@ html:has(.drawer-open.drawer-open){
   padding-right: 14px;
 }
 
-.py-1{
-  padding-top: 0.25rem;
-  padding-bottom: 0.25rem;
+.px-\[23px\]{
+  padding-left: 23px;
+  padding-right: 23px;
+}
+
+.px-\[26px\]{
+  padding-left: 26px;
+  padding-right: 26px;
+}
+
+.px-\[27px\]{
+  padding-left: 27px;
+  padding-right: 27px;
+}
+
+.px-\[90px\]{
+  padding-left: 90px;
+  padding-right: 90px;
+}
+
+.py-16{
+  padding-top: 4rem;
+  padding-bottom: 4rem;
 }
 
 .py-2{
@@ -10420,29 +10536,14 @@ html:has(.drawer-open.drawer-open){
   padding-bottom: 0.75rem;
 }
 
-.py-4{
-  padding-top: 1rem;
-  padding-bottom: 1rem;
+.py-6{
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
 }
 
-.py-5{
-  padding-top: 1.25rem;
-  padding-bottom: 1.25rem;
-}
-
-.py-\[20px\]{
-  padding-top: 20px;
-  padding-bottom: 20px;
-}
-
-.py-\[34px\]{
-  padding-top: 34px;
-  padding-bottom: 34px;
-}
-
-.px-\[26px\]{
-  padding-left: 26px;
-  padding-right: 26px;
+.py-8{
+  padding-top: 2rem;
+  padding-bottom: 2rem;
 }
 
 .py-9{
@@ -10450,13 +10551,58 @@ html:has(.drawer-open.drawer-open){
   padding-bottom: 2.25rem;
 }
 
-.py-6{
-  padding-top: 1.5rem;
-  padding-bottom: 1.5rem;
+.py-\[13px\]{
+  padding-top: 13px;
+  padding-bottom: 13px;
 }
 
-.pl-5{
-  padding-left: 1.25rem;
+.py-\[20px\]{
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.py-\[50px\]{
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+
+.py-4{
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.py-\[75px\]{
+  padding-top: 75px;
+  padding-bottom: 75px;
+}
+
+.px-\[41px\]{
+  padding-left: 41px;
+  padding-right: 41px;
+}
+
+.px-\[9px\]{
+  padding-left: 9px;
+  padding-right: 9px;
+}
+
+.py-0{
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
+
+.py-\[35px\]{
+  padding-top: 35px;
+  padding-bottom: 35px;
+}
+
+.px-2{
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+
+.pb-\[49px\]{
+  padding-bottom: 49px;
 }
 
 .pl-\[23px\]{
@@ -10471,6 +10617,10 @@ html:has(.drawer-open.drawer-open){
   padding-left: 74px;
 }
 
+.pl-\[7px\]{
+  padding-left: 7px;
+}
+
 .pl-\[9px\]{
   padding-left: 9px;
 }
@@ -10479,28 +10629,40 @@ html:has(.drawer-open.drawer-open){
   padding-right: 41px;
 }
 
+.pr-\[45px\]{
+  padding-right: 45px;
+}
+
 .pt-10{
   padding-top: 2.5rem;
+}
+
+.pt-5{
+  padding-top: 1.25rem;
 }
 
 .pt-\[204px\]{
   padding-top: 204px;
 }
 
-.pb-\[49px\]{
-  padding-bottom: 49px;
-}
-
 .pt-\[33px\]{
   padding-top: 33px;
 }
 
-.pl-\[7px\]{
-  padding-left: 7px;
+.pt-\[25px\]{
+  padding-top: 25px;
 }
 
-.pr-\[45px\]{
-  padding-right: 45px;
+.pb-\[50px\]{
+  padding-bottom: 50px;
+}
+
+.pb-24{
+  padding-bottom: 6rem;
+}
+
+.pb-11{
+  padding-bottom: 2.75rem;
 }
 
 .text-left{
@@ -10569,9 +10731,18 @@ html:has(.drawer-open.drawer-open){
   line-height: 2.25rem;
 }
 
+.text-4xl{
+  font-size: 2.25rem;
+  line-height: 2.5rem;
+}
+
 .text-5xl{
   font-size: 3rem;
   line-height: 1;
+}
+
+.text-\[10px\]{
+  font-size: 10px;
 }
 
 .text-\[20px\]{
@@ -10611,10 +10782,6 @@ html:has(.drawer-open.drawer-open){
   line-height: 1rem;
 }
 
-.text-\[10px\]{
-  font-size: 10px;
-}
-
 .font-bold{
   font-weight: 700;
 }
@@ -10631,12 +10798,12 @@ html:has(.drawer-open.drawer-open){
   font-weight: 500;
 }
 
-.font-extralight{
-  font-weight: 200;
-}
-
 .font-normal{
   font-weight: 400;
+}
+
+.font-semibold{
+  font-weight: 600;
 }
 
 .uppercase{
@@ -10720,14 +10887,14 @@ html:has(.drawer-open.drawer-open){
   color: rgb(0 0 0 / var(--tw-text-opacity, 1));
 }
 
-.text-light{
-  --tw-text-opacity: 1;
-  color: rgb(255 255 255 / var(--tw-text-opacity, 1));
-}
-
 .text-gray{
   --tw-text-opacity: 1;
   color: rgb(217 217 217 / var(--tw-text-opacity, 1));
+}
+
+.text-light{
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity, 1));
 }
 
 .underline{
@@ -11262,6 +11429,14 @@ html:has(.drawer-open.drawer-open){
 }
 
 @media (min-width: 768px){
+  .md\:mb-0{
+    margin-bottom: 0px;
+  }
+
+  .md\:mt-0{
+    margin-top: 0px;
+  }
+
   .md\:flex{
     display: flex;
   }
@@ -11270,9 +11445,30 @@ html:has(.drawer-open.drawer-open){
     width: 50%;
   }
 
+  .md\:grid-cols-3{
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .md\:grid-cols-4{
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .md\:flex-row{
+    flex-direction: row;
+  }
+
   .md\:px-16{
     padding-left: 4rem;
     padding-right: 4rem;
+  }
+
+  .md\:text-left{
+    text-align: left;
+  }
+
+  .md\:text-5xl{
+    font-size: 3rem;
+    line-height: 1;
   }
 }
 
@@ -11287,6 +11483,15 @@ html:has(.drawer-open.drawer-open){
 }
 
 @media (prefers-color-scheme: dark){
+  .dark\:bg-dark{
+    --tw-bg-opacity: 1;
+    background-color: rgb(0 0 0 / var(--tw-bg-opacity, 1));
+  }
+
+  .dark\:\[color-scheme\:light\]{
+    color-scheme: light;
+  }
+
   @media (min-width: 1024px){
     .dark\:lg\:hover\:\[paint-order\:markers\]:hover{
       paint-order: markers;
