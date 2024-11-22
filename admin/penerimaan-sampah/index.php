@@ -100,17 +100,18 @@
              <div class="bg-light rounded-[10px] w-full h-auto shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] flex flex-col py-[35px] px-[41px] mt-[46px] text-dark">
                 <h2 class="text-2xl font-bold text-center">Status Penerimaan Sampah</h2>
                 <form action="" class="flex flex-row text-base font-medium mt-[21px] w-full gap-[20px] content-start">
-                    <select id="jenis-sampah" name="jenis-sampah" class="w-[223px] h-[34px] bg-light border border-gray shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] rounded-[5px] px-[9px] text-base font-medium">
+                    <select id="jenis-sampah" name="jenis-sampah" class="w-[223px] h-auto bg-light border border-gray shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] rounded-[5px] px-[9px] text-base font-medium">
                         <option disabled selected>Semua Status</option>
                         <option>Option 1</option>
                         <option>Option 2</option>
                     </select>
-                    <select id="jenis-sampah" name="jenis-sampah" class="w-[223px] h-[34px] bg-light border border-gray shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] px-[9px] text-base font-medium">
+                    <select id="jenis-sampah" name="jenis-sampah" class="w-[223px] h-auto bg-light border border-gray shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] px-[9px] text-base font-medium">
                         <option disabled selected>Semua Jenis Sampah</option>
                         <option>Option 1</option>
                         <option>Option 2</option>
                     </select>
-                    <input type="date" id="date" name="date" class="w-[223px] h-[34px] bg-light text-dark dark:[color-scheme:light] border border-gray shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] px-[9px] text-base font-medium">
+                    <input type="date" id="date" name="date" class="w-[223px] h-auto bg-light text-dark dark:[color-scheme:light] border border-gray shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] px-[9px] text-base font-medium">
+                    <button class="btn btn-success bg-[#2E9E5D] rounded-[5px] w-[101px] h-[34px] text-base font-semibold text-light shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] border border-gray">Filter</button>
                 </form>
                 <div class="table mt-10">
                     <div class="overflow-x-auto">
@@ -144,8 +145,8 @@
                                 <td class="border border-[#828282]">50</td>
                                 <td class="border border-[#828282]">
                                     <div class="flex flex-row gap-[18px] justify-center items-center">
-                                        <button onclick="document.getElementById('verified').showModal()" class="bg-[#2ECC71] w-[72px] h-[21px] rounded-[10px] text-light text-[10px] font-semibold text-center">Verifikasi</button>
-                                        <button onclick="document.getElementById('denied').showModal()" class="bg-[#C0392B] w-[72px] h-[21px] rounded-[10px] text-light text-[10px] font-semibold text-center">Tolak</button>
+                                        <button onclick="document.getElementById('verified').showModal()" class="bg-[#2ECC71] w-[72px] h-[25px] rounded-[10px] text-light text-[10px] font-semibold text-center">Verifikasi</button>
+                                        <button onclick="document.getElementById('denied').showModal()" class="bg-[#C0392B] w-[72px] h-[25px] rounded-[10px] text-light text-[10px] font-semibold text-center">Tolak</button>
                                     </div>
                                 </td>
                             </tr>
@@ -164,8 +165,8 @@
                                 <td class="border border-[#828282]">50</td>
                                 <td class="border border-[#828282]">
                                     <div class="flex flex-row gap-[18px] justify-center items-center">
-                                        <button onclick="document.getElementById('verified').showModal()" class="bg-[#2ECC71] w-[72px] h-[21px] rounded-[10px] text-light text-[10px] font-semibold text-center">Verifikasi</button>
-                                        <button onclick="document.getElementById('denied').showModal()" class="bg-[#C0392B] w-[72px] h-[21px] rounded-[10px] text-light text-[10px] font-semibold text-center">Tolak</button>
+                                        <button onclick="document.getElementById('verified').showModal()" class="bg-[#2ECC71] w-[72px] h-[25px] rounded-[10px] text-light text-[10px] font-semibold text-center">Verifikasi</button>
+                                        <button onclick="document.getElementById('denied').showModal()" class="bg-[#C0392B] w-[72px] h-[25px] rounded-[10px] text-light text-[10px] font-semibold text-center">Tolak</button>
                                     </div>
                                 </td>
                             </tr>
@@ -184,8 +185,8 @@
                                 <td class="border border-[#828282]">50</td>
                                 <td class="border border-[#828282]">
                                     <div class="flex flex-row gap-[18px] justify-center items-center">
-                                        <button onclick="document.getElementById('verified').showModal()" class="bg-[#2ECC71] w-[72px] h-[21px] rounded-[10px] text-light text-[10px] font-semibold text-center">Verifikasi</button>
-                                        <button onclick="document.getElementById('denied').showModal()" class="bg-[#C0392B] w-[72px] h-[21px] rounded-[10px] text-light text-[10px] font-semibold text-center">Tolak</button>
+                                        <button onclick="document.getElementById('verified').showModal()" class="bg-[#2ECC71] w-[72px] h-[25px] rounded-[10px] text-light text-[10px] font-semibold text-center">Verifikasi</button>
+                                        <button onclick="document.getElementById('denied').showModal()" class="bg-[#C0392B] w-[72px] h-[25px] rounded-[10px] text-light text-[10px] font-semibold text-center">Tolak</button>
                                     </div>
                                 </td>
                             </tr>
@@ -204,8 +205,8 @@
                                 <td class="border border-[#828282]">50</td>
                                 <td class="border border-[#828282]">
                                     <div class="flex flex-row gap-[18px] justify-center items-center">
-                                        <button onclick="document.getElementById('verified').showModal()" class="bg-[#2ECC71] w-[72px] h-[21px] rounded-[10px] text-light text-[10px] font-semibold text-center">Verifikasi</button>
-                                        <button onclick="document.getElementById('denied').showModal()" class="bg-[#C0392B] w-[72px] h-[21px] rounded-[10px] text-light text-[10px] font-semibold text-center">Tolak</button>
+                                        <button onclick="document.getElementById('verified').showModal()" class="bg-[#2ECC71] w-[72px] h-[25px] rounded-[10px] text-light text-[10px] font-semibold text-center">Verifikasi</button>
+                                        <button onclick="document.getElementById('denied').showModal()" class="bg-[#C0392B] w-[72px] h-[25px] rounded-[10px] text-light text-[10px] font-semibold text-center">Tolak</button>
                                     </div>
                                 </td>
                             </tr>

@@ -126,7 +126,7 @@
                     <div class="flex flex-col gap-[5px]">
                         <label for="berat-sampah" class="px-1">Berat Sampah</label>
                         <div class="flex flex-row gap-[9px] items-center w-full justify-between">
-                            <input type="number" id="berat-sampah" name="berat-sampah" min="0" placeholder="0" class="w-full h-12 bg-light border border-gray px-[14px] font-light">
+                            <input type="number" id="berat-sampah" name="berat-sampah" min="0" placeholder="0" class="w-full h-12 bg-light border border-gray px-[14px] font-light dark:[color-scheme:light]">
                             <span class="text-base font-light justify-self-end">Kg</span>
                         </div>
                     </div>
