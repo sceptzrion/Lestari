@@ -114,7 +114,7 @@
   <!-- NAVBAR END -->
 
   <!-- Hero Section -->
-  <section class="bg-green-600 text-white py-16">
+  <section class="bg-gradient-to-r from-green to-dark-green text-white py-16">
     <div class="container mx-auto px-4">
       <div class="flex flex-col md:flex-row items-center">
         <div class="md:w-1/2 text-center md:text-left">
@@ -142,7 +142,7 @@
           </p>
 
           <div class="mb-6">
-            <div class="bg-green-600 text-white p-4 rounded-lg shadow-md flex justify-between">
+            <div class="bg-gradient-to-r from-green to-dark-green text-white p-4 rounded-lg shadow-md flex justify-between">
               <div class="text-center">
                 <h5 class="font-bold text-xl">2jt Kg+</h5>
                 <p>Sampah di Daur Ulang</p>
@@ -224,10 +224,15 @@
     </div>
   </section>
 
-  <!-- Footer -->
-  <footer class="bg-green-600 text-white py-8">
+ <!-- Footer -->
+  <footer class="bg-gradient-to-r from-green to-dark-green text-white py-20">
     <div class="container mx-auto px-4 text-center">
-      <p class="mb-4">&copy; 2024 LESTARI. All Rights Reserved.</p>
+      <div class="flex justify-center">
+        <a href="./landingpage.php">
+          <img src="./images/Logo.png" alt="Logo Lestari" class="h-20">
+        </a>
+      </div>
+      <p class="mb-4 mt-4">&copy; 2024 LESTARI. All Rights Reserved.</p>
       <div class="space-x-4">
         <a href="#" class="text-white hover:underline">Instagram</a>
         <a href="#" class="text-white hover:underline">Facebook</a>

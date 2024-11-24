@@ -71,7 +71,7 @@
         </div>
 
         <!-- Right Section -->
-        <div class="hidden md:flex w-1/2 bg-gradient-to-b from-green-500 to-green-700 items-center justify-center p-16 text-white custom-shape">
+        <div class="hidden md:flex w-1/2 bg-gradient-to-b from-[#299E63] to-[#0F3823] items-center justify-center p-16 text-white custom-shape">
             <div class="text-lg-start">
                 <h2 class="text-3xl font-bold mb-4">Be part of the solution, not the pollution</h2>
                 <img src="https://via.placeholder.com/300x150" alt="Recycling Bins" class="mx-auto">
