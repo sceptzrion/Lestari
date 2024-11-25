@@ -8657,6 +8657,10 @@ html:has(.drawer-open.drawer-open){
   margin-top: 1rem;
 }
 
+.mt-7{
+  margin-top: 1.75rem;
+}
+
 .mt-8{
   margin-top: 2rem;
 }
@@ -8675,6 +8679,10 @@ html:has(.drawer-open.drawer-open){
 
 .mt-\[33px\]{
   margin-top: 33px;
+}
+
+.mt-\[42px\]{
+  margin-top: 42px;
 }
 
 .mt-\[46px\]{
@@ -8808,6 +8816,10 @@ html:has(.drawer-open.drawer-open){
   height: 1.25rem;
 }
 
+.h-8{
+  height: 2rem;
+}
+
 .h-\[1024px\]{
   height: 1024px;
 }
@@ -8838,6 +8850,14 @@ html:has(.drawer-open.drawer-open){
 
 .h-\[2px\]{
   height: 2px;
+}
+
+.h-\[30px\]{
+  height: 30px;
+}
+
+.h-\[32px\]{
+  height: 32px;
 }
 
 .h-\[34px\]{
@@ -8948,6 +8968,10 @@ html:has(.drawer-open.drawer-open){
   width: 271px;
 }
 
+.w-\[279px\]{
+  width: 279px;
+}
+
 .w-\[30px\]{
   width: 30px;
 }
@@ -9014,6 +9038,10 @@ html:has(.drawer-open.drawer-open){
 
 .min-w-\[475px\]{
   min-width: 475px;
+}
+
+.max-w-\[238px\]{
+  max-width: 238px;
 }
 
 .max-w-full{
@@ -9371,6 +9399,10 @@ html:has(.drawer-open.drawer-open){
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
+.grid-cols-3{
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
 .flex-row{
   flex-direction: row;
 }
@@ -9577,6 +9609,10 @@ html:has(.drawer-open.drawer-open){
 
 .gap-6{
   gap: 1.5rem;
+}
+
+.gap-7{
+  gap: 1.75rem;
 }
 
 .gap-\[10px\]{
@@ -9971,6 +10007,10 @@ html:has(.drawer-open.drawer-open){
   border-radius: 114px;
 }
 
+.rounded-\[15px\]{
+  border-radius: 15px;
+}
+
 .rounded-\[20px\]{
   border-radius: 20px;
 }
@@ -10150,6 +10190,11 @@ html:has(.drawer-open.drawer-open){
 .bg-\[\#009951\]{
   --tw-bg-opacity: 1;
   background-color: rgb(0 153 81 / var(--tw-bg-opacity, 1));
+}
+
+.bg-\[\#2980B9\]{
+  --tw-bg-opacity: 1;
+  background-color: rgb(41 128 185 / var(--tw-bg-opacity, 1));
 }
 
 .bg-\[\#299E63\]{
@@ -10612,6 +10657,10 @@ html:has(.drawer-open.drawer-open){
   padding-bottom: 100px;
 }
 
+.pb-\[15px\]{
+  padding-bottom: 15px;
+}
+
 .pb-\[49px\]{
   padding-bottom: 49px;
 }
@@ -10622,6 +10671,10 @@ html:has(.drawer-open.drawer-open){
 
 .pl-\[23px\]{
   padding-left: 23px;
+}
+
+.pl-\[27px\]{
+  padding-left: 27px;
 }
 
 .pl-\[41px\]{
@@ -10670,6 +10723,10 @@ html:has(.drawer-open.drawer-open){
 
 .pt-\[75px\]{
   padding-top: 75px;
+}
+
+.pt-\[7px\]{
+  padding-top: 7px;
 }
 
 .text-left{
@@ -10750,6 +10807,10 @@ html:has(.drawer-open.drawer-open){
 
 .text-\[10px\]{
   font-size: 10px;
+}
+
+.text-\[15px\]{
+  font-size: 15px;
 }
 
 .text-\[16px\]{
