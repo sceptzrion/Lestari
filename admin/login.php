@@ -16,7 +16,7 @@
       
       <h2 class="text-[26px] font-light">Lestari</h2>
       <div class="flex flex-col form-bg w-[488px] h-auto rounded-lg border-2 border-gray p-6 gap-3">
-        <form action="./dashboard.php" class="flex flex-col gap-6">
+        <form action="./auth.php" class="flex flex-col gap-6">
           <label for="email" class="flex flex-col gap-2">
             <span>Email</span>
             <input type="email" id="email" name="email" class="w-full h-10 rounded-lg py-3 px-4 bg-transparent border-2 border-gray" placeholder="Email">

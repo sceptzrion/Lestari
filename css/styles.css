@@ -8992,6 +8992,10 @@ html:has(.drawer-open.drawer-open){
   width: 314px;
 }
 
+.w-\[327px\]{
+  width: 327px;
+}
+
 .w-\[345px\]{
   width: 345px;
 }
@@ -9048,10 +9052,6 @@ html:has(.drawer-open.drawer-open){
   width: 100%;
 }
 
-.w-\[327px\]{
-  width: 327px;
-}
-
 .min-w-\[475px\]{
   min-width: 475px;
 }
@@ -9066,10 +9066,6 @@ html:has(.drawer-open.drawer-open){
 
 .max-w-md{
   max-width: 28rem;
-}
-
-.max-w-xs{
-  max-width: 20rem;
 }
 
 .flex-shrink{
@@ -9611,6 +9607,10 @@ html:has(.drawer-open.drawer-open){
   gap: 2.5rem;
 }
 
+.gap-11{
+  gap: 2.75rem;
+}
+
 .gap-2{
   gap: 0.5rem;
 }
@@ -9693,15 +9693,6 @@ html:has(.drawer-open.drawer-open){
 
 .gap-\[9px\]{
   gap: 9px;
-}
-
-.gap-11{
-  gap: 2.75rem;
-}
-
-.gap-x-11{
-  -moz-column-gap: 2.75rem;
-       column-gap: 2.75rem;
 }
 
 .space-x-2 > :not([hidden]) ~ :not([hidden]){
@@ -10309,6 +10300,11 @@ html:has(.drawer-open.drawer-open){
   background-color: transparent;
 }
 
+.bg-success{
+  --tw-bg-opacity: 1;
+  background-color: var(--fallback-su,oklch(var(--su)/var(--tw-bg-opacity, 1)));
+}
+
 .bg-opacity-25{
   --tw-bg-opacity: 0.25;
 }
@@ -10680,16 +10676,6 @@ html:has(.drawer-open.drawer-open){
 .py-\[75px\]{
   padding-top: 75px;
   padding-bottom: 75px;
-}
-
-.px-\[500px\]{
-  padding-left: 500px;
-  padding-right: 500px;
-}
-
-.px-\[94px\]{
-  padding-left: 94px;
-  padding-right: 94px;
 }
 
 .pb-11{
