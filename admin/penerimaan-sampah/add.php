@@ -88,10 +88,10 @@
             <!-- BUTTONS -->
             <div class="flex flex-row gap-[22px] mt-[31px] ">
                 <button class="btn btn-warning h-[42px] px-[27px] text-light rounded-[20px] border border-dark bg-[#F6AC0A] shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] font-medium text-xl" onclick="location.href='">
-                    Penerimaan Sampah
-                </button>
-                <button class="btn btn-warning h-[42px] px-[27px] text-light rounded-[20px] border border-dark bg-[#F6AC0A] shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] font-medium text-xl" onclick="location.href='.'">
                     Lihat Status Penerimaan Sampah
+                </button>
+                <button class="btn btn-warning h-[42px] px-[27px] text-light rounded-[20px] border border-dark bg-[#F6AC0A] shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] font-medium text-xl" onclick="location.href='./add.php'">
+                    Penerimaan Sampah
                 </button>
             </div>
             <!-- BUTTONS END -->
