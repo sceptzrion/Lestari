@@ -86,7 +86,7 @@
             <!-- HEADER END -->
 
             <!-- ADD -->
-            <button class="bg-[#2980B9] h-10 flex flex-row gap-[18px] content-center mt-[42px] w-[279px] pl-[27px] rounded-[5px] items-center border border-gray shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)]">
+            <button onclick="location.href='./add.php'" class="bg-[#2980B9] h-10 flex flex-row gap-[18px] content-center mt-[42px] w-[279px] pl-[27px] rounded-[5px] items-center border border-gray shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)]">
                 <img src="../../images/admin/Plus.png" class="h-[30px]" alt="Add">
                 <span class="text-light text-base font-extrabold">Upload Video baru</span>
             </button>
