@@ -130,14 +130,14 @@
                             <input type="text" id="judul-video" name="judul-video" placeholder="Tambah tag dan tekan Enter" class="w-full h-12 bg-light border border-gray px-3 font-light shadow-[0px_4px_4px_rgba(0,0,0,0.25)]">
                         </div>
                     </div>
-                    <button class="btn btn-success bg-[#2ECC71] rounded-[20px] w-[327px] self-center text-xl font-extrabold text-light shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] border border-gray">Upload Video</button>
+                    <button onclick="getElementById('added').showModal()" class="btn btn-success bg-[#2ECC71] rounded-[20px] w-[327px] self-center text-xl font-extrabold text-light shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] border border-gray">Upload Video</button>
                 </form>
              </section>
 
             <!-- dialogs -->
-            <dialog id="verified" class="modal">
-                <div class="modal-box bg-light w-[593px] h-auto rounded-[20px] gap-10 flex flex-col items-center py-[75px]">
-                    <h3 class="text-[32px] font-bold text-center text-dark">Berhasil Verifikasi</h3>
+            <dialog id="added" class="modal">
+                <div class="modal-box bg-light w-[531px] h-auto py-24 rounded-[20px] gap-6 flex flex-col-reverse items-center align-middle content-center">
+                    <h3 class="text-[32px] font-bold text-center text-dark">Video Berhasil diupload</h3>
                     <img src="../../images/admin/checklist.png" class="w-[100px]" alt="">
                 </div>
                 <form method="dialog" class="modal-backdrop bg-light bg-opacity-25">

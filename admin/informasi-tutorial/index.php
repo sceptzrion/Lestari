@@ -112,114 +112,62 @@
             <!-- GRID -->
             <div class="bg-light w-full h-auto p-10 mt-7 border border-gray shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] grid-cols-3 grid gap-7 rounded-[10px]">
                 <!-- CARDS -->
-                <div class=" bg-light w-auto h-auto shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] px-1.5 pb-[15px]">
-                    <figure class="pt-[7px]">
-                        <img
-                        src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
-                        alt="Shoes"
-                        class="rounded-[15px]" />
-                    </figure>
-                    <div class="mt-[31px] gap-[9px] flex flex-col">
-                        <h2 class="text-dark text-[15px] font-extrabold">Cara Mendaur Ulang Plastik</h2>
-                        <p class="text-xs text-dark font-normal max-w-[238px]">Tips dan trik mendaur ulang sampah plastik menjadi barang bernilai...</p>
-                    </div>
-                    <div class="mt-[50px] h-5 flex flex-row justify-between align-middle">
-                        <button class="bg-[#2ECC71] h-full w-[72px] rounded-[10px] text-[10px] font-semibold text-light">Edit</button>
-                        <button class="bg-[#C0392B] h-full w-[72px] rounded-[10px] text-[10px] font-semibold text-light">Hapus</button>
-                    </div>
-                </div>
-                <!-- CARDS 2 -->
-                <div class=" bg-light w-auto h-auto shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] px-1.5 pb-[15px]">
-                    <figure class="pt-[7px]">
-                        <img
-                        src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
-                        alt="Shoes"
-                        class="rounded-[15px]" />
-                    </figure>
-                    <div class="mt-[31px] gap-[9px] flex flex-col">
-                        <h2 class="text-dark text-[15px] font-extrabold">Cara Mendaur Ulang Plastik</h2>
-                        <p class="text-xs text-dark font-normal max-w-[238px]">Tips dan trik mendaur ulang sampah plastik menjadi barang bernilai...</p>
-                    </div>
-                    <div class="mt-[50px] h-5 flex flex-row justify-between align-middle">
-                        <button class="bg-[#2ECC71] h-full w-[72px] rounded-[10px] text-[10px] font-semibold text-light">Edit</button>
-                        <button class="bg-[#C0392B] h-full w-[72px] rounded-[10px] text-[10px] font-semibold text-light">Hapus</button>
-                    </div>
-                </div>
-                <!-- CARDS 2 -->
-                <div class=" bg-light w-auto h-auto shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] px-1.5 pb-[15px]">
-                    <figure class="pt-[7px]">
-                        <img
-                        src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
-                        alt="Shoes"
-                        class="rounded-[15px]" />
-                    </figure>
-                    <div class="mt-[31px] gap-[9px] flex flex-col">
-                        <h2 class="text-dark text-[15px] font-extrabold">Cara Mendaur Ulang Plastik</h2>
-                        <p class="text-xs text-dark font-normal max-w-[238px]">Tips dan trik mendaur ulang sampah plastik menjadi barang bernilai...</p>
-                    </div>
-                    <div class="mt-[50px] h-5 flex flex-row justify-between align-middle">
-                        <button class="bg-[#2ECC71] h-full w-[72px] rounded-[10px] text-[10px] font-semibold text-light">Edit</button>
-                        <button class="bg-[#C0392B] h-full w-[72px] rounded-[10px] text-[10px] font-semibold text-light">Hapus</button>
-                    </div>
-                </div>
-                <!-- CARDS 2 -->
-                <div class=" bg-light w-auto h-auto shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] px-1.5 pb-[15px]">
-                    <figure class="pt-[7px]">
-                        <img
-                        src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
-                        alt="Shoes"
-                        class="rounded-[15px]" />
-                    </figure>
-                    <div class="mt-[31px] gap-[9px] flex flex-col">
-                        <h2 class="text-dark text-[15px] font-extrabold">Cara Mendaur Ulang Plastik</h2>
-                        <p class="text-xs text-dark font-normal max-w-[238px]">Tips dan trik mendaur ulang sampah plastik menjadi barang bernilai...</p>
-                    </div>
-                    <div class="mt-[50px] h-5 flex flex-row justify-between align-middle">
-                        <button class="bg-[#2ECC71] h-full w-[72px] rounded-[10px] text-[10px] font-semibold text-light">Edit</button>
-                        <button class="bg-[#C0392B] h-full w-[72px] rounded-[10px] text-[10px] font-semibold text-light">Hapus</button>
-                    </div>
-                </div>
-                <!-- CARDS 2 -->
-                <div class=" bg-light w-auto h-auto shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] px-1.5 pb-[15px]">
-                    <figure class="pt-[7px]">
-                        <img
-                        src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
-                        alt="Shoes"
-                        class="rounded-[15px]" />
-                    </figure>
-                    <div class="mt-[31px] gap-[9px] flex flex-col">
-                        <h2 class="text-dark text-[15px] font-extrabold">Cara Mendaur Ulang Plastik</h2>
-                        <p class="text-xs text-dark font-normal max-w-[238px]">Tips dan trik mendaur ulang sampah plastik menjadi barang bernilai...</p>
-                    </div>
-                    <div class="mt-[50px] h-5 flex flex-row justify-between align-middle">
-                        <button class="bg-[#2ECC71] h-full w-[72px] rounded-[10px] text-[10px] font-semibold text-light">Edit</button>
-                        <button class="bg-[#C0392B] h-full w-[72px] rounded-[10px] text-[10px] font-semibold text-light">Hapus</button>
-                    </div>
-                </div>
-                <!-- CARDS 2 -->
-                <div class=" bg-light w-auto h-auto shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] px-1.5 pb-[15px]">
-                    <figure class="pt-[7px]">
-                        <img
-                        src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
-                        alt="Shoes"
-                        class="rounded-[15px]" />
-                    </figure>
-                    <div class="mt-[31px] gap-[9px] flex flex-col">
-                        <h2 class="text-dark text-[15px] font-extrabold">Cara Mendaur Ulang Plastik</h2>
-                        <p class="text-xs text-dark font-normal max-w-[238px]">Tips dan trik mendaur ulang sampah plastik menjadi barang bernilai...</p>
-                    </div>
-                    <div class="mt-[50px] h-5 flex flex-row justify-between align-middle">
-                        <button class="bg-[#2ECC71] h-full w-[72px] rounded-[10px] text-[10px] font-semibold text-light">Edit</button>
-                        <button class="bg-[#C0392B] h-full w-[72px] rounded-[10px] text-[10px] font-semibold text-light">Hapus</button>
-                    </div>
-                </div>
-                <!-- CARDS 2 -->
-            </div>
+                 <?php 
+                    // LOOPING DYNAMIC CARDS
+                    for ($i = 0; $i < 9; $i++) {?>
+                        <div class=" bg-light w-auto h-auto shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] px-1.5 pb-[15px]">
+                        <figure class="pt-[7px]">
+                            <img
+                            src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
+                            alt="Shoes"
+                            class="rounded-[15px]" />
+                        </figure>
+                        <div class="mt-[31px] gap-[9px] flex flex-col">
+                            <h2 class="text-dark text-[15px] font-extrabold">Cara Mendaur Ulang Plastik</h2>
+                            <p class="text-xs text-dark font-normal max-w-[238px]">Tips dan trik mendaur ulang sampah plastik menjadi barang bernilai...</p>
+                        </div>
+                        <div class="mt-[50px] h-5 flex flex-row justify-between align-middle">
+                            <button onclick="getElementById('edit').showModal()" class="bg-[#2ECC71] h-full w-[72px] rounded-[10px] text-[10px] font-semibold text-light">Edit</button>
+                            <button onclick="getElementById('delete').showModal()" class="bg-[#C0392B] h-full w-[72px] rounded-[10px] text-[10px] font-semibold text-light">Hapus</button>
+                        </div>
+                    </div> 
+                    <?php } ?>
+            <!-- CARDS END  -->
 
             <!-- dialogs -->
-            <dialog id="verified" class="modal">
+            <dialog id="edit" class="modal">
+                <div class="modal-box bg-light min-w-[550px] h-auto rounded-[20px] gap-[18px] flex flex-col px-10 py-7">
+                    <h3 class="text-2xl font-bold text-dark">Edit Informasi Tutorial Video</h3>
+                    <form class="flex flex-col gap-[18px] w-full text-dark">
+                        <div class="flex flex-col gap-[9px]">
+                            <label for="judul-video" class="text-sm font-medium">Judul Video</label>
+                            <input type="text" id="judul-video" name="judul-video" value="Cara Mendaur Ulang Plastik" class="w-full h-7 bg-light border border-gray px-1.5 font-normal text-xs">
+                        </div>
+                        <div class="flex flex-col gap-[9px]">
+                            <label for="kategori-video" class="text-sm font-medium">Kategori</label>
+                            <select id="kategori-video" name="kategori-video" class="select select-bordered w-full h-auto bg-light border border-gray px-1.5 text-xs font-normal">
+                                <option>Plastik</option>
+                                <option>Option 1</option>
+                                <option>Option 2</option>
+                            </select>
+                        </div>
+                        <div class="flex flex-col gap-[9px]">
+                            <label for="deskripsi-video" class="text-sm font-medium">Deskripsi Video</label>
+                            <textarea type="text" id="deskripsi-video" name="deskripsi-video" class="w-full min-h-[121px] bg-light border border-gray p-1.5 text-xs font-normal">Tips dan trik mendaur ulang sampah plastik menjadi barang bernilai...</textarea>
+                        </div>
+                        <div class="flex flex-row-reverse gap-[15px] mt-2 items-end">
+                            <button onclick="getElementById('saved').showModal()" class="bg-[#2ECC71] h-auto w-auto px-[14px] py-2 rounded-[10px] text-xs font-semibold text-light">Simpan Perubahan</button>
+                    </form>
+                            <form method="dialog">
+                                <button class="bg-[#95A5A6] h-auto w-auto px-[14px] py-2 rounded-[10px] text-xs font-semibold text-light">Batal</button>
+                            </form>
+                        </div>
+                </div>
+            </dialog>
+
+            <dialog id="saved" class="modal">
                 <div class="modal-box bg-light w-[593px] h-auto rounded-[20px] gap-10 flex flex-col items-center py-[75px]">
-                    <h3 class="text-[32px] font-bold text-center text-dark">Berhasil Verifikasi</h3>
+                    <h3 class="text-[32px] font-bold text-center text-dark">Data berhasil disimpan</h3>
                     <img src="../../images/admin/checklist.png" class="w-[100px]" alt="">
                 </div>
                 <form method="dialog" class="modal-backdrop bg-light bg-opacity-25">
@@ -227,10 +175,25 @@
                 </form>
             </dialog>
 
-            <dialog id="denied" class="modal">
-                <div class="modal-box bg-light w-[593px] h-auto rounded-[20px] gap-10 flex flex-col items-center py-[75px]">
-                    <h3 class="text-[32px] font-bold text-center text-dark">Data ditolak</h3>
-                    <img src="../../images/admin/denied.png" class="w-[100px]" alt="">
+            <dialog id="delete" class="modal">
+                <div class="modal-box bg-light w-auto h-auto rounded-[20px] gap-[17px] flex flex-col items-center py-[42px] px-[83px]">
+                    <img src="../../images/admin/delete-alert.png" class="w-[60px]" alt="">
+                    <h3 class="text-[20px] font-bold text-center text-dark">Konfirmasi Hapus</h3>
+                    <p class="text-center text-xs font-normal text-dark leading-relaxed">Apakah Anda yakin ingin menghapus informasi ini?<br>
+                    Tindakan ini tidak dapat dibatalkan</p>
+                    <div class="flex flex-row-reverse mt-10 items-end gap-[18px]">
+                        <button onclick="getElementById('deleted').showModal()" class="bg-[#EB3223] h-auto w-auto px-[14px] py-2 rounded-[10px] text-xs font-semibold text-light">Ya, Hapus</button>
+                        <form method="dialog">
+                            <button class="bg-[#95A5A6] h-auto w-auto px-[14px] py-2 rounded-[10px] text-xs font-semibold text-light">Batal</button>
+                        </form>
+                    </div>
+                </div>                
+            </dialog>
+
+            <dialog id="deleted" class="modal">
+                <div class="modal-box bg-light w-[531px] h-auto py-24 rounded-[20px] gap-6 flex flex-col items-center align-middle content-center">
+                    <h3 class="text-[32px] font-bold text-center text-dark">Data berhasil dihapus</h3>
+                    <img src="../../images/admin/checklist.png" class="w-[100px]" alt="">
                 </div>
                 <form method="dialog" class="modal-backdrop bg-light bg-opacity-25">
                     <button> </button>
