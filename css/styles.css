@@ -9695,6 +9695,10 @@ html:has(.drawer-open.drawer-open){
   gap: 9px;
 }
 
+.gap-12{
+  gap: 3rem;
+}
+
 .space-x-2 > :not([hidden]) ~ :not([hidden]){
   --tw-space-x-reverse: 0;
   margin-right: calc(0.5rem * var(--tw-space-x-reverse));
@@ -10298,11 +10302,6 @@ html:has(.drawer-open.drawer-open){
 
 .bg-transparent{
   background-color: transparent;
-}
-
-.bg-success{
-  --tw-bg-opacity: 1;
-  background-color: var(--fallback-su,oklch(var(--su)/var(--tw-bg-opacity, 1)));
 }
 
 .bg-opacity-25{

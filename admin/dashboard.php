@@ -19,7 +19,7 @@
                     <img src="../images/admin/Home.png" alt="">
                     <p>Dashboard</p>
                 </button>
-                <button class="btn btn-success bg-transparent border-0 text-light font-bold justify-start pl-[9px] w-[271px] h-[59px] flex flex-row gap-[13px]" onclick="location.href='./penerimaan-sampah/add.php'">
+                <button class="btn btn-success bg-transparent border-0 text-light font-bold justify-start pl-[9px] w-[271px] h-[59px] flex flex-row gap-[13px]" onclick="location.href='./penerimaan-sampah/'">
                     <img src="../images/admin/Truck.png" alt="">
                     <p class="text-lg">Penerimaan Sampah</p>
                 </button>

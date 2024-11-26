@@ -135,18 +135,17 @@
                                 <td class="border border-[#828282]">001</td>
                                 <td class="border border-[#828282]">10-11-2024</td>
                                 <td class="border border-[#828282]">Ahmad Sudrajat</td>
-                                <td class="border border-[#828282]">Plastik</td>
-                                <td class="border border-[#828282] text-center">5 Kg</td>
+                                <td class="border border-[#828282]">-</td>
+                                <td class="border border-[#828282] text-center">-</td>
                                 <td class="border border-[#828282]">
                                     <p class="bg-[#FFDE75] rounded-[10px] border border-gray w-auto h-auto text-sm font-medium text-center p-0.5">
                                         Menunggu
                                     </p>
                                 </td>
-                                <td class="border border-[#828282]">50</td>
+                                <td class="border border-[#828282]">-</td>
                                 <td class="border border-[#828282]">
                                     <div class="flex flex-row gap-[18px] justify-center items-center">
-                                        <button onclick="document.getElementById('verified').showModal()" class="bg-[#2ECC71] w-[72px] h-[25px] rounded-[10px] text-light text-[10px] font-semibold text-center">Verifikasi</button>
-                                        <button onclick="document.getElementById('denied').showModal()" class="bg-[#C0392B] w-[72px] h-[25px] rounded-[10px] text-light text-[10px] font-semibold text-center">Tolak</button>
+                                        <button onclick="location.href='add.php'" class="bg-[#2ECC71] w-[72px] h-[25px] rounded-[10px] text-light text-[10px] font-semibold text-center">Hitung</button>
                                     </div>
                                 </td>
                             </tr>
@@ -155,18 +154,17 @@
                                 <td class="border border-[#828282]">001</td>
                                 <td class="border border-[#828282]">10-11-2024</td>
                                 <td class="border border-[#828282]">Ahmad Sudrajat</td>
-                                <td class="border border-[#828282]">Plastik</td>
-                                <td class="border border-[#828282] text-center">5 Kg</td>
+                                <td class="border border-[#828282]">-</td>
+                                <td class="border border-[#828282] text-center">-</td>
                                 <td class="border border-[#828282]">
                                     <p class="bg-[#FFDE75] rounded-[10px] border border-gray w-auto h-auto text-sm font-medium text-center p-0.5">
                                         Menunggu
                                     </p>
                                 </td>
-                                <td class="border border-[#828282]">50</td>
+                                <td class="border border-[#828282]">-</td>
                                 <td class="border border-[#828282]">
                                     <div class="flex flex-row gap-[18px] justify-center items-center">
-                                        <button onclick="document.getElementById('verified').showModal()" class="bg-[#2ECC71] w-[72px] h-[25px] rounded-[10px] text-light text-[10px] font-semibold text-center">Verifikasi</button>
-                                        <button onclick="document.getElementById('denied').showModal()" class="bg-[#C0392B] w-[72px] h-[25px] rounded-[10px] text-light text-[10px] font-semibold text-center">Tolak</button>
+                                        <button onclick="location.href='add.php'" class="bg-[#2ECC71] w-[72px] h-[25px] rounded-[10px] text-light text-[10px] font-semibold text-center">Hitung</button>
                                     </div>
                                 </td>
                             </tr>
@@ -175,18 +173,17 @@
                                 <td class="border border-[#828282]">001</td>
                                 <td class="border border-[#828282]">10-11-2024</td>
                                 <td class="border border-[#828282]">Ahmad Sudrajat</td>
-                                <td class="border border-[#828282]">Plastik</td>
-                                <td class="border border-[#828282] text-center">5 Kg</td>
+                                <td class="border border-[#828282]">-</td>
+                                <td class="border border-[#828282] text-center">-</td>
                                 <td class="border border-[#828282]">
                                     <p class="bg-[#FFDE75] rounded-[10px] border border-gray w-auto h-auto text-sm font-medium text-center p-0.5">
                                         Menunggu
                                     </p>
                                 </td>
-                                <td class="border border-[#828282]">50</td>
+                                <td class="border border-[#828282]">-</td>
                                 <td class="border border-[#828282]">
                                     <div class="flex flex-row gap-[18px] justify-center items-center">
-                                        <button onclick="document.getElementById('verified').showModal()" class="bg-[#2ECC71] w-[72px] h-[25px] rounded-[10px] text-light text-[10px] font-semibold text-center">Verifikasi</button>
-                                        <button onclick="document.getElementById('denied').showModal()" class="bg-[#C0392B] w-[72px] h-[25px] rounded-[10px] text-light text-[10px] font-semibold text-center">Tolak</button>
+                                        <button onclick="location.href='add.php'" class="bg-[#2ECC71] w-[72px] h-[25px] rounded-[10px] text-light text-[10px] font-semibold text-center">Hitung</button>
                                     </div>
                                 </td>
                             </tr>
@@ -195,18 +192,17 @@
                                 <td class="border border-[#828282]">001</td>
                                 <td class="border border-[#828282]">10-11-2024</td>
                                 <td class="border border-[#828282]">Ahmad Sudrajat</td>
-                                <td class="border border-[#828282]">Plastik</td>
-                                <td class="border border-[#828282] text-center">5 Kg</td>
+                                <td class="border border-[#828282]">-</td>
+                                <td class="border border-[#828282] text-center">-</td>
                                 <td class="border border-[#828282]">
                                     <p class="bg-[#FFDE75] rounded-[10px] border border-gray w-auto h-auto text-sm font-medium text-center p-0.5">
                                         Menunggu
                                     </p>
                                 </td>
-                                <td class="border border-[#828282]">50</td>
+                                <td class="border border-[#828282]">-</td>
                                 <td class="border border-[#828282]">
                                     <div class="flex flex-row gap-[18px] justify-center items-center">
-                                        <button onclick="document.getElementById('verified').showModal()" class="bg-[#2ECC71] w-[72px] h-[25px] rounded-[10px] text-light text-[10px] font-semibold text-center">Verifikasi</button>
-                                        <button onclick="document.getElementById('denied').showModal()" class="bg-[#C0392B] w-[72px] h-[25px] rounded-[10px] text-light text-[10px] font-semibold text-center">Tolak</button>
+                                        <button onclick="location.href='add.php'" class="bg-[#2ECC71] w-[72px] h-[25px] rounded-[10px] text-light text-[10px] font-semibold text-center">Hitung</button>
                                     </div>
                                 </td>
                             </tr>

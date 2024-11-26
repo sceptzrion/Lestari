@@ -116,28 +116,33 @@
                         </select>
                     </div>
                     <div class="flex flex-col gap-[5px]">
-                    <label for="kategori-sampah" class="px-1">Kategori Detail</label>
-                        <select id="kategori-sampah" name="kategori-sampah" class="select select-bordered w-full h-12 bg-light border border-gray px-[14px] text-base font-normal">
-                            <option disabled selected>Pilih Kategori Detail</option>
-                            <option>Option 1</option>
-                            <option>Option 2</option>
-                        </select>
-                    </div>
-                    <div class="flex flex-col gap-[5px]">
                         <label for="berat-sampah" class="px-1">Berat Sampah</label>
                         <div class="flex flex-row gap-[9px] items-center w-full justify-between">
                             <input type="number" id="berat-sampah" name="berat-sampah" min="0" placeholder="0" class="w-full h-12 bg-light border border-gray px-[14px] font-light dark:[color-scheme:light]">
                             <span class="text-base font-light justify-self-end">Kg</span>
                         </div>
                     </div>
-                    <button class="btn btn-success bg-[#2ECC71] rounded-[20px] text-xl font-extrabold text-light shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] border border-gray" onclick="document.getElementById('data_added').showModal()">Kirim Data Penerimaan</button>
+                    <div class="flex flex-row justify-center gap-12 w-full">
+                        <button class="btn btn-success bg-[#2ECC71] rounded-[20px] text-[15px] font-semibold px-[41px] text-light shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] border border-gray" onclick="document.getElementById('verified').showModal()">Verifikasi</button>
+                        <button class="btn btn-error bg-[#C0392B] rounded-[20px] text-[15px] font-semibold px-[41px] text-light shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] border border-gray" onclick="document.getElementById('denied').showModal()">Tolak</button>
+                    </div>
                 </form>
              </div>
              <!-- DIALOGS -->
-             <dialog id="data_added" class="modal">
+            <dialog id="verified" class="modal">
                 <div class="modal-box bg-light w-[593px] h-auto rounded-[20px] gap-10 flex flex-col items-center py-[75px]">
-                    <h3 class="text-[32px] font-bold text-center text-dark">Data berhasil disimpan</h3>
+                    <h3 class="text-[32px] font-bold text-center text-dark">Berhasil Verifikasi</h3>
                     <img src="../../images/admin/checklist.png" class="w-[100px]" alt="">
+                </div>
+                <form method="dialog" class="modal-backdrop bg-light bg-opacity-25">
+                    <button> </button>
+                </form>
+            </dialog>
+
+            <dialog id="denied" class="modal">
+                <div class="modal-box bg-light w-[593px] h-auto rounded-[20px] gap-10 flex flex-col items-center py-[75px]">
+                    <h3 class="text-[32px] font-bold text-center text-dark">Data ditolak</h3>
+                    <img src="../../images/admin/denied.png" class="w-[100px]" alt="">
                 </div>
                 <form method="dialog" class="modal-backdrop bg-light bg-opacity-25">
                     <button> </button>
