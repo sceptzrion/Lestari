@@ -86,29 +86,29 @@
             <!-- HEADER END -->
             
             <!-- DASHBOARD CARD -->
-            <div class="flex flex-row h-[156px] w-full mt-[63px] justify-around">
-                <div class="bg-gradient-to-b from-[#F6AC0A] to-[#906506] rounded-[20px] border border-gray shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] flex flex-col pl-[23px] pt-[33px] pb-[49px] w-[223px] h-full text-dark gap-[11px]">
+            <div class="h-auto w-full mt-[63px] grid grid-cols-4 gap-7">
+                <div class="bg-gradient-to-b from-[#F6AC0A] to-[#906506] rounded-[20px] border border-gray shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] flex flex-col pl-[23px] pt-[33px] pb-[49px] h-full text-dark gap-[11px]">
                     <h4 class="text-xs font-bold">Total Sampah Diterima</h4>
                     <div class="flex flex-col">
                         <h2 class="text-xl font-normal  ">2,547 Kg</h2>
                         <p class="text-[10px] font-light">Bulan ini</p>
                     </div>
                 </div>
-                <div class="bg-gradient-to-b from-[#08FCF0] to-[#05968F] rounded-[20px] border border-gray shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] flex flex-col pl-[23px] pt-[33px] pb-[49px] w-[223px] h-full text-dark gap-[11px]">
+                <div class="bg-gradient-to-b from-[#08FCF0] to-[#05968F] rounded-[20px] border border-gray shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] flex flex-col pl-[23px] pt-[33px] pb-[49px] h-full text-dark gap-[11px]">
                     <h4 class="text-xs font-bold">Pengantaran Aktif </h4>
                     <div class="flex flex-col">
                         <h2 class="text-xl font-normal  ">2</h2>
                         <p class="text-[10px] font-light">Menunggu Verifikasi</p>
                     </div>
                 </div>
-                <div class="bg-gradient-to-b from-[#0AF649] to-[#06902B] rounded-[20px] border border-gray shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] flex flex-col pl-[23px] pt-[33px] pb-[49px] w-[223px] h-full text-dark gap-[11px]">
+                <div class="bg-gradient-to-b from-[#0AF649] to-[#06902B] rounded-[20px] border border-gray shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] flex flex-col pl-[23px] pt-[33px] pb-[49px] h-full text-dark gap-[11px]">
                     <h4 class="text-xs font-bold">Total User Aktif</h4>
                     <div class="flex flex-col">
                         <h2 class="text-xl font-normal  ">500</h2>
                         <p class="text-[10px] font-light">+12  % dari bulan lalu</p>
                     </div>
                 </div>
-                <div class="bg-gradient-to-b from-[#ECF310] to-[#898D09] rounded-[20px] border border-gray shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] flex flex-col pl-[23px] pt-[33px] pb-[49px] w-[223px] h-full text-dark gap-[11px]">
+                <div class="bg-gradient-to-b from-[#ECF310] to-[#898D09] rounded-[20px] border border-gray shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] flex flex-col pl-[23px] pt-[33px] pb-[49px] h-full text-dark gap-[11px]">
                     <h4 class="text-xs font-bold">Total Poin Diberikan</h4>
                     <div class="flex flex-col">
                         <h2 class="text-xl font-normal  ">45,678</h2>
