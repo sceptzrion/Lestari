@@ -1,3 +1,6 @@
+<?php
+$is_login = false;
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -102,17 +105,8 @@
 </div>
 
         <!-- if user not login -->
-        <div class="navbar-end ml-[5px] flex flex-row gap-4 w-auto">
-          <a href="./user/signin.php" class="btn min-w-[100px] h-1 shadow-md rounded-full bg-gradient-to-r from-green to-dark-green text-sm border border-to-r from-green to-dark-green font-medium text-white text-center">Sign In</a>
-          <a href="./user/signup.php" class="btn btn-outline min-w-[100px] h-1 shadow-md border border-to-r from-green to-dark-green rounded-full text-sm font-medium text-[#1B5E20] text-center">Sign Up</a>
-        </div>
-
-
-
-        <!-- endif -->
-
-        <!-- if user login -->
-        <!-- <div class="ml-[233px] content-center">
+        <?php if($is_login) : ?>
+          <div class="ml-[233px] content-center">
           <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
             <div class="w-[50px] rounded-full">
               <img
@@ -120,14 +114,23 @@
                 src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
             </div>
           </div>
-        </div> -->
+        </div>
+        <!-- endif -->
+
+        <!-- if user login -->
+        <?php else : ?>
+        <div class="navbar-end ml-[5px] flex flex-row gap-4 w-auto">
+          <a href="./user/signin.php" class="btn min-w-[100px] h-1 shadow-md rounded-full bg-gradient-to-r from-green to-dark-green text-sm border border-to-r from-green to-dark-green font-medium text-white text-center">Sign In</a>
+          <a href="./user/signup.php" class="btn btn-outline min-w-[100px] h-1 shadow-md border border-to-r from-green to-dark-green rounded-full text-sm font-medium text-[#1B5E20] text-center">Sign Up</a>
+        </div>
+        <?php endif; ?>
         <!-- endif -->
     </div>
   <!-- NAVBAR END -->
 
   <!-- Hero Section -->
   <section class="bg-gradient-to-r from-green to-dark-green text-white py-16">
-    <div class="container mx-auto px-4">
+    <div class="container flex justify-between">
       <div class="flex flex-col md:flex-row items-center">
         <div class="md:w-1/2 text-center md:text-left">
           <h1 class="text-4xl md:text-5xl font-bold mb-4">Tukarkan Sampah, Dapatkan Hadiahnya</h1>
@@ -170,7 +173,9 @@
           </div>
         </div>
 
-        <div class="mt-4 text-black font-bold cursor-pointer hover:text-green-700">Lihat Selengkapnya →</div>
+        <a href="./user/tentang.php" class="mt-4 text-black font-bold cursor-pointer hover:text-green-700">
+  Lihat Selengkapnya →
+</a>
       </div>
     </div>
   </div>

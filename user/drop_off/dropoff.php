@@ -129,30 +129,27 @@
 
     <!-- Main Section -->
     <section class="py-16 bg-gray-100 flex items-center justify-center min-h-screen">
-    <div class="bg-gradient-to-r from-green to-dark-green rounded-lg shadow-lg p-8 flex items-center w-3/4 h-64">
-        <div class="w-1/2 flex justify-center items-center h-32">
-            <div class="relative">
-                <div class="w-32 h-32 bg-white rounded-full flex justify-center items-center">
-                    <img src="../../images/truck.png" alt="Truck Icon" class="w-24 h-24 rounded-full">
-                </div>
-            </div>
-        </div>
-        <div class="w-2/3 text-white text-center -ml-64"> 
+    <div class="relative bg-gradient-to-r from-green to-dark-green rounded-lg shadow-lg p-8 flex justify-center items-center w-3/4 h-64">
+        <div class="text-white text-center relative"> 
+          <div class="md:top-[20px] md:left-[-150px] absolute bg-white rounded-full flex justify-center items-center w-20 h-20 sm:w-24 sm:h-24 md:w-26 md:h-26 lg:w-32 lg:h-32">
+            <img src="../../images/truck.png" alt="Truck Icon" class="w-24 h-24 ">
+          </div>
             <h2 class="text-3xl font-bold flex items-center justify-center">
                 <img src="../../images/user/recycle.png" alt="Recycle Icon" class="w-6 h-6 mr-2">
                 Drop Off
             </h2>
             <p class="mt-4 text-lg"> Antar Langsung Sampahmu <br> ke Bank Sampah Terdekat</p>
-            <button onclick="redirectToLocation()" class="mt-4 bg-gradient-to-r from-green to-dark-green text-white px-6 py-2 rounded-full shadow hover:bg-green-600 focus:outline-none">
+            <button 
+                onclick="redirectToLocation()" 
+                class="mt-4 bg-gradient-to-r from-green to-dark-green text-white px-6 py-2 rounded-full shadow hover:bg-green-600 focus:outline-none">
                 Lihat Lokasi
             </button>
 
             <script>
                 function redirectToLocation() {
-                    window.location.href = "./location.php";
+                    window.location.href = '../drop_off/lokasi.php';
                 }
             </script>
-
         </div>
     </div>
 </section>
