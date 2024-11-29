@@ -1,48 +1,61 @@
 <?php
 session_start();
-include('../controller/config.php');
+include('../controller/config.php'); // Include konfigurasi database
 
 // Mendapatkan data dari form
-$admin_email = $_POST['admin_email'];
-$admin_password = $_POST['admin_password'];
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $admin_email = trim($_POST['admin_email']);
+    $admin_password = trim($_POST['admin_password']);
 
-// Cek apakah email ada di database
-$stmt = $conn->prepare("SELECT admin_id, bank_id, admin_password FROM admin WHERE admin_email = ?");
-$stmt->bind_param("s", $admin_email);
-$stmt->execute();
-$stmt->store_result();
+    // Debugging: Tampilkan data dari form
+    // echo "Email dari form: $admin_email<br>";
+    // echo "Password dari form: $admin_password<br>";
 
-// Periksa apakah email ditemukan
-if ($stmt->num_rows > 0) {
-    // Mengambil data dari database
-    $stmt->bind_result($admin_id, $bank_id, $admin_password_hash);
-    $stmt->fetch();
+    // Cek apakah email ada di database
+    $stmt = $conn->prepare("SELECT admin_id, bank_id, admin_password FROM admin WHERE admin_email = ?");
+    if ($stmt) {
+        $stmt->bind_param("s", $admin_email);
+        $stmt->execute();
+        $stmt->store_result();
 
-    // Verifikasi password
-    if (password_verify($admin_password, $admin_password_hash)) {
-        // Set session jika login berhasil
-        $_SESSION['admin_id'] = $admin_id;
-        $_SESSION['bank_id'] = $bank_id;
+        // Periksa apakah email ditemukan
+        if ($stmt->num_rows > 0) {
+            // Ambil data dari database
+            $stmt->bind_result($admin_id, $bank_id, $admin_password_hash);
+            $stmt->fetch();
 
-        // Redirect ke dashboard
-        header('Location: dashboard.php');
-        exit();
+            // Debugging: Periksa hash password dari database
+            // echo "Password hash dari database: $admin_password_hash<br>";
+
+            // Verifikasi password
+            if (password_verify($admin_password, $admin_password_hash)) {
+                // Login berhasil, set session
+                $_SESSION['admin_id'] = $admin_id;
+                $_SESSION['bank_id'] = $bank_id;
+
+                // Redirect ke dashboard
+                header('Location: dashboard.php');
+                exit();
+            } else {
+                // Password salah
+                echo "<script>
+                    alert('Password salah!');
+                    window.location.href='login.php';
+                </script>";
+            }
+        } else {
+            // Email tidak ditemukan
+            echo "<script>
+                alert('Email tidak ditemukan!');
+                window.location.href='login.php';
+            </script>";
+        }
+
+        $stmt->close();
     } else {
-        // Jika password salah
-        echo "<script>
-            alert('Email atau Password salah!');
-            window.location.href='login.php';
-        </script>";
+        die("Error pada prepare statement: " . $conn->error);
     }
-} else {
-    // Jika email tidak ditemukan
-    echo "<script>
-        alert('Email atau Password salah!');
-        window.location.href='login.php';
-    </script>";
 }
 
-// Menutup statement dan koneksi
-$stmt->close();
 $conn->close();
 ?>
