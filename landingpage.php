@@ -1,6 +1,4 @@
-<?php
-$is_login = false;
-?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -66,7 +64,7 @@ $is_login = false;
 <!-- DESKTOP MODE -->
 <div class="navbar-center hidden lg:flex">
   <ul class="menu menu-horizontal px-1 text-dark text-base">
-    <li><a>Home</a></li>
+    <li><a href="./landingpage.php">Home</a></li>
     <li><a href="./user/tentang.php">Tentang kami</a></li>
     <li>
       <details>
@@ -79,13 +77,13 @@ $is_login = false;
             </button>
           </li>
           <li>
-            <button onclick="window.location.href='./rewards.html'" class="btn btn-success flex-grow shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] rounded-[20px] flex items-center justify-center px-4 py-2 gap-2 min-w-[120px] max-w-[200px]">
+            <button onclick="window.location.href='./user/drop_off/poin.php'" class="btn btn-success flex-grow shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] rounded-[20px] flex items-center justify-center px-4 py-2 gap-2 min-w-[120px] max-w-[200px]">
               <img src="./images/reward.png" class="w-8 h-8" alt="">
               <p>Rewards</p>
             </button>
           </li>
           <li>
-            <button onclick="window.location.href='./tutorial.html'" class="btn btn-success flex-grow shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] rounded-[20px] flex items-center justify-center px-4 py-2 gap-2 min-w-[120px] max-w-[200px]">
+            <button onclick="window.location.href='./user/tutorial/tutorial.php'" class="btn btn-success flex-grow shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] rounded-[20px] flex items-center justify-center px-4 py-2 gap-2 min-w-[120px] max-w-[200px]">
               <img src="./images/Vector.png" class="w-6 h-6" alt="">
               <p>Tutorial</p>
             </button>
@@ -99,13 +97,13 @@ $is_login = false;
         </ul>
       </details>
     </li>
-    <li><a>Blog</a></li>
-    <li><a>Kontak Kami</a></li>
+    <li><a href="#">Blog</a></li>
+    <li><a href="./user/kontak_kami.php">Kontak Kami</a></li>
   </ul>
 </div>
 
         <!-- if user not login -->
-        <?php if($is_login) : ?>
+<!--         
           <div class="ml-[233px] content-center">
           <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
             <div class="w-[50px] rounded-full">
@@ -114,44 +112,55 @@ $is_login = false;
                 src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
             </div>
           </div>
-        </div>
+        </div> -->
         <!-- endif -->
 
         <!-- if user login -->
-        <?php else : ?>
+     
         <div class="navbar-end ml-[5px] flex flex-row gap-4 w-auto">
           <a href="./user/signin.php" class="btn min-w-[100px] h-1 shadow-md rounded-full bg-gradient-to-r from-green to-dark-green text-sm border border-to-r from-green to-dark-green font-medium text-white text-center">Sign In</a>
           <a href="./user/signup.php" class="btn btn-outline min-w-[100px] h-1 shadow-md border border-to-r from-green to-dark-green rounded-full text-sm font-medium text-[#1B5E20] text-center">Sign Up</a>
         </div>
-        <?php endif; ?>
+   
         <!-- endif -->
     </div>
   <!-- NAVBAR END -->
 
   <!-- Hero Section -->
-  <section class="bg-gradient-to-r from-green to-dark-green text-white py-16">
-    <div class="container flex justify-between">
-      <div class="flex flex-col md:flex-row items-center">
-        <div class="md:w-1/2 text-center md:text-left">
-          <h1 class="text-4xl md:text-5xl font-bold mb-4">Tukarkan Sampah, Dapatkan Hadiahnya</h1>
-          <p class="text-xl">#TukarSampahUntukKebaikan</p>
-        </div>
-        <div class="md:w-1/2 text-center mt-8 md:mt-0">
-          <img src="./images/hero banner.png" alt="Hero Image" class="rounded-lg mx-auto max-w-full h-full object-cover" />
-        </div>
-      </div>
+<section class="bg-gradient-to-r from-green to-dark-green text-white py-16">
+  <div class="container mx-auto px-4 flex flex-col md:flex-row items-center md:justify-between">
+    <div class="md:w-1/2 text-center md:text-left mb-8 md:mb-0">
+      <h1 class="text-4xl md:text-5xl font-bold leading-tight mb-4">
+        Tukarkan Sampah, Dapatkan Hadiahnya
+      </h1>
+      <p class="text-lg md:text-xl">
+        #TukarSampahUntukKebaikan
+      </p>
     </div>
-  </section>
+    <div class="md:w-1/2 flex justify-end">
+      <img 
+        src="./images/hero banner.png" 
+        alt="Hero Image" 
+        class="rounded-lg shadow-lg max-w-full h-auto object-cover md:ml-auto"
+      />
+    </div>
+  </div>
+</section>
+
 
 
 <!-- about section -->
 <section class="bg-white py-16">
   <div class="container mx-auto px-4">
     <div class="flex flex-col md:flex-row items-center gap-6 md:items-stretch">
-      <!-- Kotak Hijau -->
-      <div class="md:w-1/2 text-center mb-8 md:mb-10 flex">
+    <div class="md:w-1/2 text-center mb-8 md:mb-10 flex relative">
+        <!-- Gambar -->
+        <img src="./images/chart.png" alt="Chart" class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10">
+        
+        <!-- Kotak Hijau -->
         <div class="bg-gradient-to-r from-green to-dark-green rounded-lg shadow-md w-full h-full min-h-[300px] max-w-full"></div>
       </div>
+
       <!-- Konten Teks -->
       <div class="w-full md:w-3/4 lg:w-2/3">
         <h2 class="text-2xl md:text-3xl text-black font-bold mb-4 break-words">
@@ -256,63 +265,43 @@ $is_login = false;
     </div>
   </section>
 
-<!-- Footer -->
-<!-- <footer class="bg-green-600 text-white mt-16 py-8">
-    <div class="container mx-auto grid grid-cols-3 gap-4 text-center">
-      <div>
-        <h4 class="font-bold">Lestari</h4>
-        <p>Home</p>
-        <p>Tentang Kami</p>
-        <p>Layanan</p>
-        <p>Blog</p>
-      </div>
-      <div>
-        <h4 class="font-bold">Informasi</h4>
-        <p>Kontak Kami</p>
-      </div>
-      <div>
-        <h4 class="font-bold">Hubungi Kami</h4>
-        <div class="flex justify-center space-x-4 mt-2">
-          <a href="#"><img src="https://placehold.co/20x20" alt="Instagram"></a>
-          <a href="#"><img src="https://placehold.co/20x20" alt="Facebook"></a>
-          <a href="#"><img src="https://placehold.co/20x20" alt="Twitter"></a>
-          <a href="#"><img src="https://placehold.co/20x20" alt="YouTube"></a>
-        </div>
-      </div>
-    </div>
-  </footer> -->
 
- <!-- Footer -->
-  <footer class="bg-gradient-to-r from-green to-dark-green text-white py-5">
-    <div class="container mx-auto px-4 text-center">
-      <div class="flex justify-center">
-        <a href="./landingpage.php">
-          <img src="./images/Logo.png" alt="Logo Lestari" class="h-20">
-        </a>
-      </div>
-      <div class="container mx-auto grid grid-cols-3 gap-4 text-center">
-      <div>
+<!-- Footer -->
+<footer class="bg-gradient-to-r from-green to-dark-green text-white py-7">
+  <div class="container mx-auto px-4 text-center">
+    <div class="flex justify-center">
+      <a href="./landingpage.php">
+        <img src="./images/Logo.png" alt="Logo Lestari" class="h-20">
+      </a>
+    </div>
+    <div class="container mx-auto grid grid-cols-3 gap-4">
+      <!-- Bagian Lestari -->
+      <div class="text-left">
         <h4 class="font-bold">Lestari</h4>
-        <p>Home</p>
-        <p>Tentang Kami</p>
-        <p>Layanan</p>
-        <p>Blog</p>
+        <a href="./landingpage.php" class="block text-white hover:underline mb-1">Home</a>
+        <a href="./user/tentang.php" class="block text-white hover:underline mb-1">Tentang Kami</a>
+        <a href="" class="block text-white hover:underline mb-1">Layanan</a>
       </div>
+
+      <!-- Bagian Informasi -->
       <div>
         <h4 class="font-bold">Informasi</h4>
-        <p>Kontak Kami</p>
+        <a href="./user/kontak_kami.php" class="block text-white hover:underline mb-1">Kontak Kami</a>
       </div>
+      <!-- Bagian Hubungi Kami -->
       <div>
         <h4 class="font-bold">Hubungi Kami</h4>
         <div class="flex justify-center space-x-4 mt-2">
-          <a href="#"><img src="https://placehold.co/20x20" alt="Instagram"></a>
-          <a href="#"><img src="https://placehold.co/20x20" alt="Facebook"></a>
-          <a href="#"><img src="https://placehold.co/20x20" alt="Twitter"></a>
-          <a href="#"><img src="https://placehold.co/20x20" alt="YouTube"></a>
+          <a href="#"><img src="./images/user/sosmed/instagram.png" alt="Instagram"></a>
+          <a href="#"><img src="./images/user/sosmed/fb.png" alt="Facebook"></a>
+          <a href="#"><img src="./images/user/sosmed/x.png" alt="Twitter"></a>
+          <a href="#"><img src="./images/user/sosmed/wa.png" alt="Whatsapp"></a>
+          <a href="#"><img src="./images/user/sosmed/yt.png" alt="YouTube"></a>
         </div>
       </div>
     </div>
-    </div>
-  </footer>
+  </div>
+</footer>
+
 </body>
 </html>

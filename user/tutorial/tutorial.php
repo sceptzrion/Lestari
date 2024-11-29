@@ -128,11 +128,11 @@
   <!-- NAVBAR END -->
 
   <!-- Hero Section -->
-  <section class="bg-green-600 text-white p-8 rounded-b-lg shadow-md">
+  <section class="bg-gradient-to-r from-green to-dark-green text-white p-8 rounded-b-lg shadow-md">
     <div class="container mx-auto flex items-center space-x-6">
       <div class="flex-none">
         <div class="bg-white p-4 rounded-full">
-          <img src="https://placehold.co/60x60" alt="Video Icon" class="w-16 h-16">
+          <img src="../../images/user/video.png" alt="Video Icon" class="w-16 h-16">
         </div>
       </div>
       <div>
@@ -147,7 +147,7 @@
     <div class="bg-white shadow-lg rounded-lg">
       <!-- Dropdown Header -->
       <div class="flex items-center justify-between p-4 bg-gray-100 border-b cursor-pointer" onclick="toggleDropdown()">
-        <h3 class="text-lg font-bold text-green-600 flex items-center space-x-2">
+        <h3 class="text-lg font-bold text-green-900 flex items-center space-x-2">
           <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16" class="w-5 h-5">
             <path d="M8 4a4 4 0 1 0 0 8 4 4 0 0 0 0-8zM0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8z"/>
           </svg>
@@ -164,7 +164,7 @@
           <!-- Tutorial Item -->
           <div class="flex justify-between items-center p-4 hover:bg-gray-50">
             <h4 class="text-lg font-semibold text-gray-800">Plastik</h4>
-            <a href="#" class="text-white bg-green-600 px-4 py-2 rounded-lg flex items-center space-x-2">
+            <a href="#" class="text-white bg-gradient-to-r from-green to-dark-green px-4 py-2 rounded-lg flex items-center space-x-2">
               <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="w-5 h-5" viewBox="0 0 16 16">
                 <path d="M10.804 8.493l-3.86 2.223c-.456.262-1.05-.057-1.05-.592V5.876c0-.535.594-.854 1.05-.592l3.86 2.222c.457.263.457.921 0 1.184z"/>
               </svg>
@@ -174,7 +174,7 @@
           <!-- Add more items -->
           <div class="flex justify-between items-center p-4 hover:bg-gray-50">
             <h4 class="text-lg font-semibold text-gray-800">Kertas</h4>
-            <a href="#" class="text-white bg-green-600 px-4 py-2 rounded-lg flex items-center space-x-2">
+            <a href="#" class="text-white bg-gradient-to-r from-green to-dark-green px-4 py-2 rounded-lg flex items-center space-x-2">
               <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="w-5 h-5" viewBox="0 0 16 16">
                 <path d="M10.804 8.493l-3.86 2.223c-.456.262-1.05-.057-1.05-.592V5.876c0-.535.594-.854 1.05-.592l3.86 2.222c.457.263.457.921 0 1.184z"/>
               </svg>

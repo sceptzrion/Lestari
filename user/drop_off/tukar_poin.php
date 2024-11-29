@@ -128,6 +128,7 @@
         <!-- endif -->
     </div>
   <!-- NAVBAR END -->
+   
 <body class="bg-gray-100">
   <!-- Page Wrapper -->
   <div class="flex flex-col items-center py-10">
