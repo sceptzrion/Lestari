@@ -19,12 +19,13 @@
       }
     }
   </script>
-    <script>
-        function toggleModal() {
-            const modal = document.getElementById("location-modal");
-            modal.classList.toggle("hidden");
-        }
-    </script>
+  <script>
+    function toggleModal() {
+        const modal = document.getElementById("rewardModal");
+        modal.classList.toggle("hidden");
+    }
+</script>
+
 </head>
 <body class="font-poppins">
      <!-- NAVBAR -->
@@ -126,39 +127,52 @@
         <!-- endif -->
     </div>
   <!-- NAVBAR END -->
-        
-  <main class="container mx-auto mt-8 px-4 pb-12">
-  <div id="selected-location" class="text-2xl text-[#1B5E20] font-bold mb-3 flex items-center">
-    <img src="../../images/user/Loc.png" alt="Location Icon" class="w-[31px] h-[44px] mr-2"> 
-    Jakarta Pusat
-  </div>
-  <div class="bg-gradient-to-r from-green to-dark-green text-white rounded-lg p-6 text-center h-32 flex items-center">
-    <div class="text-white text-center relative"> 
-      <h2 class="text-3xl font-bold flex items-center">
-        <img src="../../images/user/recycle.png" alt="Recycle Icon" class="w-12 h-12 mr-2">
-        Drop Off Location
-      </h2>
+
+  <!-- section -->
+<section class="bg-gray-100 w-full min-h-screen">
+  <main class="container mx-auto px-4 py-6">
+    <div class="flex justify-between items-center mb-4">
+      <span class="inline-flex justify-between w-2/4 bg-gradient-to-r from-green to-dark-green text-white rounded-full px-4 py-2 text-sm">
+        <span class="font-bold">Poin Reward</span>
+        <span class="font-bold">$100</span>
+      </span>
+      <a href="../../user/tukar_poin.php">
+        <button class="bg-gradient-to-r from-green to-dark-green text-white px-6 py-2 rounded-full shadow hover:bg-green-600 focus:outline-none flex items-center gap-2">
+          Tukar Poin
+        </button>
+      </a>
     </div>
-  </div>
-  <p class="text-sm text-[#1B5E20] mt-4">
-    <span class="inline-block bg-gradient-to-r from-green to-dark-green text-white rounded-full px-3 py-1 text-sm">3 bank sampah tersedia</span>
-  </p>
-
-<!-- Locations -->
-<div class="mt-4 space-y-4">
-  <a href="../../user/drop_off/select_kota.php" class="block border rounded-lg p-4 hover:bg-gray-100">
-    <h3 class="text-lg font-bold">Kemayoran</h3>
-    <p class="text-sm text-gray-700">Lestari Kemayoran - Jl. Bank Sampah No.1</p>
-  </a>
-
-  <a href="https://example.com/cempaka-putih" class="block border rounded-lg p-4 hover:bg-gray-100">
-    <h3 class="text-lg font-bold">Cempaka Putih</h3>
-    <p class="text-sm text-gray-700">Lestari Cempaka Putih - Jl. Bank Sampah No.2</p>
-  </a>
-
-  <a href="https://example.com/gatot-subroto" class="block border rounded-lg p-4 mb-4 hover:bg-gray-100">
-    <h3 class="text-lg font-bold">Gatot Subroto</h3>
-    <p class="text-sm text-gray-700">Lestari Gatot Subroto - Jl. Bank Sampah No.3</p>
-  </a>
-</div>
-</main>
+   <!-- Riwayat Drop Off -->
+  <div class="bg-white rounded-lg shadow-lg p-6">
+      <h1 class="text-2xl font-bold text-green-700 text-center mb-4">Riwayat Drop Off</h1>
+      <div class="space-y-4">
+        <!-- Reward Items -->
+        <div class="flex justify-between items-center bg-gray-100 rounded-lg p-4 shadow">
+          <div class="flex items-center space-x-4">
+          <div class="w-12 h-12 bg-[#1B5E20] rounded-full flex items-center justify-center mb-3">
+          <img src="../../images/user/recycle.png" class="w-7" alt="Recycle Icon">
+        </div>
+        <div>
+              <h2 class="font-bold text-[#1B5E20]">Reward Drop Off</h2>
+              <p class="text-sm text-gray-500">15 Nov 2024, 12:56</p>
+            </div>
+          </div>
+          <span class="text-xl font-bold text-green-700">$100</span>
+        </div>
+        <div class="flex justify-between items-center bg-gray-100 rounded-lg p-4 shadow">
+          <div class="flex items-center space-x-4">
+          <div class="w-12 h-12 bg-[#1B5E20] rounded-full flex items-center justify-center mb-3">
+          <img src="../../images/user/recycle.png" class="w-7" alt="Recycle Icon">
+        </div>
+        <div>
+              <h2 class="font-bold text-[#1B5E20]">Reward Drop Off</h2>
+              <p class="text-sm text-gray-500">15 Nov 2024, 12:56</p>
+            </div>
+          </div>
+          <span class="text-xl font-bold text-green-700">$200</span>
+        </div>
+        <!-- Add more reward items as needed -->
+      </div>
+    </div>
+  </main>
+  </section>

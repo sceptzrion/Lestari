@@ -188,9 +188,10 @@
       <div class="bg-green-50 border border-green-500 rounded-lg p-4 flex justify-center items-center mb-4">
         <span class="text-green-600 font-bold text-2xl">+ 100</span>
       </div>
-      <button onclick="toggleModal()" class="bg-gradient-to-r from-green to-dark-green text-white py-2 px-4 rounded-full shadow-lg hover:bg-green-600">
-        Lihat Poin
+      <button onclick="window.location.href='../../user/drop_off/poin.php'" class="bg-gradient-to-r from-green to-dark-green text-white py-2 px-4 rounded-full shadow-lg hover:bg-green-600">
+          Lihat Poin
       </button>
+
     </div>
   </div>
   <!-- Footer -->
