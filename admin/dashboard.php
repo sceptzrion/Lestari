@@ -1,44 +1,146 @@
 <?php
+session_start();
+include('../controller/config.php');
 
-$data = [
-    "total" => "2000",
-    "writter" => "Writter 1",
-    "category" => "Category 1",
-    "price" => 10000,
-    "stock" => 10];
+// Cek apakah admin sudah login
+if (!isset($_SESSION['admin_id'])) {
+    header('Location: login.php');
+    exit();
+}
 
-$new_activity = [
-    [
-        "id" => 1,
-        "username" => "Ahmad Sudrajat",
-        "berat_sampah" => 5,
-        "jenis_sampah" => "plastik",
-        "status" => "pending"
-    ],
-    [
-        "id" => 2,
-        "username" => "Ahmad Sudrajat",
-        "berat_sampah" => 5,
-        "jenis_sampah" => "plastik",
-        "status" => "success"
-    ],
-    [
-        "id" => 3,
-        "username" => "Ahmad Sudrajat",
-        "berat_sampah" => 5,
-        "jenis_sampah" => "plastik",
-        "status" => "pending"
-    ],
-    [
-        "id" => 4,
-        "username" => "Ahmad Sudrajat",
-        "berat_sampah" => 5,
-        "jenis_sampah" => "plastik",
-        "status" => "pending"
-    ],
-]
+// Ambil data admin
+$admin_id = $_SESSION['admin_id'];
+
+// Query untuk mengambil data bank_id admin yang sedang login
+$adminQuery = "SELECT bank_id FROM admin WHERE admin_id = ?";
+$stmt = $conn->prepare($adminQuery);
+$stmt->bind_param("i", $admin_id);
+$stmt->execute();
+$result = $stmt->get_result();
+$adminData = $result->fetch_assoc();
+$bank_id = isset($adminData['bank_id']) ? $adminData['bank_id'] : null;
+
+if (!$bank_id) {
+    echo "Admin tidak terkait dengan bank sampah.";
+    exit();
+}
+
+// Query untuk menghitung total berat sampah yang diterima
+$query_total_sampah = "
+    SELECT SUM(dr.waste_weight) AS total_berat 
+    FROM detail_request dr
+    JOIN drop_off_request dor ON dr.request_id = dor.request_id
+    WHERE dor.bank_id = ?";
+$stmt = $conn->prepare($query_total_sampah);
+$stmt->bind_param("i", $bank_id);
+$stmt->execute();
+$stmt->bind_result($total_sampah);
+$stmt->fetch();
+$total_sampah = $total_sampah ?? 0;
+$stmt->close();
+
+// Query untuk menghitung jumlah Drop-off Requests
+$requestQuery = "SELECT COUNT(*) AS total_requests FROM drop_off_request WHERE bank_id = ?";
+$stmt = $conn->prepare($requestQuery);
+$stmt->bind_param("i", $bank_id);
+$stmt->execute();
+$requestResult = $stmt->get_result();
+$requestData = $requestResult->fetch_assoc();
+$total_requests = $requestData['total_requests'] ?? 0;
+$stmt->close();
+
+// Query untuk menghitung jumlah Drop-off Requests yang menunggu
+$query_drop_off_menunggu = "SELECT COUNT(*) AS total_menunggu FROM drop_off_request WHERE status = 'waiting' AND bank_id = ?";
+$stmt = $conn->prepare($query_drop_off_menunggu);
+$stmt->bind_param("i", $bank_id);
+$stmt->execute();
+$stmt->bind_result($total_menunggu);
+$stmt->fetch();
+$total_menunggu = $total_menunggu ?? 0;
+$stmt->close();
+
+// Query untuk mendapatkan nama sampah yang paling sering diterima
+$query_kategori_populer = "
+    SELECT w.waste_name AS waste_category, COUNT(w.waste_name) AS jumlah
+    FROM detail_request dr
+    JOIN waste w ON dr.waste_id = w.waste_id
+    JOIN drop_off_request dor ON dr.request_id = dor.request_id
+    WHERE dor.bank_id = ?
+    GROUP BY w.waste_name
+    ORDER BY jumlah DESC
+    LIMIT 1";
+$stmt = $conn->prepare($query_kategori_populer);
+$stmt->bind_param("i", $bank_id);
+$stmt->execute();
+$stmt->bind_result($kategori_populer, $jumlah_populer);
+$stmt->fetch();
+$kategori_populer = $kategori_populer ?? "Tidak ada";
+$stmt->close();
+
+// Query untuk mendapatkan data
+$query = "
+    SELECT 
+        u.user_name,
+        dr.waste_weight,
+        w.waste_name,
+        dor.status
+    FROM drop_off_request dor
+    JOIN detail_request dr ON dor.request_id = dr.request_id
+    JOIN waste w ON dr.waste_id = w.waste_id
+    JOIN users u ON dor.user_id = u.user_id
+    WHERE dor.status IN ('waiting', 'accepted', 'rejected')
+    ORDER BY dor.drop_off_request_created_at DESC;
+
+";
+$result = $conn->query($query);
+
+// Simpan data
+$activities = [];
+if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        $activities[] = $row;
+    }
+}
+
+$conn->close();
+// $data = [
+//     "total" => "2000",
+//     "writter" => "Writter 1",
+//     "category" => "Category 1",
+//     "price" => 10000,
+//     "stock" => 10];
+
+// $new_activity = [
+//     [
+//         "id" => 1,
+//         "username" => "Ahmad Sudrajat",
+//         "berat_sampah" => 5,
+//         "jenis_sampah" => "plastik",
+//         "status" => "pending"
+//     ],
+//     [
+//         "id" => 2,
+//         "username" => "Ahmad Sudrajat",
+//         "berat_sampah" => 5,
+//         "jenis_sampah" => "plastik",
+//         "status" => "success"
+//     ],
+//     [
+//         "id" => 3,
+//         "username" => "Ahmad Sudrajat",
+//         "berat_sampah" => 5,
+//         "jenis_sampah" => "plastik",
+//         "status" => "pending"
+//     ],
+//     [
+//         "id" => 4,
+//         "username" => "Ahmad Sudrajat",
+//         "berat_sampah" => 5,
+//         "jenis_sampah" => "plastik",
+//         "status" => "pending"
+//     ],
+// ]
 ?>
-
 
 <!DOCTYPE html>
 <html>
@@ -134,30 +236,30 @@ $new_activity = [
             <!-- DASHBOARD CARD -->
             <div class="h-auto w-full mt-[63px] grid grid-cols-4 gap-7">
                 <div class="bg-gradient-to-b from-[#F6AC0A] to-[#906506] rounded-[20px] border border-gray shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] flex flex-col pl-[23px] pt-[33px] pb-[49px] h-full text-dark gap-[11px]">
-                    <h4 class="text-xs font-bold">Total Sampah Diterima</h4>
+                    <h4 class="text-xs font-bold">Total Berat Sampah Diterima</h4>
                     <div class="flex flex-col">
-                        <h2 class="text-xl font-normal  "><?php echo $data['total'] ?> Kg</h2>
+                        <h2 class="text-xl font-normal  "><?php echo number_format($total_sampah, 2); ?> Kg</h2>
                         <p class="text-[10px] font-light">Bulan ini</p>
                     </div>
                 </div>
                 <div class="bg-gradient-to-b from-[#08FCF0] to-[#05968F] rounded-[20px] border border-gray shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] flex flex-col pl-[23px] pt-[33px] pb-[49px] h-full text-dark gap-[11px]">
-                    <h4 class="text-xs font-bold">Pengantaran Aktif </h4>
+                    <h4 class="text-xs font-bold">Total Drop-off Requests</h4>
                     <div class="flex flex-col">
-                        <h2 class="text-xl font-normal  ">2</h2>
+                        <h2 class="text-xl font-normal  "><?php echo number_format($total_requests); ?></h2>
                         <p class="text-[10px] font-light">Menunggu Verifikasi</p>
                     </div>
                 </div>
                 <div class="bg-gradient-to-b from-[#0AF649] to-[#06902B] rounded-[20px] border border-gray shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] flex flex-col pl-[23px] pt-[33px] pb-[49px] h-full text-dark gap-[11px]">
-                    <h4 class="text-xs font-bold">Total User Aktif</h4>
+                    <h4 class="text-xs font-bold">Total Drop-off Waitings</h4>
                     <div class="flex flex-col">
-                        <h2 class="text-xl font-normal  ">500</h2>
+                        <h2 class="text-xl font-normal  "><?php echo $total_menunggu; ?></h2>
                         <p class="text-[10px] font-light">+12  % dari bulan lalu</p>
                     </div>
                 </div>
                 <div class="bg-gradient-to-b from-[#ECF310] to-[#898D09] rounded-[20px] border border-gray shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] flex flex-col pl-[23px] pt-[33px] pb-[49px] h-full text-dark gap-[11px]">
-                    <h4 class="text-xs font-bold">Total Poin Diberikan</h4>
+                    <h4 class="text-xs font-bold">Sampah Paling Sering Diterima</h4>
                     <div class="flex flex-col">
-                        <h2 class="text-xl font-normal  ">45,678</h2>
+                        <h2 class="text-xl font-normal  "><?php echo $kategori_populer; ?></h2>
                         <p class="text-[10px] font-light">Bulan ini</p>
                     </div>
                 </div>
@@ -198,15 +300,15 @@ $new_activity = [
                     </div>
                 </div> -->
 
-                <?php foreach ($new_activity as $activity) : ?>
+                <?php foreach ($activities as $activity) : ?>
                     <div class="flex flex-row justify-between pl-[7px] pr-[45px] w-full h-[62px] rounded-[10px] bg-light border border-gray">
                     <div class="flex flex-col">
-                        <h4 class="text-xl font-normal"><?php echo $activity['username'] ?></h4>
-                        <p class="text-xs font-light">Mengantarkan <?php echo $activity['berat_sampah'] ?> Kg Sampah <?php echo $activity['jenis_sampah'] ?></p>
+                        <h4 class="text-xl font-normal"><?php echo $activity['user_name'] ?></h4>
+                        <p class="text-xs font-light">Mengantarkan <?php echo $activity['waste_weight'] ?> Kg Sampah <?php echo $activity['waste_name'] ?></p>
                     </div>
 
                     <!-- IF CONDITION -->
-                    <?php if ($activity['status'] == "pending") : ?>
+                    <?php if ($activity['status'] == "accepted") : ?>
                         <div class="bg-[#2ECC71] w-[159px] h-[27px] rounded-[10px] shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] border border-gray self-center text-center content-center">
                             <p class="text-xs font-light">Selesai</p>
                         </div>
