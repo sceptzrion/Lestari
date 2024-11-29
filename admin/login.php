@@ -1,3 +1,12 @@
+<?php
+session_start();
+if (isset($_SESSION['admin_id'])) {
+    // Jika admin sudah login, langsung arahkan ke dashboard
+    header('Location: dashboard.php');
+    exit();
+}
+?>
+
 <!doctype html>
 <html>
 <head>
