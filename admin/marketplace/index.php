@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="../../css/styles.css" rel="stylesheet">
-    <title>Manajemen User | Admin Lestari</title>
+    <title>Marketplace | Admin Lestari</title>
 </head>
 <body>
     <div class="flex flex-row h-full w-full">
         <!-- SIDEBAR -->
-        <div class="bg-gradient-to-t from-green-admin to-dark-green-admin w-[345px] h-auto pb-[200px] text-light">
+        <div class="bg-gradient-to-t from-green-admin to-dark-green-admin w-[345px] h-auto text-light">
             <div class="flex flex-col pt-10 items-center">
                 <h1 class="text-[32px] font-extrabold">Admin Lestari</h1>
                 <hr class="w-[345px] h-[1px] bg-light mt-[33px]">
@@ -35,11 +35,11 @@
                     <img src="../../images/admin/prize.png" class="w-[30px]" alt="">
                     <p>Kelola Reward</p>
                 </button>
-                <button class="btn btn-success bg-green-btn text-light font-bold text-xl justify-start pl-[9px] w-[271px] h-[59px] flex flex-row gap-[13px]" onclick="location.href='../manajemen-user/'">
+                <button class="btn btn-success bg-transparent border-0 text-light font-bold text-xl justify-start pl-[9px] w-[271px] h-[59px] flex flex-row gap-[13px]" onclick="location.href='../manajemen-user/'">
                     <img src="../../images/admin/Management.png" alt="">
                     <p>Manajemen User</p>
                 </button>
-                <button class="btn btn-success bg-transparent border-0 text-light font-bold text-xl justify-start pl-[9px] w-[271px] h-[59px] flex flex-row gap-[13px]" onclick="location.href='../marketplace/'">
+                <button class="btn btn-success bg-green-btn border-0 text-light font-bold text-xl justify-start pl-[9px] w-[271px] h-[59px] flex flex-row gap-[13px]" onclick="location.href='../marketplace/'">
                     <img src="../../images/admin/WhatsApp.png" alt="">
                     <p>Marketplace</p>
                 </button>
@@ -59,7 +59,7 @@
         <div class="bg-light-bg-content w-full h-auto pb-11 px-5 pt-5">
             <!-- HEADER -->
             <div class="flex flex-row justify-between bg-gradient-to-r from-[#1E5E3F] to-[#3FC483] w-full h-[88px] px-[23px] rounded-[20px] text-light font-extrabold text-[32px] items-center">
-                <h1>Manajemen User</h1>
+                <h1>Marketplace</h1>
                 <div class="dropdown dropdown-end self-center">
                     <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
                         <div class="w-[50px] rounded-full">
@@ -90,66 +90,91 @@
             <!-- HEADER END -->
             
             <!-- BUTTONS -->
-            <div class="mt-7 h-[34px]">
-                <form action="" class="flex flex-row gap-6 h-full">
-                    <input type="text" name="cari-user" id="cari-user" placeholder="Cari User" class="w-[364px] px-1 text-dark text-sm font-light bg-light rounded-[5px] py-1.5 h-full">
-                    <select id="status-user" name="status-user" class="w-auto h-full bg-light border border-gray rounded-[5px] text-sm px-3 py-1.5 font-medium text-dark">
-                        <option disabled selected>Status</option>
-                        <option>Option 1</option>
-                        <option>Option 2</option>
-                    </select>
-                    <button class="btn-success bg-[#2E9E5D] rounded-[5px] w-auto h-full px-8 text-base font-semibold text-light shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] border border-gray">Cari</button>
+            <div class="mt-7 w-1/3">
+                <form action="" class="flex flex-col gap-4 w-auto">
+                    <input type="text" name="cari-user" id="cari-user" placeholder="Cari Produk" class="w-auto px-1 text-dark text-sm font-light bg-light rounded-[5px] py-1.5 h-[34px]">
+                    <div class="flex flex-row gap-4">
+                        <select id="kategori" name="kategori" class="w-auto h-[34px] bg-light border border-gray rounded-[5px] text-sm px-3 py-1.5 font-medium text-dark">
+                            <option disabled selected>Semua Kategori</option>
+                            <option>Option 1</option>
+                            <option>Option 2</option>
+                        </select>
+                        <select id="urutkan" name="urutkan" class="w-auto h-[34px] bg-light border border-gray rounded-[5px] text-sm px-3 py-1.5 font-medium text-dark">
+                            <option disabled selected>Urutkan Berdasarkan</option>
+                            <option>Option 1</option>
+                            <option>Option 2</option>
+                        </select>
+                    </div>
                 </form>
             </div>
             <!-- BUTTONS END -->
 
             <!-- TABLE -->
-             <div class="bg-light rounded-[10px] w-full h-auto shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] flex flex-col py-[35px] px-[25px] mt-[60px] text-dark gap-3">
-                <div class="table w-full">
-                    <div class="overflow-x-auto">
-                        <table class="table border-collapse border border-[#828282] text-center text-dark">
-                            <!-- head -->
-                            <thead class="bg-[#E5E5E5] text-sm font-bold text-dark">
-                            <tr class="border border-[#828282]">
-                                <th class="border border-[#828282]">ID</th>
-                                <th class="border border-[#828282]">Nama</th>
-                                <th class="border border-[#828282]">Email</th>
-                                <th class="border border-[#828282]">Total Poin</th>
-                                <th class="border border-[#828282]">Status</th>
-                                <th class="border border-[#828282]">Tanggal Bergabung</th>
-                                <th class="border border-[#828282]">Keterangan</th>
-                            </tr>
-                            </thead>
-                            <tbody class="font-medium">
-                            <!-- row 1 -->
-                            <tr>
-                                <td class="border border-[#828282]">001</td>
-                                <td class="border border-[#828282]">Ahmad Sudrajat</td>
-                                <td class="border border-[#828282]">ahmad@gmail.com</td>
-                                <td class="border border-[#828282]">1,234</td>
-                                <td class="border border-[#828282]">
-                                    <div class="flex flex-row gap-2 items-center justify-center">
-                                        <div class="w-[8px] h-[8px] rounded-full bg-[#75F94C]"></div>
-                                        <p class="text-sm font-normal text-dark">Aktif</p>
-                                    </div>
-                                </td>
-                                <td class="border border-[#828282]">15-12-2024</td>
-                                <td class="border border-[#828282]">
-                                    <button class="bg-[#C0392B] rounded-[10px] border border-gray w-auto h-auto text-xs px-3 py-1.5 text-light font-medium text-center" onclick="getElementById('unactive').showModal()">
-                                        Nonaktifkan
-                                    </button>
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
+             <div class="bg-light rounded-[10px] w-full h-auto shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] p-10 mt-10 text-dark gap-[18px] flex flex-col">
+                <div class="grid grid-cols-3 gap-[30px]">
+                    <!-- CARDS -->
+                <?php 
+                    // LOOPING DYNAMIC CARDS
+                    for ($i = 0; $i < 4; $i++) {?>
+                        <div class=" bg-light w-auto h-auto shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] px-3 pb-[15px]">
+                        <figure class="pt-[7px] justify-self-center">
+                            <img
+                            src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
+                            alt="Shoes"
+                            class="rounded-[15px]" />
+                        </figure>
+                        <div class="mt-[31px] gap-[5px] flex flex-col">
+                            <h3 class="text-dark text-[15px] font-extrabold">Tas Daur Ulang Plastik</h3>
+                            <h2 class="text-xl text-[#077E46] font-semibold max-w-[238px]">Rp150.000</h2>
+                            <p class="text-[10px] opacity-50 font-normal text-dark">Kategori : Aksesoris</p>
+                            <p class="text-[10px] opacity-50 font-normal text-dark">Stok : 15 pcs</p>
+                        </div>
+                        <div class="mt-[21px] h-[21px] flex justify-center">
+                            <button onclick="getElementById('delete').showModal()" class="bg-[#C0392B] h-full w-[77px] rounded-[10px] text-[10px] font-semibold text-light flex flex-row gap-1 justify-center items-center">
+                                <img class="w-[10px]" src="../../images/admin/trash.png" alt="">
+                                <span>Hapus</span>
+                            </button>
+                        </div>
+                    </div> 
+                    <?php } ?>
+            <!-- CARDS END  -->
                 </div>
-                <!-- TABLE END -->
                 <button class="rounded-[5px] border border-gray py-1.5 w-[90px] self-end h-auto text-sm font-medium text-dark">See All</button>
                  <!-- BIKIN SEE ALL -->
             </div>
 
             <!-- dialogs -->
+            <dialog id="delete" class="modal">
+                <div class="modal-box bg-light w-[550px] h-auto rounded-[20px] gap-[42px] flex flex-col p-[30px]">
+                    <h3 class="text-2xl font-bold text-dark">Hapus Produk</h3>
+                    <div class="flex flex-col font-normal text-dark text-base gap-4">
+                        <p>Apakah Anda yakin ingin Menghapus produk ini?</p>
+                        <div class="flex flex-row gap-0.5">
+                            <span class="font-bold">Nama Produk</span>
+                            <p>: Tas Daur Ulang Plastik</p>
+                        </div>
+                        <div class="flex flex-row gap-0.5">
+                            <span class="font-bold">Kategori</span>
+                            <p>: Aksesoris</p>
+                        </div>
+                        <div class="flex flex-row gap-0.5">
+                            <span class="font-bold">Harga</span>
+                            <p>: Rp150.000</p>
+                        </div>
+                        <div class="flex flex-row gap-0.5">
+                            <span class="font-bold">Stok</span>
+                            <p>: 15 pcs</p>
+                        </div>
+                    </div>
+                    <div class="mt-10">
+                        <form method="dialog" class="flex flex-row-reverse items-end gap-[18px]">
+                            <button onclick="getElementById('deleted').showModal()" class="bg-[#EB3223] h-auto w-auto px-[14px] py-2 rounded-[10px] text-xs font-semibold text-light">Ya, Hapus</button>
+                            <button class="bg-[#95A5A6] h-auto w-auto px-[14px] py-2 rounded-[10px] text-xs font-semibold text-light">Batal</button>
+                        </form>
+                    </div>
+                </div>                
+            </dialog>
+
             <dialog id="verified" class="modal">
                 <div class="modal-box bg-light w-[593px] h-auto rounded-[20px] gap-10 flex flex-col items-center py-[75px]">
                     <h3 class="text-[32px] font-bold text-center text-dark">Berhasil Verifikasi</h3>
@@ -226,7 +251,7 @@
 
             <dialog id="deleted" class="modal">
                 <div class="modal-box bg-light w-[531px] h-auto py-24 rounded-[20px] gap-6 flex flex-col items-center align-middle content-center">
-                    <h3 class="text-[32px] font-bold text-center text-dark">Akun berhasil dinonaktifkan</h3>
+                    <h3 class="text-[32px] font-bold text-center text-dark">Data berhasil dihapus</h3>
                     <img src="../../images/admin/checklist.png" class="w-[100px]" alt="">
                 </div>
                 <form method="dialog" class="modal-backdrop bg-light bg-opacity-25">
