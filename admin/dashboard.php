@@ -238,7 +238,7 @@ $conn->close();
                 <div class="bg-gradient-to-b from-[#F6AC0A] to-[#906506] rounded-[20px] border border-gray shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] flex flex-col pl-[23px] pt-[33px] pb-[49px] h-full text-dark gap-[11px]">
                     <h4 class="text-xs font-bold">Total Berat Sampah Diterima</h4>
                     <div class="flex flex-col">
-                        <h2 class="text-xl font-normal  "><?php echo number_format($total_sampah, 2); ?> Kg</h2>
+                        <h2 class="text-xl font-normal  "><?php echo number_format($total_sampah); ?> Kg</h2>
                         <p class="text-[10px] font-light">Bulan ini</p>
                     </div>
                 </div>
