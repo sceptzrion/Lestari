@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="../../css/styles.css" rel="stylesheet">
-    <title>Penerimaan Sampah | Admin Lestari</title>
+    <title>Kelola Reward | Admin Lestari</title>
 </head>
 <body>
     <div class="flex flex-row h-full w-full">
@@ -23,7 +23,7 @@
                     <img src="../../images/admin/Truck.png" alt="">
                     <p class="text-lg">Penerimaan Sampah</p>
                 </button>
-                <button class="btn btn-success bg-green-btn text-light font-bold text-xl justify-start pl-[9px] w-[271px] h-[59px] flex flex-row gap-[13px]" onclick="location.href='../informasi-tutorial/'">
+                <button class="btn btn-success bg-transparent border-0 text-light font-bold text-xl justify-start pl-[9px] w-[271px] h-[59px] flex flex-row gap-[13px]" onclick="location.href='../informasi-tutorial/'">
                     <img src="../../images/admin/Recycling.png" alt="">
                     <p>Informasi Tutorial</p>
                 </button>
@@ -31,7 +31,7 @@
                     <img src="../../images/admin/Graph.png" alt="">
                     <p>Statistik & Laporan</p>
                 </button>
-                <button class="btn btn-success bg-transparent border-0 text-light font-bold text-xl justify-start pl-[9px] w-[271px] h-[59px] flex flex-row gap-[13px]" onclick="location.href='../kelola-reward/'">
+                <button class="btn btn-success bg-green-btn text-light font-bold text-xl justify-start pl-[9px] w-[271px] h-[59px] flex flex-row gap-[13px]" onclick="location.href='../kelola-reward/'">
                     <img src="../../images/admin/prize.png" class="w-[30px]" alt="">
                     <p>Kelola Reward</p>
                 </button>
@@ -59,7 +59,7 @@
         <div class="bg-light-bg-content w-full h-auto pb-11 px-5 pt-5">
             <!-- HEADER -->
             <div class="flex flex-row justify-between bg-gradient-to-r from-[#1E5E3F] to-[#3FC483] w-full h-[88px] px-[23px] rounded-[20px] text-light font-extrabold text-[32px] items-center">
-                <h1>Informasi Tutorial</h1>
+                <h1>Kelola Reward</h1>
                 <div class="dropdown dropdown-end self-center">
                     <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
                         <div class="w-[50px] rounded-full">
@@ -88,37 +88,28 @@
                 </div>
             </div>
             <!-- HEADER END -->
-
-            <!-- ADD -->
-            <button onclick="location.href='./add.php'" class="bg-[#2980B9] h-10 flex flex-row gap-[18px] content-center mt-[42px] w-[279px] pl-[27px] rounded-[5px] items-center border border-gray shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)]">
-                <img src="../../images/admin/Plus.png" class="h-[30px]" alt="Add">
-                <span class="text-light text-base font-extrabold">Upload Video baru</span>
-            </button>
-            <!-- BIKIN ADD -->
             
             <!-- BUTTONS -->
-            <div class="flex flex-row gap-[22px] mt-[31px] h-8">
-                <button class="btn-active btn-accent h-[32px] px-4 text-light font-semibold rounded-[10px] border border-gray bg-[#2ECC71] shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] text-base" onclick="location.href='./'">
-                    Semua
+            <div class="flex flex-row gap-[22px] mt-[31px] ">
+                <button class="btn btn-warning h-[42px] px-[27px] text-light rounded-[20px] border border-dark bg-[#F6AC0A] shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] font-medium text-xl" onclick="location.href='./'">
+                    Kelola Produk Reward
                 </button>
-                <button class="btn-warning h-full px-5 text-light font-semibold rounded-[10px] border border-gray bg-[#F6AC0A] shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] text-base" onclick="location.href='./'">
-                    Kertas
+                <button class="btn btn-warning h-[42px] px-[27px] text-light rounded-[20px] mr-auto border border-dark bg-[#F6AC0A] shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] font-medium text-xl" onclick="location.href='./redeem-list.php'">
+                    Daftar Tukar Reward
                 </button>
-                <button class="btn-warning h-full px-5 text-light font-semibold rounded-[10px] border border-gray bg-[#F6AC0A] shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] text-base" onclick="location.href='./'">
-                    Plastik
-                </button>
-                <button class="btn-warning h-full px-5 text-light font-semibold rounded-[10px] border border-gray bg-[#F6AC0A] shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] text-base" onclick="location.href='./'">
-                    Alumunium
+                <button onclick="location.href='./add.php'" class="bg-[#2980B9] h-10 flex flex-row gap-[18px] content-center w-[279px] pl-[27px] rounded-[5px] items-center self-center border border-gray shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)]">
+                    <img src="../../images/admin/Plus.png" class="h-[30px]" alt="Add">
+                    <span class="text-light text-base font-extrabold">Tambah produk</span>
                 </button>
             </div>
             <!-- BUTTONS END -->
 
-            <!-- GRID -->
+             <!-- GRID -->
             <div class="bg-light w-full h-auto p-10 mt-7 border border-gray shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] grid-cols-3 grid gap-7 rounded-[10px]">
                 <!-- CARDS -->
                  <?php 
                     // LOOPING DYNAMIC CARDS
-                    for ($i = 0; $i < 9; $i++) {?>
+                    for ($i = 0; $i < 4; $i++) {?>
                         <div class=" bg-light w-auto h-auto shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] px-1.5 pb-[15px]">
                         <figure class="pt-[7px]">
                             <img
@@ -127,8 +118,9 @@
                             class="rounded-[15px]" />
                         </figure>
                         <div class="mt-[31px] gap-[9px] flex flex-col">
-                            <h2 class="text-dark text-[15px] font-extrabold">Cara Mendaur Ulang Plastik</h2>
-                            <p class="text-xs text-dark font-normal max-w-[238px]">Tips dan trik mendaur ulang sampah plastik menjadi barang bernilai...</p>
+                            <h2 class="text-dark text-[15px] font-extrabold">Kantong Plastik Sampah Roll</h2>
+                            <p class="text-xs text-dark font-normal max-w-[238px]">Poin: 1000</p>
+                            <p class="bg-[#FFDE75] h-full px-2 w-auto mr-auto rounded-[10px] text-[10px] font-light text-dark">Stok 20</p>
                         </div>
                         <div class="mt-[50px] h-5 flex flex-row justify-between align-middle">
                             <button onclick="getElementById('edit').showModal()" class="bg-[#2ECC71] h-full w-[72px] rounded-[10px] text-[10px] font-semibold text-light">Edit</button>
@@ -139,25 +131,41 @@
             <!-- CARDS END  -->
 
             <!-- dialogs -->
+            <dialog id="verified" class="modal">
+                <div class="modal-box bg-light w-[593px] h-auto rounded-[20px] gap-10 flex flex-col items-center py-[75px]">
+                    <h3 class="text-[32px] font-bold text-center text-dark">Berhasil Verifikasi</h3>
+                    <img src="../../images/admin/checklist.png" class="w-[100px]" alt="">
+                </div>
+                <form method="dialog" class="modal-backdrop bg-light bg-opacity-25">
+                    <button> </button>
+                </form>
+            </dialog>
+
+            <dialog id="denied" class="modal">
+                <div class="modal-box bg-light w-[593px] h-auto rounded-[20px] gap-10 flex flex-col items-center py-[75px]">
+                    <h3 class="text-[32px] font-bold text-center text-dark">Data ditolak</h3>
+                    <img src="../../images/admin/denied.png" class="w-[100px]" alt="">
+                </div>
+                <form method="dialog" class="modal-backdrop bg-light bg-opacity-25">
+                    <button> </button>
+                </form>
+            </dialog>
+
             <dialog id="edit" class="modal">
                 <div class="modal-box bg-light min-w-[550px] h-auto rounded-[20px] gap-[18px] flex flex-col px-10 py-7">
-                    <h3 class="text-2xl font-bold text-dark">Edit Informasi Tutorial Video</h3>
+                    <h3 class="text-2xl font-bold text-dark">Edit Produk</h3>
                     <form class="flex flex-col gap-[18px] w-full text-dark">
                         <div class="flex flex-col gap-[9px]">
-                            <label for="judul-video" class="text-sm font-medium">Judul Video</label>
-                            <input type="text" id="judul-video" name="judul-video" value="Cara Mendaur Ulang Plastik" class="w-full h-7 bg-light border border-gray px-1.5 font-normal text-xs">
+                            <label for="nama-produk" class="text-sm font-medium">Nama Produk</label>
+                            <input type="text" id="nama-produk" name="nama-produk" value="Kantong Plastik Sampah Roll" class="w-full h-7 bg-light border border-gray px-1.5 font-normal text-xs">
                         </div>
                         <div class="flex flex-col gap-[9px]">
-                            <label for="kategori-video" class="text-sm font-medium">Kategori</label>
-                            <select id="kategori-video" name="kategori-video" class="select select-bordered w-full h-auto bg-light border border-gray px-1.5 text-xs font-normal">
-                                <option>Plastik</option>
-                                <option>Option 1</option>
-                                <option>Option 2</option>
-                            </select>
+                            <label for="jumlah-poin" class="text-sm font-medium">Jumlah Poin</label>
+                            <input type="number" id="jumlah-poin" name="jumlah-poin" min="0" value="1000" class="w-full h-7 bg-light border border-gray px-1.5 font-normal text-xs dark:[color-scheme:light]">
                         </div>
                         <div class="flex flex-col gap-[9px]">
-                            <label for="deskripsi-video" class="text-sm font-medium">Deskripsi Video</label>
-                            <textarea type="text" id="deskripsi-video" name="deskripsi-video" class="w-full min-h-[121px] bg-light border border-gray p-1.5 text-xs font-normal">Tips dan trik mendaur ulang sampah plastik menjadi barang bernilai...</textarea>
+                            <label for="stok-produk" class="text-sm font-medium">Stok</label>
+                            <input type="number" id="stok-produk" name="stok-produk" min="0" value="20" class="w-full h-7 bg-light border border-gray px-1.5 font-normal text-xs dark:[color-scheme:light]">
                         </div>
                         <div class="flex flex-row-reverse gap-[15px] mt-2 items-end">
                             <button onclick="getElementById('saved').showModal()" class="bg-[#2ECC71] h-auto w-auto px-[14px] py-2 rounded-[10px] text-xs font-semibold text-light">Simpan Perubahan</button>
@@ -185,9 +193,9 @@
                     <h3 class="text-[20px] font-bold text-center text-dark">Konfirmasi Hapus</h3>
                     <p class="text-center text-xs font-normal text-dark leading-relaxed">Apakah Anda yakin ingin menghapus informasi ini?<br>
                     Tindakan ini tidak dapat dibatalkan</p>
-                    <div class="flex flex-row-reverse mt-10 items-end gap-[18px]">
-                        <button onclick="getElementById('deleted').showModal()" class="bg-[#EB3223] h-auto w-auto px-[14px] py-2 rounded-[10px] text-xs font-semibold text-light">Ya, Hapus</button>
-                        <form method="dialog">
+                    <div class="mt-10">
+                        <form method="dialog" class="flex flex-row-reverse items-end gap-[18px]">
+                            <button onclick="getElementById('deleted').showModal()" class="bg-[#EB3223] h-auto w-auto px-[14px] py-2 rounded-[10px] text-xs font-semibold text-light">Ya, Hapus</button>
                             <button class="bg-[#95A5A6] h-auto w-auto px-[14px] py-2 rounded-[10px] text-xs font-semibold text-light">Batal</button>
                         </form>
                     </div>

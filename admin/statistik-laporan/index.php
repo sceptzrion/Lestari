@@ -56,7 +56,7 @@
         <!-- SIDEBAR END -->
 
         <!-- CONTENT -->
-        <div class="bg-light-bg-content w-full h-[1024px] px-5 pt-5">
+        <div class="bg-light-bg-content w-full h-auto px-5 pt-5 pb-12">
             <!-- HEADER -->
             <div class="flex flex-row justify-between bg-gradient-to-r from-[#1E5E3F] to-[#3FC483] w-full h-[88px] px-[23px] rounded-[20px] text-light font-extrabold text-[32px] items-center">
                 <h1>Statistik & Laporan</h1>
@@ -233,6 +233,49 @@
                 </div>
             </div>
             <!-- CHARTS END -->
+            
+            <!-- LAPORAN PROGRAM -->
+            <div class="bg-light w-full p-6 rounded-[20px] mt-[30px] border border-gray shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] flex flex-col text-dark gap-[30px]">
+                <h3 class="font-semibold text-[20px] mb-1">Laporan Program Daur Ulang Terkini</h3>
+                <table class="table border-collapse border border-[#828282] text-center">
+                            <!-- head -->
+                            <thead class="bg-[#E5E5E5] text-dark text-sm font-bold">
+                            <tr class="border border-[#828282]">
+                                <th class="border border-[#828282]">Nama Program</th>
+                                <th class="border border-[#828282]">Kategori</th>
+                                <th class="border border-[#828282]">Persentase</th>
+                                <th class="border border-[#828282]">Status</th>
+                                <th class="border border-[#828282]">Total Sampah (Kg)</th>
+                            </tr>
+                            </thead>
+                            <tbody class="font-medium">
+                            <!-- row 1 -->
+                            <tr>
+                                <td class="border border-[#828282]">Daur Ulang Plastik</td>
+                                <td class="border border-[#828282]">Plastik</td>
+                                <td class="border border-[#828282]">90%</td>
+                                <td class="border border-[#828282]">
+                                    <p class="bg-[#2ECC71] rounded-[10px] border border-gray w-auto h-auto text-sm font-medium text-center p-0.5">
+                                        Aktif
+                                    </p>
+                                </td>
+                                <td class="border border-[#828282] text-center">450</td>
+                            </tr>
+                            <!-- row 1 -->
+                            <tr>
+                                <td class="border border-[#828282]">Daur Ulang Plastik</td>
+                                <td class="border border-[#828282]">Plastik</td>
+                                <td class="border border-[#828282]">90%</td>
+                                <td class="border border-[#828282]">
+                                    <p class="bg-[#2ECC71] rounded-[10px] border border-gray w-auto h-auto text-sm font-medium text-center p-0.5">
+                                        Aktif
+                                    </p>
+                                </td>
+                                <td class="border border-[#828282] text-center">450</td>
+                            </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 
