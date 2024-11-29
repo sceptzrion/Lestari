@@ -19,13 +19,12 @@
       }
     }
   </script>
-  <script>
-    function toggleModal() {
-        const modal = document.getElementById("rewardModal");
-        modal.classList.toggle("hidden");
-    }
-</script>
-
+    <script>
+        function toggleModal() {
+            const modal = document.getElementById("location-modal");
+            modal.classList.toggle("hidden");
+        }
+    </script>
 </head>
 <body class="font-poppins">
      <!-- NAVBAR -->
@@ -127,104 +126,41 @@
         <!-- endif -->
     </div>
   <!-- NAVBAR END -->
-
-    <!-- Content -->
-    <main class="container mx-auto px-4 py-12">
-        <div class="bg-white rounded-xl shadow-lg p-6 relative">
-            <!-- Icon and Heading -->
-            <div class="text-center">
-                <img src="../../images/Logo admin.png" alt="Icon" class="mx-auto mb-4">
-            </div>
-            <!-- Date and Email -->
-            <div class="flex justify-between items-center text-sm text-green-600 font-semibold">
-                  <span>12 Nov 2024 · 15:32</span>
-                  <span>ahmad@gmail.com</span>
-            </div>
-                <hr class="border-dashed border-green-600 my-4">
-
-            <h2 class="text-lg font-semibold text-green-700 flex items-center justify-start">
-                    <span class="text-green-500 material-icons mr-2"></span>
-                    Penukaran Sampah
-            </h2>
         
-            <!-- Drop Off Details -->
-            <div class="mt-6 space-y-4">
-                <div>
-                    <h3 class="text-green-700 font-semibold text-sm">DROP OFF - LESTARI</h3>
-                    <div class="bg-gray-50 rounded-lg shadow p-4 flex justify-between items-center">
-                        <span>Total Poin</span>
-                        <span class="text-green-600 font-bold">$ 100</span>
-                    </div>
-                </div>
-                <div>
-                    <h3 class="text-green-700 font-semibold text-sm">DETAIL DROP OFF</h3>
-                    <div class="bg-gray-50 rounded-lg shadow p-4">
-                        <span>Kertas 10kg</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Button -->
-            <div class="mt-8 text-center">
-                <button onclick="toggleModal()" class="bg-gradient-to-r from-green to-dark-green text-white font-semibold rounded-full px-6 py-2 hover:bg-green-700">
-                    Klaim Poin
-                </button>
-            </div>
-        </div>
-    </main>
-     <!-- Modal -->
-    <div id="rewardModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50 hidden">
-     <div class="bg-white rounded-lg p-6 w-80 text-center relative">
-      <div class="absolute top-2 right-2 cursor-pointer" onclick="toggleModal()">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-500 hover:text-gray-700" fill="none" viewBox="0 0 24 24"
-          stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-        </svg>
-      </div>
-      <div class="mb-4">
-        <img src="../../images/user/selamat.png" alt="Reward Icon" class="mx-auto">
-      </div>
-      <p class="text-green-700 font-semibold mb-4">Kamu mendapatkan poin</p>
-      <div class="bg-green-50 border border-green-500 rounded-lg p-4 flex justify-center items-center mb-4">
-        <span class="text-green-600 font-bold text-2xl">+ 100</span>
-      </div>
-      <button onclick="toggleModal()" class="bg-gradient-to-r from-green to-dark-green text-white py-2 px-4 rounded-full shadow-lg hover:bg-green-600">
-        Lihat Poin
-      </button>
+  <main class="container mx-auto mt-8 px-4 pb-12">
+  <div id="selected-location" class="text-2xl text-[#1B5E20] font-bold mb-3 flex items-center">
+    <img src="../../images/user/Loc.png" alt="Location Icon" class="w-[31px] h-[44px] mr-2"> 
+    Jakarta Pusat
+  </div>
+  <div class="bg-gradient-to-r from-green to-dark-green text-white rounded-lg p-6 text-center h-32 flex items-center">
+    <div class="text-white text-center relative"> 
+      <h2 class="text-3xl font-bold flex items-center">
+        <img src="../../images/user/recycle.png" alt="Recycle Icon" class="w-12 h-12 mr-2">
+        Drop Off Location
+      </h2>
     </div>
   </div>
-  <!-- Footer -->
-<footer class="bg-gradient-to-r from-green to-dark-green text-white py-5">
-    <div class="container mx-auto px-4 text-center">
-      <div class="flex justify-center">
-        <a href="./landingpage.php">
-          <img src="../../images/Logo.png" alt="Logo Lestari" class="h-20">
-        </a>
-      </div>
-      <div class="container mx-auto grid grid-cols-3 gap-4 text-center">
-      <div>
-        <h4 class="font-bold">Lestari</h4>
-        <p>Home</p>
-        <p>Tentang Kami</p>
-        <p>Layanan</p>
-        <p>Blog</p>
-      </div>
-      <div>
-        <h4 class="font-bold">Informasi</h4>
-        <p>Kontak Kami</p>
-      </div>
-      <div>
-        <h4 class="font-bold">Hubungi Kami</h4>
-        <div class="flex justify-center space-x-4 mt-2">
-          <a href="#"><img src="https://placehold.co/20x20" alt="Instagram"></a>
-          <a href="#"><img src="https://placehold.co/20x20" alt="Facebook"></a>
-          <a href="#"><img src="https://placehold.co/20x20" alt="Twitter"></a>
-          <a href="#"><img src="https://placehold.co/20x20" alt="YouTube"></a>
-        </div>
-      </div>
-    </div>
-    </div>
-  </footer>
-    
-</body>
-</html>
+  <p class="text-sm text-[#1B5E20] mt-4">
+    <span class="inline-block bg-gradient-to-r from-green to-dark-green text-white rounded-full px-3 py-1 text-sm">3 bank sampah tersedia</span>
+  </p>
+
+<!-- Locations -->
+<div class="mt-4 space-y-4">
+  <a href="../../user/drop_off/select_kota.php" class="block border rounded-lg p-4 hover:bg-gray-100">
+    <h3 class="text-lg font-bold">Kemayoran</h3>
+    <p class="text-sm text-gray-700">Lestari Kemayoran - Jl. Bank Sampah No.1</p>
+  </a>
+
+  <a href="https://example.com/cempaka-putih" class="block border rounded-lg p-4 hover:bg-gray-100">
+    <h3 class="text-lg font-bold">Cempaka Putih</h3>
+    <p class="text-sm text-gray-700">Lestari Cempaka Putih - Jl. Bank Sampah No.2</p>
+  </a>
+
+  <a href="https://example.com/gatot-subroto" class="block border rounded-lg p-4 mb-4 hover:bg-gray-100">
+    <h3 class="text-lg font-bold">Gatot Subroto</h3>
+    <p class="text-sm text-gray-700">Lestari Gatot Subroto - Jl. Bank Sampah No.3</p>
+  </a>
+</div>
+
+
+</main>

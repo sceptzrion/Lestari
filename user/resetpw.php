@@ -1,10 +1,19 @@
+<?php
+// Proses logika backend
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Validasi dan proses lainnya
+    header('Location: ./code_verif'); // Redirect ke halaman code_verif
+    exit();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign In - Lestari</title>
+    <title>Reset Password - Lestari</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -36,51 +45,29 @@
                 </div>
 
                 <!-- Title -->
-                <h1 class="text-2xl font-bold text-lg-start text-gray-800 mb-8">Sign In to Lestari</h1>
-
-                <!-- Google Sign In -->
-                <button class="flex items-center justify-center w-full border border-gray-00 py-2 rounded-[20px] shadow-sm hover:bg-gray-200 transition mb-4">
-                    <img src="https://via.placeholder.com/20" alt="Google Logo" class="mr-2">
-                    <span class="text-sm font-medium text-gray-700">Sign In with Google</span>
-                </button>
-                <div class="flex items-center mb-4 justify-center">
-                    <hr class="w-1/4 border-gray-300">
-                    <span class="mx-2 text-gray-500 text-sm">Or sign in with email</span>
-                    <hr class="w-1/4 border-gray-300">
-                </div>
-
+                <h1 class="text-2xl font-bold text-lg-start text-gray-800 mb-8">Reset Password</h1>
                 <!-- Form -->
-                <form action="#" method="POST" class="space-y-4">
-                    
+                <form action="./code_verif.php" method="POST" class="space-y-4">                    
                     <!-- Email -->
                     <div>
                         <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
                         <input type="email" id="email" name="email" placeholder="Email"
                             class="mt-1 block w-full px-3 py-2 border rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
                     </div>
-                    <!-- Password -->
-                    <div>
-                        <label for="password" class="block text-sm font-medium text-gray-700 flex justify-between">
-                            Password
-                        </label>
-                        <input type="password" id="password" name="password" placeholder="Password"
-                            class="mt-1 block w-full px-3 py-2 border rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
-                        <a href="resetpw.php" class="block mt-2 text-sm text-indigo-600 hover:underline">Forgot password?</a>
-                    </div>
-
                     <!-- Sign In Button -->
                     <div>
+                    <form action="./code_verif" method="post">
                         <button type="submit"
-                            class="w-full mt-4 bg-black text-white py-2 rounded-lg shadow-md hover:bg-gray-800 transition">
-                            Sign In
+                                class="w-full mt-4 bg-black text-white py-2 rounded-lg shadow-md hover:bg-gray-800 transition">
+                            Reset Password
                         </button>
+                    </form>
+                        <a href="./signin.php" 
+                            class="w-full mt-4 bg-gray-600 text-white py-2 rounded-lg shadow-md hover:bg-gray-800 transition text-center block">
+                            Back to Sign in
+                        </a>
                     </div>
                 </form>
-
-                <!-- Sign In -->
-                <p class="mt-2 mb-6 text-center text-sm text-gray-600">
-                Dont have an account? <a href="./signup.php" class="text-indigo-600 hover:underline">Sign up</a>
-                </p>
             </div>
         </div>
 
