@@ -223,11 +223,23 @@ $conn->close();
                             <img src="../images/admin/Settings-profile.png" class="w-[30px]" alt="Settings">
                             <p class="text-xl font-normal">Pengaturan</p>
                         </a></li>
-                        <hr class="h-[2px] w-full text-gray my-6">
+                        <!-- <hr class="h-[2px] w-full text-gray my-6">
                         <li><a class="flex flex-row gap-[10px]">
                             <img src="../images/admin/sign-out.png" class="w-[30px]" alt="Sign Out">
                             <p class="text-xl font-normal">Sign Out</p>
-                        </a></li>
+                        </a></li> -->
+                    
+                        <hr class="h-[2px] w-full text-gray my-6">
+                        <li>
+                            <form action="signout.php" method="POST" id="signOutForm" class="flex flex-row gap-[10px]">
+                                <button type="submit" style="display: none;" id="signOutButton"></button>
+                                <a href="javascript:void(0);" onclick="document.getElementById('signOutForm').submit();" class="flex flex-row gap-[10px]">
+                                    <img src="../images/admin/sign-out.png" class="w-[30px]" alt="Sign Out">
+                                    <p class="text-xl font-normal">Sign Out</p>
+                                </a>
+                            </form>
+                        </li>
+                        
                     </ul>
                 </div>
             </div>
@@ -239,28 +251,28 @@ $conn->close();
                     <h4 class="text-xs font-bold">Total Berat Sampah Diterima</h4>
                     <div class="flex flex-col">
                         <h2 class="text-xl font-normal  "><?php echo number_format($total_sampah); ?> Kg</h2>
-                        <p class="text-[10px] font-light">Bulan ini</p>
+                        <p class="text-[10px] font-light">Selama ini</p>
                     </div>
                 </div>
                 <div class="bg-gradient-to-b from-[#08FCF0] to-[#05968F] rounded-[20px] border border-gray shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] flex flex-col pl-[23px] pt-[33px] pb-[49px] h-full text-dark gap-[11px]">
-                    <h4 class="text-xs font-bold">Total Drop-off Requests</h4>
+                    <h4 class="text-xs font-bold">Total Drop-off Accepted</h4>
                     <div class="flex flex-col">
                         <h2 class="text-xl font-normal  "><?php echo number_format($total_requests); ?></h2>
-                        <p class="text-[10px] font-light">Menunggu Verifikasi</p>
+                        <p class="text-[10px] font-light">Telah di Verifikasi</p>
                     </div>
                 </div>
                 <div class="bg-gradient-to-b from-[#0AF649] to-[#06902B] rounded-[20px] border border-gray shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] flex flex-col pl-[23px] pt-[33px] pb-[49px] h-full text-dark gap-[11px]">
                     <h4 class="text-xs font-bold">Total Drop-off Waitings</h4>
                     <div class="flex flex-col">
                         <h2 class="text-xl font-normal  "><?php echo $total_menunggu; ?></h2>
-                        <p class="text-[10px] font-light">+12  % dari bulan lalu</p>
+                        <p class="text-[10px] font-light">Menunggu Verifikasi</p>
                     </div>
                 </div>
                 <div class="bg-gradient-to-b from-[#ECF310] to-[#898D09] rounded-[20px] border border-gray shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] flex flex-col pl-[23px] pt-[33px] pb-[49px] h-full text-dark gap-[11px]">
                     <h4 class="text-xs font-bold">Sampah Paling Sering Diterima</h4>
                     <div class="flex flex-col">
                         <h2 class="text-xl font-normal  "><?php echo $kategori_populer; ?></h2>
-                        <p class="text-[10px] font-light">Bulan ini</p>
+                        <p class="text-[10px] font-light">Selama ini</p>
                     </div>
                 </div>
             </div>
