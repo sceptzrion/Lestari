@@ -52,6 +52,11 @@
                         <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
                         <input type="email" id="email" name="email" placeholder="Email"
                             class="mt-1 block w-full px-3 py-2 border rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
+                        
+                        <!-- Menampilkan pesan error email -->
+                        <?php if (!empty($error_email)): ?>
+                            <div class="text-red-500 text-sm mt-2"><?php echo $error_email; ?></div>
+                        <?php endif; ?>
                     </div>
                     <!-- Password -->
                     <div>
@@ -59,7 +64,8 @@
                             Password
                         </label>
                         <input type="password" id="password" name="password" placeholder="Password"
-                            class="mt-1 block w-full px-3 py-2 border rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
+                            class="mt-1 block w-full px-3 py-2 border rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
+                            minlength="8" required>
                     </div>
                     <!-- Alamat -->
                     <div>
@@ -72,6 +78,11 @@
                         <label for="phone" class="block text-sm font-medium text-gray-700">Nomor HP</label>
                         <input type="text" id="phone" name="phone" placeholder="Contoh : +628976537899"
                             class="mt-1 block w-full px-3 py-2 border rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
+                        
+                        <!-- Menampilkan pesan error nomor HP -->
+                        <?php if (!empty($error_phone)): ?>
+                            <div class="text-red-500 text-sm mt-2"><?php echo $error_phone; ?></div>
+                        <?php endif; ?>
                     </div>
                     <!-- Sign Up Button -->
                     <div>

@@ -119,8 +119,8 @@ if (basename($_SERVER['PHP_SELF']) != 'landingpage.php') {
     <?php if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true): ?>
         <!-- Dropdown User -->
         <div class="relative">
-            <button class="font-medium text-lg text-[#1B5E20] focus:outline-none" onclick="toggleDropdown()">
-                Halo, <?= htmlspecialchars($_SESSION['user_name']); ?> <!-- Ganti dengan nama yang benar -->
+            <button class="font-medium text-sm text-[#1B5E20] focus:outline-none" onclick="toggleDropdown()">
+                Halo, <?= htmlspecialchars($_SESSION['user_name']); ?> 
                 <svg xmlns="http://www.w3.org/2000/svg" class="inline-block w-4 h-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
                 </svg>

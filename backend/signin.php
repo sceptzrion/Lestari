@@ -1,7 +1,7 @@
 <?php
 session_start();  // Memulai sesi
 
-require 'db.connection.php';  // File koneksi ke database
+require '../controller/config.php';  // File koneksi ke database
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = $_POST['email'];
