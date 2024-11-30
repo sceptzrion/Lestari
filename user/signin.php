@@ -40,7 +40,7 @@
 
                 <!-- Google Sign In -->
                 <button class="flex items-center justify-center w-full border border-gray-00 py-2 rounded-[20px] shadow-sm hover:bg-gray-200 transition mb-4">
-                    <img src="https://via.placeholder.com/20" alt="Google Logo" class="mr-2">
+                    <img src="../images/user/sosmed/google.png" alt="Google Logo" class="mr-2">
                     <span class="text-sm font-medium text-gray-700">Sign In with Google</span>
                 </button>
                 <div class="flex items-center mb-4 justify-center">
@@ -88,7 +88,7 @@
         <div class="hidden md:flex w-1/2 bg-gradient-to-b from-[#299E63] to-[#0F3823] items-center justify-center p-16 text-white custom-shape">
             <div class="text-lg-start">
                 <h2 class="text-3xl font-bold mb-4">Be part of the solution, not the pollution</h2>
-                <img src="https://via.placeholder.com/300x150" alt="Recycling Bins" class="mx-auto">
+                <img src="../images/sampah.png" alt="Recycling Bins" class="mx-auto">
             </div>
         </div>
     </div>

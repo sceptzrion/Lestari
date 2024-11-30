@@ -57,7 +57,6 @@
                     <div>
                         <label for="password" class="block text-sm font-medium text-gray-700 flex justify-between">
                             Password
-                            <a href="#" class="text-sm text-indigo-600 hover:underline">Forgot?</a>
                         </label>
                         <input type="password" id="password" name="password" placeholder="Password"
                             class="mt-1 block w-full px-3 py-2 border rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
@@ -94,7 +93,7 @@
         <div class="hidden md:flex w-1/2 bg-gradient-to-b from-[#299E63] to-[#0F3823] items-center justify-center p-16 text-white custom-shape">
             <div class="text-lg-start">
                 <h2 class="text-3xl font-bold mb-4">Be part of the solution, not the pollution</h2>
-                <img src="https://via.placeholder.com/300x150" alt="Recycling Bins" class="mx-auto">
+                <img src="../images/sampah.png" alt="Recycling Bins" class="mx-auto">
             </div>
         </div>
     </div>

@@ -68,32 +68,32 @@
 <!-- DESKTOP MODE -->
 <div class="navbar-center hidden lg:flex">
   <ul class="menu menu-horizontal px-1 text-dark text-base">
-    <li><a>Home</a></li>
-    <li><a href="./user/tentang.php">Tentang kami</a></li>
+  <li><a href="../../landingpage.php">Home</a></li>
+  <li><a href="../../user/tentang.php">Tentang kami</a></li>
     <li>
       <details>
         <summary>Layanan</summary>
         <ul class="bg-light absolute left-1/2 transform -translate-x-1/2 rounded-[10px] border-[1px] shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] border-gray px-[14px] py-[20px] flex flex-wrap items-center gap-3 min-w-[300px] max-w-[600px]">
           <li>
-            <button onclick="window.location.href='./user/drop_off/dropoff.php'" class="btn btn-success flex-grow shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] rounded-[20px] flex items-center justify-center px-4 py-2 gap-2 min-w-[120px] max-w-[200px]">
+            <button onclick="window.location.href='.././drop_off/dropoff.php'" class="btn btn-success flex-grow shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] rounded-[20px] flex items-center justify-center px-4 py-2 gap-2 min-w-[120px] max-w-[200px]">
               <img src="../../images/truck.png" class="w-8 h-8" alt="">
               <p>Drop Off</p>
             </button>
           </li>
           <li>
-            <button onclick="window.location.href='./rewards.html'" class="btn btn-success flex-grow shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] rounded-[20px] flex items-center justify-center px-4 py-2 gap-2 min-w-[120px] max-w-[200px]">
+            <button onclick="window.location.href='.././drop_off/poin.php'" class="btn btn-success flex-grow shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] rounded-[20px] flex items-center justify-center px-4 py-2 gap-2 min-w-[120px] max-w-[200px]">
               <img src="../../images/reward.png" class="w-8 h-8" alt="">
               <p>Rewards</p>
             </button>
           </li>
           <li>
-            <button onclick="window.location.href='./tutorial.html'" class="btn btn-success flex-grow shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] rounded-[20px] flex items-center justify-center px-4 py-2 gap-2 min-w-[120px] max-w-[200px]">
+            <button onclick="window.location.href='.././tutorial/tutorial.php'" class="btn btn-success flex-grow shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] rounded-[20px] flex items-center justify-center px-4 py-2 gap-2 min-w-[120px] max-w-[200px]">
               <img src="../../images/Vector.png" class="w-6 h-6" alt="">
               <p>Tutorial</p>
             </button>
           </li>
           <li>
-            <button onclick="window.location.href='./marketplace.html'" class="btn btn-success flex-grow shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] rounded-[20px] flex items-center justify-center px-4 py-2 gap-2 min-w-[120px] max-w-[200px]">
+            <button onclick="window.location.href='.././marketplace/marketplace.php'" class="btn btn-success flex-grow shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] rounded-[20px] flex items-center justify-center px-4 py-2 gap-2 min-w-[120px] max-w-[200px]">
               <img src="../../images/marketplace.png" class="w-8 h-8" alt="">
               <p>Marketplace</p>
             </button>
@@ -101,8 +101,8 @@
         </ul>
       </details>
     </li>
-    <li><a>Blog</a></li>
-    <li><a>Kontak Kami</a></li>
+    <li><a href=".././blog.php">Blog</a></li>
+    <li><a href=".././kontak_kami.php">Kontak Kami</a></li>
   </ul>
 </div>
 
@@ -154,38 +154,41 @@
     </div>
 </section>
 
-<!-- Footer -->
-<footer class="bg-gradient-to-r from-green to-dark-green text-white py-5">
-    <div class="container mx-auto px-4 text-center">
-      <div class="flex justify-center">
-        <a href="./landingpage.php">
-          <img src="../../images/Logo.png" alt="Logo Lestari" class="h-20">
-        </a>
-      </div>
-      <div class="container mx-auto grid grid-cols-3 gap-4 text-center">
-      <div>
+  <!-- Footer -->
+  <footer class="bg-gradient-to-r from-green to-dark-green text-white py-7">
+  <div class="container mx-auto px-4 text-center">
+    <div class="flex justify-center">
+      <a href="../../landingpage.php">
+        <img src="../../images/Logo.png" alt="Logo Lestari" class="h-20">
+      </a>
+    </div>
+    <div class="container mx-auto grid grid-cols-3 gap-4">
+      <!-- Bagian Lestari -->
+      <div class="text-left">
         <h4 class="font-bold">Lestari</h4>
-        <p>Home</p>
-        <p>Tentang Kami</p>
-        <p>Layanan</p>
-        <p>Blog</p>
+        <a href="../../landingpage.php" class="block text-white hover:underline mb-1">Home</a>
+        <a href="../../user/tentang.php" class="block text-white hover:underline mb-1">Tentang Kami</a>
+        <a href="../../landingpage.php" class="block text-white hover:underline mb-1">Layanan</a>
+        <a href="../../user/blog.php" class="block text-white hover:underline mb-1">Blog</a>
       </div>
+      <!-- Bagian Informasi -->
       <div>
         <h4 class="font-bold">Informasi</h4>
-        <p>Kontak Kami</p>
+        <a href="../kontak_kami.php" class="block text-white hover:underline mb-1">Kontak Kami</a>
       </div>
+      <!-- Bagian Hubungi Kami -->
       <div>
         <h4 class="font-bold">Hubungi Kami</h4>
         <div class="flex justify-center space-x-4 mt-2">
-          <a href="#"><img src="https://placehold.co/20x20" alt="Instagram"></a>
-          <a href="#"><img src="https://placehold.co/20x20" alt="Facebook"></a>
-          <a href="#"><img src="https://placehold.co/20x20" alt="Twitter"></a>
-          <a href="#"><img src="https://placehold.co/20x20" alt="YouTube"></a>
+          <a href="#"><img src="../../images/user/sosmed/instagram.png" alt="Instagram"></a>
+          <a href="#"><img src="../../images/user/sosmed/fb.png" alt="Facebook"></a>
+          <a href="#"><img src="../../images/user/sosmed/x.png" alt="Twitter"></a>
+          <a href="#"><img src="../../images/user/sosmed/wa.png" alt="Whatsapp"></a>
+          <a href="#"><img src="../../images/user/sosmed/yt.png" alt="YouTube"></a>
         </div>
       </div>
     </div>
-    </div>
-  </footer>
-    
+  </div>
+</footer>
 </body>
 </html>

@@ -181,7 +181,7 @@
     </div>
   </main>
 
-
+<!-- footer -->
 <footer class="bg-gradient-to-r from-green to-dark-green text-white py-7">
   <div class="container mx-auto px-4 text-center">
     <div class="flex justify-center">

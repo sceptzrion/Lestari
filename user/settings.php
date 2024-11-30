@@ -101,8 +101,8 @@
         </ul>
       </details>
     </li>
-    <li><a>Blog</a></li>
-    <li><a>Kontak Kami</a></li>
+    <li><a href=".././user/blog.php">Blog</a></li>
+    <li><a href=".././user/kontak_kami.php">Kontak Kami</a></li>
   </ul>
 </div>
 
@@ -126,69 +126,43 @@
         <!-- endif -->
     </div>
   <!-- NAVBAR END -->
-  <!-- Profile Section -->
-  <main class="container mx-auto mt-8 px-4">
-    <div class="bg-gradient-to-r from-green to-dark-green text-white rounded-lg p-6 text-center">
-      <div class="flex justify-center">
-        <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" alt="User" class="h-20 w-20 rounded-full bg-white p-2">
-      </div>
-      <h2 class="text-2xl font-bold mt-4">Ahmad Sudrajat</h2>
-      <p class="text-sm">Aktif</p>
-    </div>
+ 
+  <!-- Settings Section -->
+  <section class="container mx-auto mt-10 px-4 mb-12">
+    <div class="bg-white shadow-md rounded-lg p-6">
+    <h1 class="flex items-center text-2xl font-bold text-green-700 mb-4">
+            <img src="../images/user/Settings.png" alt="Settings" class="w-8 h-8 mr-2">
+            Pengaturan
+        </a>
+    </h1>
 
-    <!-- Stats -->
-    <div class="mt-6 grid grid-cols-3 gap-4">
-      <div class="bg-white rounded-lg shadow p-4 text-center">
-        <p class="text-lg font-bold text-green-600">75 Kg</p>
-        <p class="text-sm text-gray-600">Total Sampah</p>
-      </div>
-      <div class="bg-white rounded-lg shadow p-4 text-center">
-        <p class="text-lg font-bold text-green-600">250</p>
-        <p class="text-sm text-gray-600">Point Reward</p>
-      </div>
-      <div class="bg-white rounded-lg shadow p-4 text-center">
-        <p class="text-lg font-bold text-green-600">5</p>
-        <p class="text-sm text-gray-600">Drop Off</p>
-      </div>
-    </div>
-
-    <!-- Personal Information -->
-    <div class="mt-8 bg-white rounded-lg shadow p-6 mb-12">
-      <h3 class="text-xl font-bold text-gray-800 mb-4">Informasi Pribadi</h3>
-      <div class="space-y-4">
-        <div>
-          <label class="block text-gray-600 text-sm">Nama Lengkap</label>
-          <input type="text" value="Ahmad Sudrajat" class="w-full border border-gray-300 rounded px-4 py-2" readonly>
-        </div>
-        <div>
-          <label class="block text-gray-600 text-sm">Email</label>
-          <input type="text" value="ahmad@gmail.com" class="w-full border border-gray-300 rounded px-4 py-2" readonly>
-        </div>
-        <div>
-          <label class="block text-gray-600 text-sm">Nomor Telepon</label>
-          <input type="text" value="0812345678" class="w-full border border-gray-300 rounded px-4 py-2" readonly>
-        </div>
-        <div>
-          <label class="block text-gray-600 text-sm">Alamat</label>
-          <input type="text" value="JL. Sudirman No. 123, Jakarta Pusat" class="w-full border border-gray-300 rounded px-4 py-2" readonly>
-        </div>
-        <div>
-          <label class="block text-gray-600 text-sm">Bergabung Sejak</label>
-          <input type="text" value="Januari 2024" class="w-full border border-gray-300 rounded px-4 py-2" readonly>
-        </div>
-      </div>
-      <div class="flex justify-between mt-6">
-        <button class="bg-gray-300 text-gray-800 px-4 py-2 rounded">Logout</button>
-        <button class="bg-gradient-to-r from-green to-dark-green text-white px-4 py-2 rounded">Pengaturan</button>
+      <div class="bg-gray-50 p-6 rounded-lg shadow-inner">
+        <h2 class="text-lg font-bold mb-4">Keamanan Akun</h2>
+        <form class="space-y-4">
+          <div>
+            <label for="email" class="block text-gray-600">Email</label>
+            <input type="email" id="email" value="ahmad@gmail.com" class="w-full mt-1 px-4 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-green-900">
+          </div>
+          <div>
+            <label for="password" class="block text-gray-600">Password</label>
+            <div class="relative">
+              <input type="password" id="password" value="ahmad123" class="w-full mt-1 px-4 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-green-900">
+            </div>
+          </div>
+          <div class="flex justify-between space-x-4">
+            <button type="button" class="w-1/2 bg-gray-300 text-gray-700 py-2 rounded-lg hover:bg-gray-400">Kembali</button>
+            <button type="submit" class="w-1/2 bg-gradient-to-r from-green to-dark-green text-white py-2 rounded-lg hover:bg-green-800">Simpan Perubahan</button>
+          </div>
+        </form>
       </div>
     </div>
-  </main>
+  </section>
 
-<!-- Footer -->
+ <!-- Footer -->
 <footer class="bg-gradient-to-r from-green to-dark-green text-white py-7">
   <div class="container mx-auto px-4 text-center">
     <div class="flex justify-center">
-      <a href="./landingpage.php">
+      <a href="../landingpage.php">
         <img src="../images/Logo.png" alt="Logo Lestari" class="h-20">
       </a>
     </div>
@@ -196,15 +170,16 @@
       <!-- Bagian Lestari -->
       <div class="text-left">
         <h4 class="font-bold">Lestari</h4>
-        <a href="./landingpage.php" class="block text-white hover:underline mb-1">Home</a>
-        <a href="./user/tentang.php" class="block text-white hover:underline mb-1">Tentang Kami</a>
-        <a href="" class="block text-white hover:underline mb-1">Layanan</a>
+        <a href="../landingpage.php" class="block text-white hover:underline mb-1">Home</a>
+        <a href="../user/tentang.php" class="block text-white hover:underline mb-1">Tentang Kami</a>
+        <a href="../landingpage.php" class="block text-white hover:underline mb-1">Layanan</a>
+        <a href="../user/blog.php" class="block text-white hover:underline mb-1">Blog</a>
       </div>
 
       <!-- Bagian Informasi -->
       <div>
         <h4 class="font-bold">Informasi</h4>
-        <a href="./user/kontak_kami.php" class="block text-white hover:underline mb-1">Kontak Kami</a>
+        <a href="../user/kontak_kami.php" class="block text-white hover:underline mb-1">Kontak Kami</a>
       </div>
       <!-- Bagian Hubungi Kami -->
       <div>
@@ -221,6 +196,5 @@
   </div>
 </footer>
 
-    
 </body>
 </html>

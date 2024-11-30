@@ -281,6 +281,8 @@
         <a href="./landingpage.php" class="block text-white hover:underline mb-1">Home</a>
         <a href="./user/tentang.php" class="block text-white hover:underline mb-1">Tentang Kami</a>
         <a href="" class="block text-white hover:underline mb-1">Layanan</a>
+        <a href="" class="block text-white hover:underline mb-1">Blog</a>
+
       </div>
 
       <!-- Bagian Informasi -->

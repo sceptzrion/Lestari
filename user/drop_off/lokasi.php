@@ -5,24 +5,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="../../css/styles.css" rel="stylesheet">
     <title>Lestari - Drop Off</title>
-      <!-- Google Fonts -->
+    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          fontFamily: {
-            'poppins': ['Poppins', 'sans-serif']
+        tailwind.config = {
+          theme: {
+            extend: {
+              fontFamily: {
+                'poppins': ['Poppins', 'sans-serif']
+              }
+            }
           }
-        }
-      }
-    }
-  </script>
+        };
+    </script>
     <script>
         function toggleModal() {
             const modal = document.getElementById("location-modal");
             modal.classList.toggle("hidden");
+        }
+
+        // Fungsi Pencarian
+        function handleSearch(query) {
+            const searchQuery = query.toLowerCase();
+            const items = document.querySelectorAll('.grid .bg-white'); // Semua elemen yang ingin disaring
+            
+            items.forEach(item => {
+                const locationName = item.querySelector('h3').textContent.toLowerCase();
+                if (locationName.includes(searchQuery)) {
+                    item.style.display = ''; // Tampilkan item
+                } else {
+                    item.style.display = 'none'; // Sembunyikan item
+                }
+            });
         }
     </script>
 </head>
@@ -68,32 +83,32 @@
 <!-- DESKTOP MODE -->
 <div class="navbar-center hidden lg:flex">
   <ul class="menu menu-horizontal px-1 text-dark text-base">
-    <li><a>Home</a></li>
-    <li><a href="./user/tentang.php">Tentang kami</a></li>
+  <li><a href="../../landingpage.php">Home</a></li>
+  <li><a href="../../user/tentang.php">Tentang kami</a></li>
     <li>
       <details>
         <summary>Layanan</summary>
         <ul class="bg-light absolute left-1/2 transform -translate-x-1/2 rounded-[10px] border-[1px] shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] border-gray px-[14px] py-[20px] flex flex-wrap items-center gap-3 min-w-[300px] max-w-[600px]">
           <li>
-            <button onclick="window.location.href='./user/drop_off/dropoff.php'" class="btn btn-success flex-grow shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] rounded-[20px] flex items-center justify-center px-4 py-2 gap-2 min-w-[120px] max-w-[200px]">
+            <button onclick="window.location.href='.././drop_off/dropoff.php'" class="btn btn-success flex-grow shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] rounded-[20px] flex items-center justify-center px-4 py-2 gap-2 min-w-[120px] max-w-[200px]">
               <img src="../../images/truck.png" class="w-8 h-8" alt="">
               <p>Drop Off</p>
             </button>
           </li>
           <li>
-            <button onclick="window.location.href='./rewards.html'" class="btn btn-success flex-grow shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] rounded-[20px] flex items-center justify-center px-4 py-2 gap-2 min-w-[120px] max-w-[200px]">
+            <button onclick="window.location.href='.././drop_off/poin.php'" class="btn btn-success flex-grow shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] rounded-[20px] flex items-center justify-center px-4 py-2 gap-2 min-w-[120px] max-w-[200px]">
               <img src="../../images/reward.png" class="w-8 h-8" alt="">
               <p>Rewards</p>
             </button>
           </li>
           <li>
-            <button onclick="window.location.href='./tutorial.html'" class="btn btn-success flex-grow shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] rounded-[20px] flex items-center justify-center px-4 py-2 gap-2 min-w-[120px] max-w-[200px]">
+            <button onclick="window.location.href='.././tutorial/tutorial.php'" class="btn btn-success flex-grow shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] rounded-[20px] flex items-center justify-center px-4 py-2 gap-2 min-w-[120px] max-w-[200px]">
               <img src="../../images/Vector.png" class="w-6 h-6" alt="">
               <p>Tutorial</p>
             </button>
           </li>
           <li>
-            <button onclick="window.location.href='./marketplace.html'" class="btn btn-success flex-grow shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] rounded-[20px] flex items-center justify-center px-4 py-2 gap-2 min-w-[120px] max-w-[200px]">
+            <button onclick="window.location.href='.././marketplace/marketplace.php'" class="btn btn-success flex-grow shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] rounded-[20px] flex items-center justify-center px-4 py-2 gap-2 min-w-[120px] max-w-[200px]">
               <img src="../../images/marketplace.png" class="w-8 h-8" alt="">
               <p>Marketplace</p>
             </button>
@@ -101,8 +116,8 @@
         </ul>
       </details>
     </li>
-    <li><a>Blog</a></li>
-    <li><a>Kontak Kami</a></li>
+    <li><a href=".././blog.php">Blog</a></li>
+    <li><a href=".././kontak_kami.php">Kontak Kami</a></li>
   </ul>
 </div>
 
@@ -126,44 +141,59 @@
         <!-- endif -->
     </div>
   <!-- NAVBAR END -->
-        <div class="flex justify-end items-center mt-4 mr-10 space-x-4">
-            <input
-                type="text"
-                placeholder="Search..."
-                class="border rounded-full px-10 py-1 focus:outline-none focus:ring focus:ring-green-600"
-            />
+    <!-- SEARCH -->
+    <div class="flex justify-end items-center mt-4 mr-10 space-x-4">
+        <input
+            type="text"
+            placeholder="Search..."
+            class="border rounded-full px-10 py-1 focus:outline-none focus:ring focus:ring-green-600"
+            oninput="handleSearch(this.value)"
+        />
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <main class="container mx-auto px-6 py-8">
+        <div class="text-center mb-8">
+            <h2 class="text-green-700 text-3xl font-bold">Lokasi Bank Sampah</h2>
+            <p class="text-gray-600">Pilih kota terdekat dengan lokasi anda</p>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Card Lokasi -->
+        <div class="bg-white shadow-md rounded-lg p-6">
+            <h3 class="text-green-700 font-bold text-lg">Jakarta Pusat</h3>
+            <p class="text-gray-600 text-sm">2 Bank Sampah Tersedia</p>
+            <p class="text-gray-600 text-sm">Operasional: Senin - Sabtu</p>
+            <button 
+                onclick="window.location.href='.././drop_off/kota.php?city=jakarta-pusat'"
+                class="mt-4 bg-gradient-to-r from-green to-dark-green text-white py-2 px-4 rounded hover:bg-green-800">
+                Lihat Detail
+            </button>
+        </div>
+
+        <!-- Card Lokasi -->
+        <div class="bg-white shadow-md rounded-lg p-6">
+            <h3 class="text-green-700 font-bold text-lg">Depok</h3>
+            <p class="text-gray-600 text-sm">2 Bank Sampah Tersedia</p>
+            <p class="text-gray-600 text-sm">Operasional: Senin - Sabtu</p>
+            <button 
+                onclick="window.location.href='.././drop_off/kota.php?city=depok'"
+                class="mt-4 bg-gradient-to-r from-green to-dark-green text-white py-2 px-4 rounded hover:bg-green-800">
+                Lihat Detail
+            </button>
+        </div>
+
+        <!-- Card Lokasi -->
+        <div class="bg-white shadow-md rounded-lg p-6">
+            <h3 class="text-green-700 font-bold text-lg">Bekasi</h3>
+            <p class="text-gray-600 text-sm">3 Bank Sampah Tersedia</p>
+            <p class="text-gray-600 text-sm">Operasional: Senin - Sabtu</p>
+            <button 
+                onclick="window.location.href='.././drop_off/kota.php?city=bekasi'"
+                class="mt-4 bg-gradient-to-r from-green to-dark-green text-white py-2 px-4 rounded hover:bg-green-800">
+                Lihat Detail
+            </button>
         </div>
     </div>
-  </header>
-
-  <main class="container mx-auto px-6 py-8">
-    <div class="text-center mb-8">
-      <h2 class="text-green-700 text-3xl font-bold">Lokasi Bank Sampah</h2>
-      <p class="text-gray-600">Pilih kota terdekat dengan lokasi anda</p>
-    </div>
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-      <div class="bg-white shadow-md rounded-lg p-6">
-        <h3 class="text-green-700 font-bold text-lg">Jakarta Pusat</h3>
-        <p class="text-gray-600 text-sm">2 Bank Sampah Tersedia</p>
-        <p class="text-gray-600 text-sm">Operasional: Senin - Sabtu</p>
-        <button class="mt-4 bg-gradient-to-r from-green to-dark-green text-white py-2 px-4 rounded hover:bg-green-800">
-          Lihat Detail
-        </button>
-      </div>
-
-
-      <!-- perulangan -->
-      <!-- <div class="bg-white shadow-md rounded-lg p-6">
-        <h3 class="text-green-700 font-bold text-lg">Jakarta Pusat</h3>
-        <p class="text-gray-600 text-sm">2 Bank Sampah Tersedia</p>
-        <p class="text-gray-600 text-sm">Operasional: Senin - Sabtu</p>
-        <button class="mt-4 bg-gradient-to-r from-green to-dark-green text-white py-2 px-4 rounded hover:bg-green-800">
-          Lihat Detail
-        </button>
-      </div> -->
-
-      
-    </div>
-  </main>
+    </main>
 </body>
 </html>
