@@ -4,6 +4,7 @@ include('../controller/config.php');
 
 // Cek apakah admin sudah login
 if (!isset($_SESSION['admin_id'])) {
+    $_SESSION['login_message'] = "Not authorized";
     header('Location: login.php');
     exit();
 }
@@ -255,10 +256,10 @@ $conn->close();
                     </div>
                 </div>
                 <div class="bg-gradient-to-b from-[#08FCF0] to-[#05968F] rounded-[20px] border border-gray shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] flex flex-col pl-[23px] pt-[33px] pb-[49px] h-full text-dark gap-[11px]">
-                    <h4 class="text-xs font-bold">Total Drop-off Accepted</h4>
+                    <h4 class="text-xs font-bold">Total Drop-off Entry</h4>
                     <div class="flex flex-col">
                         <h2 class="text-xl font-normal  "><?php echo number_format($total_requests); ?></h2>
-                        <p class="text-[10px] font-light">Telah di Verifikasi</p>
+                        <p class="text-[10px] font-light">Telah Masuk Sistem</p>
                     </div>
                 </div>
                 <div class="bg-gradient-to-b from-[#0AF649] to-[#06902B] rounded-[20px] border border-gray shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] flex flex-col pl-[23px] pt-[33px] pb-[49px] h-full text-dark gap-[11px]">
