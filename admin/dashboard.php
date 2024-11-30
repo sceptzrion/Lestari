@@ -4,6 +4,7 @@ include('../controller/config.php');
 
 // Cek apakah admin sudah login
 if (!isset($_SESSION['admin_id'])) {
+    $_SESSION['login_message'] = "Not authorized";
     header('Location: login.php');
     exit();
 }

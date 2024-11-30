@@ -38,17 +38,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 exit();
             } else {
                 // Password salah
-                echo "<script>
-                    alert('Password salah!');
-                    window.location.href='login.php';
-                </script>";
+                $_SESSION['email_attempt'] = $admin_email;
+                $_SESSION['login_message'] = "Wrong credentials";
+                header('Location: login.php');
             }
         } else {
             // Email tidak ditemukan
-            echo "<script>
-                alert('Email tidak ditemukan!');
-                window.location.href='login.php';
-            </script>";
+            $_SESSION['email_attempt'] = $admin_email;
+            $_SESSION['login_message'] = "Wrong credentials";
+            header('Location: login.php');
         }
 
         $stmt->close();
