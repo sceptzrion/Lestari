@@ -40,8 +40,8 @@
                 <h1 class="text-2xl font-bold text-lg-start text-gray-800 mb-8">Sign Up to Lestari</h1>
 
                 <!-- Form -->
-                <form action="#" method="POST" class="space-y-4">
-                    <!-- Nama Lengkap -->
+                <form action="../BackEnd/signup_email.php" method="POST" class="space-y-4">
+                <!-- Nama Lengkap -->
                     <div>
                         <label for="name" class="block text-sm font-medium text-gray-700">Nama Lengkap</label>
                         <input type="text" id="name" name="name" placeholder="Masukkan Nama Lengkap"

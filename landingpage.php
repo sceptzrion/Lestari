@@ -1,3 +1,15 @@
+<?php
+session_start();  // Start session untuk memeriksa status login
+
+// Halaman yang tidak memerlukan login (seperti landingpage.php)
+if (basename($_SERVER['PHP_SELF']) != 'landingpage.php') {
+    // Jika user belum login, arahkan ke halaman login atau lainnya
+    if (!isset($_SESSION['loggedin'])) {
+        header("Location: landingpage.php");
+        exit();  // Jangan lupa exit setelah redirect
+    }
+}
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -102,27 +114,47 @@
   </ul>
 </div>
 
-        <!-- if user not login -->
-<!--         
-          <div class="ml-[233px] content-center">
-          <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
-            <div class="w-[50px] rounded-full">
-              <img
-                alt="Tailwind CSS Navbar component"
-                src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
+<!-- Profile -->
+<div class="navbar-end ml-[5px] flex items-center gap-4">
+    <?php if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true): ?>
+        <!-- Dropdown User -->
+        <div class="relative">
+            <button class="font-medium text-lg text-[#1B5E20] focus:outline-none" onclick="toggleDropdown()">
+                Halo, <?= htmlspecialchars($_SESSION['user_name']); ?> <!-- Ganti dengan nama yang benar -->
+                <svg xmlns="http://www.w3.org/2000/svg" class="inline-block w-4 h-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                </svg>
+            </button>
+            <div id="dropdownMenu" class="hidden absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-md z-10">
+                <a href="./user/profile.php" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Profil</a>
+                <a href="./backend/logout.php" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Logout</a>
             </div>
-          </div>
-        </div> -->
-        <!-- endif -->
-
-        <!-- if user login -->
-     
-        <div class="navbar-end ml-[5px] flex flex-row gap-4 w-auto">
-          <a href="./user/signin.php" class="btn min-w-[100px] h-1 shadow-md rounded-full bg-gradient-to-r from-green to-dark-green text-sm border border-to-r from-green to-dark-green font-medium text-white text-center">Sign In</a>
-          <a href="./user/signup.php" class="btn btn-outline min-w-[100px] h-1 shadow-md border border-to-r from-green to-dark-green rounded-full text-sm font-medium text-[#1B5E20] text-center">Sign Up</a>
         </div>
-   
-        <!-- endif -->
+    <?php else: ?>
+        <!-- Tombol Sign In dan Sign Up jika belum login -->
+        <a href="./user/signin.php" class="btn min-w-[100px] h-1 shadow-md rounded-full bg-gradient-to-r from-green to-dark-green text-sm border border-to-r from-green to-dark-green font-medium text-white text-center">Sign In</a>
+        <a href="./user/signup.php" class="btn btn-outline min-w-[100px] h-1 shadow-md border border-to-r from-green to-dark-green rounded-full text-sm font-medium text-[#1B5E20] text-center">Sign Up</a>
+    <?php endif; ?>
+</div>
+
+
+<script>
+    // Toggle dropdown visibility
+    function toggleDropdown() {
+        const dropdown = document.getElementById('dropdownMenu');
+        dropdown.classList.toggle('hidden');
+    }
+
+    // Close dropdown if clicked outside
+    window.addEventListener('click', function(event) {
+        const dropdown = document.getElementById('dropdownMenu');
+        const button = event.target.closest('button');
+        // Jika yang diklik bukan tombol atau dropdown, sembunyikan dropdown
+        if (!button || button.getAttribute('onclick') !== 'toggleDropdown()') {
+            dropdown.classList.add('hidden');
+        }
+    });
+</script>
     </div>
   <!-- NAVBAR END -->
 

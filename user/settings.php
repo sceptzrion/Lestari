@@ -68,33 +68,33 @@
 <!-- DESKTOP MODE -->
 <div class="navbar-center hidden lg:flex">
   <ul class="menu menu-horizontal px-1 text-dark text-base">
-    <li><a>Home</a></li>
-    <li><a href="./user/tentang.php">Tentang kami</a></li>
+  <li><a href="../landingpage.php">Home</a></li>
+  <li><a href="./tentang.php">Tentang kami</a></li>
     <li>
       <details>
         <summary>Layanan</summary>
         <ul class="bg-light absolute left-1/2 transform -translate-x-1/2 rounded-[10px] border-[1px] shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] border-gray px-[14px] py-[20px] flex flex-wrap items-center gap-3 min-w-[300px] max-w-[600px]">
           <li>
-            <button onclick="window.location.href='./user/drop_off/dropoff.php'" class="btn btn-success flex-grow shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] rounded-[20px] flex items-center justify-center px-4 py-2 gap-2 min-w-[120px] max-w-[200px]">
-              <img src="../../images/truck.png" class="w-8 h-8" alt="">
+            <button onclick="window.location.href='.././user/drop_off/dropoff.php'" class="btn btn-success flex-grow shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] rounded-[20px] flex items-center justify-center px-4 py-2 gap-2 min-w-[120px] max-w-[200px]">
+              <img src="../images/truck.png" class="w-8 h-8" alt="">
               <p>Drop Off</p>
             </button>
           </li>
           <li>
-            <button onclick="window.location.href='./rewards.html'" class="btn btn-success flex-grow shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] rounded-[20px] flex items-center justify-center px-4 py-2 gap-2 min-w-[120px] max-w-[200px]">
-              <img src="../../images/reward.png" class="w-8 h-8" alt="">
+            <button onclick="window.location.href='.././user/drop_off/poin.php'" class="btn btn-success flex-grow shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] rounded-[20px] flex items-center justify-center px-4 py-2 gap-2 min-w-[120px] max-w-[200px]">
+              <img src="../images/reward.png" class="w-8 h-8" alt="">
               <p>Rewards</p>
             </button>
           </li>
           <li>
-            <button onclick="window.location.href='./tutorial.html'" class="btn btn-success flex-grow shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] rounded-[20px] flex items-center justify-center px-4 py-2 gap-2 min-w-[120px] max-w-[200px]">
-              <img src="../../images/Vector.png" class="w-6 h-6" alt="">
+            <button onclick="window.location.href='.././user/tutorial/tutorial.php'" class="btn btn-success flex-grow shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] rounded-[20px] flex items-center justify-center px-4 py-2 gap-2 min-w-[120px] max-w-[200px]">
+              <img src="../images/Vector.png" class="w-6 h-6" alt="">
               <p>Tutorial</p>
             </button>
           </li>
           <li>
             <button onclick="window.location.href='./marketplace.html'" class="btn btn-success flex-grow shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] rounded-[20px] flex items-center justify-center px-4 py-2 gap-2 min-w-[120px] max-w-[200px]">
-              <img src="../../images/marketplace.png" class="w-8 h-8" alt="">
+              <img src="../images/marketplace.png" class="w-8 h-8" alt="">
               <p>Marketplace</p>
             </button>
           </li>
@@ -108,8 +108,8 @@
 
         <!-- if user not login -->
         <!-- <div class="navbar-end ml-[5px] flex flex-row gap-4 w-auto">
-          <a href="./user/signin.php" class="btn min-w-[100px] h-1 shadow-md rounded-full bg-gradient-to-r from-green to-dark-green text-sm border border-to-r from-green to-dark-green font-medium text-white text-center">Sign In</a>
-          <a href="./user/signup.php" class="btn btn-outline min-w-[100px] h-1 shadow-md border border-to-r from-green to-dark-green rounded-full text-sm font-medium text-[#1B5E20] text-center">Sign Up</a>
+          <a href="../user/signin.php" class="btn min-w-[100px] h-1 shadow-md rounded-full bg-gradient-to-r from-green to-dark-green text-sm border border-to-r from-green to-dark-green font-medium text-white text-center">Sign In</a>
+          <a href="../user/signup.php" class="btn btn-outline min-w-[100px] h-1 shadow-md border border-to-r from-green to-dark-green rounded-full text-sm font-medium text-[#1B5E20] text-center">Sign Up</a>
         </div> -->
         <!-- endif -->
 

@@ -98,7 +98,7 @@
         </ul>
       </details>
     </li>
-    <li><a>Blog</a></li>
+    <li><a href=".././user/blog.php">Blog</a></li>
     <li><a href=".././user/kontak_kami.php">Kontak Kami</a></li>
   </ul>
 </div>
