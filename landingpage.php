@@ -321,7 +321,6 @@ if (basename($_SERVER['PHP_SELF']) != 'landingpage.php') {
 </section>
 
 
-
   <!-- Jenis sampah Section -->
   <section class="bg-white py-16">
     <div class="text-black container mx-auto px-4">
@@ -363,6 +362,7 @@ if (basename($_SERVER['PHP_SELF']) != 'landingpage.php') {
       </div>
     </div>
   </section>
+
 <!-- modal  -->
 <div id="loginModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
     <div class="bg-white p-6 rounded-lg shadow-lg text-center max-w-sm">
@@ -375,7 +375,6 @@ if (basename($_SERVER['PHP_SELF']) != 'landingpage.php') {
     </div>
 </div>
 
-
 <!-- Footer -->
 <footer class="bg-gradient-to-r from-green to-dark-green text-white py-7">
   <div class="container mx-auto px-4 text-center">
@@ -385,7 +384,7 @@ if (basename($_SERVER['PHP_SELF']) != 'landingpage.php') {
       </a>
     </div>
     <div class="container mx-auto grid grid-cols-3 gap-4">
-      <!-- Bagian Lestari -->
+    <!-- Bagian Lestari -->
       <div class="text-left">
         <h4 class="font-bold">Lestari</h4>
         <a href="./landingpage.php" class="block text-white hover:underline mb-1">Home</a>
@@ -394,13 +393,12 @@ if (basename($_SERVER['PHP_SELF']) != 'landingpage.php') {
         <a href="" class="block text-white hover:underline mb-1">Blog</a>
 
       </div>
-
-      <!-- Bagian Informasi -->
+    <!-- Bagian Informasi -->
       <div>
         <h4 class="font-bold">Informasi</h4>
         <a href="./user/kontak_kami.php" class="block text-white hover:underline mb-1">Kontak Kami</a>
       </div>
-      <!-- Bagian Hubungi Kami -->
+    <!-- Bagian Hubungi Kami -->
       <div>
         <h4 class="font-bold">Hubungi Kami</h4>
         <div class="flex justify-center space-x-4 mt-2">

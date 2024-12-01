@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -45,17 +46,19 @@
                     <div>
                         <label for="name" class="block text-sm font-medium text-gray-700">Nama Lengkap</label>
                         <input type="text" id="name" name="name" placeholder="Masukkan Nama Lengkap"
-                            class="mt-1 block w-full px-3 py-2 border rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
-                    </div>
+                            class="mt-1 block w-full px-3 py-2 border rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
+                            value="<?php echo isset($_POST['user_name']) ? $_POST['user_name'] : ''; ?>">
+                        </div>
                     <!-- Email -->
                     <div>
                         <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
                         <input type="email" id="email" name="email" placeholder="Email"
                             class="mt-1 block w-full px-3 py-2 border rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
                         
-                        <!-- Menampilkan pesan error email -->
-                        <?php if (!empty($error_email)): ?>
-                            <div class="text-red-500 text-sm mt-2"><?php echo $error_email; ?></div>
+                         <!-- Menampilkan pesan error email -->
+                         <?php if (isset($_SESSION['error_email'])): ?>
+                            <div class="text-red-500 text-sm mt-2"><?php echo $_SESSION['error_email']; ?></div>
+                            <?php unset($_SESSION['error_email']); // Hapus pesan error setelah ditampilkan ?>
                         <?php endif; ?>
                     </div>
                     <!-- Password -->
@@ -79,9 +82,10 @@
                         <input type="text" id="phone" name="phone" placeholder="Contoh : +628976537899"
                             class="mt-1 block w-full px-3 py-2 border rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
                         
-                        <!-- Menampilkan pesan error nomor HP -->
-                        <?php if (!empty($error_phone)): ?>
-                            <div class="text-red-500 text-sm mt-2"><?php echo $error_phone; ?></div>
+                      <!-- Menampilkan pesan error nomor HP -->
+                      <?php if (isset($_SESSION['error_phone'])): ?>
+                            <div class="text-red-500 text-sm mt-2"><?php echo $_SESSION['error_phone']; ?></div>
+                            <?php unset($_SESSION['error_phone']); // Hapus pesan error setelah ditampilkan ?>
                         <?php endif; ?>
                     </div>
                     <!-- Sign Up Button -->
