@@ -141,7 +141,7 @@ if (basename($_SERVER['PHP_SELF']) != 'landingpage.php') {
         </ul>
       </details>
     </li>
-    <li><a href="#">Blog</a></li>
+    <li><a href="./user/blog.php">Blog</a></li>
     <li><a href="./user/kontak_kami.php">Kontak Kami</a></li>
   </ul>
 </div>
@@ -389,9 +389,8 @@ if (basename($_SERVER['PHP_SELF']) != 'landingpage.php') {
         <h4 class="font-bold">Lestari</h4>
         <a href="./landingpage.php" class="block text-white hover:underline mb-1">Home</a>
         <a href="./user/tentang.php" class="block text-white hover:underline mb-1">Tentang Kami</a>
-        <a href="" class="block text-white hover:underline mb-1">Layanan</a>
-        <a href="" class="block text-white hover:underline mb-1">Blog</a>
-
+        <a href="./landingpage.php" class="block text-white hover:underline mb-1">Layanan</a>
+        <a href="./user/blog.php" class="block text-white hover:underline mb-1">Blog</a>
       </div>
     <!-- Bagian Informasi -->
       <div>

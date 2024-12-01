@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -69,7 +70,7 @@
 <div class="navbar-center hidden lg:flex">
   <ul class="menu menu-horizontal px-1 text-dark text-base">
   <li><a href="../landingpage.php">Home</a></li>
-  <li><a href="../../user/tentang.php">Tentang kami</a></li>
+  <li><a href="../user/tentang.php">Tentang kami</a></li>
     <li>
       <details>
         <summary>Layanan</summary>

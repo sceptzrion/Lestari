@@ -1,3 +1,15 @@
+<?php
+session_start();
+
+// Halaman yang tidak memerlukan login, seperti "Tentang Kami" dan "Blog"
+if (basename($_SERVER['PHP_SELF']) != 'landingpage.php' && basename($_SERVER['PHP_SELF']) != 'tentang.php' && basename($_SERVER['PHP_SELF']) != 'blog.php') {
+    if (!isset($_SESSION['loggedin'])) {
+        header("Location: landingpage.php");
+        exit();  // Jangan lupa exit setelah redirect
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -215,6 +227,19 @@
             </div>
           </div>
         </section>
+  
+<!-- modal  -->
+<div id="loginModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+    <div class="bg-white p-6 rounded-lg shadow-lg text-center max-w-sm">
+        <h2 class="text-lg font-bold text-gray-800 mb-4">Yuk Login dulu</h2>
+        <p class="text-gray-600 mb-6">Silakan login terlebih dahulu untuk mengakses layanan ini.</p>
+        <div class="flex justify-center gap-4">
+            <button onclick="closeModal()" class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300">Batal</button>
+            <a href="./user/signin.php" class="px-4 py-2 bg-gradient-to-r from-green to-dark-green text-white rounded-lg hover:bg-green-700">Login</a>
+        </div>
+    </div>
+</div>
+
   <!-- Footer -->
 <footer class="bg-gradient-to-r from-green to-dark-green text-white py-7">
   <div class="container mx-auto px-4 text-center">
@@ -251,5 +276,20 @@
     </div>
   </div>
 </footer>
+<script>
+    // Notifikasi jika belum login
+    function alertLogin() {
+        alert("Silakan login untuk mengakses layanan ini.");
+    }
+    //modal
+    function showModal() {
+    document.getElementById('loginModal').classList.remove('hidden');
+    }
+
+    function closeModal() {
+        document.getElementById('loginModal').classList.add('hidden');
+    }
+
+</script>
 </body>
 </html>
