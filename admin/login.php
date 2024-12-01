@@ -37,7 +37,7 @@ if (isset($_SESSION['login_message'])) {
 
       <?php if (isset($notAuthorized)) : ?>
         <div class="flex flex-col w-auto h-auto p-2 text-center text-red font-medium text-sm">
-          <p>Anda harus login terlebih dahulu</p>
+          <p>Anda harus masuk terlebih dahulu</p>
         </div>
       <?php else : ?>
         <h2 class="text-2xl font-light">Lestari</h2>
@@ -47,13 +47,13 @@ if (isset($_SESSION['login_message'])) {
         <form action="./auth.php" method="POST" class="flex flex-col gap-6 dark:[color-scheme:light]">
 
           <label for="admin_email" class="flex flex-col gap-2">
-            <span>Email</span>
+            <span>Alamat email</span>
             <input type="email" id="admin_email" name="admin_email" required <?php if (isset($wrongCredentials)) echo 'value="' . $_SESSION['email_attempt'] . '"'; ?> class="w-full h-10 rounded-lg py-3 px-4 bg-transparent border-2 border-gray" placeholder="Email">
           </label>
 
           <label for="admin_password" class="flex flex-col gap-2">
-            <span>Password</span>
-            <input type="password" id="admin_password" name="admin_password" required class="w-full h-10 rounded-lg py-3 px-4 bg-transparent border-2 border-gray" pattern=".{8,}" title="Password harus memiliki minimal 8 karakter" placeholder="Password">
+            <span>Kata sandi</span>
+            <input type="password" id="admin_password" name="admin_password" required class="w-full h-10 rounded-lg py-3 px-4 bg-transparent border-2 border-gray" pattern=".{8,}" title="Password harus memiliki minimal 8 karakter" placeholder="Kata sandi">
           </label>
           
           <button type="submit" class="bg-[#009951] h-10 rounded-lg text-base font-bold items-center text-light border-2 border-dark">Masuk</button>
@@ -66,7 +66,7 @@ if (isset($_SESSION['login_message'])) {
           </div>
         <?php endif; ?>
 
-        <a href="./password-reset/" class="underline self-end">Forgot password?</a>
+        <a href="./password-reset/" class="underline self-end">Lupa kata sandi?</a>
       </div>
     </div>
   </div>

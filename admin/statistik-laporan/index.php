@@ -1,3 +1,17 @@
+<?php
+session_start();
+// Sertakan konfigurasi database
+require_once('../../controller/config.php');
+
+// Cek apakah admin sudah login
+if (!isset($_SESSION['admin_id'])) {
+    $_SESSION['login_message'] = "Not authorized";
+    header('Location: login.php');
+    exit();
+}
+
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -72,16 +86,16 @@
                         tabindex="0"
                         class="menu menu-sm dropdown-content bg-light rounded-[10px] z-[1] mt-3 w-[233px] py-6 border border-gray shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] text-dark">
                         <li><a class="flex flex-row gap-[10px] mb-[15px]">
-                            <img src="../images/admin/Profile.png" class="w-[30px]" alt="Profile">
+                            <img src="../../images/admin/Profile.png" class="w-[30px]" alt="Profile">
                             <p class="text-xl font-normal">Profile</p>
                         </a></li>
                         <li><a class="flex flex-row gap-[10px]">
-                            <img src="../images/admin/Settings-profile.png" class="w-[30px]" alt="Settings">
+                            <img src="../../images/admin/Settings-profile.png" class="w-[30px]" alt="Settings">
                             <p class="text-xl font-normal">Pengaturan</p>
                         </a></li>
                         <hr class="h-[2px] w-full text-gray my-6">
                         <li><a class="flex flex-row gap-[10px]">
-                            <img src="../images/admin/sign-out.png" class="w-[30px]" alt="Sign Out">
+                            <img src="../../images/admin/sign-out.png" class="w-[30px]" alt="Sign Out">
                             <p class="text-xl font-normal">Sign Out</p>
                         </a></li>
                     </ul>

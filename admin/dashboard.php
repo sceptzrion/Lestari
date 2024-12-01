@@ -201,7 +201,7 @@ $conn->close();
         <!-- SIDEBAR END -->
 
         <!-- CONTENT -->
-        <div class="bg-light-bg-content w-full h-[1024px] px-5 pt-5">
+        <div class="bg-light-bg-content w-full h-auto px-5 py-5">
             <!-- HEADER -->
             <div class="flex flex-row justify-between bg-gradient-to-r from-[#1E5E3F] to-[#3FC483] w-full h-[88px] px-[23px] rounded-[20px] text-light font-extrabold text-[32px] items-center">
                 <h1>Dashboard</h1>
@@ -313,25 +313,27 @@ $conn->close();
                     </div>
                 </div> -->
 
-                <?php foreach ($activities as $activity) : ?>
-                    <div class="flex flex-row justify-between pl-[7px] pr-[45px] w-full h-[62px] rounded-[10px] bg-light border border-gray">
-                    <div class="flex flex-col">
-                        <h4 class="text-xl font-normal"><?php echo $activity['user_name'] ?></h4>
-                        <p class="text-xs font-light">Mengantarkan <?php echo $activity['waste_weight'] ?> Kg Sampah <?php echo $activity['waste_name'] ?></p>
+                <!-- <div class="h-[314px] overflow-y-scroll gap-[22px] flex flex-col"> menambahkan scroll -->
+                    <?php foreach ($activities as $activity) : ?>
+                        <div class="flex flex-row justify-between pl-[7px] pr-[45px] w-full h-[62px] rounded-[10px] bg-light border border-gray">
+                        <div class="flex flex-col">
+                            <h4 class="text-xl font-normal"><?php echo $activity['user_name'] ?></h4>
+                            <p class="text-xs font-light">Mengantarkan <?php echo $activity['waste_weight'] ?> Kg Sampah <?php echo $activity['waste_name'] ?></p>
+                        </div>
+    
+                        <!-- IF CONDITION -->
+                        <?php if ($activity['status'] == "accepted") : ?>
+                            <div class="bg-[#2ECC71] w-[159px] h-[27px] rounded-[10px] shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] border border-gray self-center text-center content-center">
+                                <p class="text-xs font-light">Selesai</p>
+                            </div>
+                        <?php else : ?>
+                            <div class="bg-[#FFDE75] w-[159px] h-[27px] rounded-[10px] shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] border border-gray self-center text-center content-center">
+                                <p class="text-xs font-light">Menunggu Verifikasi</p>
+                            </div>
+                        <?php endif; ?>
                     </div>
-
-                    <!-- IF CONDITION -->
-                    <?php if ($activity['status'] == "accepted") : ?>
-                        <div class="bg-[#2ECC71] w-[159px] h-[27px] rounded-[10px] shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] border border-gray self-center text-center content-center">
-                            <p class="text-xs font-light">Selesai</p>
-                        </div>
-                    <?php else : ?>
-                        <div class="bg-[#FFDE75] w-[159px] h-[27px] rounded-[10px] shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] border border-gray self-center text-center content-center">
-                            <p class="text-xs font-light">Menunggu Verifikasi</p>
-                        </div>
-                    <?php endif; ?>
-                </div>
-                <?php endforeach; ?>
+                    <?php endforeach; ?>
+                <!-- </div> -->
              </div>
              <!-- RECENT ACTIVITY END -->
         </div>

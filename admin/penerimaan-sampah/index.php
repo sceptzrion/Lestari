@@ -4,11 +4,13 @@ session_start();
 // Sertakan konfigurasi database
 require_once('../../controller/config.php');
 
-// Pastikan admin sudah login
+// Cek apakah admin sudah login
 if (!isset($_SESSION['admin_id'])) {
-    header('Location: login.php');
-    exit;
+    $_SESSION['login_message'] = "Not authorized";
+    header('Location: ../login.php');
+    exit();
 }
+
 
 // Inisialisasi variabel
 $rows = [];
@@ -146,7 +148,7 @@ if ($conn) {
         <!-- SIDEBAR END -->
 
         <!-- CONTENT -->
-        <div class="bg-light-bg-content w-full h-auto pb-11 px-5 pt-5">
+        <div class="bg-light-bg-content w-auto h-auto pb-11 px-5 pt-5">
             <!-- HEADER -->
             <div class="flex flex-row justify-between bg-gradient-to-r from-[#1E5E3F] to-[#3FC483] w-full h-[88px] px-[23px] rounded-[20px] text-light font-extrabold text-[32px] items-center">
                 <h1>Penerimaan Sampah</h1>
