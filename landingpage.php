@@ -82,29 +82,61 @@ if (basename($_SERVER['PHP_SELF']) != 'landingpage.php') {
       <details>
         <summary>Layanan</summary>
         <ul class="bg-light absolute left-1/2 transform -translate-x-1/2 rounded-[10px] border-[1px] shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] border-gray px-[14px] py-[20px] flex flex-wrap items-center gap-3 min-w-[300px] max-w-[600px]">
+          <!-- Drop Off -->
           <li>
-            <button onclick="window.location.href='./user/drop_off/dropoff.php'" class="btn btn-success flex-grow shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] rounded-[20px] flex items-center justify-center px-4 py-2 gap-2 min-w-[120px] max-w-[200px]">
-              <img src="./images/truck.png" class="w-8 h-8" alt="">
-              <p>Drop Off</p>
-            </button>
+            <?php if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true): ?>
+              <button onclick="window.location.href='./user/drop_off/dropoff.php'" class="btn btn-success flex-grow shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] rounded-[20px] flex items-center justify-center px-4 py-2 gap-2 min-w-[120px] max-w-[200px]">
+                <img src="./images/truck.png" class="w-8 h-8" alt="">
+                <p>Drop Off</p>
+              </button>
+            <?php else: ?>
+              <button onclick="showModal()" class="btn btn-success flex-grow shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] rounded-[20px] flex items-center justify-center px-4 py-2 gap-2 min-w-[120px] max-w-[200px]">
+                <img src="./images/truck.png" class="w-8 h-8" alt="">
+                <p>Drop Off</p>
+              </button>
+            <?php endif; ?>
           </li>
+          <!-- Rewards -->
           <li>
-            <button onclick="window.location.href='./user/drop_off/poin.php'" class="btn btn-success flex-grow shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] rounded-[20px] flex items-center justify-center px-4 py-2 gap-2 min-w-[120px] max-w-[200px]">
-              <img src="./images/reward.png" class="w-8 h-8" alt="">
-              <p>Rewards</p>
-            </button>
+            <?php if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true): ?>
+              <button onclick="window.location.href='./user/drop_off/poin.php'" class="btn btn-success flex-grow shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] rounded-[20px] flex items-center justify-center px-4 py-2 gap-2 min-w-[120px] max-w-[200px]">
+                <img src="./images/reward.png" class="w-8 h-8" alt="">
+                <p>Rewards</p>
+              </button>
+            <?php else: ?>
+              <button onclick="showModal()" class="btn btn-success flex-grow shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] rounded-[20px] flex items-center justify-center px-4 py-2 gap-2 min-w-[120px] max-w-[200px]">
+                <img src="./images/reward.png" class="w-8 h-8" alt="">
+                <p>Rewards</p>
+              </button>
+            <?php endif; ?>
           </li>
+          <!-- Tutorial -->
           <li>
-            <button onclick="window.location.href='./user/tutorial/tutorial.php'" class="btn btn-success flex-grow shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] rounded-[20px] flex items-center justify-center px-4 py-2 gap-2 min-w-[120px] max-w-[200px]">
-              <img src="./images/Vector.png" class="w-6 h-6" alt="">
-              <p>Tutorial</p>
-            </button>
+            <?php if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true): ?>
+              <button onclick="window.location.href='./user/tutorial/tutorial.php'" class="btn btn-success flex-grow shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] rounded-[20px] flex items-center justify-center px-4 py-2 gap-2 min-w-[120px] max-w-[200px]">
+                <img src="./images/Vector.png" class="w-6 h-6" alt="">
+                <p>Tutorial</p>
+              </button>
+            <?php else: ?>
+              <button onclick="showModal()" class="btn btn-success flex-grow shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] rounded-[20px] flex items-center justify-center px-4 py-2 gap-2 min-w-[120px] max-w-[200px]">
+                <img src="./images/Vector.png" class="w-6 h-6" alt="">
+                <p>Tutorial</p>
+              </button>
+            <?php endif; ?>
           </li>
+          <!-- Marketplace -->
           <li>
-            <button onclick="window.location.href='./marketplace.html'" class="btn btn-success flex-grow shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] rounded-[20px] flex items-center justify-center px-4 py-2 gap-2 min-w-[120px] max-w-[200px]">
-              <img src="./images/marketplace.png" class="w-8 h-8" alt="">
-              <p>Marketplace</p>
-            </button>
+            <?php if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true): ?>
+              <button onclick="window.location.href='./marketplace.html'" class="btn btn-success flex-grow shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] rounded-[20px] flex items-center justify-center px-4 py-2 gap-2 min-w-[120px] max-w-[200px]">
+                <img src="./images/marketplace.png" class="w-8 h-8" alt="">
+                <p>Marketplace</p>
+              </button>
+            <?php else: ?>
+              <button onclick="showModal()" class="btn btn-success flex-grow shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] rounded-[20px] flex items-center justify-center px-4 py-2 gap-2 min-w-[120px] max-w-[200px]">
+                <img src="./images/marketplace.png" class="w-8 h-8" alt="">
+                <p>Marketplace</p>
+              </button>
+            <?php endif; ?>
           </li>
         </ul>
       </details>
@@ -113,6 +145,7 @@ if (basename($_SERVER['PHP_SELF']) != 'landingpage.php') {
     <li><a href="./user/kontak_kami.php">Kontak Kami</a></li>
   </ul>
 </div>
+
 
 <!-- Profile -->
 <div class="navbar-end ml-[5px] flex items-center gap-4">
@@ -223,36 +256,70 @@ if (basename($_SERVER['PHP_SELF']) != 'landingpage.php') {
 </section>
 
 
-  <!-- Layanan Section -->
-  <section class="py-16 bg-gray-100">
+ <!-- Layanan Section -->
+<section class="py-16 bg-gray-100">
     <div class="container mx-auto px-4">
         <h2 class="text-3xl text-black font-bold mb-2">Layanan</h2>
         <p class="text-black mb-8">Revolusi daur ulang dari Mall Sampah untuk semua orang</p>
         <div class="text-black grid md:grid-cols-3 gap-6">
             <!-- Card Rewards -->
-            <a href="https://example.com" class="block">
-                <div class="bg-white p-6 rounded-lg shadow-md cursor-pointer hover:bg-green-200 h-full justify-between">
-                    <h5 class="text-xl mb-2">🎁 Rewards</h5>
-                    <p>LESTARI mengubah sampahmu menjadi poin yang bisa kamu kumpulkan dan tukarkan dengan hadiah ramah lingkungan.</p>
-                </div>
-            </a>
+            <div class="block">
+                <?php if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true): ?>
+                    <a href="./user/drop_off/poin.php" class="block">
+                        <div class="bg-white p-6 rounded-lg shadow-md cursor-pointer hover:bg-green-200 h-full justify-between">
+                            <h5 class="text-xl mb-2">🎁 Rewards</h5>
+                            <p>LESTARI mengubah sampahmu menjadi poin yang bisa kamu kumpulkan dan tukarkan dengan hadiah ramah lingkungan.</p>
+                        </div>
+                    </a>
+                <?php else: ?>
+                    <a href="javascript:void(0)" onclick="showModal()" class="block">
+                        <div class="bg-white p-6 rounded-lg shadow-md cursor-pointer hover:bg-green-200 h-full justify-between">
+                            <h5 class="text-xl mb-2">🎁 Rewards</h5>
+                            <p>LESTARI mengubah sampahmu menjadi poin yang bisa kamu kumpulkan dan tukarkan dengan hadiah ramah lingkungan.</p>
+                        </div>
+                    </a>
+                <?php endif; ?>
+            </div>
             <!-- Card Tutorial -->
-            <a href="./user/tutorial/tutorial.php" class="block">
-                <div class="bg-white p-6 rounded-lg shadow-md cursor-pointer hover:bg-green-200 h-full  justify-between">
-                    <h5 class="text-xl mb-2">📺 Tutorial</h5>
-                    <p>LESTARI menyediakan tutorial untuk mengubah limbah menjadi barang bernilai dengan gaya hidup ramah lingkungan.</p>
-                </div>
-            </a>
+            <div class="block">
+                <?php if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true): ?>
+                    <a href="./user/tutorial/tutorial.php" class="block">
+                        <div class="bg-white p-6 rounded-lg shadow-md cursor-pointer hover:bg-green-200 h-full justify-between">
+                            <h5 class="text-xl mb-2">📺 Tutorial</h5>
+                            <p>LESTARI menyediakan tutorial untuk mengubah limbah menjadi barang bernilai dengan gaya hidup ramah lingkungan.</p>
+                        </div>
+                    </a>
+                <?php else: ?>
+                    <a href="javascript:void(0)" onclick="showModal()" class="block">
+                        <div class="bg-white p-6 rounded-lg shadow-md cursor-pointer hover:bg-green-200 h-full justify-between">
+                            <h5 class="text-xl mb-2">📺 Tutorial</h5>
+                            <p>LESTARI menyediakan tutorial untuk mengubah limbah menjadi barang bernilai dengan gaya hidup ramah lingkungan.</p>
+                        </div>
+                    </a>
+                <?php endif; ?>
+            </div>
             <!-- Card Marketplace -->
-            <a href="https://example.com" class="block">
-                <div class="bg-white p-6 rounded-lg shadow-md cursor-pointer hover:bg-green-200 h-full justify-between">
-                    <h5 class="text-xl mb-2">🛍️ Marketplace</h5>
-                    <p>Marketplace LESTARI menyediakan produk berkualitas daur ulang. Dukungan nyata untuk gerakan ramah lingkungan.</p>
-                </div>
-            </a>
+            <div class="block">
+                <?php if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true): ?>
+                    <a href="./marketplace.html" class="block">
+                        <div class="bg-white p-6 rounded-lg shadow-md cursor-pointer hover:bg-green-200 h-full justify-between">
+                            <h5 class="text-xl mb-2">🛍️ Marketplace</h5>
+                            <p>Marketplace LESTARI menyediakan produk berkualitas daur ulang. Dukungan nyata untuk gerakan ramah lingkungan.</p>
+                        </div>
+                    </a>
+                <?php else: ?>
+                    <a href="javascript:void(0)" onclick="showModal()" class="block">
+                        <div class="bg-white p-6 rounded-lg shadow-md cursor-pointer hover:bg-green-200 h-full justify-between">
+                            <h5 class="text-xl mb-2">🛍️ Marketplace</h5>
+                            <p>Marketplace LESTARI menyediakan produk berkualitas daur ulang. Dukungan nyata untuk gerakan ramah lingkungan.</p>
+                        </div>
+                    </a>
+                <?php endif; ?>
+            </div>
         </div>
     </div>
 </section>
+
 
 
   <!-- Jenis sampah Section -->
@@ -296,6 +363,17 @@ if (basename($_SERVER['PHP_SELF']) != 'landingpage.php') {
       </div>
     </div>
   </section>
+<!-- modal  -->
+<div id="loginModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+    <div class="bg-white p-6 rounded-lg shadow-lg text-center max-w-sm">
+        <h2 class="text-lg font-bold text-gray-800 mb-4">Yuk Login dulu</h2>
+        <p class="text-gray-600 mb-6">Silakan login terlebih dahulu untuk mengakses layanan ini.</p>
+        <div class="flex justify-center gap-4">
+            <button onclick="closeModal()" class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300">Batal</button>
+            <a href="./user/signin.php" class="px-4 py-2 bg-gradient-to-r from-green to-dark-green text-white rounded-lg hover:bg-green-700">Login</a>
+        </div>
+    </div>
+</div>
 
 
 <!-- Footer -->
@@ -336,6 +414,20 @@ if (basename($_SERVER['PHP_SELF']) != 'landingpage.php') {
     </div>
   </div>
 </footer>
+<script>
+    // Notifikasi jika belum login
+    function alertLogin() {
+        alert("Silakan login untuk mengakses layanan ini.");
+    }
+    //modal
+    function showModal() {
+    document.getElementById('loginModal').classList.remove('hidden');
+    }
 
+    function closeModal() {
+        document.getElementById('loginModal').classList.add('hidden');
+    }
+
+</script>
 </body>
 </html>
