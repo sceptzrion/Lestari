@@ -9,7 +9,27 @@ if (basename($_SERVER['PHP_SELF']) != 'landingpage.php') {
         exit();  // Jangan lupa exit setelah redirect
     }
 }
+
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "db_sampah_2";
+
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// Cek koneksi
+if ($conn->connect_error) {
+    die("Koneksi gagal: " . $conn->connect_error);
+}
+
+// Query untuk mengambil data wilayah (region) dan bank sampah
+$sql = "SELECT region, COUNT(bank_id) as total_banks, bank_operating_hours 
+        FROM bank_locations 
+        GROUP BY region";
+
+$result = $conn->query($sql);
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -226,42 +246,29 @@ if (basename($_SERVER['PHP_SELF']) != 'landingpage.php') {
             <p class="text-gray-600">Pilih kota terdekat dengan lokasi anda</p>
         </div>
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        <!-- Card Lokasi -->
-        <div class="bg-white shadow-md rounded-lg p-6">
-            <h3 class="text-green-700 font-bold text-lg">Jakarta Pusat</h3>
-            <p class="text-gray-600 text-sm">2 Bank Sampah Tersedia</p>
-            <p class="text-gray-600 text-sm">Operasional: Senin - Sabtu</p>
-            <button 
-                onclick="window.location.href='.././drop_off/kota.php?city=jakarta-pusat'"
-                class="mt-4 bg-gradient-to-r from-green to-dark-green text-white py-2 px-4 rounded hover:bg-green-800">
-                Lihat Detail
-            </button>
+            <?php
+            if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                    $region = $row['region'];
+                    $total_banks = $row['total_banks'];
+                    $bank_hours = $row['bank_operating_hours'];
+                    ?>
+                    <div class="bg-white shadow-md rounded-lg p-6">
+                        <h3 class="text-green-700 font-bold text-lg"><?php echo htmlspecialchars($region); ?></h3>
+                        <p class="text-gray-600 text-sm"><?php echo $total_banks; ?> Bank Sampah Tersedia</p>
+                        <p class="text-gray-600 text-sm">Jam Operasional: <?php echo htmlspecialchars($bank_hours); ?></p>
+                        <a href="kota.php?region=<?php echo urlencode($region); ?>" 
+                            class="mt-4 bg-gradient-to-r from-green to-dark-green text-white py-2 px-4 rounded hover:bg-green-800 inline-block">
+                             Lihat Detail
+                        </a>
+                    </div>
+                    <?php
+                }
+            } else {
+                echo "<p class='text-center text-gray-600'>Tidak ada bank sampah ditemukan.</p>";
+            }
+            ?>
         </div>
-
-        <!-- Card Lokasi -->
-        <div class="bg-white shadow-md rounded-lg p-6">
-            <h3 class="text-green-700 font-bold text-lg">Depok</h3>
-            <p class="text-gray-600 text-sm">2 Bank Sampah Tersedia</p>
-            <p class="text-gray-600 text-sm">Operasional: Senin - Sabtu</p>
-            <button 
-                onclick="window.location.href='.././drop_off/kota.php?city=depok'"
-                class="mt-4 bg-gradient-to-r from-green to-dark-green text-white py-2 px-4 rounded hover:bg-green-800">
-                Lihat Detail
-            </button>
-        </div>
-
-        <!-- Card Lokasi -->
-        <div class="bg-white shadow-md rounded-lg p-6">
-            <h3 class="text-green-700 font-bold text-lg">Bekasi</h3>
-            <p class="text-gray-600 text-sm">3 Bank Sampah Tersedia</p>
-            <p class="text-gray-600 text-sm">Operasional: Senin - Sabtu</p>
-            <button 
-                onclick="window.location.href='.././drop_off/kota.php?city=bekasi'"
-                class="mt-4 bg-gradient-to-r from-green to-dark-green text-white py-2 px-4 rounded hover:bg-green-800">
-                Lihat Detail
-            </button>
-        </div>
-    </div>
     </main>
 </body>
 </html>

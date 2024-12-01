@@ -9,7 +9,39 @@ if (basename($_SERVER['PHP_SELF']) != 'landingpage.php') {
         exit();  // Jangan lupa exit setelah redirect
     }
 }
+// Koneksi ke database
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "db_sampah_2";
+
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// Cek koneksi
+if ($conn->connect_error) {
+    die("Koneksi gagal: " . $conn->connect_error);
+}
+
+// Ambil region dari URL
+$region = isset($_GET['region']) ? urldecode($_GET['region']) : "";
+
+// Query untuk mendapatkan detail bank sampah berdasarkan region
+$sql = "SELECT bank_name, bank_address FROM bank_locations WHERE region = ?";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("s", $region);
+$stmt->execute();
+$result = $stmt->get_result();
+
+// Query untuk menghitung jumlah bank sampah berdasarkan region
+$count_sql = "SELECT COUNT(*) AS total_banks FROM bank_locations WHERE region = ?";
+$count_stmt = $conn->prepare($count_sql);
+$count_stmt->bind_param("s", $region);
+$count_stmt->execute();
+$count_result = $count_stmt->get_result();
+$count_row = $count_result->fetch_assoc();
+$total_banks = $count_row['total_banks'];
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -39,7 +71,7 @@ if (basename($_SERVER['PHP_SELF']) != 'landingpage.php') {
     </script>
 </head>
 <body class="font-poppins">
-     <!-- NAVBAR -->
+    <!-- NAVBAR -->
    <div class="navbar bg-light h-20 pr-10 justify-between sticky top-0 z-50">
    <!-- MOBILE SCREEN MODE -->
       <div class="navbar-start pl-[41px]">
@@ -193,12 +225,11 @@ if (basename($_SERVER['PHP_SELF']) != 'landingpage.php') {
     });
 </script>
     </div>
-  <!-- NAVBAR END -->
-        
+
   <main class="container mx-auto mt-8 px-4 pb-12">
   <div id="selected-location" class="text-2xl text-[#1B5E20] font-bold mb-3 flex items-center">
     <img src="../../images/user/Loc.png" alt="Location Icon" class="w-[31px] h-[44px] mr-2"> 
-    Jakarta Pusat
+    <?php echo htmlspecialchars($region); ?>
   </div>
   <div class="bg-gradient-to-r from-green to-dark-green text-white rounded-lg p-6 text-center h-32 flex items-center">
     <div class="text-white text-center relative"> 
@@ -209,24 +240,21 @@ if (basename($_SERVER['PHP_SELF']) != 'landingpage.php') {
     </div>
   </div>
   <p class="text-sm text-[#1B5E20] mt-4">
-    <span class="inline-block bg-gradient-to-r from-green to-dark-green text-white rounded-full px-3 py-1 text-sm">3 bank sampah tersedia</span>
+    <span class="inline-block bg-gradient-to-r from-green to-dark-green text-white rounded-full px-3 py-1 text-sm">
+    <?php echo $total_banks; ?> Bank sampah tersedia.
+    </span>
   </p>
 
 <!-- Locations -->
-<div class="mt-4 space-y-4">
-  <a href="../../user/drop_off/select_kota.php" class="block border rounded-lg p-4 hover:bg-gray-100">
-    <h3 class="text-lg font-bold">Kemayoran</h3>
-    <p class="text-sm text-gray-700">Lestari Kemayoran - Jl. Bank Sampah No.1</p>
-  </a>
-
-  <a href="https://example.com/cempaka-putih" class="block border rounded-lg p-4 hover:bg-gray-100">
-    <h3 class="text-lg font-bold">Cempaka Putih</h3>
-    <p class="text-sm text-gray-700">Lestari Cempaka Putih - Jl. Bank Sampah No.2</p>
-  </a>
-
-  <a href="https://example.com/gatot-subroto" class="block border rounded-lg p-4 mb-4 hover:bg-gray-100">
-    <h3 class="text-lg font-bold">Gatot Subroto</h3>
-    <p class="text-sm text-gray-700">Lestari Gatot Subroto - Jl. Bank Sampah No.3</p>
-  </a>
-</div>
-</main>
+<!-- Locations -->
+<div class="drop-off-list mt-8 space-y-4">
+            <?php while ($row = $result->fetch_assoc()) { ?>
+              <a href="./select_kota.php?bank_name=<?php echo urlencode($row['bank_name']); ?>" class="block bg-white p-4 rounded-lg shadow-md hover:bg-gray-100 cursor-pointer">
+                    <h3 class="text-xl font-bold"><?php echo htmlspecialchars($row['bank_name']); ?></h3>
+                    <p class="text-sm text-gray-600"><?php echo htmlspecialchars($row['bank_address']); ?></p>
+                </a>
+            <?php } ?>
+        </div>
+    </main>
+</body>
+</html>

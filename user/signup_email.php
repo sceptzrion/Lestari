@@ -1,4 +1,61 @@
-<?php session_start(); ?>
+<?php
+// Database connection setup
+$servername = "localhost";
+$username = "root"; // Your MySQL username
+$password = ""; // Your MySQL password
+$dbname = "db_sampah_2"; // Your database name
+
+// Create connection
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+$error_message = "";
+$success_message = "";
+
+// Check if the form was submitted
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Get form data
+    $name = $_POST['name'];
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+    $phone = $_POST['phone'];
+    $address = $_POST['address'];
+    
+    // Validate form data
+    if (empty($name) || empty($email) || empty($password) || empty($address) || empty($phone)) {
+        $error_message = "All fields are required!";
+    } else {
+        // Hash the password
+        $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+
+        // Prepare SQL query
+        $stmt = $conn->prepare("INSERT INTO users (user_name, user_email, user_password, user_phone_number, user_address) VALUES (?, ?, ?, ?, ?)");
+        if (!$stmt) {
+            $error_message = "Query preparation failed: " . $conn->error;
+        } else {
+            $stmt->bind_param("sssss", $name, $email, $hashed_password, $phone, $address);
+
+            // Execute query
+            if ($stmt->execute()) {
+                $success_message = "Registration successful! Redirecting to login...";
+                header("Refresh: 3; URL=signin.php"); // Redirect after 3 seconds
+            } else {
+                $error_message = "Error: " . $stmt->error;
+            }
+
+            // Close statement
+            $stmt->close();
+        }
+    }
+}
+
+// Close the database connection
+$conn->close();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -39,6 +96,17 @@
 
                 <!-- Title -->
                 <h1 class="text-2xl font-bold text-lg-start text-gray-800 mb-8">Sign Up to Lestari</h1>
+
+                <?php if (!empty($error_message)) : ?>
+                    <div class="mb-4 p-3 bg-red-100 text-red-700 rounded">
+                        <?php echo $error_message; ?>
+                    </div>
+                <?php endif; ?>
+                <?php if (!empty($success_message)) : ?>
+                    <div class="mb-4 p-3 bg-green-100 text-green-700 rounded">
+                        <?php echo $success_message; ?>
+                    </div>
+                <?php endif; ?>
 
                 <!-- Form -->
                 <form action="../BackEnd/signup_email.php" method="POST" class="space-y-4">

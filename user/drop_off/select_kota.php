@@ -9,6 +9,39 @@ if (basename($_SERVER['PHP_SELF']) != 'landingpage.php') {
         exit();  // Jangan lupa exit setelah redirect
     }
 }
+
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "db_sampah_2"; // Ganti dengan nama database Anda
+
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// Periksa koneksi
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+// Periksa jika ada parameter bank_name di URL
+$bank_name = isset($_GET['bank_name']) ? $_GET['bank_name'] : '';
+
+// Query untuk mendapatkan data bank
+$query = "SELECT bank_name, bank_address, bank_operating_hours FROM bank_locations WHERE bank_name = ?";
+$stmt = $conn->prepare($query);
+$stmt->bind_param("s", $bank_name);
+$stmt->execute();
+$result = $stmt->get_result();
+
+// Periksa apakah ada data yang ditemukan
+if ($result->num_rows > 0) {
+    $row = $result->fetch_assoc();
+} else {
+    echo "Bank tidak ditemukan.";
+    exit();
+}
+
+$stmt->close();
+$conn->close();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -211,9 +244,9 @@ if (basename($_SERVER['PHP_SELF']) != 'landingpage.php') {
   <div class="bg-white p-6 pb-19 rounded-lg drop-shadow-xl relative">
     <!-- Logo Checklist di Pojok Kanan Atas -->
     <img src="../../images/user/checklist.png" alt="Checklist Icon" class="w-6 h-6 absolute top-4 right-4">
-    <h5 class="text-[#1B5E20] text-2xl font-bold">Kemayoran</h5>
-    <p class="text-sm text-gray-700">Lestari Kemayoran - Jl. Bank Sampah No.1</p>
-    <p class="text-sm text-gray-700">Buka 08.00 - 17.00</p>
+    <h5 class="text-[#1B5E20] text-2xl font-bold"><?= htmlspecialchars($row['bank_name']); ?></h5>
+            <p class="text-sm text-gray-700"><?= htmlspecialchars($row['bank_address']); ?></p>
+            <p class="text-sm text-gray-700">Jam Operasional: <?= htmlspecialchars($row['bank_operating_hours']); ?></p>
     <div class="flex justify-center mt-4">
       <button 
         onclick="redirectToLocation()" 
