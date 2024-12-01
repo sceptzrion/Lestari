@@ -152,7 +152,7 @@ $conn->close();
     <title>Dashboard | Admin Lestari</title>
 </head>
 <body>
-    <div class="flex flex-row h-full w-full">
+    <div class="flex flex-row min-h-[1024px] w-full">
         <!-- SIDEBAR -->
         <div class="bg-gradient-to-t from-green-admin to-dark-green-admin w-[345px] h-auto text-light">
             <div class="flex flex-col pt-10 items-center">
@@ -216,11 +216,11 @@ $conn->close();
                     <ul
                         tabindex="0"
                         class="menu menu-sm dropdown-content bg-light rounded-[10px] z-[1] mt-3 w-[233px] py-6 border border-gray shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] text-dark">
-                        <li><a class="flex flex-row gap-[10px] mb-[15px]">
+                        <li><a href="./pengaturan/profil.php" class="flex flex-row gap-[10px] mb-[15px]">
                             <img src="../images/admin/Profile.png" class="w-[30px]" alt="Profile">
                             <p class="text-xl font-normal">Profile</p>
                         </a></li>
-                        <li><a class="flex flex-row gap-[10px]">
+                        <li><a href="./pengaturan/" class="flex flex-row gap-[10px]">
                             <img src="../images/admin/Settings-profile.png" class="w-[30px]" alt="Settings">
                             <p class="text-xl font-normal">Pengaturan</p>
                         </a></li>
@@ -251,7 +251,7 @@ $conn->close();
                 <div class="bg-gradient-to-b from-[#F6AC0A] to-[#906506] rounded-[20px] border border-gray shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] flex flex-col pl-[23px] pt-[33px] pb-[49px] h-full text-dark gap-[11px]">
                     <h4 class="text-xs font-bold">Total Berat Sampah Diterima</h4>
                     <div class="flex flex-col">
-                        <h2 class="text-xl font-normal  "><?php echo number_format($total_sampah); ?> Kg</h2>
+                        <h2 class="text-xl font-normal  "><?php echo number_format($total_sampah); ?> kg</h2>
                         <p class="text-[10px] font-light">Selama ini</p>
                     </div>
                 </div>
@@ -259,14 +259,14 @@ $conn->close();
                     <h4 class="text-xs font-bold">Total Drop-off Entry</h4>
                     <div class="flex flex-col">
                         <h2 class="text-xl font-normal  "><?php echo number_format($total_requests); ?></h2>
-                        <p class="text-[10px] font-light">Telah Masuk Sistem</p>
+                        <p class="text-[10px] font-light">Telah masuk sistem</p>
                     </div>
                 </div>
                 <div class="bg-gradient-to-b from-[#0AF649] to-[#06902B] rounded-[20px] border border-gray shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] flex flex-col pl-[23px] pt-[33px] pb-[49px] h-full text-dark gap-[11px]">
                     <h4 class="text-xs font-bold">Total Drop-off Waitings</h4>
                     <div class="flex flex-col">
                         <h2 class="text-xl font-normal  "><?php echo $total_menunggu; ?></h2>
-                        <p class="text-[10px] font-light">Menunggu Verifikasi</p>
+                        <p class="text-[10px] font-light">Menunggu verifikasi</p>
                     </div>
                 </div>
                 <div class="bg-gradient-to-b from-[#ECF310] to-[#898D09] rounded-[20px] border border-gray shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] flex flex-col pl-[23px] pt-[33px] pb-[49px] h-full text-dark gap-[11px]">
@@ -313,27 +313,27 @@ $conn->close();
                     </div>
                 </div> -->
 
-                <!-- <div class="h-[314px] overflow-y-scroll gap-[22px] flex flex-col"> menambahkan scroll -->
+                <div class="overflow-auto h-[314px] flex flex-col gap-5">
                     <?php foreach ($activities as $activity) : ?>
-                        <div class="flex flex-row justify-between pl-[7px] pr-[45px] w-full h-[62px] rounded-[10px] bg-light border border-gray">
-                        <div class="flex flex-col">
-                            <h4 class="text-xl font-normal"><?php echo $activity['user_name'] ?></h4>
-                            <p class="text-xs font-light">Mengantarkan <?php echo $activity['waste_weight'] ?> Kg Sampah <?php echo $activity['waste_name'] ?></p>
+                        <div class="flex flex-row justify-between pl-2 pr-10 w-full h-auto py-[1px] rounded-[10px] bg-light border border-gray">
+                            <div class="flex flex-col mb-3">
+                                <h4 class="text-xl font-normal"><?php echo $activity['user_name'] ?></h4>
+                                <p class="text-xs font-light">Mengantarkan <?php echo $activity['waste_weight'] ?> kg sampah <?php echo strtolower($activity['waste_name']) ?></p>
+                            </div>
+        
+                            <!-- IF CONDITION -->
+                            <?php if ($activity['status'] == "accepted") : ?>
+                                <div class="bg-[#2ECC71] w-[159px] h-[27px] rounded-[10px] shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] border border-gray self-center text-center content-center">
+                                    <p class="text-xs font-light">Selesai</p>
+                                </div>
+                            <?php else : ?>
+                                <div class="bg-[#FFDE75] w-[159px] h-[27px] rounded-[10px] shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] border border-gray self-center text-center content-center">
+                                    <p class="text-xs font-light">Menunggu Verifikasi</p>
+                                </div>
+                            <?php endif; ?>
                         </div>
-    
-                        <!-- IF CONDITION -->
-                        <?php if ($activity['status'] == "accepted") : ?>
-                            <div class="bg-[#2ECC71] w-[159px] h-[27px] rounded-[10px] shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] border border-gray self-center text-center content-center">
-                                <p class="text-xs font-light">Selesai</p>
-                            </div>
-                        <?php else : ?>
-                            <div class="bg-[#FFDE75] w-[159px] h-[27px] rounded-[10px] shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] border border-gray self-center text-center content-center">
-                                <p class="text-xs font-light">Menunggu Verifikasi</p>
-                            </div>
-                        <?php endif; ?>
-                    </div>
                     <?php endforeach; ?>
-                <!-- </div> -->
+                </div>
              </div>
              <!-- RECENT ACTIVITY END -->
         </div>
