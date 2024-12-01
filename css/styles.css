@@ -9143,10 +9143,6 @@ html:has(.drawer-open.drawer-open){
   height: 2.25rem;
 }
 
-.h-\[1024px\]{
-  height: 1024px;
-}
-
 .h-\[144px\]{
   height: 144px;
 }
@@ -9185,6 +9181,10 @@ html:has(.drawer-open.drawer-open){
 
 .h-\[30px\]{
   height: 30px;
+}
+
+.h-\[314px\]{
+  height: 314px;
 }
 
 .h-\[32px\]{
@@ -9239,16 +9239,12 @@ html:has(.drawer-open.drawer-open){
   height: 100vh;
 }
 
-.h-\[200px\]{
-  height: 200px;
+.h-80{
+  height: 20rem;
 }
 
-.h-\[300px\]{
-  height: 300px;
-}
-
-.h-\[314px\]{
-  height: 314px;
+.h-72{
+  height: 18rem;
 }
 
 .max-h-0{
@@ -9281,6 +9277,10 @@ html:has(.drawer-open.drawer-open){
 
 .min-h-screen{
   min-height: 100vh;
+}
+
+.min-h-\[1024px\]{
+  min-height: 1024px;
 }
 
 .w-1\/2{
@@ -11422,6 +11422,11 @@ html:has(.drawer-open.drawer-open){
   padding-bottom: 0.75rem;
 }
 
+.py-5{
+  padding-top: 1.25rem;
+  padding-bottom: 1.25rem;
+}
+
 .py-6{
   padding-top: 1.5rem;
   padding-bottom: 1.5rem;
@@ -11462,14 +11467,9 @@ html:has(.drawer-open.drawer-open){
   padding-bottom: 75px;
 }
 
-.px-\[34px\]{
-  padding-left: 34px;
-  padding-right: 34px;
-}
-
-.py-5{
-  padding-top: 1.25rem;
-  padding-bottom: 1.25rem;
+.py-\[1px\]{
+  padding-top: 1px;
+  padding-bottom: 1px;
 }
 
 .pb-11{
@@ -11578,6 +11578,18 @@ html:has(.drawer-open.drawer-open){
 
 .pt-\[7px\]{
   padding-top: 7px;
+}
+
+.pl-2{
+  padding-left: 0.5rem;
+}
+
+.pb-3{
+  padding-bottom: 0.75rem;
+}
+
+.pt-\[1px\]{
+  padding-top: 1px;
 }
 
 .text-left{
