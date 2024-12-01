@@ -3,7 +3,7 @@
 $servername = "localhost";
 $username = "root"; // Your MySQL username
 $password = ""; // Your MySQL password
-$dbname = "db_sampah_2"; // Your database name
+$dbname = "db_sampah_4"; // Your database name
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
@@ -42,7 +42,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // Execute query
             if ($stmt->execute()) {
                 $success_message = "Registration successful! Redirecting to login...";
-                header("Refresh: 3; URL=signin.php"); // Redirect after 3 seconds
+                header("Refresh: 3; URL=signin.php"); 
             } else {
                 $error_message = "Error: " . $stmt->error;
             }

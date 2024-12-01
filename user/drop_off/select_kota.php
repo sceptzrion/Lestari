@@ -13,7 +13,7 @@ if (basename($_SERVER['PHP_SELF']) != 'landingpage.php') {
 $servername = "localhost";
 $username = "root";
 $password = "";
-$dbname = "db_sampah_2"; // Ganti dengan nama database Anda
+$dbname = "db_sampah_4"; // Ganti dengan nama database Anda
 
 $conn = new mysqli($servername, $username, $password, $dbname);
 
