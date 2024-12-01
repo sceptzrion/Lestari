@@ -89,7 +89,7 @@ if (!isset($_SESSION['admin_id'])) {
                             <img src="../../images/admin/Profile.png" class="w-[30px]" alt="Profile">
                             <p class="text-xl font-normal">Profile</p>
                         </a></li>
-                        <li><a class="flex flex-row gap-[10px]">
+                        <li><a href="./" class="flex flex-row gap-[10px]">
                             <img src="../../images/admin/Settings-profile.png" class="w-[30px]" alt="Settings">
                             <p class="text-xl font-normal">Pengaturan</p>
                         </a></li>

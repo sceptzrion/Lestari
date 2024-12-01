@@ -9239,12 +9239,8 @@ html:has(.drawer-open.drawer-open){
   height: 100vh;
 }
 
-.h-80{
-  height: 20rem;
-}
-
-.h-72{
-  height: 18rem;
+.h-\[400px\]{
+  height: 400px;
 }
 
 .max-h-0{
@@ -9253,6 +9249,10 @@ html:has(.drawer-open.drawer-open){
 
 .min-h-\[100px\]{
   min-height: 100px;
+}
+
+.min-h-\[1024px\]{
+  min-height: 1024px;
 }
 
 .min-h-\[120px\]{
@@ -9277,10 +9277,6 @@ html:has(.drawer-open.drawer-open){
 
 .min-h-screen{
   min-height: 100vh;
-}
-
-.min-h-\[1024px\]{
-  min-height: 1024px;
 }
 
 .w-1\/2{
@@ -9519,6 +9515,14 @@ html:has(.drawer-open.drawer-open){
   width: 100%;
 }
 
+.w-screen{
+  width: 100vw;
+}
+
+.w-\[29px\]{
+  width: 29px;
+}
+
 .min-w-\[100px\]{
   min-width: 100px;
 }
@@ -9569,6 +9573,10 @@ html:has(.drawer-open.drawer-open){
 
 .max-w-sm{
   max-width: 24rem;
+}
+
+.max-w-\[978px\]{
+  max-width: 978px;
 }
 
 .flex-1{
@@ -11447,6 +11455,11 @@ html:has(.drawer-open.drawer-open){
   padding-bottom: 2.25rem;
 }
 
+.py-\[1px\]{
+  padding-top: 1px;
+  padding-bottom: 1px;
+}
+
 .py-\[20px\]{
   padding-top: 20px;
   padding-bottom: 20px;
@@ -11465,11 +11478,6 @@ html:has(.drawer-open.drawer-open){
 .py-\[75px\]{
   padding-top: 75px;
   padding-bottom: 75px;
-}
-
-.py-\[1px\]{
-  padding-top: 1px;
-  padding-bottom: 1px;
 }
 
 .pb-11{
@@ -11502,6 +11510,10 @@ html:has(.drawer-open.drawer-open){
 
 .pb-\[75px\]{
   padding-bottom: 75px;
+}
+
+.pl-2{
+  padding-left: 0.5rem;
 }
 
 .pl-6{
@@ -11578,18 +11590,6 @@ html:has(.drawer-open.drawer-open){
 
 .pt-\[7px\]{
   padding-top: 7px;
-}
-
-.pl-2{
-  padding-left: 0.5rem;
-}
-
-.pb-3{
-  padding-bottom: 0.75rem;
-}
-
-.pt-\[1px\]{
-  padding-top: 1px;
 }
 
 .text-left{

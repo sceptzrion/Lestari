@@ -148,7 +148,7 @@ if ($conn) {
         <!-- SIDEBAR END -->
 
         <!-- CONTENT -->
-        <div class="bg-light-bg-content w-auto h-auto pb-11 px-5 pt-5">
+        <div class="bg-light-bg-content w-full h-auto pb-11 px-5 pt-5">
             <!-- HEADER -->
             <div class="flex flex-row justify-between bg-gradient-to-r from-[#1E5E3F] to-[#3FC483] w-full h-[88px] px-[23px] rounded-[20px] text-light font-extrabold text-[32px] items-center">
                 <h1>Penerimaan Sampah</h1>
@@ -163,11 +163,11 @@ if ($conn) {
                     <ul
                         tabindex="0"
                         class="menu menu-sm dropdown-content bg-light rounded-[10px] z-[1] mt-3 w-[233px] py-6 border border-gray shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] text-dark">
-                        <li><a class="flex flex-row gap-[10px] mb-[15px]">
+                        <li><a href="../pengaturan/profil.php" class="flex flex-row gap-[10px] mb-[15px]">
                             <img src="../../images/admin/Profile.png" class="w-[30px]" alt="Profile">
                             <p class="text-xl font-normal">Profile</p>
                         </a></li>
-                        <li><a class="flex flex-row gap-[10px]">
+                        <li><a href="../pengaturan/" class="flex flex-row gap-[10px]">
                             <img src="../../images/admin/Settings-profile.png" class="w-[30px]" alt="Settings">
                             <p class="text-xl font-normal">Pengaturan</p>
                         </a></li>
@@ -193,7 +193,7 @@ if ($conn) {
             <!-- BUTTONS END -->
 
             <!-- FORM -->
-             <div class="bg-light rounded-[10px] w-full h-auto shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] flex flex-col py-[35px] px-[41px] mt-[46px] text-dark">
+            <div class="bg-light rounded-[10px] w-full h-auto shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] flex flex-col py-[35px] px-[41px] mt-[46px] text-dark">
                 <h2 class="text-2xl font-bold text-center">Status Penerimaan Sampah</h2>
                 <form action="" class="flex flex-row text-base font-medium mt-[21px] w-full gap-[20px] content-start">
                     <select id="status-sampah" name="status-sampah" class="w-[223px] h-auto bg-light border border-gray shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] rounded-[5px] px-[9px] text-base font-medium">
@@ -212,65 +212,64 @@ if ($conn) {
                     <button class="btn btn-success bg-[#2E9E5D] rounded-[5px] w-[101px] h-[34px] text-base font-semibold text-light shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] border border-gray">Filter</button>
                 </form>
                 <div class="table mt-10">
-        <div class="overflow-x-auto">
-            <table class="table border-collapse border border-[#828282] text-center">
-                <!-- head -->
-                <thead class="bg-[#E5E5E5] text-dark text-sm font-bold">
-                    <tr class="border border-[#828282]">
-                        <th class="border border-[#828282]">ID</th>
-                        <th class="border border-[#828282]">Tanggal</th>
-                        <th class="border border-[#828282]">Nama User</th>
-                        <th class="border border-[#828282]">Jenis Sampah</th>
-                        <th class="border border-[#828282]">Berat</th>
-                        <th class="border border-[#828282]">Status</th>
-                        <th class="border border-[#828282]">Poin</th>
-                        <th class="border border-[#828282]">Aksi</th>
-                    </tr>
-                </thead>
-                <tbody class="font-medium">
-<?php if (count($rows) > 0): ?>
-    <?php foreach ($rows as $row): ?>
-        <tr>
-            <td class="border border-[#828282]"><?= htmlspecialchars($row['request_id']) ?></td>
-            <td class="border border-[#828282]"><?= htmlspecialchars($row['drop_off_request_created_at']) ?></td>
-            <td class="border border-[#828282]"><?= htmlspecialchars($row['user_name']) ?></td>
-            <td class="border border-[#828282]"><?= htmlspecialchars($row['waste_type']) ?></td>
-            <td class="border border-[#828282]"><?= htmlspecialchars($row['waste_weight']) ?> Kg</td>
-            <td class="border border-[#828282]">
-                <?php if ($row['status'] === 'Selesai'): ?>
-                    <p class="bg-[#299E63] text-light rounded-[10px] border border-gray w-auto h-auto text-sm font-medium text-center p-0.5">
-                        <?= htmlspecialchars($row['status']) ?>
-                    </p>
-                <?php else: ?>
-                    <p class="bg-[#FFDE75] rounded-[10px] border border-gray w-auto h-auto text-sm font-medium text-center p-0.5">
-                        <?= htmlspecialchars($row['status']) ?>
-                    </p>
-                <?php endif; ?>
-            </td>
-            <td class="border border-[#828282]"><?= htmlspecialchars($row['points_earned']) ?></td>
-            <td class="border border-[#828282]">
-                <div class="flex flex-row gap-[18px] justify-center items-center">
-                    <?php if ($row['status'] !== 'Selesai'): ?>
-                        <button onclick="location.href='add.php?id=<?= $row['request_id'] ?>'" class="bg-[#2ECC71] w-[72px] h-[25px] rounded-[10px] text-light text-[10px] font-semibold text-center">
-                            Hitung
-                        </button>
-                    <?php else: ?>
-                        <p>-</p>
-                    <?php endif; ?>
+                    <div class="overflow-auto h-[400px]">
+                        <table class="table border-collapse border border-[#828282] text-center">
+                            <!-- head -->
+                            <thead class="bg-[#E5E5E5] text-dark text-sm font-bold">
+                                <tr class="border border-[#828282]">
+                                    <th class="border border-[#828282]">ID</th>
+                                    <th class="border border-[#828282]">Tanggal</th>
+                                    <th class="border border-[#828282]">Nama User</th>
+                                    <th class="border border-[#828282]">Jenis Sampah</th>
+                                    <th class="border border-[#828282]">Berat</th>
+                                    <th class="border border-[#828282]">Status</th>
+                                    <th class="border border-[#828282]">Poin</th>
+                                    <th class="border border-[#828282]">Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody class="font-medium">
+                                <?php if (count($rows) > 0): ?>
+                                    <?php foreach ($rows as $row): ?>
+                                        <tr>
+                                            <td class="border border-[#828282]"><?= htmlspecialchars($row['request_id']) ?></td>
+                                            <td class="border border-[#828282]"><?= htmlspecialchars($row['drop_off_request_created_at']) ?></td>
+                                            <td class="border border-[#828282]"><?= htmlspecialchars($row['user_name']) ?></td>
+                                            <td class="border border-[#828282]"><?= htmlspecialchars($row['waste_type']) ?></td>
+                                            <td class="border border-[#828282]"><?= htmlspecialchars($row['waste_weight']) ?> Kg</td>
+                                            <td class="border border-[#828282]">
+                                                <?php if ($row['status'] === 'Selesai'): ?>
+                                                    <p class="bg-[#299E63] text-light rounded-[10px] border border-gray w-auto h-auto text-sm font-medium text-center p-0.5">
+                                                        <?= htmlspecialchars($row['status']) ?>
+                                                    </p>
+                                                <?php else: ?>
+                                                    <p class="bg-[#FFDE75] rounded-[10px] border border-gray w-auto h-auto text-sm font-medium text-center p-0.5">
+                                                        <?= htmlspecialchars($row['status']) ?>
+                                                    </p>
+                                                <?php endif; ?>
+                                            </td>
+                                            <td class="border border-[#828282]"><?= htmlspecialchars($row['points_earned']) ?></td>
+                                            <td class="border border-[#828282]">
+                                                <div class="flex flex-row gap-[18px] justify-center items-center">
+                                                    <?php if ($row['status'] !== 'Selesai'): ?>
+                                                        <button onclick="location.href='add.php?id=<?= $row['request_id'] ?>'" class="bg-[#2ECC71] w-[72px] h-[25px] rounded-[10px] text-light text-[10px] font-semibold text-center">
+                                                            Hitung
+                                                        </button>
+                                                    <?php else: ?>
+                                                        <p>-</p>
+                                                    <?php endif; ?>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    <?php endforeach; ?>
+                                <?php else: ?>
+                                    <tr>
+                                        <td colspan="8" class="border border-[#828282] text-center">Tidak ada data tersedia</td>
+                                    </tr>
+                                <?php endif; ?>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
-            </td>
-        </tr>
-    <?php endforeach; ?>
-<?php else: ?>
-    <tr>
-        <td colspan="8" class="border border-[#828282] text-center">Tidak ada data tersedia</td>
-    </tr>
-<?php endif; ?>
-</tbody>
-
-            </table>
-        </div>
-    </div>
 
             <!-- dialogs -->
             <dialog id="verified" class="modal">
