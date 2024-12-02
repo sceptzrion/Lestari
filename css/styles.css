@@ -9195,6 +9195,10 @@ html:has(.drawer-open.drawer-open){
   height: 34px;
 }
 
+.h-\[400px\]{
+  height: 400px;
+}
+
 .h-\[42px\]{
   height: 42px;
 }
@@ -9237,10 +9241,6 @@ html:has(.drawer-open.drawer-open){
 
 .h-screen{
   height: 100vh;
-}
-
-.h-\[400px\]{
-  height: 400px;
 }
 
 .max-h-0{
@@ -9515,14 +9515,6 @@ html:has(.drawer-open.drawer-open){
   width: 100%;
 }
 
-.w-screen{
-  width: 100vw;
-}
-
-.w-\[29px\]{
-  width: 29px;
-}
-
 .min-w-\[100px\]{
   min-width: 100px;
 }
@@ -9573,10 +9565,6 @@ html:has(.drawer-open.drawer-open){
 
 .max-w-sm{
   max-width: 24rem;
-}
-
-.max-w-\[978px\]{
-  max-width: 978px;
 }
 
 .flex-1{
@@ -11245,6 +11233,10 @@ html:has(.drawer-open.drawer-open){
   padding: 0.625rem;
 }
 
+.p-3{
+  padding: 0.75rem;
+}
+
 .p-4{
   padding: 1rem;
 }
@@ -12521,6 +12513,10 @@ html:has(.drawer-open.drawer-open){
 
   .md\:flex{
     display: flex;
+  }
+
+  .md\:min-h-\[300px\]{
+    min-height: 300px;
   }
 
   .md\:w-1\/2{
