@@ -11,9 +11,9 @@ if (!isset($_SESSION['admin_id'])) {
     exit();
 }
 
-
 // Inisialisasi variabel
 $rows = [];
+$error_message = "";
 
 // Periksa koneksi database
 if ($conn) {
@@ -23,70 +23,90 @@ if ($conn) {
     // Query untuk mendapatkan bank_id berdasarkan admin_id
     $query = "SELECT bank_id FROM admin WHERE admin_id = ?";
     $stmt = $conn->prepare($query);
-    $stmt->bind_param('i', $admin_id);
-    $stmt->execute();
-    $stmt->bind_result($bank_id);
-    $stmt->fetch();
-    $stmt->close();
+    if ($stmt) {
+        $stmt->bind_param('i', $admin_id);
+        $stmt->execute();
+        $stmt->bind_result($bank_id);
+        $stmt->fetch();
+        $stmt->close();
+    } else {
+        $error_message = "Kesalahan dalam query database.";
+    }
 
     // Jika bank_id ditemukan, ambil data permintaan sampah
-    if ($bank_id) {
-    // Query untuk menampilkan drop-off requests sesuai dengan bank_id admin
-    $query = "
-        SELECT 
-            dr.request_id, 
-            dr.drop_off_request_created_at, 
-            u.user_name, 
-            w.waste_name AS waste_type, 
-            wr.waste_weight, 
-            dr.status, 
-            wr.points_earned
-        FROM drop_off_request dr
-        JOIN users u ON dr.user_id = u.user_id
-        LEFT JOIN detail_request wr ON dr.request_id = wr.request_id
-        LEFT JOIN waste w ON wr.waste_id = w.waste_id  -- Bergabung dengan tabel waste untuk mendapatkan waste_name
-        WHERE dr.bank_id = ?  -- Hanya tampilkan drop-off requests sesuai dengan bank_id admin
-        ORDER BY dr.drop_off_request_created_at DESC
-    ";
+    if (!empty($bank_id)) {
+        // Persiapkan query utama
+        $query = "
+            SELECT 
+                dr.request_id, 
+                dr.drop_off_request_created_at, 
+                u.user_name, 
+                w.waste_name AS waste_type, 
+                wr.waste_weight, 
+                dr.status, 
+                wr.points_earned
+            FROM drop_off_request dr
+            JOIN users u ON dr.user_id = u.user_id
+            LEFT JOIN detail_request wr ON dr.request_id = wr.request_id
+            LEFT JOIN waste w ON wr.waste_id = w.waste_id
+            WHERE dr.bank_id = ?
+        ";
 
-    // Persiapkan query untuk menghindari SQL Injection
-    $stmt = mysqli_prepare($conn, $query);
-    mysqli_stmt_bind_param($stmt, 'i', $bank_id);
-    mysqli_stmt_execute($stmt);
-    $result = mysqli_stmt_get_result($stmt);
-
-        // Ambil semua data
-        while ($row = $result->fetch_assoc()) {
-            $rows[] = $row;
-        }
-        $stmt->close();
-
-        // Filter data berdasarkan parameter GET
+        // Filter tambahan berdasarkan parameter GET
+        $filters = [];
         if (!empty($_GET['status-sampah'])) {
-            $status_filter = $_GET['status-sampah'];
-            $rows = array_filter($rows, function ($row) use ($status_filter) {
-                return $row['status'] === $status_filter;
-            });
+            $filters[] = "dr.status = ?";
         }
-
         if (!empty($_GET['jenis-sampah'])) {
-            $jenis_filter = $_GET['jenis-sampah'];
-            $rows = array_filter($rows, function ($row) use ($jenis_filter) {
-                return $row['waste_type'] === $jenis_filter;
-            });
+            $filters[] = "w.waste_name = ?";
+        }
+        if (!empty($_GET['date'])) {
+            $filters[] = "DATE(dr.drop_off_request_created_at) = ?";
         }
 
-        if (!empty($_GET['date'])) {
-            $date_filter = $_GET['date'];
-            $rows = array_filter($rows, function ($row) use ($date_filter) {
-                return strpos($row['drop_off_request_created_at'], $date_filter) === 0;
-            });
+        if ($filters) {
+            $query .= " AND " . implode(" AND ", $filters);
+        }
+
+        $query .= " ORDER BY dr.drop_off_request_created_at DESC";
+
+        // Persiapkan query untuk menghindari SQL Injection
+        $stmt = $conn->prepare($query);
+
+        if ($stmt) {
+            // Bind parameter secara dinamis
+            $bind_types = "i";
+            $bind_params = [$bank_id];
+
+            if (!empty($_GET['status-sampah'])) {
+                $bind_types .= "s";
+                $bind_params[] = $_GET['status-sampah'];
+            }
+            if (!empty($_GET['jenis-sampah'])) {
+                $bind_types .= "s";
+                $bind_params[] = $_GET['jenis-sampah'];
+            }
+            if (!empty($_GET['date'])) {
+                $bind_types .= "s";
+                $bind_params[] = $_GET['date'];
+            }
+
+            // Bind parameter
+            $stmt->bind_param($bind_types, ...$bind_params);
+            $stmt->execute();
+
+            // Ambil hasil
+            $result = $stmt->get_result();
+            $rows = $result->fetch_all(MYSQLI_ASSOC);
+            $stmt->close();
+        } else {
+            $error_message = "Kesalahan dalam query filter.";
         }
     } else {
-        die("Bank ID tidak ditemukan. Silakan login kembali.");
+        $error_message = "Bank ID tidak ditemukan. Silakan login kembali.";
     }
 } else {
-    die("Koneksi database gagal. Periksa konfigurasi Anda.");
+    $error_message = "Koneksi database gagal. Periksa konfigurasi Anda.";
 }
 ?>
 
@@ -182,14 +202,14 @@ if ($conn) {
             <!-- HEADER END -->
             
             <!-- BUTTONS -->
-            <div class="flex flex-row gap-[22px] mt-[31px] ">
+            <!-- <div class="flex flex-row gap-[22px] mt-[31px] ">
                 <button class="btn btn-warning h-[42px] px-[27px] text-light rounded-[20px] border border-dark bg-[#F6AC0A] shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] font-medium text-xl" onclick="location.href='./'">
                     Lihat Status Penerimaan Sampah
                 </button>
                 <button class="btn btn-warning h-[42px] px-[27px] text-light rounded-[20px] border border-dark bg-[#F6AC0A] shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] font-medium text-xl" onclick="location.href='./add.php'">
                     Penerimaan Sampah
                 </button>
-            </div>
+            </div> -->
             <!-- BUTTONS END -->
 
             <!-- FORM -->
@@ -251,7 +271,7 @@ if ($conn) {
                                             <td class="border border-[#828282]">
                                                 <div class="flex flex-row gap-[18px] justify-center items-center">
                                                     <?php if ($row['status'] !== 'Selesai'): ?>
-                                                        <button onclick="location.href='add.php?id=<?= $row['request_id'] ?>'" class="bg-[#2ECC71] w-[72px] h-[25px] rounded-[10px] text-light text-[10px] font-semibold text-center">
+                                                        <button onclick="location.href='add.php?id=<?= isset($row['request_id']) ? $row['request_id'] : '' ?>'" class="bg-[#2ECC71] w-[72px] h-[25px] rounded-[10px] text-light text-[10px] font-semibold text-center">
                                                             Hitung
                                                         </button>
                                                     <?php else: ?>
