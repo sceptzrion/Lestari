@@ -74,7 +74,7 @@ if (basename($_SERVER['PHP_SELF']) != 'landingpage.php') {
         </div>
         <!-- BRAND LOGO -->
         <a href="." class="">
-          <img src="./images/Logo.png" alt="Logo Lestari">
+          <img src="../../images/Logo.png" alt="Logo Lestari">
         </a>
       </div>
 <!-- DESKTOP MODE -->

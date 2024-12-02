@@ -1,15 +1,22 @@
 <?php
-session_start();  // Start session untuk memeriksa status login
+session_start();
+require_once '../controller/config.php'; 
 
-// Halaman yang tidak memerlukan login (seperti landingpage.php)
-if (basename($_SERVER['PHP_SELF']) != 'landingpage.php') {
-    // Jika user belum login, arahkan ke halaman login atau lainnya
-    if (!isset($_SESSION['loggedin'])) {
-        header("Location: .././landingpage.php");
-        exit();  // Jangan lupa exit setelah redirect
-    }
+// Cek apakah pengguna sudah login
+if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
+    $user_id = $_SESSION['user_id']; // Ambil ID pengguna dari session
+    $stmt = $conn->prepare("SELECT user_name, user_email, user_phone_number, user_address, created_at, user_total_points FROM users WHERE user_id = ?");
+    $stmt->bind_param("i", $user_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $user = $result->fetch_assoc(); // Data pengguna disimpan di $user
+} else {
+    // Jika belum login, redirect ke halaman login
+    header("Location: signin.php");
+    exit();
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -39,8 +46,8 @@ if (basename($_SERVER['PHP_SELF']) != 'landingpage.php') {
     </script>
 </head>
 <body class="font-poppins">
-    <!-- NAVBAR -->
-    <div class="navbar bg-light h-20 pr-10 justify-between sticky top-0 z-50">
+      <!-- NAVBAR -->
+      <div class="navbar bg-light h-20 pr-10 justify-between sticky top-0 z-50">
    <!-- MOBILE SCREEN MODE -->
       <div class="navbar-start pl-[41px]">
         <div class="dropdown ">
@@ -74,14 +81,14 @@ if (basename($_SERVER['PHP_SELF']) != 'landingpage.php') {
         </div>
         <!-- BRAND LOGO -->
         <a href="." class="">
-          <img src="../images/Logo.png" alt="Logo Lestari">
+          <img src=".././images/Logo.png" alt="Logo Lestari">
         </a>
       </div>
 <!-- DESKTOP MODE -->
 <div class="navbar-center hidden lg:flex">
   <ul class="menu menu-horizontal px-1 text-dark text-base">
-    <li><a href="../landingpage.php">Home</a></li>
-    <li><a href="../user/tentang.php">Tentang kami</a></li>
+    <li><a href=".././landingpage.php">Home</a></li>
+    <li><a href=".././user/tentang.php">Tentang kami</a></li>
     <li>
       <details>
         <summary>Layanan</summary>
@@ -145,8 +152,8 @@ if (basename($_SERVER['PHP_SELF']) != 'landingpage.php') {
         </ul>
       </details>
     </li>
-    <li><a href="../user/blog.php">Blog</a></li>
-    <li><a href="../user/kontak_kami.php">Kontak Kami</a></li>
+    <li><a href="./blog.php">Blog</a></li>
+    <li><a href="./kontak_kami.php">Kontak Kami</a></li>
   </ul>
 </div>
 
@@ -163,8 +170,8 @@ if (basename($_SERVER['PHP_SELF']) != 'landingpage.php') {
                 </svg>
             </button>
             <div id="dropdownMenu" class="hidden absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-md z-10">
-                <a href="./user/profile.php" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Profil</a>
-                <a href="./backend/logout.php" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Logout</a>
+                <a href=".././user/profile.php" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Profil</a>
+                <a href=".././backend/logout.php" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Logout</a>
             </div>
         </div>
     <?php else: ?>
@@ -197,10 +204,7 @@ if (basename($_SERVER['PHP_SELF']) != 'landingpage.php') {
   <!-- Profile Section -->
   <main class="container mx-auto mt-8 px-4">
     <div class="bg-gradient-to-r from-green to-dark-green text-white rounded-lg p-6 text-center">
-      <div class="flex justify-center">
-        <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" alt="User" class="h-20 w-20 rounded-full bg-white p-2">
-      </div>
-      <h2 class="text-2xl font-bold mt-4">Ahmad Sudrajat</h2>
+      <h2 class="text-2xl font-bold mt-4"><?php echo htmlspecialchars($user['user_name']); ?></h2>
       <p class="text-sm">Aktif</p>
     </div>
 
@@ -211,7 +215,7 @@ if (basename($_SERVER['PHP_SELF']) != 'landingpage.php') {
         <p class="text-sm text-gray-600">Total Sampah</p>
       </div>
       <div class="bg-white rounded-lg shadow p-4 text-center">
-        <p class="text-lg font-bold text-green-600">250</p>
+        <p class="text-lg font-bold text-green-600"><?php echo htmlspecialchars($user['user_total_points']); ?></p>
         <p class="text-sm text-gray-600">Point Reward</p>
       </div>
       <div class="bg-white rounded-lg shadow p-4 text-center">
@@ -226,24 +230,24 @@ if (basename($_SERVER['PHP_SELF']) != 'landingpage.php') {
       <div class="space-y-4">
         <div>
           <label class="block text-gray-600 text-sm">Nama Lengkap</label>
-          <input type="text" value="Ahmad Sudrajat" class="w-full border border-gray-300 rounded px-4 py-2" readonly>
+          <input type="text" value="<?php echo htmlspecialchars($user['user_name']); ?>" class="w-full border border-gray-300 rounded px-4 py-2" readonly>
         </div>
         <div>
           <label class="block text-gray-600 text-sm">Email</label>
-          <input type="text" value="ahmad@gmail.com" class="w-full border border-gray-300 rounded px-4 py-2" readonly>
+          <input type="text" value="<?php echo htmlspecialchars($user['user_email']); ?>" class="w-full border border-gray-300 rounded px-4 py-2" readonly>
         </div>
         <div>
           <label class="block text-gray-600 text-sm">Nomor Telepon</label>
-          <input type="text" value="0812345678" class="w-full border border-gray-300 rounded px-4 py-2" readonly>
+          <input type="text" value="<?php echo htmlspecialchars($user['user_phone_number']); ?>" class="w-full border border-gray-300 rounded px-4 py-2" readonly>
         </div>
         <div>
           <label class="block text-gray-600 text-sm">Alamat</label>
-          <input type="text" value="JL. Sudirman No. 123, Jakarta Pusat" class="w-full border border-gray-300 rounded px-4 py-2" readonly>
+          <input type="text" value="<?php echo htmlspecialchars($user['user_address']); ?>" class="w-full border border-gray-300 rounded px-4 py-2" readonly>
         </div>
-        <div>
+        <!-- <div>
           <label class="block text-gray-600 text-sm">Bergabung Sejak</label>
-          <input type="text" value="Januari 2024" class="w-full border border-gray-300 rounded px-4 py-2" readonly>
-        </div>
+          <input type="text" value="<?php echo htmlspecialchars($user['created_at']); ?>" class="w-full border border-gray-300 rounded px-4 py-2" readonly>
+        </div> -->
       </div>
       <div class="flex justify-between mt-6">
         <button class="bg-gray-300 text-gray-800 px-4 py-2 rounded">Logout</button>
@@ -264,9 +268,10 @@ if (basename($_SERVER['PHP_SELF']) != 'landingpage.php') {
       <!-- Bagian Lestari -->
       <div class="text-left">
         <h4 class="font-bold">Lestari</h4>
-        <a href="./landingpage.php" class="block text-white hover:underline mb-1">Home</a>
-        <a href="./user/tentang.php" class="block text-white hover:underline mb-1">Tentang Kami</a>
-        <a href="" class="block text-white hover:underline mb-1">Layanan</a>
+        <a href=".././landingpage.php" class="block text-white hover:underline mb-1">Home</a>
+        <a href=".././user/tentang.php" class="block text-white hover:underline mb-1">Tentang Kami</a>
+        <a href=".././landingpage.php" class="block text-white hover:underline mb-1">Layanan</a>
+        <a href=".././user/blog.php" class="block text-white hover:underline mb-1">Blog</a>
       </div>
 
       <!-- Bagian Informasi -->
