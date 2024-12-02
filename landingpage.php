@@ -228,7 +228,7 @@ if (basename($_SERVER['PHP_SELF']) != 'landingpage.php') {
 
       <!-- Konten Teks -->
       <div class="w-full md:w-3/4 lg:w-2/3">
-        <h2 class="text-2xl md:text-3xl text-black font-bold mb-4 break-words">
+        <h2 class="text-2xl md:text-3xl text-black font-bold mb-4 break-words text-center md:text-left">
           Kelola Sampah dengan Drop Off, Dapatkan Poin Berharga
         </h2>
         <p class="text-black mb-6" style="text-align: justify;">
@@ -259,8 +259,8 @@ if (basename($_SERVER['PHP_SELF']) != 'landingpage.php') {
  <!-- Layanan Section -->
 <section class="py-16 bg-gray-100">
     <div class="container mx-auto px-4">
-        <h2 class="text-3xl text-black font-bold mb-2">Layanan</h2>
-        <p class="text-black mb-8">Revolusi daur ulang dari Mall Sampah untuk semua orang</p>
+        <h2 class="text-3xl text-black font-bold mb-2 md:text-left text-center">Layanan</h2>
+        <p class="text-black mb-8 md:text-left text-center">Revolusi daur ulang dari Mall Sampah untuk semua orang</p>
         <div class="text-black grid md:grid-cols-3 gap-6">
             <!-- Card Rewards -->
             <div class="block">
@@ -324,8 +324,8 @@ if (basename($_SERVER['PHP_SELF']) != 'landingpage.php') {
   <!-- Jenis sampah Section -->
   <section class="bg-white py-16">
     <div class="text-black container mx-auto px-4">
-      <h2 class="text-3xl font-bold mb-2">Jenis Sampah</h2>
-      <p class="mb-8">Lihat semua jenis sampah yang kami daur ulang.</p>
+      <h2 class="text-3xl font-bold mb-2 md:text-left text-center">Jenis Sampah</h2>
+      <p class="mb-8 md:text-left text-center">Lihat semua jenis sampah yang kami daur ulang.</p>
       <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
         <div class="bg-white p-4 rounded-lg shadow-md text-center">
           <div class="text-4xl mb-2">📄</div>
