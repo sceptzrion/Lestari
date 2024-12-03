@@ -194,7 +194,6 @@ if (!in_array(basename($_SERVER['PHP_SELF']), ['landingpage.php', 'tentang.php',
     </div>
   <!-- NAVBAR END -->
 
-
   <!-- Blog Section -->
   <main class="bg-white container mx-auto  px-12 py-12">
     <h1 class="text-3xl font-bold text-center text-[#1B5E20] mb-2">Blog Lestari</h1>

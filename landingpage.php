@@ -101,7 +101,7 @@ if (basename($_SERVER['PHP_SELF']) != 'landingpage.php') {
                 <!-- Marketplace -->
                 <li>
                     <?php if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true): ?>
-                    <button onclick="window.location.href='./marketplace.html'">
+                    <button onclick="window.location.href='../user/marketplace/marketplace.php'">
                         <p>Marketplace</p>
                     </button>
                     <?php else: ?>
@@ -175,7 +175,7 @@ if (basename($_SERVER['PHP_SELF']) != 'landingpage.php') {
           <!-- Marketplace -->
           <li>
             <?php if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true): ?>
-              <button onclick="window.location.href='./marketplace.html'" class="btn btn-success flex-grow shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] rounded-[20px] flex items-center justify-center px-4 py-2 gap-2 min-w-[120px] max-w-[200px]">
+              <button onclick="window.location.href='../user/marketplace/marketplace.php'" class="btn btn-success flex-grow shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] rounded-[20px] flex items-center justify-center px-4 py-2 gap-2 min-w-[120px] max-w-[200px]">
                 <img src="./images/marketplace.png" class="w-8 h-8" alt="">
                 <p>Marketplace</p>
               </button>
@@ -221,10 +221,6 @@ if (basename($_SERVER['PHP_SELF']) != 'landingpage.php') {
         </a>
     <?php endif; ?>
 </div>
-      <!-- Tombol Sign In dan Sign Up jika belum login -->
-      <!-- <a href="./user/signin.php" class="btn md:min-w-[100px] md:h-12 md:shadow-md md:rounded-full md:bg-gradient-to-r from-green to-dark-green md:text-sm md:border md:border-to-r md:from-green md:to-dark-green md:font-medium md:text-white md:text-center text-base bg-transparent text-sm text-[#1B5E20] border-0 shadow-none ">Sign In</a>
-      <a href="./user/signup.php" class="btn btn-outline md:min-w-[100px] md:h-12 md:shadow-md md:border border-to-r from-green to-dark-green md:rounded-full md:text-sm md:font-medium md:text-[#1B5E20] md:text-center text-base bg-transparent text-sm text-[#1B5E20] border-0 shadow-none whitespace-nowrap">Sign Up</a> -->
-
 <script>
     // Toggle dropdown visibility
     function toggleDropdown() {
@@ -243,6 +239,15 @@ if (basename($_SERVER['PHP_SELF']) != 'landingpage.php') {
     });
 </script>
     </div>
+  <!-- navbar -->
+  <script>
+        const hamburgerBtn = document.getElementById('hamburger-btn');
+        const dropdownMenu = document.getElementById('dropdown-menu');
+
+        hamburgerBtn.addEventListener('click', () => {
+            dropdownMenu.classList.toggle('hidden');
+        });
+    </script>
   <!-- NAVBAR END -->
 
 <!-- Hero Section -->
@@ -357,7 +362,7 @@ if (basename($_SERVER['PHP_SELF']) != 'landingpage.php') {
             <!-- Card Marketplace -->
             <div class="block">
                 <?php if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true): ?>
-                    <a href="./marketplace.html" class="block">
+                    <a href="../user/marketplace/marketplace.php" class="block">
                         <div class="bg-white p-6 rounded-lg shadow-md cursor-pointer hover:bg-green-200 h-full justify-between">
                             <h5 class="text-xl mb-2">🛍️ Marketplace</h5>
                             <p>Marketplace LESTARI menyediakan produk berkualitas daur ulang. Dukungan nyata untuk gerakan ramah lingkungan.</p>
@@ -488,15 +493,7 @@ if (basename($_SERVER['PHP_SELF']) != 'landingpage.php') {
             document.getElementById('loginModal').classList.add('hidden');
         }
     </script>
-    <!-- navbar -->
-    <script>
-        const hamburgerBtn = document.getElementById('hamburger-btn');
-        const dropdownMenu = document.getElementById('dropdown-menu');
-
-        hamburgerBtn.addEventListener('click', () => {
-            dropdownMenu.classList.toggle('hidden');
-        });
-    </script>
+    
 
 </body>
 </html>
