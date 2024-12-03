@@ -196,7 +196,7 @@ if (basename($_SERVER['PHP_SELF']) != 'landingpage.php') {
 
 
 <!-- Profile -->
-<div class="navbar-end ml-[5px] flex items-center gap-4">
+<div class="navbar-end ml-[5px] flex items-center gap-x-0 md:gap-4">
     <?php if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true): ?>
         <!-- Dropdown User -->
         <div class="relative">
@@ -212,11 +212,18 @@ if (basename($_SERVER['PHP_SELF']) != 'landingpage.php') {
             </div>
         </div>
     <?php else: ?>
-        <!-- Tombol Sign In dan Sign Up jika belum login -->
-        <a href="./user/signin.php" class="btn min-w-[100px] h-1 shadow-md rounded-full bg-gradient-to-r from-green to-dark-green text-sm border border-to-r from-green to-dark-green font-medium text-white text-center">Sign In</a>
-        <a href="./user/signup.php" class="btn btn-outline min-w-[100px] h-1 shadow-md border border-to-r from-green to-dark-green rounded-full text-sm font-medium text-[#1B5E20] text-center">Sign Up</a>
+      <!-- Tombol Sign In dan Sign Up jika belum login -->
+        <a href="./user/signin.php" class="btn md:min-w-[100px] md:h-12 md:shadow-md md:rounded-full md:bg-gradient-to-r from-green to-dark-green md:text-sm md:border md:border-to-r md:from-green md:to-dark-green md:font-medium md:text-white md:text-center text-base bg-transparent text-sm text-[#1B5E20] border-0 shadow-none">
+          Sign In
+        </a>
+        <a href="./user/signup.php" class="btn btn-outline md:min-w-[100px] md:h-12 md:shadow-md md:border border-to-r from-green to-dark-green md:rounded-full md:text-sm md:font-medium md:text-[#1B5E20] md:text-center text-base bg-transparent text-sm text-[#1B5E20] border-0 shadow-none whitespace-nowrap">
+          Sign Up
+        </a>
     <?php endif; ?>
 </div>
+      <!-- Tombol Sign In dan Sign Up jika belum login -->
+      <!-- <a href="./user/signin.php" class="btn md:min-w-[100px] md:h-12 md:shadow-md md:rounded-full md:bg-gradient-to-r from-green to-dark-green md:text-sm md:border md:border-to-r md:from-green md:to-dark-green md:font-medium md:text-white md:text-center text-base bg-transparent text-sm text-[#1B5E20] border-0 shadow-none ">Sign In</a>
+      <a href="./user/signup.php" class="btn btn-outline md:min-w-[100px] md:h-12 md:shadow-md md:border border-to-r from-green to-dark-green md:rounded-full md:text-sm md:font-medium md:text-[#1B5E20] md:text-center text-base bg-transparent text-sm text-[#1B5E20] border-0 shadow-none whitespace-nowrap">Sign Up</a> -->
 
 <script>
     // Toggle dropdown visibility
@@ -240,9 +247,9 @@ if (basename($_SERVER['PHP_SELF']) != 'landingpage.php') {
 
 <!-- Hero Section -->
 <section class="bg-gradient-to-r from-green to-dark-green text-white py-16 h-[450px] md:h-[590px]">
-  <div class="container mx-auto px-4 flex flex-col md:flex-row items-center md:justify-between h-full">
-    <div class="w-full md:w-1/2 text-center h-full flex flex-col justify-center items-center md:items-start md:text-left mb-8 md:mb-0">
-      <h1 class="text-4xl md:text-5xl font-bold leading-tight mb-4">
+  <div class="container mx-auto px-12 flex flex-col md:flex-row items-center md:justify-between h-full">
+  <div class="w-full md:w-1/2 text-center h-full flex flex-col justify-center items-center md:items-start md:text-left mb-4 md:mb-0">
+  <h1 class="text-4xl md:text-5xl font-bold leading-tight mb-4">
         Tukarkan Sampah, Dapatkan Hadiahnya
       </h1>
       <p class="text-lg md:text-xl">
@@ -264,40 +271,40 @@ if (basename($_SERVER['PHP_SELF']) != 'landingpage.php') {
   </div>
 </section>
 
-<!-- about section -->
-<section class="bg-white py-16">
-  <div class="container mx-auto px-4">
-    <div class="flex flex-col md:flex-row items-start gap-6 md:items-stretch">
+<section class="bg-white md:py-16 py-1">
+  <div class="container mx-auto px-12">
+    <div class="md:flex  md:flex-row items-start md:gap-6 md:items-stretch">
       <div class="md:w-1/2 text-center mb-8 md:mb-10 flex relative">
-        <!-- Gambar -->
-        <img src="./images/chart.png" alt="Chart" class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10">
+        <!-- Gambar (hanya muncul di desktop) -->
+        <img src="./images/chart.png" alt="Chart" 
+             class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 hidden md:block">
         
-        <!-- Kotak Hijau -->
-        <div class="bg-gradient-to-r from-green to-dark-green rounded-lg shadow-md w-full h-full min-h-[300px] max-w-full"></div>
+        <!-- Kotak Hijau (hanya muncul di desktop) -->
+        <div class="bg-gradient-to-r from-green to-dark-green rounded-lg shadow-md w-full h-full min-h-[300px] max-w-full hidden md:block"></div>
       </div>
 
       <!-- Konten Teks -->
-      <div class="w-full md:w-3/4 lg:w-2/3 md:pt-0 pt-6 mt-0">
-        <h2 class="text-2xl md:text-3xl text-black font-bold mb-4 break-words text-center md:text-left">
+      <div class="w-full md:w-3/4 w-2/3 md:pt-0 mb-8">
+        <h2 class="text-2xl md:text-3xl text-black font-bold mb-4 break-words md:text-left">
           Kelola Sampah dengan Drop Off, Dapatkan Poin Berharga
         </h2>
         <p class="text-black mb-6" style="text-align: justify;">
           LESTARI mengajak kamu untuk melakukan Drop Off sampah di bank sampah terdekat dan mendapatkan hadiah menarik. Pilah sampahmu (plastik, kertas, logam, atau organik), bawa ke bank sampah, kumpulkan poin, dan tukarkan dengan hadiah ramah lingkungan. Dengan Drop Off, kamu ikut berkontribusi menjaga bumi, mengurangi sampah di lingkungan, serta mendukung upaya daur ulang. Ayo, manfaatkan fitur ini dan jadikan bumi lebih bersih dan hijau!
         </p>
-        <div class="mb-6">
+        <div class="md:mb-6 mb-2">
           <div class="bg-gradient-to-r from-green to-dark-green text-white p-4 rounded-lg shadow-md flex justify-between">
-            <div class="text-center">
-              <h5 class="font-bold text-xl">2jt Kg+</h5>
-              <p>Sampah di Daur Ulang</p>
+            <div class="text-center text-l">
+              <h5 class="font-bold md:text-xl text-l">2jt Kg+</h5>
+              <p class="text-sm">Sampah di Daur Ulang</p>
             </div>
             <div class="text-center">
-              <h5 class="font-bold text-xl">15rb+</h5>
-              <p>Pengguna</p>
+              <h5 class="font-bold md:text-xl text-l">15rb+</h5>
+              <p class="text-sm">Pengguna</p>
             </div>
           </div>
         </div>
 
-        <a href="./user/tentang.php" class="mt-4 text-black font-bold cursor-pointer hover:text-green-700">
+        <a href="./user/tentang.php" class="md:mt-4 text-black font-bold cursor-pointer hover:text-green-700">
           Lihat Selengkapnya →
         </a>
       </div>
@@ -306,8 +313,8 @@ if (basename($_SERVER['PHP_SELF']) != 'landingpage.php') {
 </section>
 
  <!-- Layanan Section -->
-<section class="py-16 bg-gray-100">
-    <div class="container mx-auto px-4">
+<section class="md:py-16 py-8 bg-gray-100">
+    <div class="container mx-auto px-12">
         <h2 class="text-3xl text-black font-bold mb-2 md:text-left text-center">Layanan</h2>
         <p class="text-black mb-8 md:text-left text-center">Revolusi daur ulang dari Mall Sampah untuk semua orang</p>
         <div class="text-black grid md:grid-cols-3 gap-6">
@@ -372,7 +379,7 @@ if (basename($_SERVER['PHP_SELF']) != 'landingpage.php') {
 
   <!-- Jenis sampah Section -->
   <section class="bg-white py-16">
-    <div class="text-black container mx-auto px-4">
+    <div class="text-black container mx-auto px-12">
       <h2 class="text-3xl font-bold mb-2 md:text-left text-center">Jenis Sampah</h2>
       <p class="mb-8 md:text-left text-center">Lihat semua jenis sampah yang kami daur ulang.</p>
       <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
@@ -426,29 +433,34 @@ if (basename($_SERVER['PHP_SELF']) != 'landingpage.php') {
 
 <!-- Footer -->
 <footer class="bg-gradient-to-r from-green to-dark-green text-white py-7">
-  <div class="container mx-auto px-4 text-center">
-    <div class="flex justify-center">
+  <div class="container mx-auto px-12">
+    <!-- Logo -->
+    <div class="flex justify-center mb-6">
       <a href="./landingpage.php">
         <img src="./images/Logo.png" alt="Logo Lestari" class="h-20">
       </a>
     </div>
-    <div class="container mx-auto grid grid-cols-3 gap-4">
-    <!-- Bagian Lestari -->
-      <div class="text-left">
-        <h4 class="font-bold">Lestari</h4>
+    
+    <!-- Grid Container -->
+    <div class="grid grid-cols-2 md:grid-cols-3 gap-4 text-center md:text-left">
+      <!-- Bagian Lestari -->
+      <div class="text-left col-span-1 md:col-span-1">
+        <h4 class="font-bold mb-2">Lestari</h4>
         <a href="./landingpage.php" class="block text-white hover:underline mb-1">Home</a>
         <a href="./user/tentang.php" class="block text-white hover:underline mb-1">Tentang Kami</a>
         <a href="./landingpage.php" class="block text-white hover:underline mb-1">Layanan</a>
         <a href="./user/blog.php" class="block text-white hover:underline mb-1">Blog</a>
       </div>
-    <!-- Bagian Informasi -->
-      <div>
-        <h4 class="font-bold">Informasi</h4>
+
+      <!-- Bagian Informasi -->
+      <div class="text-right md:text-center col-span-1 md:col-span-1">
+        <h4 class="font-bold mb-2">Informasi</h4>
         <a href="./user/kontak_kami.php" class="block text-white hover:underline mb-1">Kontak Kami</a>
       </div>
-    <!-- Bagian Hubungi Kami -->
-      <div>
-        <h4 class="font-bold">Hubungi Kami</h4>
+
+      <!-- Bagian Hubungi Kami -->
+      <div class="col-span-2 md:col-span-1 text-center">
+        <h4 class="font-bold mb-2">Hubungi Kami</h4>
         <div class="flex justify-center space-x-4 mt-2">
           <a href="#"><img src="./images/user/sosmed/instagram.png" alt="Instagram"></a>
           <a href="#"><img src="./images/user/sosmed/fb.png" alt="Facebook"></a>

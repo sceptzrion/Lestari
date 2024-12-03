@@ -148,10 +148,9 @@ if (!in_array(basename($_SERVER['PHP_SELF']), ['landingpage.php', 'tentang.php',
 
 </script>
   <!-- NAVBAR END -->
-  <main class="container mx-auto px-4 py-8">
+  <main class="bg-white container mx-auto px-12 py-8">
     <h2 class="text-3xl text-[#1B5E20] font-bold mb-3">Kontak Kami</h2>
    <p class="text-gray-700 mb-6">Punya pertanyaan atau ingin berkolaborasi? Jangan ragu untuk menghubungi kami</p>
-
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
       <!-- Contact Information -->
       <div class="bg-green-100 p-6 rounded-lg shadow-lg">
@@ -175,19 +174,19 @@ if (!in_array(basename($_SERVER['PHP_SELF']), ['landingpage.php', 'tentang.php',
       </div>
 
       <!-- Contact Form -->
-      <div class="bg-white p-6 rounded-lg shadow-lg">
+      <div class="bg-white p-12 rounded-lg shadow-lg">
         <form action="#" method="POST" class="space-y-6">
           <div>
             <label for="name" class="block text-gray-700 font-semibold">Nama Lengkap</label>
-            <input type="text" id="name" name="name" class="w-full mt-2 border-gray-300 rounded-lg shadow-sm focus:ring-green-500 focus:border-green-500" placeholder="Masukkan nama lengkap Anda">
-          </div>
+            <input type="text" id="name" name="name" class="bg-white w-full py-2 pl-2 border border-gray-400 rounded-lg shadow-sm focus:ring-green-500 focus:border-green-500" placeholder="Masukkan nama lengkap Anda">
+            </div>
           <div>
             <label for="email" class="block text-gray-700 font-semibold">Email</label>
-            <input type="email" id="email" name="email" class="w-full mt-2 border-gray-300 rounded-lg shadow-sm focus:ring-green-500 focus:border-green-500" placeholder="Masukkan alamat email Anda">
+            <input type="email" id="email" name="email" class="bg-white w-full py-2 pl-2 border border-gray-400 rounded-lg shadow-sm focus:ring-green-500 focus:border-green-500" placeholder="Masukkan alamat email Anda">
           </div>
           <div>
             <label for="subject" class="block text-gray-700 font-semibold">Subjek</label>
-            <select id="subject" name="subject" class="w-full mt-2 border-gray-300 rounded-lg shadow-sm focus:ring-green-500 focus:border-green-500">
+            <select id="subject" name="subject" class="bg-white w-full py-2 pl-2 border border-gray-400 rounded-lg shadow-sm focus:ring-green-500 focus:border-green-500">
               <option>Pilih Subjek</option>
               <option>Kolaborasi</option>
               <option>Pertanyaan</option>
@@ -195,9 +194,9 @@ if (!in_array(basename($_SERVER['PHP_SELF']), ['landingpage.php', 'tentang.php',
           </div>
           <div>
             <label for="message" class="block text-gray-700 font-semibold">Pesan</label>
-            <textarea id="message" name="message" rows="5" class="w-full mt-2 border-gray-300 rounded-lg shadow-sm focus:ring-green-500 focus:border-green-500" placeholder="Tulis pesan Anda di sini..."></textarea>
+            <textarea id="message" name="message" rows="5" class="bg-white w-full py-2 pl-2 border border-gray-400 rounded-lg shadow-sm focus:ring-green-500 focus:border-green-500" placeholder="Tulis pesan Anda di sini..."></textarea>
           </div>
-          <button type="submit" class="w-full py-3 bg-gradient-to-r from-green to-dark-green text-white font-semibold rounded-lg shadow hover:bg-green-600">Kirim Pesan</button>
+          <button type="submit" class="bg-white w-full py-3 bg-gradient-to-r from-green to-dark-green text-white font-semibold rounded-lg shadow hover:bg-green-600">Kirim Pesan</button>
         </form>
       </div>
     </div>
@@ -205,7 +204,7 @@ if (!in_array(basename($_SERVER['PHP_SELF']), ['landingpage.php', 'tentang.php',
 
 <!-- footer -->
 <footer class="bg-gradient-to-r from-green to-dark-green text-white py-7">
-  <div class="container mx-auto px-4 text-center">
+  <div class="container mx-auto px-12 text-center">
     <div class="flex justify-center">
       <a href="../landingpage.php">
         <img src="../images/Logo.png" alt="Logo Lestari" class="h-20">
@@ -218,8 +217,8 @@ if (!in_array(basename($_SERVER['PHP_SELF']), ['landingpage.php', 'tentang.php',
         <a href="../landingpage.php" class="block text-white hover:underline mb-1">Home</a>
         <a href="../user/tentang.php" class="block text-white hover:underline mb-1">Tentang Kami</a>
         <a href="" class="block text-white hover:underline mb-1">Layanan</a>
+        <a href="../user/blog.php" class="block text-white hover:underline mb-1">Blog</a>
       </div>
-
       <!-- Bagian Informasi -->
       <div>
         <h4 class="font-bold">Informasi</h4>
@@ -239,6 +238,5 @@ if (!in_array(basename($_SERVER['PHP_SELF']), ['landingpage.php', 'tentang.php',
     </div>
   </div>
 </footer>
-    
 </body>
 </html>

@@ -196,7 +196,7 @@ if (!in_array(basename($_SERVER['PHP_SELF']), ['landingpage.php', 'tentang.php',
 
 
   <!-- Blog Section -->
-  <main class="container mx-auto mt-8 px-4 mb-6">
+  <main class="bg-white container mx-auto  px-12 py-12">
     <h1 class="text-3xl font-bold text-center text-[#1B5E20] mb-2">Blog Lestari</h1>
     <p class="text-center text-gray-700">Temukan artikel menarik seputar daur ulang, lingkungan, dan tips ramah lingkungan</p>
 
@@ -253,7 +253,7 @@ if (!in_array(basename($_SERVER['PHP_SELF']), ['landingpage.php', 'tentang.php',
 
   <!-- footer -->
 <footer class="bg-gradient-to-r from-green to-dark-green text-white py-7">
-  <div class="container mx-auto px-4 text-center">
+  <div class="container mx-auto px-12 text-center">
     <div class="flex justify-center">
       <a href="../landingpage.php">
         <img src="../images/Logo.png" alt="Logo Lestari" class="h-20">

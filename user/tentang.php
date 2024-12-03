@@ -149,7 +149,7 @@ if (!in_array(basename($_SERVER['PHP_SELF']), ['landingpage.php', 'tentang.php',
   <!-- About Section -->
    <!-- left section -->
   <section class="bg-white py-10">
-    <div class="container mx-auto px-4">
+    <div class="container mx-auto px-24">
       <div class="flex flex-col md:flex-row items-center">
         <div class="w-full">
           <h2 class="text-3xl text-[#1B5E20] font-bold mb-4 text-center">Tentang LESTARI</h2>
@@ -171,7 +171,7 @@ if (!in_array(basename($_SERVER['PHP_SELF']), ['landingpage.php', 'tentang.php',
               </div>
             </div>
            <!-- Right Section -->
-          <div class="w-full md:w-1/2 relative flex justify-center items-center">
+          <div class="w-full md:w-1/2 relative flex justify-end items-center">
             <!-- Kotak Hijau -->
             <div class="bg-gradient-to-r from-green to-dark-green rounded-lg shadow-md p-8 relative">
               <!-- Gambar -->
@@ -187,7 +187,7 @@ if (!in_array(basename($_SERVER['PHP_SELF']), ['landingpage.php', 'tentang.php',
 
  <!-- Card Section -->
 <section class="py-16 bg-gray-100">
-  <div class="container mx-auto px-4">
+  <div class="container mx-auto px-12">
     <div class="text-black grid md:grid-cols-3 gap-6">
       <!-- Visi Kami -->
       <div class="bg-white p-6 rounded-lg drop-shadow-xl">
@@ -219,7 +219,7 @@ if (!in_array(basename($_SERVER['PHP_SELF']), ['landingpage.php', 'tentang.php',
 
 <!-- card green -->
 <section class="py-16 bg-white">
-  <div class="container mx-auto px-4">
+  <div class="container mx-auto px-12">
     <div class="mb-6">
     <div class="bg-[#E8F5E9] text-white p-10 rounded-lg shadow-md flex justify-between">
       <div class=" text-center">
@@ -252,7 +252,7 @@ if (!in_array(basename($_SERVER['PHP_SELF']), ['landingpage.php', 'tentang.php',
 
   <!-- Footer -->
 <footer class="bg-gradient-to-r from-green to-dark-green text-white py-7">
-  <div class="container mx-auto px-4 text-center">
+  <div class="container mx-auto px-12 text-center">
     <div class="flex justify-center">
       <a href="../landingpage.php">
         <img src="../images/Logo.png" alt="Logo Lestari" class="h-20">
