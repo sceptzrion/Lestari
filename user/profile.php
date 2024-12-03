@@ -244,7 +244,6 @@ $drop_off = $result_drop_off->fetch_assoc();
   <!-- NAVBAR END -->
   <!-- Profile Section -->
   <main class="container mx-auto mt-8 px-4">
-<<<<<<< HEAD
         <div class="bg-gradient-to-r from-green to-dark-green text-white rounded-lg p-6 text-center">
             <div class="flex justify-center">
                 <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" alt="User" class="h-20 w-20 rounded-full bg-white p-2">
@@ -268,28 +267,6 @@ $drop_off = $result_drop_off->fetch_assoc();
                 <p class="text-sm text-gray-600">Drop Off</p>
             </div>
         </div>
-=======
-    <div class="bg-gradient-to-r from-green to-dark-green text-white rounded-lg p-6 text-center">
-      <h2 class="text-2xl font-bold mt-4"><?php echo htmlspecialchars($user['user_name']); ?></h2>
-      <p class="text-sm">Aktif</p>
-    </div>
-
-    <!-- Stats -->
-    <div class="mt-6 grid grid-cols-3 gap-4">
-      <div class="bg-white rounded-lg shadow p-4 text-center">
-        <p class="text-lg font-bold text-green-600">75 Kg</p>
-        <p class="text-sm text-gray-600">Total Sampah</p>
-      </div>
-      <div class="bg-white rounded-lg shadow p-4 text-center">
-        <p class="text-lg font-bold text-green-600"><?php echo htmlspecialchars($user['user_total_points']); ?></p>
-        <p class="text-sm text-gray-600">Point Reward</p>
-      </div>
-      <div class="bg-white rounded-lg shadow p-4 text-center">
-        <p class="text-lg font-bold text-green-600">5</p>
-        <p class="text-sm text-gray-600">Drop Off</p>
-      </div>
-    </div>
->>>>>>> 8a5b10a8a2d8b8bc5b7c66cf09cb3bc4b9abf4a0
 
         <!-- Personal Information -->
         <div class="mt-8 bg-white rounded-lg shadow p-6 mb-12">
@@ -311,24 +288,10 @@ $drop_off = $result_drop_off->fetch_assoc();
           <label class="block text-gray-600 text-sm">Alamat</label>
           <input type="text" value="<?php echo htmlspecialchars($user['user_address']); ?>" class="w-full border border-gray-300 rounded px-4 py-2" readonly>
         </div>
-<<<<<<< HEAD
         <div>
                     <label class="block text-gray-600 text-sm">Bergabung Sejak</label>
                     <input type="text" value="<?= date("F Y", strtotime($user['created_at'])); ?>" class="w-full border border-gray-300 rounded px-4 py-2" readonly>
   </div>
-=======
-        <!-- <div>
-          <label class="block text-gray-600 text-sm">Bergabung Sejak</label>
-          <input type="text" value="<?php echo htmlspecialchars($user['created_at']); ?>" class="w-full border border-gray-300 rounded px-4 py-2" readonly>
-        </div> -->
-      </div>
-      <div class="flex justify-between mt-6">
-        <button class="bg-gray-300 text-gray-800 px-4 py-2 rounded">Logout</button>
-        <button class="bg-gradient-to-r from-green to-dark-green text-white px-4 py-2 rounded">Pengaturan</button>
-      </div>
-    </div>
-  </main>
->>>>>>> 8a5b10a8a2d8b8bc5b7c66cf09cb3bc4b9abf4a0
 
             <div class="flex justify-between mt-6">
                 <button class="bg-gray-300 text-gray-800 px-4 py-2 rounded">Logout</button>
