@@ -357,47 +357,65 @@ if (basename($_SERVER['PHP_SELF']) != 'landingpage.php') {
 </section>
 
 
-  <!-- Jenis sampah Section -->
-  <section class="bg-white py-16">
-    <div class="text-black container mx-auto px-12">
-      <h2 class="text-3xl font-bold mb-2 md:text-left text-center">Jenis Sampah</h2>
-      <p class="mb-8 md:text-left text-center">Lihat semua jenis sampah yang kami daur ulang.</p>
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-        <div class="bg-white p-4 rounded-lg shadow-md text-center">
-          <div class="text-4xl mb-2">📄</div>
-          <p>Kertas</p>
-        </div>
-        <div class="bg-white p-4 rounded-lg shadow-md text-center">
-          <div class="text-4xl mb-2">🛢️</div>
-          <p>Plastik</p>
-        </div>
-        <div class="bg-white p-4 rounded-lg shadow-md text-center">
-          <div class="text-4xl mb-2">🥫</div>
-          <p>Aluminium</p>
-        </div>
-        <div class="bg-white p-4 rounded-lg shadow-md text-center">
-          <div class="text-4xl mb-2">🔩</div>
-          <p>Besi & Logam</p>
-        </div>
-        <div class="bg-white p-4 rounded-lg shadow-md text-center">
-          <div class="text-4xl mb-2">💻</div>
-          <p>Elektronik</p>
-        </div>
-        <div class="bg-white p-4 rounded-lg shadow-md text-center">
-          <div class="text-4xl mb-2">🍾</div>
-          <p>Botol Kaca</p>
-        </div>
-        <div class="bg-white p-4 rounded-lg shadow-md text-center">
-          <div class="text-4xl mb-2">🏷️</div>
-          <p>Merek</p>
-        </div>
-        <div class="bg-white p-4 rounded-lg shadow-md text-center">
-          <div class="text-4xl mb-2">🍃</div>
-          <p>Khusus</p>
-        </div>
-      </div>
+ <!-- Jenis sampah Section -->
+<section class="bg-white py-16">
+  <div class="text-black container mx-auto px-12">
+    <h2 class="text-3xl font-bold mb-2 md:text-left text-center">Jenis Sampah</h2>
+    <p class="mb-8 md:text-left text-center">Lihat semua jenis sampah yang kami daur ulang.</p>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+      
+      <!-- Kertas -->
+      <a href="./user/sampah/kertas.php" class="bg-white p-4 rounded-lg shadow-md text-center hover:bg-green-100 transition-all">
+        <div class="text-4xl mb-2">📄</div>
+        <p>Kertas</p>
+      </a>
+
+      <!-- Plastik -->
+      <a href="./user/sampah/plastik.php" class="bg-white p-4 rounded-lg shadow-md text-center hover:bg-green-100 transition-all">
+        <div class="text-4xl mb-2">🛢️</div>
+        <p>Plastik</p>
+      </a>
+
+      <!-- Aluminium -->
+      <a href="./user/sampah/aluminium.php" class="bg-white p-4 rounded-lg shadow-md text-center hover:bg-green-100 transition-all">
+        <div class="text-4xl mb-2">🥫</div>
+        <p>Aluminium</p>
+      </a>
+
+      <!-- Besi & Logam -->
+      <a href="./user/sampah/besi.php" class="bg-white p-4 rounded-lg shadow-md text-center hover:bg-green-100 transition-all">
+        <div class="text-4xl mb-2">🔩</div>
+        <p>Besi & Logam</p>
+      </a>
+
+      <!-- Elektronik -->
+      <a href="./user/sampah/elektronik.php" class="bg-white p-4 rounded-lg shadow-md text-center hover:bg-green-100 transition-all">
+        <div class="text-4xl mb-2">💻</div>
+        <p>Elektronik</p>
+      </a>
+
+      <!-- Botol Kaca -->
+      <a href="./user/sampah/botol.php" class="bg-white p-4 rounded-lg shadow-md text-center hover:bg-green-100 transition-all">
+        <div class="text-4xl mb-2">🍾</div>
+        <p>Botol Kaca</p>
+      </a>
+
+      <!-- Merek -->
+      <a href="./user/sampah/merek.php" class="bg-white p-4 rounded-lg shadow-md text-center hover:bg-green-100 transition-all">
+        <div class="text-4xl mb-2">🏷️</div>
+        <p>Merek</p>
+      </a>
+
+      <!-- Khusus -->
+      <a href="./user/sampah/khusus.php" class="bg-white p-4 rounded-lg shadow-md text-center hover:bg-green-100 transition-all">
+        <div class="text-4xl mb-2">🍃</div>
+        <p>Khusus</p>
+      </a>
+
     </div>
-  </section>
+  </div>
+</section>
+
 
 <!-- modal  -->
 <div id="loginModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
