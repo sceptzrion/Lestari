@@ -1,3 +1,14 @@
+<?php
+session_start();
+
+if (!in_array(basename($_SERVER['PHP_SELF']), ['landingpage.php', 'tentang.php', 'blog.php'])) {
+  if (!isset($_SESSION['loggedin'])) {
+      header("Location: landingpage.php");
+      exit();
+  }
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

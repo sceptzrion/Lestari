@@ -10,6 +10,13 @@ if (!isset($_SESSION['admin_id'])) {
     exit();
 }
 
+// Mengambil data dari tabel redeem
+$sql = "SELECT redeem.*, rewards.reward_name, rewards.reward_points_required
+        FROM redeem
+        JOIN rewards ON redeem.reward_id = rewards.reward_id
+        ORDER BY redeem.created_at DESC";
+$redeem_result = $conn->query($sql);
+
 ?>
 
 <!DOCTYPE html>
@@ -130,16 +137,18 @@ if (!isset($_SESSION['admin_id'])) {
                             </tr>
                             </thead>
                             <tbody class="font-medium">
-                            <!-- row 1 -->
-                            <tr>
-                                <td class="border border-[#828282]">10-11-2024</td>
-                                <td class="border border-[#828282]">001</td>
-                                <td class="border border-[#828282]">Kantong Plastik Sampah Roll</td>
-                                <td class="border border-[#828282]">1000</td>
-                                <td class="border border-[#828282]">
+                                 <?php while ($row = $redeem_result->fetch_assoc()): ?>
+                                 <tr>
+                                    <td class="border border-[#828282]"><?= date("d/m/Y", strtotime($row['created_at'])); ?></td>
+                                    <td class="border border-[#828282]"><?= htmlspecialchars($row['user_id']); ?></td>
+                                    <td class="border border-[#828282]"><?= htmlspecialchars($row['reward_name']); ?></td>
+                                    <td class="border border-[#828282]"><?= htmlspecialchars($row['reward_points_required']); ?></td>
+                                    <td class="border border-[#828282]"><?= htmlspecialchars(ucfirst($row['status'])); ?></td>
+                                    <td class="border border-[#828282]">
                                     <img src="../../images/admin/checklist-redeem.png" class="w-[30px] justify-self-center" alt="success">
                                 </td>
-                            </tr>
+                                 </tr>
+                                 <?php endwhile; ?>
                             </tbody>
                         </table>
                     </div>

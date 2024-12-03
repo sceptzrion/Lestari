@@ -10,6 +10,30 @@ if (!isset($_SESSION['admin_id'])) {
     exit();
 }
 
+// Proses tambah reward
+$message = '';
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['add_reward'])) {
+    $reward_name = $_POST['reward_name'];
+    $reward_description = $_POST['reward_description'];
+    $reward_points_required = $_POST['reward_points_required'];
+
+    // Proses upload gambar
+    $target_dir = "uploads/";
+    $reward_image = $target_dir . basename($_FILES['reward_image']['name']);
+    if (move_uploaded_file($_FILES['reward_image']['tmp_name'], $reward_image)) {
+        $sql = "INSERT INTO rewards (reward_name, reward_description, reward_points_required, reward_image) VALUES (?, ?, ?, ?)";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("ssis", $reward_name, $reward_description, $reward_points_required, $reward_image);
+        if ($stmt->execute()) {
+            $message = "Reward berhasil ditambahkan.";
+        } else {
+            $message = "Gagal menambahkan reward: " . $stmt->error;
+        }
+        $stmt->close();
+    } else {
+        $message = "Gagal mengupload gambar.";
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -120,28 +144,34 @@ if (!isset($_SESSION['admin_id'])) {
                     </a>
                     <div class="flex flex-col gap-[5px] text-center mx-auto">
                         <h1 class="text-dark font-bold text-[24px] text-center">Tambah Produk Baru</h1>
+
+                         <!-- Pesan -->
+                        <?php if (!empty($message)): ?>
+                                <div class="alert alert-info"><?= htmlspecialchars($message); ?></div>
+                        <?php endif; ?>
+
                     </div>
                 </div>
-                <form action="" class="flex flex-col gap-9 mt-[26px] text-dark">
+                <form method="POST" enctype="multipart/form-data" class="flex flex-col gap-9 mt-[26px] text-dark">
                     <div class="flex flex-col gap-[10px] w-1/2">
-                        <label for="nama-produk" class="px-1 text-2xl font-medium">Nama Produk</label>
-                        <input type="text" id="nama-produk" name="nama-produk" placeholder="Masukkan nama produk" class="w-full h-12 bg-light border border-gray px-3 font-light shadow-[0px_4px_4px_rgba(0,0,0,0.25)]">
+                        <label for="reward_name" class="px-1 text-2xl font-medium">Nama Produk</label>
+                        <input type="text" id="reward_name" name="reward_name" placeholder="Masukkan nama produk" class="w-full h-12 bg-light border border-gray px-3 font-light shadow-[0px_4px_4px_rgba(0,0,0,0.25)]" required>
                     </div>
                     <div class="flex flex-col gap-[10px] w-full">
-                        <label for="jumlah-poin" class="px-1 text-2xl font-medium">Jumlah Poin</label>
-                        <input type="number" id="jumlah-poin" name="jumlah-poin" min="0" placeholder="Masukkan Jumlah Poin" class="w-full h-12 bg-light border border-gray px-3 font-light dark:[color-scheme:light] shadow-[0px_4px_4px_rgba(0,0,0,0.25)]">
+                        <label for="reward_points_required"  class="px-1 text-2xl font-medium">Jumlah Poin</label>
+                        <input type="number" id="reward_points_required" name="reward_points_required"  min="0" placeholder="Masukkan Jumlah Poin" class="w-full h-12 bg-light border border-gray px-3 font-light dark:[color-scheme:light] shadow-[0px_4px_4px_rgba(0,0,0,0.25)]" required>
                     </div>
                     <div class="flex flex-col gap-[10px] w-full">
-                        <label for="stok-produk" class="px-1 text-2xl font-medium">Stok</label>
-                        <input type="number" id="stok-produk" name="stok-produk" min="0" placeholder="Masukkan Stok Produk" class="w-full h-12 bg-light border border-gray px-3 font-light dark:[color-scheme:light] shadow-[0px_4px_4px_rgba(0,0,0,0.25)]">
+                        <label for="reward_description" class="px-1 text-2xl font-medium">Deskripsi</label>
+                        <input type="text" id="reward_description"  name="reward_description"  min="0" placeholder="Masukkan Deskripsi Produk" class="w-full h-12 bg-light border border-gray px-3 font-light dark:[color-scheme:light] shadow-[0px_4px_4px_rgba(0,0,0,0.25)]" required>
                     </div>
                     <div class="flex flex-col gap-[10px] w-full">
-                        <label for="judul-video" class="px-1 text-2xl font-medium">Gambar Produk</label>
+                        <label for="reward_image" class="px-1 text-2xl font-medium">Gambar Produk</label>
                         <div class="w-full min-h-[204px] bg-light border-dashed border-2 border-gray py-3 font-light flex items-center justify-center">
-                            <input type="file" name="myImage" accept="image/*" class="file-input file-input-ghost dark:[color-scheme:light]">
+                            <input type="file" name="reward_image" accept="image/*" class="file-input file-input-ghost dark:[color-scheme:light]">
                         </div>
                     </div>
-                    <button onclick="getElementById('added').showModal()" class="btn btn-success bg-[#2ECC71] rounded-[20px] w-[327px] self-center text-xl font-extrabold text-light shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] border border-gray">Upload Produk</button>
+                    <button type="submit" name="add_reward" onclick="getElementById('added').showModal()" class="btn btn-success bg-[#2ECC71] rounded-[20px] w-[327px] self-center text-xl font-extrabold text-light shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] border border-gray">Upload Produk</button>
                 </form>
              </section>
 
