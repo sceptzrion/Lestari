@@ -10,6 +10,36 @@ if (basename($_SERVER['PHP_SELF']) != 'landingpage.php') {
     }
 }
 ?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="../../css/styles.css" rel="stylesheet">
+    <title>Lestari - Marketplace</title>
+      <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            'poppins': ['Poppins', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+    <script>
+        function toggleModal() {
+            const modal = document.getElementById("location-modal");
+            modal.classList.toggle("hidden");
+        }
+    </script>
+</head>
+<body class="font-poppins">
  <!-- NAVBAR -->
  <div class="navbar bg-light h-20 pr-10 justify-between sticky top-0 z-50">
    <!-- MOBILE SCREEN MODE -->
@@ -45,7 +75,7 @@ if (basename($_SERVER['PHP_SELF']) != 'landingpage.php') {
         </div>
         <!-- BRAND LOGO -->
         <a href="." class="">
-          <img src="./images/Logo.png" alt="Logo Lestari">
+          <img src="../../images/Logo.png" alt="Logo Lestari">
         </a>
       </div>
 <!-- DESKTOP MODE -->
@@ -165,4 +195,3 @@ if (basename($_SERVER['PHP_SELF']) != 'landingpage.php') {
 </script>
     </div>
   <!-- NAVBAR END -->
-   

@@ -86,18 +86,7 @@ if (basename($_SERVER['PHP_SELF']) != 'landingpage.php') {
                     </button>
                     <?php endif; ?>
                 </li>
-                <!-- Tutorial -->
-                <li>
-                    <?php if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true): ?>
-                    <button onclick="window.location.href='./user/tutorial/tutorial.php'" >
-                        <p>Tutorial</p>
-                    </button>
-                    <?php else: ?>
-                    <button onclick="showModal()" >
-                        <p>Tutorial</p>
-                    </button>
-                    <?php endif; ?>
-                </li>
+                
                 <!-- Marketplace -->
                 <li>
                     <?php if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true): ?>
@@ -158,20 +147,7 @@ if (basename($_SERVER['PHP_SELF']) != 'landingpage.php') {
               </button>
             <?php endif; ?>
           </li>
-          <!-- Tutorial -->
-          <li>
-            <?php if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true): ?>
-              <button onclick="window.location.href='./user/tutorial/tutorial.php'" class="btn btn-success flex-grow shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] rounded-[20px] flex items-center justify-center px-4 py-2 gap-2 min-w-[120px] max-w-[200px]">
-                <img src="./images/Vector.png" class="w-6 h-6" alt="">
-                <p>Tutorial</p>
-              </button>
-            <?php else: ?>
-              <button onclick="showModal()" class="btn btn-success flex-grow shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] rounded-[20px] flex items-center justify-center px-4 py-2 gap-2 min-w-[120px] max-w-[200px]">
-                <img src="./images/Vector.png" class="w-6 h-6" alt="">
-                <p>Tutorial</p>
-              </button>
-            <?php endif; ?>
-          </li>
+         
           <!-- Marketplace -->
           <li>
             <?php if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true): ?>
@@ -283,12 +259,11 @@ if (basename($_SERVER['PHP_SELF']) != 'landingpage.php') {
         <!-- Gambar (hanya muncul di desktop) -->
         <img src="./images/chart.png" alt="Chart" 
              class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 hidden md:block">
-        
         <!-- Kotak Hijau (hanya muncul di desktop) -->
         <div class="bg-gradient-to-r from-green to-dark-green rounded-lg shadow-md w-full h-full min-h-[300px] max-w-full hidden md:block"></div>
       </div>
 
-      <!-- Konten Teks -->
+<!-- Konten Teks -->
       <div class="w-full md:w-3/4 w-2/3 md:pt-0 mb-8">
         <h2 class="text-2xl md:text-3xl text-black font-bold mb-4 break-words md:text-left">
           Kelola Sampah dengan Drop Off, Dapatkan Poin Berharga
@@ -317,12 +292,12 @@ if (basename($_SERVER['PHP_SELF']) != 'landingpage.php') {
   </div>
 </section>
 
- <!-- Layanan Section -->
+<!-- Layanan Section -->
 <section class="md:py-16 py-8 bg-gray-100">
     <div class="container mx-auto px-12">
         <h2 class="text-3xl text-black font-bold mb-2 md:text-left text-center">Layanan</h2>
         <p class="text-black mb-8 md:text-left text-center">Revolusi daur ulang dari Mall Sampah untuk semua orang</p>
-        <div class="text-black grid md:grid-cols-3 gap-6">
+        <div class="text-black grid md:grid-cols-2 gap-6">
             <!-- Card Rewards -->
             <div class="block">
                 <?php if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true): ?>
@@ -342,7 +317,7 @@ if (basename($_SERVER['PHP_SELF']) != 'landingpage.php') {
                 <?php endif; ?>
             </div>
             <!-- Card Tutorial -->
-            <div class="block">
+            <!-- <div class="block">
                 <?php if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true): ?>
                     <a href="./user/tutorial/tutorial.php" class="block">
                         <div class="bg-white p-6 rounded-lg shadow-md cursor-pointer hover:bg-green-200 h-full justify-between">
@@ -358,7 +333,7 @@ if (basename($_SERVER['PHP_SELF']) != 'landingpage.php') {
                         </div>
                     </a>
                 <?php endif; ?>
-            </div>
+            </div> -->
             <!-- Card Marketplace -->
             <div class="block">
                 <?php if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true): ?>

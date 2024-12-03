@@ -30,9 +30,6 @@ if (!in_array(basename($_SERVER['PHP_SELF']), ['landingpage.php', 'tentang.php',
       }
     }
   </script>
-
-
-
 </head>
 <body class="font-poppins">
 <!-- NAVBAR -->
@@ -86,18 +83,7 @@ if (!in_array(basename($_SERVER['PHP_SELF']), ['landingpage.php', 'tentang.php',
                     </button>
                     <?php endif; ?>
                 </li>
-                <!-- Tutorial -->
-                <li>
-                    <?php if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true): ?>
-                    <button onclick="window.location.href='../user/tutorial/tutorial.php'" >
-                        <p>Tutorial</p>
-                    </button>
-                    <?php else: ?>
-                    <button onclick="showModal()" >
-                        <p>Tutorial</p>
-                    </button>
-                    <?php endif; ?>
-                </li>
+               
                 <!-- Marketplace -->
                 <li>
                     <?php if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true): ?>
@@ -158,20 +144,7 @@ if (!in_array(basename($_SERVER['PHP_SELF']), ['landingpage.php', 'tentang.php',
               </button>
             <?php endif; ?>
           </li>
-          <!-- Tutorial -->
-          <li>
-            <?php if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true): ?>
-              <button onclick="window.location.href='../user/tutorial/tutorial.php'" class="btn btn-success flex-grow shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] rounded-[20px] flex items-center justify-center px-4 py-2 gap-2 min-w-[120px] max-w-[200px]">
-                <img src="../images/Vector.png" class="w-6 h-6" alt="">
-                <p>Tutorial</p>
-              </button>
-            <?php else: ?>
-              <button onclick="showModal()" class="btn btn-success flex-grow shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] rounded-[20px] flex items-center justify-center px-4 py-2 gap-2 min-w-[120px] max-w-[200px]">
-                <img src="../images/Vector.png" class="w-6 h-6" alt="">
-                <p>Tutorial</p>
-              </button>
-            <?php endif; ?>
-          </li>
+          
           <!-- Marketplace -->
           <li>
             <?php if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true): ?>
