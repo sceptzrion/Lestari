@@ -248,12 +248,14 @@ $conn->close();
             <p class="text-sm text-gray-700"><?= htmlspecialchars($row['bank_address']); ?></p>
             <p class="text-sm text-gray-700">Jam Operasional: <?= htmlspecialchars($row['bank_operating_hours']); ?></p>
     <div class="flex justify-center mt-4">
-      <button 
-        onclick="redirectToLocation()" 
+    <form action="invoice.php" method="POST">
+    <button 
+        type="submit"
         class="bg-gradient-to-r from-green to-dark-green text-white px-6 py-2 rounded-full shadow hover:bg-green-600 focus:outline-none flex items-center gap-2">
         <img src="../../images/user/recycle.png" alt="Recycle Icon" class="w-6 h-6">
         Drop Off
-      </button>
+    </button>
+</form>
     </div>
     <script>
       function redirectToLocation() {

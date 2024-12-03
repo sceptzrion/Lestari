@@ -1,14 +1,79 @@
 <?php
-session_start();  // Start session untuk memeriksa status login
+// Start session
+session_start();  
 
-// Halaman yang tidak memerlukan login (seperti landingpage.php)
-if (basename($_SERVER['PHP_SELF']) != 'landingpage.php') {
-    // Jika user belum login, arahkan ke halaman login atau lainnya
-    if (!isset($_SESSION['loggedin'])) {
-        header("Location: ../../landingpage.php");
-        exit();  // Jangan lupa exit setelah redirect
-    }
+// Check if the user is logged in
+if (!isset($_SESSION['loggedin'])) {
+    header("Location: ../../landingpage.php");
+    exit();
 }
+
+// Database connection
+$host = 'localhost'; // Change to your database host
+$username = 'root';  // Change to your database username
+$password = '';      // Change to your database password
+$database = 'db_sampah_4'; // Change to your database name
+
+// Create connection
+$conn = new mysqli($host, $username, $password, $database);
+
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+// Get user_id from session
+$user_id = $_SESSION['user_id']; // Ensure 'user_id' is stored in session
+
+// Simulate bank_id (you can replace this with actual logic to fetch bank_id)
+$bank_id = 1; // Example static bank_id
+
+// Insert new drop-off request if not already inserted in this session
+if (!isset($_SESSION['drop_off_inserted'])) {
+    // Insert data into drop_off_request table
+    $stmt = $conn->prepare("INSERT INTO drop_off_request (user_id, bank_id, status, drop_off_request_created_at, drop_off_request_updated_at) VALUES (?, ?, 'waiting', NOW(), NOW())");
+    $stmt->bind_param("ii", $user_id, $bank_id);
+
+    if ($stmt->execute()) {
+        $request_id = $stmt->insert_id; // Get the last inserted request_id
+        $_SESSION['drop_off_inserted'] = true; // Set flag session
+        $_SESSION['request_id'] = $request_id; // Save request_id to session
+    } else {
+        die("Error inserting data: " . $stmt->error);
+    }
+
+    $stmt->close();
+} else {
+    // Retrieve request_id from session
+    $request_id = $_SESSION['request_id'];
+}
+
+// Fetch the updated drop-off request data from the database
+$query = "SELECT d.request_id, d.status, d.drop_off_request_created_at, u.user_email, 
+                 COALESCE(SUM(dr.waste_weight * w.waste_point), 0) AS total_points, 
+                 GROUP_CONCAT(w.waste_name SEPARATOR ', ') AS waste_names,
+                 GROUP_CONCAT(CONCAT(w.waste_name, ' ', dr.waste_weight, 'kg') SEPARATOR ', ') AS waste_details
+          FROM drop_off_request d
+          INNER JOIN users u ON d.user_id = u.user_id
+          LEFT JOIN detail_request dr ON d.request_id = dr.request_id
+          LEFT JOIN waste w ON dr.waste_id = w.waste_id
+          WHERE d.request_id = ?
+          GROUP BY d.request_id";
+
+$stmt = $conn->prepare($query);
+$stmt->bind_param("i", $request_id);
+$stmt->execute();
+$result = $stmt->get_result();
+
+// Check if there's any result
+if ($result->num_rows > 0) {
+    $request = $result->fetch_assoc();
+} else {
+    die('Error: No drop-off request found for this user.');
+}
+
+// Store total points in a variable for use in the modal
+$total_points = $request['total_points'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -74,7 +139,7 @@ if (basename($_SERVER['PHP_SELF']) != 'landingpage.php') {
         </div>
         <!-- BRAND LOGO -->
         <a href="." class="">
-          <img src="./images/Logo.png" alt="Logo Lestari">
+          <img src="../../images/Logo.png" alt="Logo Lestari">
         </a>
       </div>
 <!-- DESKTOP MODE -->
@@ -195,42 +260,45 @@ if (basename($_SERVER['PHP_SELF']) != 'landingpage.php') {
     </div>
   <!-- NAVBAR END -->
 
-    <!-- Content -->
+    <!-- Main Content -->
     <main class="container mx-auto px-4 py-12">
         <div class="bg-white rounded-xl shadow-lg p-6 relative">
             <!-- Icon and Heading -->
             <div class="text-center">
                 <img src="../../images/Logo admin.png" alt="Icon" class="mx-auto mb-4">
             </div>
-            <!-- Date and Email -->
-            <div class="flex justify-between items-center text-sm text-green-600 font-semibold">
-                  <span>12 Nov 2024 · 15:32</span>
-                  <span>ahmad@gmail.com</span>
+             <!-- Status Section -->
+            <div class="bg-gray-50 rounded-lg shadow p-4 mb-4">
+                <h3 class="text-green-700 font-semibold text-sm">Status Verifikasi</h3>
+                <p class="text-sm text-gray-600">
+                    Status: 
+                    <span class="<?= $request['status'] === 'waiting' ? 'text-yellow-500' : 'text-green-600'; ?> font-bold">
+                        <?= htmlspecialchars(ucfirst($request['status'])); ?>
+                    </span>
+                </p>
             </div>
+            <!-- Drop Off Information -->
+            <div class="flex justify-between items-center text-sm text-green-600 font-semibold">
+                <span><?= date('d M Y · H:i', strtotime($request['drop_off_request_created_at'])); ?></span>
+                <span><?= htmlspecialchars($request['user_email']); ?></span>
+                </div>
                 <hr class="border-dashed border-green-600 my-4">
-
-            <h2 class="text-lg font-semibold text-green-700 flex items-center justify-start">
-                    <span class="text-green-500 material-icons mr-2"></span>
-                    Penukaran Sampah
-            </h2>
-        
             <!-- Drop Off Details -->
             <div class="mt-6 space-y-4">
                 <div>
                     <h3 class="text-green-700 font-semibold text-sm">DROP OFF - LESTARI</h3>
                     <div class="bg-gray-50 rounded-lg shadow p-4 flex justify-between items-center">
                         <span>Total Poin</span>
-                        <span class="text-green-600 font-bold">$ 100</span>
+                        <span class="text-green-600 font-bold">$<?= number_format($request['total_points']); ?></span>
                     </div>
                 </div>
                 <div>
                     <h3 class="text-green-700 font-semibold text-sm">DETAIL DROP OFF</h3>
                     <div class="bg-gray-50 rounded-lg shadow p-4">
-                        <span>Kertas 10kg</span>
+                        <span><?= htmlspecialchars($request['waste_details']); ?></span>
                     </div>
                 </div>
             </div>
-
             <!-- Button -->
             <div class="mt-8 text-center">
                 <button onclick="toggleModal()" class="bg-gradient-to-r from-green to-dark-green text-white font-semibold rounded-full px-6 py-2 hover:bg-green-700">
@@ -239,7 +307,7 @@ if (basename($_SERVER['PHP_SELF']) != 'landingpage.php') {
             </div>
         </div>
     </main>
-     <!-- Modal -->
+    <!-- Modal -->
     <div id="rewardModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50 hidden">
      <div class="bg-white rounded-lg p-6 w-80 text-center relative">
       <div class="absolute top-2 right-2 cursor-pointer" onclick="toggleModal()">
@@ -297,6 +365,17 @@ if (basename($_SERVER['PHP_SELF']) != 'landingpage.php') {
     </div>
   </div>
 </footer>
+        </div>
+    </main>
     
+    <!-- Footer -->
+    <!-- Insert your footer code here -->
+
 </body>
 </html>
+
+
+<?php
+// Close the database connection
+$conn->close();
+?>

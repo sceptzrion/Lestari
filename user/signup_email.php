@@ -25,6 +25,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $phone = $_POST['phone'];
     $address = $_POST['address'];
     
+    // Current timestamp
+    $created_at = date("Y-m-d H:i:s");
+    $updated_at = date("Y-m-d H:i:s");
+
     // Validate form data
     if (empty($name) || empty($email) || empty($password) || empty($address) || empty($phone)) {
         $error_message = "All fields are required!";
@@ -33,11 +37,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
         // Prepare SQL query
-        $stmt = $conn->prepare("INSERT INTO users (user_name, user_email, user_password, user_phone_number, user_address) VALUES (?, ?, ?, ?, ?)");
+        $stmt = $conn->prepare("INSERT INTO users (user_name, user_email, user_password, user_phone_number, user_address, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?)");
         if (!$stmt) {
             $error_message = "Query preparation failed: " . $conn->error;
         } else {
-            $stmt->bind_param("sssss", $name, $email, $hashed_password, $phone, $address);
+            $stmt->bind_param("sssssss", $name, $email, $hashed_password, $phone, $address, $created_at, $updated_at);
 
             // Execute query
             if ($stmt->execute()) {
@@ -56,6 +60,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 // Close the database connection
 $conn->close();
 ?>
+
+
+<!DOCTYPE html>
+<html lang="en">
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -94,9 +103,8 @@ $conn->close();
                     <img src="../images/Logo.png" alt="Lestari Logo" class="mx-auto">
                 </div>
 
-                <!-- Title -->
+                <!-- Success/Error Messages -->
                 <h1 class="text-2xl font-bold text-lg-start text-gray-800 mb-8">Sign Up to Lestari</h1>
-
                 <?php if (!empty($error_message)) : ?>
                     <div class="mb-4 p-3 bg-red-100 text-red-700 rounded">
                         <?php echo $error_message; ?>

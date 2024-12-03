@@ -1,14 +1,61 @@
 <?php
-session_start();  // Start session untuk memeriksa status login
+// Start session
+session_start();  
 
-// Halaman yang tidak memerlukan login (seperti landingpage.php)
-if (basename($_SERVER['PHP_SELF']) != 'landingpage.php') {
-    // Jika user belum login, arahkan ke halaman login atau lainnya
-    if (!isset($_SESSION['loggedin'])) {
-        header("Location: .././landingpage.php");
-        exit();  // Jangan lupa exit setelah redirect
-    }
+// Check if the user is logged in
+if (!isset($_SESSION['loggedin'])) {
+    header("Location: ../../landingpage.php");
+    exit();
 }
+
+// Database connection
+$host = 'localhost'; // Change to your database host
+$username = 'root';  // Change to your database username
+$password = '';      // Change to your database password
+$database = 'db_sampah_4'; // Change to your database name
+
+// Create connection
+$conn = new mysqli($host, $username, $password, $database);
+
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+// Ambil user_id dari sesi
+$user_id = $_SESSION['user_id']; // Pastikan user_id disimpan di sesi saat login
+
+// Query untuk mengambil data pengguna
+$sql_user = "SELECT * FROM users WHERE user_id = ?";
+$stmt = $conn->prepare($sql_user);
+$stmt->bind_param("i", $user_id);
+$stmt->execute();
+$result_user = $stmt->get_result();
+$user = $result_user->fetch_assoc();
+
+// Ambil total berat sampah (total waste weight)
+$sql_waste = "SELECT SUM(waste_weight) AS total_weight FROM detail_request WHERE request_id IN (SELECT request_id FROM drop_off_request WHERE user_id = ?)";
+$stmt_waste = $conn->prepare($sql_waste);
+$stmt_waste->bind_param("i", $user_id);
+$stmt_waste->execute();
+$result_waste = $stmt_waste->get_result();
+$waste = $result_waste->fetch_assoc();
+
+// Ambil total poin yang sudah dikumpulkan
+$sql_points = "SELECT SUM(points_earned) AS total_points FROM detail_request WHERE request_id IN (SELECT request_id FROM drop_off_request WHERE user_id = ?)";
+$stmt_points = $conn->prepare($sql_points);
+$stmt_points->bind_param("i", $user_id);
+$stmt_points->execute();
+$result_points = $stmt_points->get_result();
+$points = $result_points->fetch_assoc();
+
+// Ambil jumlah total drop off yang sudah dilakukan
+$sql_drop_off = "SELECT COUNT(request_id) AS total_drop_off FROM drop_off_request WHERE user_id = ?";
+$stmt_drop_off = $conn->prepare($sql_drop_off);
+$stmt_drop_off->bind_param("i", $user_id);
+$stmt_drop_off->execute();
+$result_drop_off = $stmt_drop_off->get_result();
+$drop_off = $result_drop_off->fetch_assoc();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -196,62 +243,62 @@ if (basename($_SERVER['PHP_SELF']) != 'landingpage.php') {
   <!-- NAVBAR END -->
   <!-- Profile Section -->
   <main class="container mx-auto mt-8 px-4">
-    <div class="bg-gradient-to-r from-green to-dark-green text-white rounded-lg p-6 text-center">
-      <div class="flex justify-center">
-        <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" alt="User" class="h-20 w-20 rounded-full bg-white p-2">
-      </div>
-      <h2 class="text-2xl font-bold mt-4">Ahmad Sudrajat</h2>
-      <p class="text-sm">Aktif</p>
-    </div>
+        <div class="bg-gradient-to-r from-green to-dark-green text-white rounded-lg p-6 text-center">
+            <div class="flex justify-center">
+                <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" alt="User" class="h-20 w-20 rounded-full bg-white p-2">
+            </div>
+            <h2 class="text-2xl font-bold mt-4"><?= htmlspecialchars($user['user_name']); ?></h2>
+            <p class="text-sm">Aktif</p>
+        </div>
 
-    <!-- Stats -->
-    <div class="mt-6 grid grid-cols-3 gap-4">
-      <div class="bg-white rounded-lg shadow p-4 text-center">
-        <p class="text-lg font-bold text-green-600">75 Kg</p>
-        <p class="text-sm text-gray-600">Total Sampah</p>
-      </div>
-      <div class="bg-white rounded-lg shadow p-4 text-center">
-        <p class="text-lg font-bold text-green-600">250</p>
-        <p class="text-sm text-gray-600">Point Reward</p>
-      </div>
-      <div class="bg-white rounded-lg shadow p-4 text-center">
-        <p class="text-lg font-bold text-green-600">5</p>
-        <p class="text-sm text-gray-600">Drop Off</p>
-      </div>
-    </div>
+        <!-- Stats -->
+        <div class="mt-6 grid grid-cols-3 gap-4">
+            <div class="bg-white rounded-lg shadow p-4 text-center">
+                <p class="text-lg font-bold text-green-600"><?= $waste['total_weight']; ?> Kg</p>
+                <p class="text-sm text-gray-600">Total Sampah</p>
+            </div>
+            <div class="bg-white rounded-lg shadow p-4 text-center">
+                <p class="text-lg font-bold text-green-600"><?= $points['total_points']; ?> Poin</p>
+                <p class="text-sm text-gray-600">Point Reward</p>
+            </div>
+            <div class="bg-white rounded-lg shadow p-4 text-center">
+                <p class="text-lg font-bold text-green-600"><?= $drop_off['total_drop_off']; ?></p>
+                <p class="text-sm text-gray-600">Drop Off</p>
+            </div>
+        </div>
 
-    <!-- Personal Information -->
-    <div class="mt-8 bg-white rounded-lg shadow p-6 mb-12">
+        <!-- Personal Information -->
+        <div class="mt-8 bg-white rounded-lg shadow p-6 mb-12">
       <h3 class="text-xl font-bold text-gray-800 mb-4">Informasi Pribadi</h3>
       <div class="space-y-4">
         <div>
           <label class="block text-gray-600 text-sm">Nama Lengkap</label>
-          <input type="text" value="Ahmad Sudrajat" class="w-full border border-gray-300 rounded px-4 py-2" readonly>
+          <input type="text" value="<?php echo htmlspecialchars($user['user_name']); ?>" class="w-full border border-gray-300 rounded px-4 py-2" readonly>
         </div>
         <div>
           <label class="block text-gray-600 text-sm">Email</label>
-          <input type="text" value="ahmad@gmail.com" class="w-full border border-gray-300 rounded px-4 py-2" readonly>
+          <input type="text" value="<?php echo htmlspecialchars($user['user_email']); ?>" class="w-full border border-gray-300 rounded px-4 py-2" readonly>
         </div>
         <div>
           <label class="block text-gray-600 text-sm">Nomor Telepon</label>
-          <input type="text" value="0812345678" class="w-full border border-gray-300 rounded px-4 py-2" readonly>
+          <input type="text" value="<?php echo htmlspecialchars($user['user_phone_number']); ?>" class="w-full border border-gray-300 rounded px-4 py-2" readonly>
         </div>
         <div>
           <label class="block text-gray-600 text-sm">Alamat</label>
-          <input type="text" value="JL. Sudirman No. 123, Jakarta Pusat" class="w-full border border-gray-300 rounded px-4 py-2" readonly>
+          <input type="text" value="<?php echo htmlspecialchars($user['user_address']); ?>" class="w-full border border-gray-300 rounded px-4 py-2" readonly>
         </div>
         <div>
-          <label class="block text-gray-600 text-sm">Bergabung Sejak</label>
-          <input type="text" value="Januari 2024" class="w-full border border-gray-300 rounded px-4 py-2" readonly>
-        </div>
-      </div>
-      <div class="flex justify-between mt-6">
-        <button class="bg-gray-300 text-gray-800 px-4 py-2 rounded">Logout</button>
-        <button class="bg-gradient-to-r from-green to-dark-green text-white px-4 py-2 rounded">Pengaturan</button>
-      </div>
-    </div>
-  </main>
+                    <label class="block text-gray-600 text-sm">Bergabung Sejak</label>
+                    <input type="text" value="<?= date("F Y", strtotime($user['created_at'])); ?>" class="w-full border border-gray-300 rounded px-4 py-2" readonly>
+  </div>
 
+            <div class="flex justify-between mt-6">
+                <button class="bg-gray-300 text-gray-800 px-4 py-2 rounded">Logout</button>
+                <button class="bg-gradient-to-r from-green to-dark-green text-white px-4 py-2 rounded">Pengaturan</button>
+            </div>
+        </div>
+    </main>
+    
 <!-- Footer -->
 <footer class="bg-gradient-to-r from-green to-dark-green text-white py-7">
   <div class="container mx-auto px-4 text-center">
@@ -264,9 +311,10 @@ if (basename($_SERVER['PHP_SELF']) != 'landingpage.php') {
       <!-- Bagian Lestari -->
       <div class="text-left">
         <h4 class="font-bold">Lestari</h4>
-        <a href="./landingpage.php" class="block text-white hover:underline mb-1">Home</a>
-        <a href="./user/tentang.php" class="block text-white hover:underline mb-1">Tentang Kami</a>
-        <a href="" class="block text-white hover:underline mb-1">Layanan</a>
+        <a href=".././landingpage.php" class="block text-white hover:underline mb-1">Home</a>
+        <a href=".././user/tentang.php" class="block text-white hover:underline mb-1">Tentang Kami</a>
+        <a href=".././landingpage.php" class="block text-white hover:underline mb-1">Layanan</a>
+        <a href=".././user/blog.php" class="block text-white hover:underline mb-1">Blog</a>
       </div>
 
       <!-- Bagian Informasi -->
@@ -289,6 +337,5 @@ if (basename($_SERVER['PHP_SELF']) != 'landingpage.php') {
   </div>
 </footer>
 
-    
 </body>
 </html>
