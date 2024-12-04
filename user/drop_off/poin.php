@@ -277,13 +277,20 @@ $requests_result = $stmt->get_result();
 
 
  <!-- section -->
+<<<<<<< HEAD
 <!-- section -->
+=======
+>>>>>>> 9a79ae23c3f8087453fb2d94c73afa26a6abc356
 <section class="bg-gray-100 w-full min-h-screen">
-  <main class="container mx-auto px-4 py-6">
+  <main class="container mx-auto md:px-16 px-6 py-6">
     <div class="flex justify-between items-center mb-4">
       <span class="inline-flex justify-between w-2/4 bg-gradient-to-r from-green to-dark-green text-white rounded-full px-4 py-2 text-sm">
         <span class="font-bold">Poin Reward</span>
+<<<<<<< HEAD
         <span class="font-bold"><?= number_format($total_points); ?> Poin</span>
+=======
+        <span class="font-bold ">$100</span>
+>>>>>>> 9a79ae23c3f8087453fb2d94c73afa26a6abc356
       </span>
       <a href="../drop_off/tukar_poin.php">
         <button class="bg-gradient-to-r from-green to-dark-green text-white px-6 py-2 rounded-full shadow hover:bg-green-600 focus:outline-none flex items-center gap-2">
@@ -296,6 +303,7 @@ $requests_result = $stmt->get_result();
     <div class="bg-white rounded-lg shadow-lg p-6">
       <h1 class="text-2xl font-bold text-green-700 text-center mb-4">Riwayat Drop Off</h1>
       <div class="space-y-4">
+<<<<<<< HEAD
         <?php while ($request = $requests_result->fetch_assoc()) : ?>
           <div class="flex justify-between items-center bg-gray-100 rounded-lg p-4 shadow">
             <div class="flex items-center space-x-4">
@@ -306,10 +314,39 @@ $requests_result = $stmt->get_result();
                 <h2 class="font-bold text-[#1B5E20]">Reward Drop Off</h2>
                 <p class="text-sm text-gray-500"><?= date('d M Y, H:i', strtotime($request['drop_off_request_created_at'])); ?></p>
               </div>
+=======
+        <!-- Reward Items -->
+        <div class="flex justify-between items-center bg-gray-100 rounded-lg p-4 shadow">
+          <div class="flex items-center space-x-4">
+          <div class="md:w-12 md:h-12 w-10 h-10 bg-[#1B5E20] rounded-full flex items-center justify-center mb-3">
+          <img src="../../images/user/recycle.png" class="w-7" alt="Recycle Icon">
+        </div>
+        <div>
+              <h2 class="font-bold text-[#1B5E20]">Reward Drop Off</h2>
+              <p class="text-sm text-gray-500">15 Nov 2024, 12:56</p>
+>>>>>>> 9a79ae23c3f8087453fb2d94c73afa26a6abc356
             </div>
             <span class="text-xl font-bold text-green-700"><?= number_format($request['points']); ?> Poin</span>
           </div>
+<<<<<<< HEAD
         <?php endwhile; ?>
+=======
+          <span class="md:text-xl text-l font-bold text-green-700">$100</span>
+        </div>
+        <div class="flex justify-between items-center bg-gray-100 rounded-lg p-4 shadow">
+          <div class="flex items-center space-x-4">
+          <div class="md:w-12 md:h-12 w-10 h-10 bg-[#1B5E20] rounded-full flex items-center justify-center mb-3">
+          <img src="../../images/user/recycle.png" class="w-7" alt="Recycle Icon">
+        </div>
+        <div>
+              <h2 class="font-bold text-[#1B5E20]">Reward Drop Off</h2>
+              <p class="text-sm text-gray-500">15 Nov 2024, 12:56</p>
+            </div>
+          </div>
+          <span class="md:text-xl text-l font-bold text-green-700">$200</span>
+        </div>
+        <!-- Add more reward items as needed -->
+>>>>>>> 9a79ae23c3f8087453fb2d94c73afa26a6abc356
       </div>
     </div>
   </main>
