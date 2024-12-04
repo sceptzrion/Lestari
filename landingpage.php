@@ -227,22 +227,22 @@ if (basename($_SERVER['PHP_SELF']) != 'landingpage.php') {
   <!-- NAVBAR END -->
 
 <!-- Hero Section -->
-<section class="bg-gradient-to-r from-green to-dark-green text-white  h-[450px] md:h-auto">
-  <div class="container mx-auto px-12 md:px-0 md:pl-12 md:gap-5 flex flex-col md:flex-row items-center md:justify-between h-full">
-  <div class="w-full md:w-1/2 text-center h-full flex flex-col justify-center items-center md:items-start md:text-left mb-4 md:mb-0">
-  <h1 class="text-4xl md:text-5xl md:max-w-[610px] font-bold leading-tight mb-4">
+<section class="bg-gradient-to-r from-green to-dark-green text-white h-auto">
+  <div class="container mx-auto md:px-0 md:pl-12 md:gap-5 flex flex-col md:flex-row items-center md:justify-between h-full">
+    <div class="w-full md:w-1/2 text-center py-10 md:py-0 h-full flex flex-col justify-center items-center md:items-start md:text-left">
+      <h1 class="text-2xl md:text-3xl lg:text-4xl xl:text-5xl max-w-80 md:max-w-[610px] lg:max-w-[500px] xl:max-w-[600px] md:text-left font-bold leading-tight md:leading-normal lg:leading-relaxed xl:leading-relaxed mb-4">
         Tukarkan Sampah, Dapatkan Hadiahnya
       </h1>
       <p class="text-lg md:text-xl">
         #TukarSampahUntukKebaikan
       </p>
     </div>
-    <div class="md:w-1/2 md:absolute md:right-0 md:top-[80px] flex flex-end">
+    <div class="md:w-1/2 md:right-0 md:top-[80px] flex flex-end">
       <!-- gambar mobile -->
       <img 
         src="./images/hero-banner-mobile.png" 
         alt="Hero Image Mobile" 
-        class="hidden rounded-lg max-w-full h-auto object-cover">
+        class="rounded-lg max-w-full h-auto object-cover md:hidden">
         <!-- gambar dekstop -->
       <img 
         src="./images/hero-banner.png" 
@@ -252,20 +252,20 @@ if (basename($_SERVER['PHP_SELF']) != 'landingpage.php') {
   </div>
 </section>
 
-<section class="bg-white md:py-16 py-1">
+<section class="bg-white md:py-16 py-10">
   <div class="container mx-auto px-12">
-    <div class="md:flex  md:flex-row items-start md:gap-6 md:items-stretch">
-      <div class="md:w-1/2 text-center mb-8 md:mb-10 flex relative">
-        <!-- Gambar (hanya muncul di desktop) -->
-        <img src="./images/chart.png" alt="Chart" 
-             class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 hidden md:block">
+    <div class="md:flex md:flex-row items-start md:gap-6 md:items-stretch">
+      <div class="md:w-1/2 text-center place-content-center md:place-content-baseline mb-8 md:mb-10 flex relative">
         <!-- Kotak Hijau (hanya muncul di desktop) -->
-        <div class="bg-gradient-to-r from-green to-dark-green rounded-lg shadow-md w-full h-full min-h-[300px] max-w-full hidden md:block"></div>
+        <div class="bg-gradient-to-r from-green to-dark-green rounded-lg shadow-md w-auto h-60 md:w-full lg:h-full aspect-square lg:aspect-auto p-4 max-w-full items-center flex justify-center">
+          <img src="./images/chart.png" alt="Chart" 
+        class="h-full">
+        </div>
       </div>
 
 <!-- Konten Teks -->
-      <div class="w-full md:w-3/4 w-2/3 md:pt-0 mb-8">
-        <h2 class="text-2xl md:text-3xl text-black font-bold mb-4 break-words md:text-left">
+      <div class="w-full md:w-3/4 md:pt-0">
+        <h2 class="text-base sm:text-xl lg:text-3xl max-w-72 sm:max-w-96 md:max-w-full place-self-center md:place-self-auto text-black font-bold mb-4 break-words text-center md:text-justify">
           Kelola Sampah dengan Drop Off, Dapatkan Poin Berharga
         </h2>
         <p class="text-black mb-6" style="text-align: justify;">
@@ -295,8 +295,8 @@ if (basename($_SERVER['PHP_SELF']) != 'landingpage.php') {
 <!-- Layanan Section -->
 <section class="md:py-16 py-8 bg-gray-100">
     <div class="container mx-auto px-12">
-        <h2 class="text-3xl text-black font-bold mb-2 md:text-left text-center">Layanan</h2>
-        <p class="text-black mb-8 md:text-left text-center">Revolusi daur ulang dari Mall Sampah untuk semua orang</p>
+        <h2 class="text-3xl text-black font-bold mb-2 text-center">Layanan</h2>
+        <p class="text-black mb-8 text-center">Revolusi daur ulang dari Mall Sampah untuk semua orang</p>
         <div class="text-black grid md:grid-cols-2 gap-6">
             <!-- Card Rewards -->
             <div class="block">
@@ -360,8 +360,8 @@ if (basename($_SERVER['PHP_SELF']) != 'landingpage.php') {
  <!-- Jenis sampah Section -->
 <section class="bg-white py-16">
   <div class="text-black container mx-auto px-12">
-    <h2 class="text-3xl font-bold mb-2 md:text-left text-center">Jenis Sampah</h2>
-    <p class="mb-8 md:text-left text-center">Lihat semua jenis sampah yang kami daur ulang.</p>
+    <h2 class="text-3xl font-bold mb-2 text-center">Jenis Sampah</h2>
+    <p class="mb-8 text-center">Lihat semua jenis sampah yang kami daur ulang.</p>
     <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
       
       <!-- Kertas -->
