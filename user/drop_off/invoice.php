@@ -1,11 +1,13 @@
 <?php
-// Start session
-session_start();  
+session_start();  // Start session untuk memeriksa status login
 
-// Check if the user is logged in
-if (!isset($_SESSION['loggedin'])) {
-    header("Location: ../../landingpage.php");
-    exit();
+// Halaman yang tidak memerlukan login (seperti landingpage.php)
+if (basename($_SERVER['PHP_SELF']) != 'landingpage.php') {
+    // Jika user belum login, arahkan ke halaman login atau lainnya
+    if (!isset($_SESSION['loggedin'])) {
+        header("Location: landingpage.php");
+        exit();  // Jangan lupa exit setelah redirect
+    }
 }
 
 // Database connection
@@ -357,7 +359,7 @@ $total_points = $request['total_points'];
       </div>
       <p class="text-green-700 font-semibold mb-4">Kamu mendapatkan poin</p>
       <div class="bg-green-50 border border-green-500 rounded-lg p-4 flex justify-center items-center mb-4">
-        <span class="text-green-600 font-bold text-2xl">+ 100</span>
+        <span class="text-green-600 font-bold text-2xl">+ <?= number_format($request['total_points']); ?></span>
       </div>
       <button onclick="window.location.href='../../user/drop_off/poin.php'" class="bg-gradient-to-r from-green to-dark-green text-white py-2 px-4 rounded-full shadow-lg hover:bg-green-600">
           Lihat Poin
