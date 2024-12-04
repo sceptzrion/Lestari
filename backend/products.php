@@ -50,10 +50,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $stmt->bind_param("isssis", $user_id, $product_name, $product_description, $product_price, $product_stock, $unique_name);
 
         if ($stmt->execute()) {
-            echo "<script>toggleModal();</script>";
+            echo "<script>alert('Produk berhasil diupload!');</script>";
         } else {
             echo "<script>alert('Error: " . $stmt->error . "');</script>";
         }
+
+        $stmt->close();
+    } else {
+        echo "<script>alert('Error: " . $conn->error . "');</script>";
     }
 }
 ?>

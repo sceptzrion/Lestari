@@ -1,9 +1,12 @@
 <?php
-session_start(); 
+session_start();  // Start session untuk memeriksa status login
+
+// Halaman yang tidak memerlukan login (seperti landingpage.php)
 if (basename($_SERVER['PHP_SELF']) != 'landingpage.php') {
+    // Jika user belum login, arahkan ke halaman login atau lainnya
     if (!isset($_SESSION['loggedin'])) {
         header("Location: ../../landingpage.php");
-        exit(); 
+        exit();  // Jangan lupa exit setelah redirect
     }
 }
 ?>
@@ -320,8 +323,9 @@ if (basename($_SERVER['PHP_SELF']) != 'landingpage.php') {
 
         <!-- Tombol Submit -->
         <button
-          type="submit" onclick="toggleModal()"
-          class="w-full py-3 bg-gradient-to-r from-green to-dark-green text-white font-semibold rounded-lg shadow hover:bg-green-900">
+          type="submit"
+          class="w-full py-3 bg-gradient-to-r from-green to-dark-green text-white font-semibold rounded-lg shadow hover:bg-green-900"
+        >
           Upload Produk
         </button>
       </form>
@@ -335,33 +339,7 @@ if (basename($_SERVER['PHP_SELF']) != 'landingpage.php') {
       }
     </script>
   </main>
-<!-- Modal -->
-<div id="rewardModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50 hidden">
-  <div class="bg-white rounded-lg p-6 w-80 text-center relative">
-    <div class="absolute top-2 right-2 cursor-pointer" onclick="toggleModal()">
-      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-500 hover:text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-      </svg>
-    </div>
-    <div class="mb-4">
-      <img src="../../images/user/selamat.png" alt="Reward Icon" class="mx-auto">
-    </div>
-    <p class="text-green-700 font-semibold mb-4">Produk berhasil diunggah!</p>
-    <div class="bg-green-50 border border-green-500 rounded-lg p-4 flex justify-center items-center mb-4">
-      <span class="text-green-600 font-bold text-2xl">+ 100</span>
-    </div>
-    <button onclick="toggleModal(); window.location.href='../../user/marketplace/marketplace.php';" class="bg-gradient-to-r from-green to-dark-green text-white py-2 px-4 rounded-full shadow-lg hover:bg-green-600">
-      Selesai
-    </button>
-  </div>
-</div>
-
-<script>
-  function toggleModal() {
-    document.getElementById("rewardModal").classList.toggle("hidden");
-  }
-</script>
-
+  
 <!-- Footer -->
 <footer class="bg-gradient-to-r from-green to-dark-green text-white py-7">
   <div class="container mx-auto px-12">
