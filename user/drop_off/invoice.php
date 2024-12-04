@@ -362,7 +362,6 @@ $total_points = $request['total_points'];
       <button onclick="window.location.href='../../user/drop_off/poin.php'" class="bg-gradient-to-r from-green to-dark-green text-white py-2 px-4 rounded-full shadow-lg hover:bg-green-600">
           Lihat Poin
       </button>
-
     </div>
   </div>
 <!-- Footer -->

@@ -31,7 +31,7 @@ $result = $conn->query($sql);
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"  class="bg-light dark:[color-scheme:light]">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -267,7 +267,7 @@ $result = $conn->query($sql);
   <!-- NAVBAR END -->
 
 <!-- MAIN CONTENT -->
-<main class="bg-light container mx-auto px-12 md:py-8 pb-10">
+<main class="bg-light container mx-auto px-12 md:py-8 pb-12">
     <div class="text-center mb-8">
         <h2 class="text-green-700 text-3xl font-bold">Lokasi Bank Sampah</h2>
         <p class="text-gray-600">Pilih kota terdekat dengan lokasi anda</p>

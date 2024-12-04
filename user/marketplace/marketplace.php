@@ -11,7 +11,7 @@ if (basename($_SERVER['PHP_SELF']) != 'landingpage.php') {
 }
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="bg-light dark:[color-scheme:light]">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -230,3 +230,101 @@ if (basename($_SERVER['PHP_SELF']) != 'landingpage.php') {
         });
     </script>
   <!-- NAVBAR END -->
+
+<!-- Main Content -->
+  <main class="bg-white md:p-16 p-8 pb-12 pt-2 md:pt-4">
+  <div class="flex justify-between items-center mb-4">
+      <h1 class="text-3xl font-bold text-[#1B5E20]">Marketplace</h1>
+      <a href="../../user/marketplace/upload.php">
+          <button class="bg-gradient-to-r from-green to-dark-green text-white px-4 py-2 rounded-lg hover:bg-[#388E3C] focus:outline-none">Upload</button>
+      </a>
+  </div>
+    <div class="bg-white p-4 rounded-lg shadow">
+      <div class="flex items-center border rounded-lg px-4 py-2 mb-6">
+      <input id="searchInput" type="text" placeholder="Search" class="bg-white border rounded-lg px-4 py-2 ml-2 w-full border-none focus:ring-0">
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <!-- Item 1 -->
+        <div class="bg-white border rounded-lg shadow hover:shadow-lg overflow-hidden marketplace-item">
+          <img src="https://placehold.co/300x200" alt="Bunga Hias Mawar Plastik" class="w-full">
+          <div class="p-4">
+            <h3 class="font-sm text-[#1B5E20]">Bunga Hias Mawar Plastik</h3>
+            <p class="text-[#1B5E20] font-bold text-xl">Rp 15.000</p>
+          </div>
+        </div>
+
+        <!-- Item 2 -->
+        <div class="bg-white border rounded-lg shadow hover:shadow-lg overflow-hidden marketplace-item">
+          <img src="https://placehold.co/300x200" alt="Pas Bunga Kertas Koran" class="w-full">
+          <div class="p-4">
+            <h3 class="font-sm text-[#1B5E20]">Pas Bunga Kertas Koran</h3>
+            <p class="text-[#1B5E20] font-bold text-xl">Rp 42.000</p>
+          </div>
+        </div>
+
+        <!-- Item 3 -->
+        <div class="bg-white border rounded-lg shadow hover:shadow-lg overflow-hidden marketplace-item">
+          <img src="https://placehold.co/300x200" alt="Tempat Pensil Tali Rami" class="w-full">
+          <div class="p-4">
+            <h3 class="font-sm text-[#1B5E20]">Tempat Pensil Tali Rami</h3>
+            <p class="text-[#1B5E20] font-bold text-xl">Rp 14.000</p>
+          </div>
+        </div>
+
+        <!-- Item 4 -->
+        <div class="bg-white border rounded-lg shadow hover:shadow-lg overflow-hidden marketplace-item">
+          <img src="https://placehold.co/300x200" alt="Bingkai Bubur Kertas" class="w-full">
+          <div class="p-4">
+            <h3 class="font-sm text-[#1B5E20]">Bingkai Bubur Kertas</h3>
+            <p class="text-[#1B5E20] font-bold text-xl">Rp 29.000</p>
+          </div>
+        </div>
+
+        <!-- Item 5 -->
+        <div class="bg-white border rounded-lg shadow hover:shadow-lg overflow-hidden marketplace-item">
+          <img src="https://placehold.co/300x200" alt="Vas Bunga dari Botol Bekas" class="w-full">
+          <div class="p-4">
+            <h3 class="font-sm text-[#1B5E20]">Vas Bunga dari Botol Bekas</h3>
+            <p class="text-[#1B5E20] font-bold text-xl">Rp 27.000</p>
+          </div>
+        </div>
+
+        <!-- Item 6 -->
+        <div class="bg-white border rounded-lg shadow hover:shadow-lg overflow-hidden marketplace-item">
+          <img src="https://placehold.co/300x200" alt="Pot Bunga Botol Bekas" class="w-full">
+          <div class="p-4">
+            <h3 class="font-sm text-[#1B5E20]">Pot Bunga Botol Bekas</h3>
+            <p class="text-[#1B5E20] font-bold text-xl">Rp 18.000</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- search java  -->
+  <script>
+    // Ambil elemen pencarian dan daftar item marketplace
+    const searchInput = document.getElementById("searchInput");
+    const items = document.querySelectorAll(".marketplace-item");  // Pastikan setiap item memiliki class .marketplace-item
+
+    // Fungsi untuk memfilter dan menampilkan item
+    function filterItems() {
+        const query = searchInput.value.toLowerCase();  // Ambil kata kunci pencarian dan ubah menjadi lowercase
+
+        items.forEach(item => {
+            const title = item.querySelector("h3").textContent.toLowerCase();  // Ambil teks judul item
+            if (title.includes(query)) {
+                item.style.display = "block";  // Tampilkan item yang cocok
+            } else {
+                item.style.display = "none";  // Sembunyikan item yang tidak cocok
+            }
+        });
+    }
+
+    // Tambahkan event listener untuk input pencarian
+    searchInput.addEventListener("input", filterItems);
+</script>
+
+
+</body>
+</html>
