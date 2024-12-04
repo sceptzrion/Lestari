@@ -5,11 +5,54 @@ session_start();  // Start session untuk memeriksa status login
 if (basename($_SERVER['PHP_SELF']) != 'landingpage.php') {
     // Jika user belum login, arahkan ke halaman login atau lainnya
     if (!isset($_SESSION['loggedin'])) {
-        header("Location: ../../landingpage.php");
+        header("Location: landingpage.php");
         exit();  // Jangan lupa exit setelah redirect
     }
 }
+
+$host = 'localhost'; // Change to your database host
+$username = 'root';  // Change to your database username
+$password = '';      // Change to your database password
+$database = 'db_sampah_4'; // Change to your database name
+
+$conn = new mysqli($host, $username, $password, $database);
+
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+$user_id = $_SESSION['user_id']; // Ensure 'user_id' is stored in session
+
+// Query to get total points for the user
+$query = "SELECT SUM(dr.waste_weight * w.waste_point) AS total_points
+          FROM drop_off_request d
+          LEFT JOIN detail_request dr ON d.request_id = dr.request_id
+          LEFT JOIN waste w ON dr.waste_id = w.waste_id
+          WHERE d.user_id = ? AND d.status = 'accepted'";
+
+$stmt = $conn->prepare($query);
+$stmt->bind_param("i", $user_id);
+$stmt->execute();
+$result = $stmt->get_result();
+$row = $result->fetch_assoc();
+$total_points = $row['total_points'] ?? 0;  // Set to 0 if no points are found
+
+// Fetch the user's drop-off history
+$query = "SELECT d.request_id, d.drop_off_request_created_at, SUM(dr.waste_weight * w.waste_point) AS points 
+          FROM drop_off_request d
+          LEFT JOIN detail_request dr ON d.request_id = dr.request_id
+          LEFT JOIN waste w ON dr.waste_id = w.waste_id
+          WHERE d.user_id = ? 
+          GROUP BY d.request_id 
+          ORDER BY d.drop_off_request_created_at DESC";
+
+$stmt = $conn->prepare($query);
+$stmt->bind_param("i", $user_id);
+$stmt->execute();
+$requests_result = $stmt->get_result();
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -234,12 +277,20 @@ if (basename($_SERVER['PHP_SELF']) != 'landingpage.php') {
 
 
  <!-- section -->
+<<<<<<< HEAD
+<!-- section -->
+=======
+>>>>>>> 9a79ae23c3f8087453fb2d94c73afa26a6abc356
 <section class="bg-gray-100 w-full min-h-screen">
   <main class="container mx-auto md:px-16 px-6 py-6">
     <div class="flex justify-between items-center mb-4">
       <span class="inline-flex justify-between w-2/4 bg-gradient-to-r from-green to-dark-green text-white rounded-full px-4 py-2 text-sm">
         <span class="font-bold">Poin Reward</span>
+<<<<<<< HEAD
+        <span class="font-bold"><?= number_format($total_points); ?> Poin</span>
+=======
         <span class="font-bold ">$100</span>
+>>>>>>> 9a79ae23c3f8087453fb2d94c73afa26a6abc356
       </span>
       <a href="../drop_off/tukar_poin.php">
         <button class="bg-gradient-to-r from-green to-dark-green text-white px-6 py-2 rounded-full shadow hover:bg-green-600 focus:outline-none flex items-center gap-2">
@@ -247,10 +298,23 @@ if (basename($_SERVER['PHP_SELF']) != 'landingpage.php') {
         </button>
       </a>
     </div>
-   <!-- Riwayat Drop Off -->
-  <div class="bg-white rounded-lg shadow-lg p-6">
+
+    <!-- Riwayat Drop Off -->
+    <div class="bg-white rounded-lg shadow-lg p-6">
       <h1 class="text-2xl font-bold text-green-700 text-center mb-4">Riwayat Drop Off</h1>
       <div class="space-y-4">
+<<<<<<< HEAD
+        <?php while ($request = $requests_result->fetch_assoc()) : ?>
+          <div class="flex justify-between items-center bg-gray-100 rounded-lg p-4 shadow">
+            <div class="flex items-center space-x-4">
+              <div class="w-12 h-12 bg-[#1B5E20] rounded-full flex items-center justify-center mb-3">
+                <img src="../../images/user/recycle.png" class="w-7" alt="Recycle Icon">
+              </div>
+              <div>
+                <h2 class="font-bold text-[#1B5E20]">Reward Drop Off</h2>
+                <p class="text-sm text-gray-500"><?= date('d M Y, H:i', strtotime($request['drop_off_request_created_at'])); ?></p>
+              </div>
+=======
         <!-- Reward Items -->
         <div class="flex justify-between items-center bg-gray-100 rounded-lg p-4 shadow">
           <div class="flex items-center space-x-4">
@@ -260,8 +324,13 @@ if (basename($_SERVER['PHP_SELF']) != 'landingpage.php') {
         <div>
               <h2 class="font-bold text-[#1B5E20]">Reward Drop Off</h2>
               <p class="text-sm text-gray-500">15 Nov 2024, 12:56</p>
+>>>>>>> 9a79ae23c3f8087453fb2d94c73afa26a6abc356
             </div>
+            <span class="text-xl font-bold text-green-700"><?= number_format($request['points']); ?> Poin</span>
           </div>
+<<<<<<< HEAD
+        <?php endwhile; ?>
+=======
           <span class="md:text-xl text-l font-bold text-green-700">$100</span>
         </div>
         <div class="flex justify-between items-center bg-gray-100 rounded-lg p-4 shadow">
@@ -277,7 +346,8 @@ if (basename($_SERVER['PHP_SELF']) != 'landingpage.php') {
           <span class="md:text-xl text-l font-bold text-green-700">$200</span>
         </div>
         <!-- Add more reward items as needed -->
+>>>>>>> 9a79ae23c3f8087453fb2d94c73afa26a6abc356
       </div>
     </div>
   </main>
-  </section>
+</section>

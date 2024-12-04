@@ -189,7 +189,7 @@ $waste_result = mysqli_query($conn, $waste_query);
                     </div>
                     <p class="text-sm font-light">Silakan isi data penerimaan sampah dengan lengkap</p>
                 </div>
-                <form action="add_process.php" method="POST" class="flex flex-col text-base font-medium mt-[50px] w-full px-[90px] gap-[31px]">
+                <form action="add.process.php" method="POST" class="flex flex-col text-base font-medium mt-[50px] w-full px-[90px] gap-[31px]">
                     <!-- Waste Inputs -->
                     <div id="waste-container" class="flex flex-col gap-[5px]">
                         <!-- Input Jenis Sampah akan ditambahkan di sini -->
