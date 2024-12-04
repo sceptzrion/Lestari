@@ -229,7 +229,7 @@
          Tukar Poin Reward
     </div>
       <!-- Wrapper for Cards -->
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 w-full max-w-screen-lg"> <!-- Mengubah grid untuk 2 kolom pada mobile -->
+      <div class="grid grid-cols-1 place-items-center sm:grid-cols-2 lg:grid-cols-3 gap-8 w-full max-w-screen-lg"> <!-- Mengubah grid untuk 2 kolom pada mobile -->
       
         <!-- Custom Reward Card 1 -->
         <div class="bg-white shadow-md rounded-lg overflow-hidden w-80 mb-10">

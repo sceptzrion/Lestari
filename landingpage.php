@@ -228,9 +228,9 @@ if (basename($_SERVER['PHP_SELF']) != 'landingpage.php') {
 
 <!-- Hero Section -->
 <section class="bg-gradient-to-r from-green to-dark-green text-white  h-[450px] md:h-auto">
-  <div class="container mx-auto px-12 flex flex-col md:flex-row items-center md:justify-between h-full">
+  <div class="container mx-auto px-12 md:px-0 md:pl-12 md:gap-5 flex flex-col md:flex-row items-center md:justify-between h-full">
   <div class="w-full md:w-1/2 text-center h-full flex flex-col justify-center items-center md:items-start md:text-left mb-4 md:mb-0">
-  <h1 class="text-4xl md:text-5xl font-bold leading-tight mb-4">
+  <h1 class="text-4xl md:text-5xl md:max-w-[610px] font-bold leading-tight mb-4">
         Tukarkan Sampah, Dapatkan Hadiahnya
       </h1>
       <p class="text-lg md:text-xl">
