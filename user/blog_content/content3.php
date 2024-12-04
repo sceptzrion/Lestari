@@ -1,14 +1,14 @@
+<!-- gaya Hidup -->
 <?php
-session_start();  // Start session untuk memeriksa status login
+session_start();
 
-// Halaman yang tidak memerlukan login (seperti landingpage.php)
-if (basename($_SERVER['PHP_SELF']) != 'landingpage.php') {
-    // Jika user belum login, arahkan ke halaman login atau lainnya
-    if (!isset($_SESSION['loggedin'])) {
-        header("Location: ../../landingpage.php");
-        exit();  // Jangan lupa exit setelah redirect
-    }
+if (!in_array(basename($_SERVER['PHP_SELF']), ['landingpage.php', 'tentang.php', 'blog.php'])) {
+  if (!isset($_SESSION['loggedin'])) {
+      header("Location: landingpage.php");
+      exit();
+  }
 }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -31,12 +31,6 @@ if (basename($_SERVER['PHP_SELF']) != 'landingpage.php') {
       }
     }
   </script>
-    <script>
-        function toggleModal() {
-            const modal = document.getElementById("location-modal");
-            modal.classList.toggle("hidden");
-        }
-    </script>
 </head>
 <body class="font-poppins">
 <!-- NAVBAR -->
@@ -90,7 +84,7 @@ if (basename($_SERVER['PHP_SELF']) != 'landingpage.php') {
                     </button>
                     <?php endif; ?>
                 </li>
-                
+               
                 <!-- Marketplace -->
                 <li>
                     <?php if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true): ?>
@@ -151,7 +145,7 @@ if (basename($_SERVER['PHP_SELF']) != 'landingpage.php') {
               </button>
             <?php endif; ?>
           </li>
-         
+          
           <!-- Marketplace -->
           <li>
             <?php if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true): ?>
@@ -230,3 +224,171 @@ if (basename($_SERVER['PHP_SELF']) != 'landingpage.php') {
         });
     </script>
   <!-- NAVBAR END -->
+<!-- Content -->
+    <main class=" bg-light container mx-auto px-16 py-12">
+        <p class="text-sm bg-green-100 text-[#1B5E20] font-medium inline-block px-3 py-1 rounded">Tips Daur Ulang</p>
+        <h1 class="text-3xl font-bold text-[#1B5E20] mt-4">5 Cara Kreatif Mengolah Sampah Plastik Menjadi Barang Bernilai</h1>
+        <p class="text-gray-500 mt-2">Dipublikasikan 2 Hari yang Lalu</p>
+        <img src="../../images/user/blog/content1.png" alt="Gambar ilustrasi daur ulang" class="mt-4 mb-6 w-[500px] rounded-lg">
+        <p class="text-gray-700 mb-6 text-justify">
+            Sampah plastik telah menjadi salah satu masalah lingkungan yang paling serius di era modern. Namun, dengan sedikit kreativitas dan inovasi, kita dapat mengubah sampah plastik menjadi produk yang bernilai dan bermanfaat.      </p>
+        <div class="mt-8 space-y-10">
+            <!-- Section 1 -->
+            <section>
+                <h2 class="text-xl font-bold text-[#1B5E20]">1. Membuat Pot Bunga dari Botol Plastik</h2>
+                <div class="bg-gray-50 border rounded-lg p-4 mt-2 text-gray-700">
+                <p class="mb-4">Botol plastik bekas dapat diubah menjadi pot bunga yang menarik dengan mengikuti langkah-langkah berikut :</p>
+                    <ol class="list-decimal pl-5 space-y-2">
+                    <li>Bersihkan botol plastik hingga benar-benar bersih.</li>
+                    <li>Potong botol plastik menjadi dua bagian secara horizontal (sekitar 1/3 dari bawah).</li>
+                    <li>Buat 4-5 lubang kecil di bagian bawah untuk drainase.</li>
+                    <li>Buat pola sesuai desain yang diinginkan (bisa berbentuk hewan, geometris, dll).</li>
+                    <li>Cat permukaan botol sesuai selera (tunggu hingga benar-benar kering).</li>
+                    <li>Isi dengan media tanam.</li>
+                    <li>Tanam tanaman yang diinginkan.</li>
+                    </ol>
+                </div>
+            </section>
+
+            <!-- Section 2 -->
+            <section>
+                <h2 class="text-xl font-bold text-[#1B5E20]">2. Tas Belanja dari Kemasan Plastik</h2>
+                <div class="bg-gray-50 border rounded-lg p-4 mt-2 text-gray-700">
+                <p class="mb-4">Kemasan plastik bekas dapat dianyam menjadi tas belanja yang kuat dan stylish. Berikut langkah langkah nya</p>
+                    <ol class="list-decimal pl-5 space-y-2">
+                        <li>Bersihkan kemasan plastik dari debu dan kotoran</li>
+                        <li>Potong kemasan menjadi lembaran-lembaran sama besar</li>
+                        <li>Susun dan setrika dengan kertas minyak sebagai pelapis</li>
+                        <li>Jahit sesuai pola tas yang diinginkan</li>
+                        <li>Tambahkan tali untuk pegangan tas</li>
+                    </ol>
+                </div>
+            </section>
+
+            <!-- Section 3 -->
+            <section>
+                <h2 class="text-xl font-bold text-[#1B5E20]">3. Hiasan Dinding dari Tutup Botol</h2>
+                <div class="bg-gray-50 border rounded-lg p-4 mt-2 text-gray-700">
+                <p class="mb-4">Tutup botol plastik dapat disusun menjadi hiasan dinding yang artistik dengan mengikuti langkah-langkah berikut :</p>
+                    <ol class="list-decimal pl-5 space-y-2">
+                    <li>Kumpulkan tutup botol dalam jumlah banyak.</li>
+                    <li>Buat pola atau desain di papan.</li>
+                    <li>Tempelkan tutup botol sesuai pola.</li>
+                    <li>Semprot dengan clear coat untuk hasil mengkilap.</li>
+                    </ol>
+                </div>
+            </section>
+
+            <!-- Section 4 -->
+            <section>
+                <h2 class="text-xl font-bold text-[#1B5E20]">4. Tempat Pensil dari Botol Sampo</h2>
+                <div class="bg-gray-50 border rounded-lg p-4 mt-2 text-gray-700">
+                <p class="mb-4">Botol sampo bekas dapat diubah menjadi tempat pensil yang unik dengan mengikuti langkah langkah dibawah ini :</p>
+                    <ol class="list-decimal pl-5 space-y-2">
+                    <li>Bersihkan botol sampo hingga benar-benar bersih dari sisa sampo.</li>
+                    <li>Potong botol sesuai ketinggian yang diinginkan (biasanya 15-20 cm).</li>
+                    <li>Amplas permukaan botol agar cat dapat menempel dengan baik.</li>
+                    <li>Buat pola atau desain yang diinginkan.</li>
+                    <li>Cat dasar seluruh permukaan botol (2-3 lapis).</li>
+                    <li>Tambahkan detail dan hiasan sesuai selera.</li>
+                    <li>Aplikasikan clear coat untuk hasil yang tahan lama.</li>
+                    </ol>
+                </div>
+            </section>
+
+            <!-- Section 5 -->
+            <section>
+                <h2 class="text-xl font-bold text-[#1B5E20]">5. Vas Bunga dari Plastik Daur Ulang</h2>
+                <div class="bg-gray-50 border rounded-lg p-4 mt-2 text-gray-700">
+                <p class="mb-4">Berbagai jenis plastik dapat dilelehkan dan dibentuk ulang menjadi vas bunga dengan mengikuti langkah langkah dibawah ini :</p>
+                    <ol class="list-decimal pl-5 space-y-2">
+                        <li>Potong plastik menjadi potongan-potongan kecil</li>
+                        <li>Siapkan cetakan dari botol plastik, lapisi dengan aluminium foil</li>
+                        <li>Susun potongan plastik pada cetakan dengan pola yang diinginkan</li>
+                        <li>Panaskan dengan hati-hati menggunakan heat gun atau oven dengan suhu rendah (~150°C)</li>
+                        <li>Tunggu hingga plastik meleleh dan menyatu</li>
+                        <li>Biarkan dingin secara alami</li>
+                        <li>Lepaskan dari cetakan dengan hati-hati</li>
+                    </ol>
+                </div>
+            </section>
+
+            <!-- Back Button -->
+            <div class="mt-6">
+                <a href="../../user/blog.php" class="bg-gradient-to-r from-green to-dark-green text-white px-6 py-2 rounded shadow hover:bg-green-800">
+                    Kembali
+                </a>
+            </div>
+        </div>
+    </main>
+
+<!-- modal  -->
+<div id="loginModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+    <div class="bg-white p-6 rounded-lg shadow-lg text-center max-w-sm">
+        <h2 class="text-lg font-bold text-gray-800 mb-4">Yuk Login dulu</h2>
+        <p class="text-gray-600 mb-6">Silakan login terlebih dahulu untuk mengakses layanan ini.</p>
+        <div class="flex justify-center gap-4">
+            <button onclick="closeModal()" class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300">Batal</button>
+            <a href="../../user/signin.php" class="px-4 py-2 bg-gradient-to-r from-green to-dark-green text-white rounded-lg hover:bg-green-700">Login</a>
+        </div>
+    </div>
+</div>
+
+<!-- Footer -->
+<footer class="bg-gradient-to-r from-green to-dark-green text-white py-7">
+  <div class="container mx-auto px-12">
+    <!-- Logo -->
+    <div class="flex justify-center mb-6">
+      <a href="../../landingpage.php">
+        <img src="../../images/Logo.png" alt="Logo Lestari" class="h-20">
+      </a>
+    </div>
+    
+    <!-- Grid Container -->
+    <div class="grid grid-cols-2 md:grid-cols-3 gap-4 text-center md:text-left">
+      <!-- Bagian Lestari -->
+      <div class="text-left col-span-1 md:col-span-1">
+        <h4 class="font-bold mb-2">Lestari</h4>
+        <a href="../../landingpage.php" class="block text-white hover:underline mb-1">Home</a>
+        <a href="../../user/tentang.php" class="block text-white hover:underline mb-1">Tentang Kami</a>
+        <a href="../../landingpage.php" class="block text-white hover:underline mb-1">Layanan</a>
+        <a href="../../user/blog.php" class="block text-white hover:underline mb-1">Blog</a>
+      </div>
+
+      <!-- Bagian Informasi -->
+      <div class="text-right md:text-center col-span-1 md:col-span-1">
+        <h4 class="font-bold mb-2">Informasi</h4>
+        <a href="../../user/kontak_kami.php" class="block text-white hover:underline mb-1">Kontak Kami</a>
+      </div>
+
+      <!-- Bagian Hubungi Kami -->
+      <div class="col-span-2 md:col-span-1 text-center">
+        <h4 class="font-bold mb-2">Hubungi Kami</h4>
+        <div class="flex justify-center space-x-4 mt-2">
+          <a href="#"><img src="../../images/user/sosmed/instagram.png" alt="Instagram"></a>
+          <a href="#"><img src="../../images/user/sosmed/fb.png" alt="Facebook"></a>
+          <a href="#"><img src="../../images/user/sosmed/x.png" alt="Twitter"></a>
+          <a href="#"><img src="../../images/user/sosmed/wa.png" alt="Whatsapp"></a>
+          <a href="#"><img src="../../images/user/sosmed/yt.png" alt="YouTube"></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+<script>
+    // Notifikasi jika belum login
+    function alertLogin() {
+        alert("Silakan login untuk mengakses layanan ini.");
+    }
+    //modal
+    function showModal() {
+    document.getElementById('loginModal').classList.remove('hidden');
+    }
+
+    function closeModal() {
+        document.getElementById('loginModal').classList.add('hidden');
+    }
+
+</script>
+</body>
+</html>

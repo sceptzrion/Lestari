@@ -231,54 +231,54 @@ if (!in_array(basename($_SERVER['PHP_SELF']), ['landingpage.php', 'tentang.php',
   <!-- NAVBAR END -->
 
   <!-- Blog Section -->
-  <main class="bg-white container mx-auto px-12 md:py-12 py-6">
+  <main class="bg-white container mx-auto px-12 md:py-6 py-6">
     <h1 class="text-3xl font-bold text-center text-[#1B5E20] mb-2">Blog Lestari</h1>
     <p class="text-center text-gray-700">Temukan artikel menarik seputar daur ulang, lingkungan, dan tips ramah lingkungan</p>
 
-    <!-- Blog Cards -->
-    <div class="grid grid-cols-1 md:grid-cols-3 md:gap-6 md:mt-8 gap-2 mt-4">
-      <!-- Blog Card 1 -->
-      <div class="bg-white rounded-lg shadow overflow-hidden">
-        <img src="https://placehold.co/400x250" alt="Blog Image" class="w-full">
-        <div class="p-4">
-          <span class="bg-green-100 text-green-600 text-xs font-medium px-2 py-1 rounded">Tips Daur Ulang</span>
-          <h2 class="text-lg font-bold mt-2 text-gray-800">5 Cara Kreatif Mengolah Sampah Plastik Menjadi Barang Bernilai</h2>
-          <p class="text-sm text-gray-600 mt-1">Pelajari cara mengubah sampah plastik menjadi produk yang memiliki nilai jual dan bermanfaat untuk kehidupan sehari-hari.</p>
-          <div class="flex justify-between items-center mt-4 text-gray-500 text-sm">
-            <p>5 menit baca</p>
-            <p>2 hari yang lalu</p>
-          </div>
-        </div>
-      </div>
-      
-      <!-- Blog Card 2 -->
-      <div class="bg-white rounded-lg shadow overflow-hidden">
-        <img src="https://placehold.co/400x250" alt="Blog Image" class="w-full">
-        <div class="p-4">
-          <span class="bg-green-100 text-green-600 text-xs font-medium px-2 py-1 rounded">Lingkungan</span>
-          <h2 class="text-lg font-bold mt-2 text-gray-800">Dampak Positif Program Bank Sampah Bagi Lingkungan</h2>
-          <p class="text-sm text-gray-600 mt-1">Simak bagaimana program bank sampah memberikan dampak positif bagi lingkungan dan masyarakat sekitar.</p>
-          <div class="flex justify-between items-center mt-11 text-gray-500 text-sm">
-            <p>4 menit baca</p>
-            <p>5 hari yang lalu</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- Blog Card 3 -->
-      <div class="bg-white rounded-lg shadow overflow-hidden">
-        <img src="https://placehold.co/400x250" alt="Blog Image" class="w-full">
-        <div class="p-4">
-          <span class="bg-green-100 text-green-600 text-xs font-medium px-2 py-1 rounded">Gaya Hidup</span>
-          <h2 class="text-lg font-bold mt-2 text-gray-800">Zero Waste Lifestyle: Panduan Pemula untuk Hidup Bebas Sampah</h2>
-          <p class="text-sm text-gray-600 mt-1">Temukan langkah-langkah mudah untuk memulai gaya hidup zero waste dan berkontribusi pada kelestarian lingkungan.</p>
-          <div class="flex justify-between items-center mt-4 text-gray-500 text-sm">
-            <p>7 menit baca</p>
-            <p>1 minggu yang lalu</p>
-          </div>
-        </div>
+    <div class="grid grid-cols-1 md:grid-cols-3 md:gap-6 md:mt-8 md:gap-2 gap-4 mt-4">
+  <!-- Blog Card 1 -->
+  <a href="../user/blog_content/content1.php" class="block bg-white rounded-lg shadow overflow-hidden transform transition hover:scale-105 hover:shadow-lg">
+    <img src="../images/user/blog/content1.png" alt="Blog Image" class="w-full">
+    <div class="p-4">
+      <span class="bg-green-100 text-green-600 text-xs font-medium px-2 py-1 rounded">Tips Daur Ulang</span>
+      <h2 class="text-lg font-bold mt-2 text-gray-800">5 Cara Kreatif Mengolah Sampah Plastik Menjadi Barang Bernilai</h2>
+      <p class="text-sm text-gray-600 mt-1">Pelajari cara mengubah sampah plastik menjadi produk yang memiliki nilai jual dan bermanfaat untuk kehidupan sehari-hari.</p>
+      <div class="flex justify-between items-center mt-4 text-gray-500 text-sm">
+        <p>5 menit baca</p>
+        <p>2 hari yang lalu</p>
       </div>
     </div>
+  </a>
+
+  <!-- Blog Card 2 -->
+  <a href="../user/blog_content/content2.php" class="block bg-white rounded-lg shadow overflow-hidden transform transition hover:scale-105 hover:shadow-lg">
+    <img src="../images/user/blog/content2.png" alt="Blog Image" class="w-full">
+    <div class="p-4">
+      <span class="bg-green-100 text-green-600 text-xs font-medium px-2 py-1 rounded">Lingkungan</span>
+      <h2 class="text-lg font-bold mt-2 text-gray-800">Dampak Positif Program Bank Sampah Bagi Lingkungan</h2>
+      <p class="text-sm text-gray-600 mt-1">Simak bagaimana program bank sampah memberikan dampak positif bagi lingkungan dan masyarakat sekitar.</p>
+      <div class="flex justify-between items-center mt-11 text-gray-500 text-sm">
+        <p>4 menit baca</p>
+        <p>5 hari yang lalu</p>
+      </div>
+    </div>
+  </a>
+
+  <!-- Blog Card 3 -->
+  <a href="../user/blog_content/content3.php" class="block bg-white rounded-lg shadow overflow-hidden transform transition hover:scale-105 hover:shadow-lg">
+    <img src="../images/user/blog/content3.png" alt="Blog Image" class="w-full">
+    <div class="p-4">
+      <span class="bg-green-100 text-green-600 text-xs font-medium px-2 py-1 rounded">Gaya Hidup</span>
+      <h2 class="text-lg font-bold mt-2 text-gray-800">Zero Waste Lifestyle: Panduan Pemula untuk Hidup Bebas Sampah</h2>
+      <p class="text-sm text-gray-600 mt-1">Temukan langkah-langkah mudah untuk memulai gaya hidup zero waste dan berkontribusi pada kelestarian lingkungan.</p>
+      <div class="flex justify-between items-center mt-4 text-gray-500 text-sm">
+        <p>7 menit baca</p>
+        <p>1 minggu yang lalu</p>
+      </div>
+    </div>
+  </a>
+</div>
+
 
     <!-- Load More Button -->
     <div class="flex justify-center mt-8">
