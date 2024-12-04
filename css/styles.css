@@ -11021,11 +11021,6 @@ html:has(.drawer-open.drawer-open){
   background-color: rgb(235 50 35 / var(--tw-bg-opacity, 1));
 }
 
-.bg-\[\#EB5757\]{
-  --tw-bg-opacity: 1;
-  background-color: rgb(235 87 87 / var(--tw-bg-opacity, 1));
-}
-
 .bg-\[\#F6AC0A\]{
   --tw-bg-opacity: 1;
   background-color: rgb(246 172 10 / var(--tw-bg-opacity, 1));
@@ -11078,6 +11073,11 @@ html:has(.drawer-open.drawer-open){
 
 .bg-transparent{
   background-color: transparent;
+}
+
+.bg-\[\#EB5757\]{
+  --tw-bg-opacity: 1;
+  background-color: rgb(235 87 87 / var(--tw-bg-opacity, 1));
 }
 
 .bg-opacity-25{
@@ -11480,11 +11480,6 @@ html:has(.drawer-open.drawer-open){
   padding-right: 9px;
 }
 
-.py-0\.5{
-  padding-top: 0.125rem;
-  padding-bottom: 0.125rem;
-}
-
 .py-1{
   padding-top: 0.25rem;
   padding-bottom: 0.25rem;
@@ -11585,6 +11580,11 @@ html:has(.drawer-open.drawer-open){
   padding-bottom: 75px;
 }
 
+.py-0\.5{
+  padding-top: 0.125rem;
+  padding-bottom: 0.125rem;
+}
+
 .pb-10{
   padding-bottom: 2.5rem;
 }
@@ -11643,10 +11643,6 @@ html:has(.drawer-open.drawer-open){
 
 .pl-5{
   padding-left: 1.25rem;
-}
-
-.pl-7{
-  padding-left: 1.75rem;
 }
 
 .pl-\[23px\]{
@@ -11723,6 +11719,10 @@ html:has(.drawer-open.drawer-open){
 
 .pt-\[7px\]{
   padding-top: 7px;
+}
+
+.pl-7{
+  padding-left: 1.75rem;
 }
 
 .text-left{

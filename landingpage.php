@@ -227,7 +227,7 @@ if (basename($_SERVER['PHP_SELF']) != 'landingpage.php') {
   <!-- NAVBAR END -->
 
 <!-- Hero Section -->
-<section class="bg-gradient-to-r from-green to-dark-green text-white py-16 h-[450px] md:h-[590px]">
+<section class="bg-gradient-to-r from-green to-dark-green text-white  h-[450px] md:h-auto">
   <div class="container mx-auto px-12 flex flex-col md:flex-row items-center md:justify-between h-full">
   <div class="w-full md:w-1/2 text-center h-full flex flex-col justify-center items-center md:items-start md:text-left mb-4 md:mb-0">
   <h1 class="text-4xl md:text-5xl font-bold leading-tight mb-4">
@@ -237,7 +237,7 @@ if (basename($_SERVER['PHP_SELF']) != 'landingpage.php') {
         #TukarSampahUntukKebaikan
       </p>
     </div>
-    <div class="md:w-1/2 md:absolute md:right-0 md:top-[80px] flex flex-end">
+    <div class="md:w-1/2 md: md:right-0 md:top-[80px] flex flex-end">
       <!-- gambar mobile -->
       <img 
         src="./images/hero-banner-mobile.png" 
@@ -337,7 +337,7 @@ if (basename($_SERVER['PHP_SELF']) != 'landingpage.php') {
             <!-- Card Marketplace -->
             <div class="block">
                 <?php if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true): ?>
-                    <a href="../user/marketplace/marketplace.php" class="block">
+                    <a href="./user/marketplace/marketplace.php" class="block">
                         <div class="bg-white p-6 rounded-lg shadow-md cursor-pointer hover:bg-green-200 h-full justify-between">
                             <h5 class="text-xl mb-2">🛍️ Marketplace</h5>
                             <p>Marketplace LESTARI menyediakan produk berkualitas daur ulang. Dukungan nyata untuk gerakan ramah lingkungan.</p>
