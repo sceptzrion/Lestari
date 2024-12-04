@@ -9,7 +9,6 @@ if (basename($_SERVER['PHP_SELF']) != 'landingpage.php') {
         exit();  // Jangan lupa exit setelah redirect
     }
 }
-
 ?>
 <!DOCTYPE html>
 <html lang="en" class="bg-light dark:[color-scheme:light]">
@@ -245,32 +244,60 @@ if (basename($_SERVER['PHP_SELF']) != 'landingpage.php') {
       <input id="searchInput" type="text" placeholder="Search" class="bg-white border rounded-lg px-4 py-2 ml-2 w-full border-none focus:ring-0">
       </div>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-    <?php
-    include '../../controller/config.php'; // Pastikan path ini sesuai lokasi file koneksi Anda
+        <!-- Item 1 -->
+        <div class="bg-white border rounded-lg shadow hover:shadow-lg overflow-hidden marketplace-item">
+          <img src="https://placehold.co/300x200" alt="Bunga Hias Mawar Plastik" class="w-full">
+          <div class="p-4">
+            <h3 class="font-sm text-[#1B5E20]">Bunga Hias Mawar Plastik</h3>
+            <p class="text-[#1B5E20] font-bold text-xl">Rp 15.000</p>
+          </div>
+        </div>
 
-    // Ambil data produk dari database
-    $sql = "SELECT * FROM marketplace ORDER BY marketplace_created_at DESC";
-    $result = $conn->query($sql);
+        <!-- Item 2 -->
+        <div class="bg-white border rounded-lg shadow hover:shadow-lg overflow-hidden marketplace-item">
+          <img src="https://placehold.co/300x200" alt="Pas Bunga Kertas Koran" class="w-full">
+          <div class="p-4">
+            <h3 class="font-sm text-[#1B5E20]">Pas Bunga Kertas Koran</h3>
+            <p class="text-[#1B5E20] font-bold text-xl">Rp 42.000</p>
+          </div>
+        </div>
 
-    if ($result->num_rows > 0) {
-        // Loop melalui setiap produk
-        while ($row = $result->fetch_assoc()) {
-            echo '<div class="bg-white border rounded-lg shadow hover:shadow-lg overflow-hidden marketplace-item">';
-            echo '<img src="../../images/user/products' . htmlspecialchars($row['marketplace_image']) . '" alt="' . htmlspecialchars($row['marketplace_product_name']) . '" class="w-full">';
-            echo '<div class="p-4">';
-            echo '<h3 class="font-sm text-[#1B5E20]">' . htmlspecialchars($row['marketplace_product_name']) . '</h3>';
-            echo '<p class="text-[#1B5E20] font-bold text-xl">Rp ' . number_format($row['marketplace_price'], 0, ',', '.') . '</p>';
-            echo '</div>';
-            echo '</div>';
-        }
-    } else {
-        echo '<p class="text-center">Belum ada produk yang diunggah.</p>';
-    }
+        <!-- Item 3 -->
+        <div class="bg-white border rounded-lg shadow hover:shadow-lg overflow-hidden marketplace-item">
+          <img src="https://placehold.co/300x200" alt="Tempat Pensil Tali Rami" class="w-full">
+          <div class="p-4">
+            <h3 class="font-sm text-[#1B5E20]">Tempat Pensil Tali Rami</h3>
+            <p class="text-[#1B5E20] font-bold text-xl">Rp 14.000</p>
+          </div>
+        </div>
 
-    $conn->close();
-    ?>
-</div>
+        <!-- Item 4 -->
+        <div class="bg-white border rounded-lg shadow hover:shadow-lg overflow-hidden marketplace-item">
+          <img src="https://placehold.co/300x200" alt="Bingkai Bubur Kertas" class="w-full">
+          <div class="p-4">
+            <h3 class="font-sm text-[#1B5E20]">Bingkai Bubur Kertas</h3>
+            <p class="text-[#1B5E20] font-bold text-xl">Rp 29.000</p>
+          </div>
+        </div>
 
+        <!-- Item 5 -->
+        <div class="bg-white border rounded-lg shadow hover:shadow-lg overflow-hidden marketplace-item">
+          <img src="https://placehold.co/300x200" alt="Vas Bunga dari Botol Bekas" class="w-full">
+          <div class="p-4">
+            <h3 class="font-sm text-[#1B5E20]">Vas Bunga dari Botol Bekas</h3>
+            <p class="text-[#1B5E20] font-bold text-xl">Rp 27.000</p>
+          </div>
+        </div>
+
+        <!-- Item 6 -->
+        <div class="bg-white border rounded-lg shadow hover:shadow-lg overflow-hidden marketplace-item">
+          <img src="https://placehold.co/300x200" alt="Pot Bunga Botol Bekas" class="w-full">
+          <div class="p-4">
+            <h3 class="font-sm text-[#1B5E20]">Pot Bunga Botol Bekas</h3>
+            <p class="text-[#1B5E20] font-bold text-xl">Rp 18.000</p>
+          </div>
+        </div>
+      </div>
     </div>
   </main>
 
