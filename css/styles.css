@@ -9287,6 +9287,10 @@ html:has(.drawer-open.drawer-open){
   height: 100vh;
 }
 
+.h-0{
+  height: 0px;
+}
+
 .min-h-\[100px\]{
   min-height: 100px;
 }
@@ -9896,6 +9900,10 @@ html:has(.drawer-open.drawer-open){
 
 .list-decimal{
   list-style-type: decimal;
+}
+
+.list-disc{
+  list-style-type: disc;
 }
 
 .appearance-none{
@@ -11641,6 +11649,10 @@ html:has(.drawer-open.drawer-open){
   padding-left: 1.25rem;
 }
 
+.pl-6{
+  padding-left: 1.5rem;
+}
+
 .pl-7{
   padding-left: 1.75rem;
 }
@@ -12672,6 +12684,10 @@ html:has(.drawer-open.drawer-open){
 }
 
 @media (min-width: 640px){
+  .sm\:h-5{
+    height: 1.25rem;
+  }
+
   .sm\:max-w-96{
     max-width: 24rem;
   }
@@ -12695,10 +12711,6 @@ html:has(.drawer-open.drawer-open){
 }
 
 @media (min-width: 768px){
-  .md\:absolute{
-    position: absolute;
-  }
-
   .md\:left-\[-150px\]{
     left: -150px;
   }
@@ -12797,6 +12809,14 @@ html:has(.drawer-open.drawer-open){
 
   .md\:h-full{
     height: 100%;
+  }
+
+  .md\:h-6{
+    height: 1.5rem;
+  }
+
+  .md\:h-7{
+    height: 1.75rem;
   }
 
   .md\:w-1\/2{
@@ -13015,6 +13035,11 @@ html:has(.drawer-open.drawer-open){
     padding-bottom: 2rem;
   }
 
+  .md\:px-10{
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
+  }
+
   .md\:pl-12{
     padding-left: 3rem;
   }
@@ -13143,6 +13168,14 @@ html:has(.drawer-open.drawer-open){
 
   .lg\:h-full{
     height: 100%;
+  }
+
+  .lg\:h-9{
+    height: 2.25rem;
+  }
+
+  .lg\:h-7{
+    height: 1.75rem;
   }
 
   .lg\:w-\[450px\]{

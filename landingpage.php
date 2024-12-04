@@ -36,7 +36,7 @@ if (basename($_SERVER['PHP_SELF']) != 'landingpage.php') {
 </head>
 <body class="font-poppins">
    <!-- NAVBAR -->
-   <div class="navbar bg-light h-20 pr-10 justify-between sticky top-0 z-50">
+   <div class="navbar bg-light h-20 px-4 md:px-10 justify-between sticky top-0 z-50">
    <!-- MOBILE SCREEN MODE -->
    <div class="navbar-start pl-1/2">
         <div class="dropdown">
@@ -106,8 +106,8 @@ if (basename($_SERVER['PHP_SELF']) != 'landingpage.php') {
           </ul>
         </div>
         <!-- BRAND LOGO -->
-        <a href="." class="">
-          <img src="./images/Logo.png" alt="Logo Lestari">
+        <a href="./landingpage.php" class="ml-1">
+          <img src="./images/logo-crop.png" class="h-4 sm:h-5 md:h-6 lg:h-7" alt="Logo Lestari">
         </a>
       </div>
 <!-- DESKTOP MODE -->
@@ -433,9 +433,9 @@ if (basename($_SERVER['PHP_SELF']) != 'landingpage.php') {
 <footer class="bg-gradient-to-r from-green to-dark-green text-white py-7">
   <div class="container mx-auto px-12">
     <!-- Logo -->
-    <div class="flex justify-center mb-6">
+    <div class="flex justify-center mb-6 py-4">
       <a href="./landingpage.php">
-        <img src="./images/Logo.png" alt="Logo Lestari" class="h-20">
+        <img src="./images/logo-crop-white.png" alt="Logo Lestari" class="h-7 lg:h-9">
       </a>
     </div>
     
