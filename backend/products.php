@@ -51,10 +51,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         if ($stmt->execute()) {
             echo "<script>alert('Produk berhasil diupload!');</script>";
+            header("Location: ../user/marketplace/marketplace.php");
+            exit;
         } else {
             echo "<script>alert('Error: " . $stmt->error . "');</script>";
         }
-
         $stmt->close();
     } else {
         echo "<script>alert('Error: " . $conn->error . "');</script>";

@@ -1,12 +1,10 @@
 <?php
-session_start();  // Start session untuk memeriksa status login
+session_start();  
 
-// Halaman yang tidak memerlukan login (seperti landingpage.php)
 if (basename($_SERVER['PHP_SELF']) != 'landingpage.php') {
-    // Jika user belum login, arahkan ke halaman login atau lainnya
     if (!isset($_SESSION['loggedin'])) {
         header("Location: ../../landingpage.php");
-        exit();  // Jangan lupa exit setelah redirect
+        exit();  
     }
 }
 ?>
@@ -339,7 +337,7 @@ if (basename($_SERVER['PHP_SELF']) != 'landingpage.php') {
       }
     </script>
   </main>
-  
+
 <!-- Footer -->
 <footer class="bg-gradient-to-r from-green to-dark-green text-white py-7">
   <div class="container mx-auto px-12">
