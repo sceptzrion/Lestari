@@ -119,7 +119,7 @@ if ($conn) {
     <title>Penerimaan Sampah | Admin Lestari</title>
 </head>
 <body>
-    <div class="flex flex-row h-full w-full">
+    <div class="flex flex-row min-h-[1024px] w-full">
         <!-- SIDEBAR -->
         <div class="bg-gradient-to-t from-green-admin to-dark-green-admin w-[345px] h-auto text-light">
             <div class="flex flex-col pt-10 items-center">
@@ -257,12 +257,16 @@ if ($conn) {
                                             <td class="border border-[#828282]"><?= htmlspecialchars($row['waste_type']) ?></td>
                                             <td class="border border-[#828282]"><?= htmlspecialchars($row['waste_weight']) ?> Kg</td>
                                             <td class="border border-[#828282]">
-                                                <?php if ($row['status'] === 'Selesai'): ?>
-                                                    <p class="bg-[#299E63] text-light rounded-[10px] border border-gray w-auto h-auto text-sm font-medium text-center p-0.5">
+                                                <?php if ($row['status'] == 'accepted'): ?>
+                                                    <p class="bg-[#299E63] text-light rounded-[10px] border border-gray w-auto h-auto text-sm font-medium text-center py-0.5 px-2">
+                                                        <?= htmlspecialchars($row['status']) ?>
+                                                    </p>
+                                                <?php elseif ($row['status'] == 'rejected'): ?>
+                                                    <p class="bg-[#EB5757] text-light rounded-[10px] border border-gray w-auto h-auto text-sm font-medium text-center py-0.5 px-1">
                                                         <?= htmlspecialchars($row['status']) ?>
                                                     </p>
                                                 <?php else: ?>
-                                                    <p class="bg-[#FFDE75] rounded-[10px] border border-gray w-auto h-auto text-sm font-medium text-center p-0.5">
+                                                    <p class="bg-[#FFDE75] rounded-[10px] border border-gray w-auto h-auto text-sm font-medium text-center py-0.5 px-1">
                                                         <?= htmlspecialchars($row['status']) ?>
                                                     </p>
                                                 <?php endif; ?>
