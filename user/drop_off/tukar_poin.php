@@ -1,3 +1,15 @@
+<?php
+session_start();  // Start session untuk memeriksa status login
+
+// Halaman yang tidak memerlukan login (seperti landingpage.php)
+if (basename($_SERVER['PHP_SELF']) != 'landingpage.php') {
+    // Jika user belum login, arahkan ke halaman login atau lainnya
+    if (!isset($_SESSION['loggedin'])) {
+        header("Location: ../../landingpage.php");
+        exit();  // Jangan lupa exit setelah redirect
+    }
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
