@@ -14,8 +14,8 @@ if (isset($_GET['id'])) {
     $request_id = $_GET['id'];
 
 $query = "
-    SELECT dr.request_id, dr.drop_off_request_created_at, u.user_name, dr.status, dr.bank_id
-    FROM drop_off_request dr
+    SELECT dr.request_id, dr.drop-off_request_created_at, u.user_name, dr.status, dr.bank_id
+    FROM drop-off_request dr
     JOIN users u ON dr.user_id = u.user_id
     WHERE dr.request_id = '$request_id'
 ";

@@ -1,22 +1,22 @@
 <?php
 session_start();  // Start session untuk memeriksa status login
 
-// Halaman yang tidak memerlukan login (seperti landingpage.php)
-if (basename($_SERVER['PHP_SELF']) != 'landingpage.php') {
+// Halaman yang tidak memerlukan login (seperti landing-page.php)
+if (basename($_SERVER['PHP_SELF']) != 'landing-page.php') {
     // Jika user belum login, arahkan ke halaman login atau lainnya
     if (!isset($_SESSION['loggedin'])) {
-        header("Location: ../../landingpage.php");
+        header("Location: ../../landing-page.php");
         exit();  // Jangan lupa exit setelah redirect
     }
 }
 ?>
 <!DOCTYPE html>
-<html lang="en"class="bg-light dark:[color-scheme:light]">
+<html lang="en" class="bg-light dark:[color-scheme:light]">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="../../css/styles.css" rel="stylesheet">
-    <title>Lestari - Drop Off</title>
+    <title>Lestari - Marketplace</title>
       <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
     <script src="https://cdn.tailwindcss.com"></script>
@@ -61,7 +61,7 @@ if (basename($_SERVER['PHP_SELF']) != 'landingpage.php') {
             <ul
             id="dropdown-menu"
             class="menu menu-sm dropdown-content bg-white rounded-box z-[1] mt-3 w-52 p-2 shadow hidden">
-            <li><a href="../../landingpage.php">Home</a></li>
+            <li><a href="../../landing-page.php">Home</a></li>
             <li><a href="../../user/tentang.php">Tentang kami</a></li>
             <li>
               <a>Layanan</a>
@@ -69,7 +69,7 @@ if (basename($_SERVER['PHP_SELF']) != 'landingpage.php') {
                 <!-- Drop Off -->
                 <li>
                     <?php if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true): ?>
-                    <button onclick="window.location.href='../../user/drop_off/dropoff.php'" >
+                    <button onclick="window.location.href='../../user/drop-off/dropoff.php'" >
                         <p>Drop Off</p>
                     </button>
                     <?php else: ?>
@@ -81,7 +81,7 @@ if (basename($_SERVER['PHP_SELF']) != 'landingpage.php') {
                  <!-- Rewards -->
                 <li>
                     <?php if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true): ?>
-                    <button onclick="window.location.href='../../user/drop_off/poin.php'" >
+                    <button onclick="window.location.href='../../user/drop-off/poin.php'" >
                         <p>Rewards</p>
                     </button>
                     <?php else: ?>
@@ -106,7 +106,7 @@ if (basename($_SERVER['PHP_SELF']) != 'landingpage.php') {
                     </ul>
                 </li>
             <li><a href="../../user/blog.php">Blog</a></li>
-            <li><a href="../../user/kontak_kami.php">Kontak Kami</a></li>
+            <li><a href="../../user/kontak-kami.php">Kontak Kami</a></li>
           </ul>
         </div>
         <!-- BRAND LOGO -->
@@ -117,7 +117,7 @@ if (basename($_SERVER['PHP_SELF']) != 'landingpage.php') {
 <!-- DESKTOP MODE -->
 <div class="navbar-center hidden lg:flex">
   <ul class="menu menu-horizontal px-1 text-dark text-base">
-    <li><a href="../../landingpage.php">Home</a></li>
+    <li><a href="../../landing-page.php">Home</a></li>
     <li><a href="../../user/tentang.php">Tentang kami</a></li>
     <li>
       <details>
@@ -126,7 +126,7 @@ if (basename($_SERVER['PHP_SELF']) != 'landingpage.php') {
           <!-- Drop Off -->
           <li>
             <?php if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true): ?>
-              <button onclick="window.location.href='../../user/drop_off/dropoff.php'" class="btn btn-success flex-grow shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] rounded-[20px] flex items-center justify-center px-4 py-2 gap-2 min-w-[120px] max-w-[200px]">
+              <button onclick="window.location.href='../../user/drop-off/dropoff.php'" class="btn btn-success flex-grow shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] rounded-[20px] flex items-center justify-center px-4 py-2 gap-2 min-w-[120px] max-w-[200px]">
                 <img src="../../images/truck.png" class="w-8 h-8" alt="">
                 <p>Drop Off</p>
               </button>
@@ -140,7 +140,7 @@ if (basename($_SERVER['PHP_SELF']) != 'landingpage.php') {
           <!-- Rewards -->
           <li>
             <?php if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true): ?>
-              <button onclick="window.location.href='../../user/drop_off/poin.php'" class="btn btn-success flex-grow shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] rounded-[20px] flex items-center justify-center px-4 py-2 gap-2 min-w-[120px] max-w-[200px]">
+              <button onclick="window.location.href='../../user/drop-off/poin.php'" class="btn btn-success flex-grow shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] rounded-[20px] flex items-center justify-center px-4 py-2 gap-2 min-w-[120px] max-w-[200px]">
                 <img src="../../images/reward.png" class="w-8 h-8" alt="">
                 <p>Rewards</p>
               </button>
@@ -170,7 +170,7 @@ if (basename($_SERVER['PHP_SELF']) != 'landingpage.php') {
       </details>
     </li>
     <li><a href="../../user/blog.php">Blog</a></li>
-    <li><a href="../../user/kontak_kami.php">Kontak Kami</a></li>
+    <li><a href="../../user/kontak-kami.php">Kontak Kami</a></li>
   </ul>
 </div>
 
@@ -231,74 +231,50 @@ if (basename($_SERVER['PHP_SELF']) != 'landingpage.php') {
     </script>
   <!-- NAVBAR END -->
 
-<!-- Main Section -->
-<section class="md:py-16 bg-gray-100 flex items-center justify-center min-h-screen">
-    <div class="relative bg-gradient-to-r from-green to-dark-green rounded-lg shadow-lg p-8 flex justify-center items-center w-3/4 h-64">
-        <div class="text-white text-center relative"> 
-            <!-- Gambar Truck di Posisi Responsif -->
-            <div class="absolute top-[-40px] left-1/2 transform -translate-x-1/2 md:top-[20px] md:left-[-150px] md:transform-none bg-white rounded-full flex justify-center items-center w-24 h-24 md:w-32 md:h-32">
-                <img src="../../images/truck.png" alt="Truck Icon" class="w-24 h-24">
-            </div>
-            <h2 class="text-3xl font-bold flex items-center justify-center mt-16 md:mt-0">
-                <img src="../../images/user/recycle.png" alt="Recycle Icon" class="w-6 h-6 mr-2">
-                Drop Off
-            </h2>
-            <p class="mt-4 text-lg"> Antar Langsung Sampahmu <br> ke Bank Sampah Terdekat</p>
-            <button 
-                onclick="redirectToLocation()" 
-                class="mt-4 bg-gradient-to-r from-green to-dark-green text-white px-6 py-2 rounded-full shadow hover:bg-green-600 focus:outline-none">
-                Lihat Lokasi
-            </button>
-            <script>
-                function redirectToLocation() {
-                    window.location.href = '../../user/drop_off/lokasi.php';
-                }
-            </script>
-        </div>
+<!-- Main Content -->
+<main class="container mx-auto px-6 py-12 grid grid-cols-1 md:grid-cols-2 gap-8">
+    <!-- Product Image -->
+    <div class="text-center">
+      <img src="https://placehold.co/400x400" alt="Bunga Hias Mawar Plastik" class="rounded-lg shadow-md mx-auto">
+      <h2 class="mt-6 text-green-700 text-xl font-bold">Bunga Hias Mawar Plastik</h2>
+      <p class="text-lg text-gray-700 font-semibold">Rp 15.000</p>
     </div>
-</section>
+
+    <!-- Product Details -->
+    <div>
+      <!-- Product Title Outside Card -->
+      <h2 class="text-green-700 text-2xl font-bold mb-4 hidden md:block">Bunga Hias Mawar Plastik</h2>
+      <p class="text-lg text-gray-700 font-semibold mb-4 hidden md:block">Rp 15.000</p>
 
 
-<!-- Footer -->
-<footer class="bg-gradient-to-r from-green to-dark-green text-white py-7">
-  <div class="container mx-auto px-12">
-    <!-- Logo -->
-    <div class="flex justify-center mb-6">
-      <a href="../../landingpage.php">
-        <img src="../../images/Logo.png" alt="Logo Lestari" class="h-20">
-      </a>
-    </div>
-    
-    <!-- Grid Container -->
-    <div class="grid grid-cols-2 md:grid-cols-3 gap-4 text-center md:text-left">
-      <!-- Bagian Lestari -->
-      <div class="text-left col-span-1 md:col-span-1">
-        <h4 class="font-bold mb-2">Lestari</h4>
-        <a href="../../landingpage.php" class="block text-white hover:underline mb-1">Home</a>
-        <a href="../../user/tentang.php" class="block text-white hover:underline mb-1">Tentang Kami</a>
-        <a href="../../landingpage.php" class="block text-white hover:underline mb-1">Layanan</a>
-        <a href="../../user/blog.php" class="block text-white hover:underline mb-1">Blog</a>
+      <!-- Description Card -->
+      <div class="bg-white shadow-md rounded-lg p-6">
+        <h3 class="text-green-700 text-xl font-bold">Deskripsi Produk</h3>
+        <p class="text-gray-700 mt-4">
+          Bunga Hias Mawar Plastik adalah rangkaian bunga mawar yang terbuat dari bahan plastik berkualitas tinggi.
+          Bunga ini memiliki tampilan yang sangat realistis dan indah, sehingga dapat menjadi pilihan yang sempurna untuk
+          dekorasi rumah atau kantor Anda. Bunga ini juga sangat mudah dirawat, karena tidak memerlukan air atau sinar matahari.
+        </p>
       </div>
 
-      <!-- Bagian Informasi -->
-      <div class="text-right md:text-center col-span-1 md:col-span-1">
-        <h4 class="font-bold mb-2">Informasi</h4>
-        <a href="../../user/kontak_kami.php" class="block text-white hover:underline mb-1">Kontak Kami</a>
+      <div class="bg-white shadow-md rounded-lg p-6 mt-6">
+        <h3 class="text-green-700 text-xl font-bold">Detail Produk</h3>
+        <ul class="list-disc pl-6 mt-4 space-y-2 text-gray-700">
+          <li>75% bahan daur ulang botol plastik</li>
+          <li>Terbuat dari bahan plastik berkualitas tinggi</li>
+          <li>Tampilan yang sangat realistis dan indah</li>
+          <li>Tidak memerlukan air atau sinar matahari</li>
+          <li>Cocok untuk dekorasi rumah atau kantor</li>
+        </ul>
       </div>
 
-      <!-- Bagian Hubungi Kami -->
-      <div class="col-span-2 md:col-span-1 text-center">
-        <h4 class="font-bold mb-2">Hubungi Kami</h4>
-        <div class="flex justify-center space-x-4 mt-2">
-          <a href="#"><img src="../../images/user/sosmed/instagram.png" alt="Instagram"></a>
-          <a href="#"><img src="../../images/user/sosmed/fb.png" alt="Facebook"></a>
-          <a href="#"><img src="../../images/user/sosmed/x.png" alt="Twitter"></a>
-          <a href="#"><img src="../../images/user/sosmed/wa.png" alt="Whatsapp"></a>
-          <a href="#"><img src="../../images/user/sosmed/yt.png" alt="YouTube"></a>
-        </div>
+      <!-- Contact Button -->
+      <div class="mt-6">
+        <a href="#" class="w-full inline-block text-center bg-green-600 text-white py-3 rounded-lg shadow-md hover:bg-green-700">
+          Chat dengan penjual
+        </a>
       </div>
     </div>
-  </div>
-</footer>
+  </main>
 </body>
 </html>

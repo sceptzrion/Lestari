@@ -1,10 +1,10 @@
-<!-- gaya Hidup -->
+<!-- tips daur ulang -->
 <?php
 session_start();
 
-if (!in_array(basename($_SERVER['PHP_SELF']), ['landingpage.php', 'tentang.php', 'blog.php'])) {
+if (!in_array(basename($_SERVER['PHP_SELF']), ['landing-page.php', 'tentang.php', 'blog.php'])) {
   if (!isset($_SESSION['loggedin'])) {
-      header("Location: landingpage.php");
+      header("Location: ../../landing-page.php");
       exit();
   }
 }
@@ -16,7 +16,7 @@ if (!in_array(basename($_SERVER['PHP_SELF']), ['landingpage.php', 'tentang.php',
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="../../css/styles.css" rel="stylesheet">
-    <title>Lestari - Drop Off</title>
+    <title>Lestari - Blog</title>
       <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
     <script src="https://cdn.tailwindcss.com"></script>
@@ -55,7 +55,7 @@ if (!in_array(basename($_SERVER['PHP_SELF']), ['landingpage.php', 'tentang.php',
             <ul
             id="dropdown-menu"
             class="menu menu-sm dropdown-content bg-white rounded-box z-[1] mt-3 w-52 p-2 shadow hidden">
-            <li><a href="../../landingpage.php">Home</a></li>
+            <li><a href="../../landing-page.php">Home</a></li>
             <li><a href="../../user/tentang.php">Tentang kami</a></li>
             <li>
               <a>Layanan</a>
@@ -63,7 +63,7 @@ if (!in_array(basename($_SERVER['PHP_SELF']), ['landingpage.php', 'tentang.php',
                 <!-- Drop Off -->
                 <li>
                     <?php if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true): ?>
-                    <button onclick="window.location.href='../../user/drop_off/dropoff.php'" >
+                    <button onclick="window.location.href='../../user/drop-off/dropoff.php'" >
                         <p>Drop Off</p>
                     </button>
                     <?php else: ?>
@@ -75,7 +75,7 @@ if (!in_array(basename($_SERVER['PHP_SELF']), ['landingpage.php', 'tentang.php',
                  <!-- Rewards -->
                 <li>
                     <?php if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true): ?>
-                    <button onclick="window.location.href='../../user/drop_off/poin.php'" >
+                    <button onclick="window.location.href='../../user/drop-off/poin.php'" >
                         <p>Rewards</p>
                     </button>
                     <?php else: ?>
@@ -100,7 +100,7 @@ if (!in_array(basename($_SERVER['PHP_SELF']), ['landingpage.php', 'tentang.php',
                     </ul>
                 </li>
             <li><a href="../../user/blog.php">Blog</a></li>
-            <li><a href="../../user/kontak_kami.php">Kontak Kami</a></li>
+            <li><a href="../../user/kontak-kami.php">Kontak Kami</a></li>
           </ul>
         </div>
         <!-- BRAND LOGO -->
@@ -111,7 +111,7 @@ if (!in_array(basename($_SERVER['PHP_SELF']), ['landingpage.php', 'tentang.php',
 <!-- DESKTOP MODE -->
 <div class="navbar-center hidden lg:flex">
   <ul class="menu menu-horizontal px-1 text-dark text-base">
-    <li><a href="../../landingpage.php">Home</a></li>
+    <li><a href="../../landing-page.php">Home</a></li>
     <li><a href="../../user/tentang.php">Tentang kami</a></li>
     <li>
       <details>
@@ -120,7 +120,7 @@ if (!in_array(basename($_SERVER['PHP_SELF']), ['landingpage.php', 'tentang.php',
           <!-- Drop Off -->
           <li>
             <?php if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true): ?>
-              <button onclick="window.location.href='../../user/drop_off/dropoff.php'" class="btn btn-success flex-grow shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] rounded-[20px] flex items-center justify-center px-4 py-2 gap-2 min-w-[120px] max-w-[200px]">
+              <button onclick="window.location.href='../../user/drop-off/dropoff.php'" class="btn btn-success flex-grow shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] rounded-[20px] flex items-center justify-center px-4 py-2 gap-2 min-w-[120px] max-w-[200px]">
                 <img src="../../images/truck.png" class="w-8 h-8" alt="">
                 <p>Drop Off</p>
               </button>
@@ -134,7 +134,7 @@ if (!in_array(basename($_SERVER['PHP_SELF']), ['landingpage.php', 'tentang.php',
           <!-- Rewards -->
           <li>
             <?php if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true): ?>
-              <button onclick="window.location.href='../../user/drop_off/poin.php'" class="btn btn-success flex-grow shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] rounded-[20px] flex items-center justify-center px-4 py-2 gap-2 min-w-[120px] max-w-[200px]">
+              <button onclick="window.location.href='../../user/drop-off/poin.php'" class="btn btn-success flex-grow shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] rounded-[20px] flex items-center justify-center px-4 py-2 gap-2 min-w-[120px] max-w-[200px]">
                 <img src="../../images/reward.png" class="w-8 h-8" alt="">
                 <p>Rewards</p>
               </button>
@@ -164,7 +164,7 @@ if (!in_array(basename($_SERVER['PHP_SELF']), ['landingpage.php', 'tentang.php',
       </details>
     </li>
     <li><a href="../../user/blog.php">Blog</a></li>
-    <li><a href="../../user/kontak_kami.php">Kontak Kami</a></li>
+    <li><a href="../../user/kontak-kami.php">Kontak Kami</a></li>
   </ul>
 </div>
 
@@ -224,6 +224,7 @@ if (!in_array(basename($_SERVER['PHP_SELF']), ['landingpage.php', 'tentang.php',
         });
     </script>
   <!-- NAVBAR END -->
+
 <!-- Content -->
     <main class=" bg-light container mx-auto px-16 py-12">
         <p class="text-sm bg-green-100 text-[#1B5E20] font-medium inline-block px-3 py-1 rounded">Tips Daur Ulang</p>
@@ -339,7 +340,7 @@ if (!in_array(basename($_SERVER['PHP_SELF']), ['landingpage.php', 'tentang.php',
   <div class="container mx-auto px-12">
     <!-- Logo -->
     <div class="flex justify-center mb-6">
-      <a href="../../landingpage.php">
+      <a href="../../landing-page.php">
         <img src="../../images/Logo.png" alt="Logo Lestari" class="h-20">
       </a>
     </div>
@@ -349,16 +350,16 @@ if (!in_array(basename($_SERVER['PHP_SELF']), ['landingpage.php', 'tentang.php',
       <!-- Bagian Lestari -->
       <div class="text-left col-span-1 md:col-span-1">
         <h4 class="font-bold mb-2">Lestari</h4>
-        <a href="../../landingpage.php" class="block text-white hover:underline mb-1">Home</a>
+        <a href="../../landing-page.php" class="block text-white hover:underline mb-1">Home</a>
         <a href="../../user/tentang.php" class="block text-white hover:underline mb-1">Tentang Kami</a>
-        <a href="../../landingpage.php" class="block text-white hover:underline mb-1">Layanan</a>
+        <a href="../../landing-page.php" class="block text-white hover:underline mb-1">Layanan</a>
         <a href="../../user/blog.php" class="block text-white hover:underline mb-1">Blog</a>
       </div>
 
       <!-- Bagian Informasi -->
       <div class="text-right md:text-center col-span-1 md:col-span-1">
         <h4 class="font-bold mb-2">Informasi</h4>
-        <a href="../../user/kontak_kami.php" class="block text-white hover:underline mb-1">Kontak Kami</a>
+        <a href="../../user/kontak-kami.php" class="block text-white hover:underline mb-1">Kontak Kami</a>
       </div>
 
       <!-- Bagian Hubungi Kami -->

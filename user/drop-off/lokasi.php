@@ -1,86 +1,77 @@
 <?php
 session_start();  // Start session untuk memeriksa status login
 
-// Halaman yang tidak memerlukan login (seperti landingpage.php)
-if (basename($_SERVER['PHP_SELF']) != 'landingpage.php') {
+// Halaman yang tidak memerlukan login (seperti landing-page.php)
+if (basename($_SERVER['PHP_SELF']) != 'landing-page.php') {
     // Jika user belum login, arahkan ke halaman login atau lainnya
     if (!isset($_SESSION['loggedin'])) {
-        header("Location: landingpage.php");
+        header("Location: ../../landing-page.php");
         exit();  // Jangan lupa exit setelah redirect
     }
 }
 
-$host = 'localhost'; // Change to your database host
-$username = 'root';  // Change to your database username
-$password = '';      // Change to your database password
-$database = 'db_sampah_4'; // Change to your database name
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "db_sampah_4";
 
-$conn = new mysqli($host, $username, $password, $database);
+$conn = new mysqli($servername, $username, $password, $dbname);
 
-// Check connection
+// Cek koneksi
 if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
+    die("Koneksi gagal: " . $conn->connect_error);
 }
 
-$user_id = $_SESSION['user_id']; // Ensure 'user_id' is stored in session
+// Query untuk mengambil data wilayah (region) dan bank sampah
+$sql = "SELECT region, COUNT(bank_id) as total_banks, bank_operating_hours 
+        FROM bank_locations 
+        GROUP BY region";
 
-// Query to get total points for the user
-$query = "SELECT SUM(dr.waste_weight * w.waste_point) AS total_points
-          FROM drop_off_request d
-          LEFT JOIN detail_request dr ON d.request_id = dr.request_id
-          LEFT JOIN waste w ON dr.waste_id = w.waste_id
-          WHERE d.user_id = ? AND d.status = 'accepted'";
-
-$stmt = $conn->prepare($query);
-$stmt->bind_param("i", $user_id);
-$stmt->execute();
-$result = $stmt->get_result();
-$row = $result->fetch_assoc();
-$total_points = $row['total_points'] ?? 0;  // Set to 0 if no points are found
-
-// Fetch the user's drop-off history
-$query = "SELECT d.request_id, d.drop_off_request_created_at, SUM(dr.waste_weight * w.waste_point) AS points 
-          FROM drop_off_request d
-          LEFT JOIN detail_request dr ON d.request_id = dr.request_id
-          LEFT JOIN waste w ON dr.waste_id = w.waste_id
-          WHERE d.user_id = ? 
-          GROUP BY d.request_id 
-          ORDER BY d.drop_off_request_created_at DESC";
-
-$stmt = $conn->prepare($query);
-$stmt->bind_param("i", $user_id);
-$stmt->execute();
-$requests_result = $stmt->get_result();
+$result = $conn->query($sql);
 ?>
 
 <!DOCTYPE html>
-<html lang="en"class="bg-light dark:[color-scheme:light]">
+<html lang="en" class="bg-light dark:[color-scheme:light]">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="../../css/styles.css" rel="stylesheet">
     <title>Lestari - Drop Off</title>
-      <!-- Google Fonts -->
+    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          fontFamily: {
-            'poppins': ['Poppins', 'sans-serif']
+        tailwind.config = {
+          theme: {
+            extend: {
+              fontFamily: {
+                'poppins': ['Poppins', 'sans-serif']
+              }
+            }
           }
+        };
+    </script>
+    <script>
+        function toggleModal() {
+            const modal = document.getElementById("location-modal");
+            modal.classList.toggle("hidden");
         }
-      }
-    }
-  </script>
-  <script>
-    function toggleModal() {
-        const modal = document.getElementById("rewardModal");
-        modal.classList.toggle("hidden");
-    }
-</script>
 
+        // Fungsi Pencarian
+        function handleSearch(query) {
+            const searchQuery = query.toLowerCase();
+            const items = document.querySelectorAll('.grid .bg-white'); // Semua elemen yang ingin disaring
+            
+            items.forEach(item => {
+                const locationName = item.querySelector('h3').textContent.toLowerCase();
+                if (locationName.includes(searchQuery)) {
+                    item.style.display = ''; // Tampilkan item
+                } else {
+                    item.style.display = 'none'; // Sembunyikan item
+                }
+            });
+        }
+    </script>
 </head>
 <body class="font-poppins">
 <!-- NAVBAR -->
@@ -105,7 +96,7 @@ $requests_result = $stmt->get_result();
             <ul
             id="dropdown-menu"
             class="menu menu-sm dropdown-content bg-white rounded-box z-[1] mt-3 w-52 p-2 shadow hidden">
-            <li><a href="../../landingpage.php">Home</a></li>
+            <li><a href="../../landing-page.php">Home</a></li>
             <li><a href="../../user/tentang.php">Tentang kami</a></li>
             <li>
               <a>Layanan</a>
@@ -113,7 +104,7 @@ $requests_result = $stmt->get_result();
                 <!-- Drop Off -->
                 <li>
                     <?php if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true): ?>
-                    <button onclick="window.location.href='../../user/drop_off/dropoff.php'" >
+                    <button onclick="window.location.href='../../user/drop-off/dropoff.php'" >
                         <p>Drop Off</p>
                     </button>
                     <?php else: ?>
@@ -125,7 +116,7 @@ $requests_result = $stmt->get_result();
                  <!-- Rewards -->
                 <li>
                     <?php if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true): ?>
-                    <button onclick="window.location.href='../../user/drop_off/poin.php'" >
+                    <button onclick="window.location.href='../../user/drop-off/poin.php'" >
                         <p>Rewards</p>
                     </button>
                     <?php else: ?>
@@ -134,7 +125,7 @@ $requests_result = $stmt->get_result();
                     </button>
                     <?php endif; ?>
                 </li>
-                
+               
                 <!-- Marketplace -->
                 <li>
                     <?php if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true): ?>
@@ -150,7 +141,7 @@ $requests_result = $stmt->get_result();
                     </ul>
                 </li>
             <li><a href="../../user/blog.php">Blog</a></li>
-            <li><a href="../../user/kontak_kami.php">Kontak Kami</a></li>
+            <li><a href="../../user/kontak-kami.php">Kontak Kami</a></li>
           </ul>
         </div>
         <!-- BRAND LOGO -->
@@ -161,7 +152,7 @@ $requests_result = $stmt->get_result();
 <!-- DESKTOP MODE -->
 <div class="navbar-center hidden lg:flex">
   <ul class="menu menu-horizontal px-1 text-dark text-base">
-    <li><a href="../../landingpage.php">Home</a></li>
+    <li><a href="../../landing-page.php">Home</a></li>
     <li><a href="../../user/tentang.php">Tentang kami</a></li>
     <li>
       <details>
@@ -170,7 +161,7 @@ $requests_result = $stmt->get_result();
           <!-- Drop Off -->
           <li>
             <?php if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true): ?>
-              <button onclick="window.location.href='../../user/drop_off/dropoff.php'" class="btn btn-success flex-grow shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] rounded-[20px] flex items-center justify-center px-4 py-2 gap-2 min-w-[120px] max-w-[200px]">
+              <button onclick="window.location.href='../../user/drop-off/dropoff.php'" class="btn btn-success flex-grow shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] rounded-[20px] flex items-center justify-center px-4 py-2 gap-2 min-w-[120px] max-w-[200px]">
                 <img src="../../images/truck.png" class="w-8 h-8" alt="">
                 <p>Drop Off</p>
               </button>
@@ -184,7 +175,7 @@ $requests_result = $stmt->get_result();
           <!-- Rewards -->
           <li>
             <?php if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true): ?>
-              <button onclick="window.location.href='../../user/drop_off/poin.php'" class="btn btn-success flex-grow shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] rounded-[20px] flex items-center justify-center px-4 py-2 gap-2 min-w-[120px] max-w-[200px]">
+              <button onclick="window.location.href='../../user/drop-off/poin.php'" class="btn btn-success flex-grow shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] rounded-[20px] flex items-center justify-center px-4 py-2 gap-2 min-w-[120px] max-w-[200px]">
                 <img src="../../images/reward.png" class="w-8 h-8" alt="">
                 <p>Rewards</p>
               </button>
@@ -195,7 +186,7 @@ $requests_result = $stmt->get_result();
               </button>
             <?php endif; ?>
           </li>
-          
+         
           <!-- Marketplace -->
           <li>
             <?php if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true): ?>
@@ -214,7 +205,7 @@ $requests_result = $stmt->get_result();
       </details>
     </li>
     <li><a href="../../user/blog.php">Blog</a></li>
-    <li><a href="../../user/kontak_kami.php">Kontak Kami</a></li>
+    <li><a href="../../user/kontak-kami.php">Kontak Kami</a></li>
   </ul>
 </div>
 
@@ -275,42 +266,70 @@ $requests_result = $stmt->get_result();
     </script>
   <!-- NAVBAR END -->
 
-
- <!-- section -->
-<!-- section -->
-<section class="bg-gray-100 w-full min-h-screen">
-  <main class="container mx-auto md:px-16 px-6 py-6">
-    <div class="flex justify-between items-center mb-4">
-      <span class="inline-flex justify-between w-2/4 bg-gradient-to-r from-green to-dark-green text-white rounded-full px-4 py-2 text-sm">
-        <span class="font-bold">Poin Reward</span>
-        <span class="font-bold"><?= number_format($total_points); ?> Poin</span>
-      </span>
-      <a href="../drop_off/tukar_poin.php">
-        <button class="bg-gradient-to-r from-green to-dark-green text-white px-6 py-2 rounded-full shadow hover:bg-green-600 focus:outline-none flex items-center gap-2">
-          Tukar Poin
-        </button>
-      </a>
+<!-- MAIN CONTENT -->
+<main class="bg-light container mx-auto px-12 md:py-8 pb-12">
+    <div class="text-center mb-8">
+        <h2 class="text-green-700 text-3xl font-bold">Lokasi Bank Sampah</h2>
+        <p class="text-gray-600">Pilih kota terdekat dengan lokasi anda</p>
     </div>
-
-    <!-- Riwayat Drop Off -->
-    <div class="bg-white rounded-lg shadow-lg p-6">
-      <h1 class="text-2xl font-bold text-green-700 text-center mb-4">Riwayat Drop Off</h1>
-      <div class="space-y-4">
-        <?php while ($request = $requests_result->fetch_assoc()) : ?>
-          <div class="flex justify-between items-center bg-gray-100 rounded-lg p-4 shadow">
-            <div class="flex items-center space-x-4">
-              <div class="w-12 h-12 bg-[#1B5E20] rounded-full flex items-center justify-center mb-3">
-                <img src="../../images/user/recycle.png" class="w-7" alt="Recycle Icon">
-              </div>
-              <div>
-                <h2 class="font-bold text-[#1B5E20]">Reward Drop Off</h2>
-                <p class="text-sm text-gray-500"><?= date('d M Y, H:i', strtotime($request['drop_off_request_created_at'])); ?></p>
-              </div>
-            </div>
-            <span class="text-xl font-bold text-green-700"><?= number_format($request['points']); ?> Poin</span>
-          </div>
-        <?php endwhile; ?>
-      </div>
+<!-- SEARCH -->
+<div class="bg-light flex justify-end items-center pt-1 pr-1 space-x-4 py-2">
+    <input
+        type="text"
+        placeholder="Search..."
+        class="bg-light border rounded-full px-10 py-1 focus:outline-none focus:ring focus:ring-green-600"
+        oninput="handleSearch(this.value)"
+    />
+</div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" id="bank-sampah-list">
+        <?php
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                $region = $row['region'];
+                $total_banks = $row['total_banks'];
+                $bank_hours = $row['bank_operating_hours'];
+                ?>
+                <div class="bank-sampah-item bg-white shadow-md rounded-lg p-6">
+                    <h3 class="text-green-700 font-bold text-lg"><?php echo htmlspecialchars($region); ?></h3>
+                    <p class="text-gray-600 text-sm"><?php echo $total_banks; ?> Bank Sampah Tersedia</p>
+                    <p class="text-gray-600 text-sm">Jam Operasional: <?php echo htmlspecialchars($bank_hours); ?></p>
+                    <a href="kota.php?region=<?php echo urlencode($region); ?>" 
+                        class="mt-4 bg-gradient-to-r from-green to-dark-green text-white py-2 px-4 rounded hover:bg-green-800 inline-block">
+                         Lihat Detail
+                    </a>
+                </div>
+                <?php
+            }
+        } else {
+            echo "<p class='text-center text-gray-600'>Tidak ada bank sampah ditemukan.</p>";
+        }
+        ?>
     </div>
-  </main>
-</section>
+</main>
+
+<!-- search java -->
+<script>
+    function handleSearch(query) {
+        // Ambil semua elemen dengan class 'bank-sampah-item'
+        const items = document.querySelectorAll('.bank-sampah-item');
+
+        // Jika query kosong, tampilkan semua elemen
+        if (query.trim() === "") {
+            items.forEach(item => item.style.display = 'block');
+            return;
+        }
+
+        // Filter berdasarkan query
+        items.forEach(item => {
+            const region = item.querySelector('h3').textContent.toLowerCase();
+            if (region.includes(query.toLowerCase())) {
+                item.style.display = 'block'; // Tampilkan elemen yang cocok
+            } else {
+                item.style.display = 'none'; // Sembunyikan elemen yang tidak cocok
+            }
+        });
+    }
+</script>
+
+</body>
+</html>

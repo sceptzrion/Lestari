@@ -1,48 +1,47 @@
 <?php
 session_start();  // Start session untuk memeriksa status login
 
-// Halaman yang tidak memerlukan login (seperti landingpage.php)
-if (basename($_SERVER['PHP_SELF']) != 'landingpage.php') {
+// Halaman yang tidak memerlukan login (seperti landing-page.php)
+if (basename($_SERVER['PHP_SELF']) != 'landing-page.php') {
     // Jika user belum login, arahkan ke halaman login atau lainnya
     if (!isset($_SESSION['loggedin'])) {
-        header("Location: ../../landingpage.php");
+        header("Location: ../../landing-page.php");
         exit();  // Jangan lupa exit setelah redirect
     }
 }
-
+// Koneksi ke database
 $servername = "localhost";
 $username = "root";
 $password = "";
-$dbname = "db_sampah_4"; // Ganti dengan nama database Anda
+$dbname = "db_sampah_4";
 
 $conn = new mysqli($servername, $username, $password, $dbname);
 
-// Periksa koneksi
+// Cek koneksi
 if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
+    die("Koneksi gagal: " . $conn->connect_error);
 }
 
-// Periksa jika ada parameter bank_name di URL
-$bank_name = isset($_GET['bank_name']) ? $_GET['bank_name'] : '';
+// Ambil region dari URL
+$region = isset($_GET['region']) ? urldecode($_GET['region']) : "";
 
-// Query untuk mendapatkan data bank
-$query = "SELECT bank_name, bank_address, bank_operating_hours FROM bank_locations WHERE bank_name = ?";
-$stmt = $conn->prepare($query);
-$stmt->bind_param("s", $bank_name);
+// Query untuk mendapatkan detail bank sampah berdasarkan region
+$sql = "SELECT bank_name, bank_address FROM bank_locations WHERE region = ?";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("s", $region);
 $stmt->execute();
 $result = $stmt->get_result();
 
-// Periksa apakah ada data yang ditemukan
-if ($result->num_rows > 0) {
-    $row = $result->fetch_assoc();
-} else {
-    echo "Bank tidak ditemukan.";
-    exit();
-}
-
-$stmt->close();
-$conn->close();
+// Query untuk menghitung jumlah bank sampah berdasarkan region
+$count_sql = "SELECT COUNT(*) AS total_banks FROM bank_locations WHERE region = ?";
+$count_stmt = $conn->prepare($count_sql);
+$count_stmt->bind_param("s", $region);
+$count_stmt->execute();
+$count_result = $count_stmt->get_result();
+$count_row = $count_result->fetch_assoc();
+$total_banks = $count_row['total_banks'];
 ?>
+
 <!DOCTYPE html>
 <html lang="en"class="bg-light dark:[color-scheme:light]">
 <head>
@@ -94,7 +93,7 @@ $conn->close();
             <ul
             id="dropdown-menu"
             class="menu menu-sm dropdown-content bg-white rounded-box z-[1] mt-3 w-52 p-2 shadow hidden">
-            <li><a href="../../landingpage.php">Home</a></li>
+            <li><a href="../../landing-page.php">Home</a></li>
             <li><a href="../../user/tentang.php">Tentang kami</a></li>
             <li>
               <a>Layanan</a>
@@ -102,7 +101,7 @@ $conn->close();
                 <!-- Drop Off -->
                 <li>
                     <?php if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true): ?>
-                    <button onclick="window.location.href='../../user/drop_off/dropoff.php'" >
+                    <button onclick="window.location.href='../../user/drop-off/dropoff.php'" >
                         <p>Drop Off</p>
                     </button>
                     <?php else: ?>
@@ -114,7 +113,7 @@ $conn->close();
                  <!-- Rewards -->
                 <li>
                     <?php if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true): ?>
-                    <button onclick="window.location.href='../../user/drop_off/poin.php'" >
+                    <button onclick="window.location.href='../../user/drop-off/poin.php'" >
                         <p>Rewards</p>
                     </button>
                     <?php else: ?>
@@ -123,7 +122,7 @@ $conn->close();
                     </button>
                     <?php endif; ?>
                 </li>
-                
+              
                 <!-- Marketplace -->
                 <li>
                     <?php if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true): ?>
@@ -139,7 +138,7 @@ $conn->close();
                     </ul>
                 </li>
             <li><a href="../../user/blog.php">Blog</a></li>
-            <li><a href="../../user/kontak_kami.php">Kontak Kami</a></li>
+            <li><a href="../../user/kontak-kami.php">Kontak Kami</a></li>
           </ul>
         </div>
         <!-- BRAND LOGO -->
@@ -150,7 +149,7 @@ $conn->close();
 <!-- DESKTOP MODE -->
 <div class="navbar-center hidden lg:flex">
   <ul class="menu menu-horizontal px-1 text-dark text-base">
-    <li><a href="../../landingpage.php">Home</a></li>
+    <li><a href="../../landing-page.php">Home</a></li>
     <li><a href="../../user/tentang.php">Tentang kami</a></li>
     <li>
       <details>
@@ -159,7 +158,7 @@ $conn->close();
           <!-- Drop Off -->
           <li>
             <?php if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true): ?>
-              <button onclick="window.location.href='../../user/drop_off/dropoff.php'" class="btn btn-success flex-grow shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] rounded-[20px] flex items-center justify-center px-4 py-2 gap-2 min-w-[120px] max-w-[200px]">
+              <button onclick="window.location.href='../../user/drop-off/dropoff.php'" class="btn btn-success flex-grow shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] rounded-[20px] flex items-center justify-center px-4 py-2 gap-2 min-w-[120px] max-w-[200px]">
                 <img src="../../images/truck.png" class="w-8 h-8" alt="">
                 <p>Drop Off</p>
               </button>
@@ -173,7 +172,7 @@ $conn->close();
           <!-- Rewards -->
           <li>
             <?php if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true): ?>
-              <button onclick="window.location.href='../../user/drop_off/poin.php'" class="btn btn-success flex-grow shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] rounded-[20px] flex items-center justify-center px-4 py-2 gap-2 min-w-[120px] max-w-[200px]">
+              <button onclick="window.location.href='../../user/drop-off/poin.php'" class="btn btn-success flex-grow shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] rounded-[20px] flex items-center justify-center px-4 py-2 gap-2 min-w-[120px] max-w-[200px]">
                 <img src="../../images/reward.png" class="w-8 h-8" alt="">
                 <p>Rewards</p>
               </button>
@@ -184,7 +183,7 @@ $conn->close();
               </button>
             <?php endif; ?>
           </li>
-         
+          
           <!-- Marketplace -->
           <li>
             <?php if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true): ?>
@@ -203,7 +202,7 @@ $conn->close();
       </details>
     </li>
     <li><a href="../../user/blog.php">Blog</a></li>
-    <li><a href="../../user/kontak_kami.php">Kontak Kami</a></li>
+    <li><a href="../../user/kontak-kami.php">Kontak Kami</a></li>
   </ul>
 </div>
 
@@ -264,49 +263,52 @@ $conn->close();
     </script>
   <!-- NAVBAR END -->
 
- <!-- card section -->
-<main class="bg-light container mx-auto pt-8 px-16 pb-40">
-  <div class="bg-gradient-to-r from-green to-dark-green text-white rounded-lg p-6 text-center h-32 flex items-center justify-center">
-    <div class="text-white flex items-center justify-center">
+<script>
+    // Toggle dropdown visibility
+    function toggleDropdown() {
+        const dropdown = document.getElementById('dropdownMenu');
+        dropdown.classList.toggle('hidden');
+    }
+
+    // Close dropdown if clicked outside
+    window.addEventListener('click', function(event) {
+        const dropdown = document.getElementById('dropdownMenu');
+        const button = event.target.closest('button');
+        // Jika yang diklik bukan tombol atau dropdown, sembunyikan dropdown
+        if (!button || button.getAttribute('onclick') !== 'toggleDropdown()') {
+            dropdown.classList.add('hidden');
+        }
+    });
+</script>
+<!-- main -->
+  <main class="bg-white container mx-auto md:pt-8 pt-4 md:px-16 px-12 pb-12">
+  <div id="selected-location" class="text-2xl text-[#1B5E20] font-bold mb-3 flex items-center">
+    <img src="../../images/user/Loc.png" alt="Location Icon" class="w-[31px] h-[44px] mr-2"> 
+    <?php echo htmlspecialchars($region); ?>
+  </div>
+  <div class="bg-gradient-to-r from-green to-dark-green text-white rounded-lg p-6 text-center h-32 flex items-center">
+    <div class="text-white text-center relative"> 
       <h2 class="text-3xl font-bold flex items-center">
         <img src="../../images/user/recycle.png" alt="Recycle Icon" class="w-12 h-12 mr-2">
-        Drop Off
+        Drop Off Location
       </h2>
     </div>
   </div>
+  <p class="text-sm text-[#1B5E20] mt-4">
+    <span class="inline-block bg-gradient-to-r from-green to-dark-green text-white rounded-full px-3 py-1 text-sm">
+    <?php echo $total_banks; ?> Bank sampah tersedia.
+    </span>
+  </p>
 
-
-<!-- card loc -->
-<!-- <div class="bg-light container mx-auto pb-24 px-16 pt-1"> -->
-  <div class="bg-white p-6 pb-10 rounded-lg drop-shadow-xl relative">
-    <!-- Logo Checklist di Pojok Kanan Atas -->
-    <img src="../../images/user/checklist.png" alt="Checklist Icon" class="w-6 h-6 absolute top-4 right-4">
-    <h5 class="text-[#1B5E20] text-2xl font-bold"><?= htmlspecialchars($row['bank_name']); ?></h5>
-            <p class="text-sm text-gray-700"><?= htmlspecialchars($row['bank_address']); ?></p>
-            <p class="text-sm text-gray-700">Jam Operasional: <?= htmlspecialchars($row['bank_operating_hours']); ?></p>
-    <div class="flex justify-center mt-4">
-    <form action="invoice.php" method="POST">
-    <button 
-        type="submit"
-        class="bg-gradient-to-r from-green to-dark-green text-white px-6 py-2 rounded-full shadow hover:bg-green-600 focus:outline-none flex items-center gap-2">
-        <img src="../../images/user/recycle.png" alt="Recycle Icon" class="w-6 h-6">
-        Drop Off
-    </button>
-</form>
-    </div>
-    <script>
-      function redirectToLocation() {
-        window.location.href = '../../user/drop_off/invoice.php';
-      }
-    </script>
-  </div>
-<!-- </div> -->
-</main>
-<<<<<<< HEAD
-=======
-
->>>>>>> 9a79ae23c3f8087453fb2d94c73afa26a6abc356
-
-
-
-
+<!-- Locations -->
+<div class="drop-off-list mt-8 space-y-4">
+            <?php while ($row = $result->fetch_assoc()) { ?>
+              <a href="./select-kota.php?bank_name=<?php echo urlencode($row['bank_name']); ?>" class="block bg-white p-4 rounded-lg shadow-md hover:bg-gray-100 cursor-pointer">
+                    <h3 class="text-xl font-bold text-[#1B5E20]"><?php echo htmlspecialchars($row['bank_name']); ?></h3>
+                    <p class="text-sm text-gray-600"><?php echo htmlspecialchars($row['bank_address']); ?></p>
+                </a>
+            <?php } ?>
+        </div>
+    </main>
+</body>
+</html>

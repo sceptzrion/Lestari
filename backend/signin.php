@@ -32,7 +32,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
             // Redirect ke landing page
-            header("Location: ../landingpage.php");
+            header("Location: ../landing-page.php");
             exit;
         } else {
             echo "Password salah!";

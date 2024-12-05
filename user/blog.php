@@ -1,9 +1,9 @@
 <?php
 session_start();
 
-if (!in_array(basename($_SERVER['PHP_SELF']), ['landingpage.php', 'tentang.php', 'blog.php'])) {
+if (!in_array(basename($_SERVER['PHP_SELF']), ['landing-page.php', 'tentang.php', 'blog.php'])) {
   if (!isset($_SESSION['loggedin'])) {
-      header("Location: landingpage.php");
+      header("Location: landing-page.php");
       exit();
   }
 }
@@ -60,7 +60,7 @@ if (!in_array(basename($_SERVER['PHP_SELF']), ['landingpage.php', 'tentang.php',
             <ul
             id="dropdown-menu"
             class="menu menu-sm dropdown-content bg-white rounded-box z-[1] mt-3 w-52 p-2 shadow hidden">
-            <li><a href="../landingpage.php">Home</a></li>
+            <li><a href="../landing-page.php">Home</a></li>
             <li><a href="../user/tentang.php">Tentang kami</a></li>
             <li>
               <a>Layanan</a>
@@ -68,7 +68,7 @@ if (!in_array(basename($_SERVER['PHP_SELF']), ['landingpage.php', 'tentang.php',
                 <!-- Drop Off -->
                 <li>
                     <?php if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true): ?>
-                    <button onclick="window.location.href='../user/drop_off/dropoff.php'" >
+                    <button onclick="window.location.href='../user/drop-off/dropoff.php'" >
                         <p>Drop Off</p>
                     </button>
                     <?php else: ?>
@@ -80,7 +80,7 @@ if (!in_array(basename($_SERVER['PHP_SELF']), ['landingpage.php', 'tentang.php',
                  <!-- Rewards -->
                 <li>
                     <?php if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true): ?>
-                    <button onclick="window.location.href='../user/drop_off/poin.php'" >
+                    <button onclick="window.location.href='../user/drop-off/poin.php'" >
                         <p>Rewards</p>
                     </button>
                     <?php else: ?>
@@ -105,7 +105,7 @@ if (!in_array(basename($_SERVER['PHP_SELF']), ['landingpage.php', 'tentang.php',
                     </ul>
                 </li>
             <li><a href="../user/blog.php">Blog</a></li>
-            <li><a href="../user/kontak_kami.php">Kontak Kami</a></li>
+            <li><a href="../user/kontak-kami.php">Kontak Kami</a></li>
           </ul>
         </div>
         <!-- BRAND LOGO -->
@@ -116,7 +116,7 @@ if (!in_array(basename($_SERVER['PHP_SELF']), ['landingpage.php', 'tentang.php',
 <!-- DESKTOP MODE -->
 <div class="navbar-center hidden lg:flex">
   <ul class="menu menu-horizontal px-1 text-dark text-base">
-    <li><a href="../landingpage.php">Home</a></li>
+    <li><a href="../landing-page.php">Home</a></li>
     <li><a href="../user/tentang.php">Tentang kami</a></li>
     <li>
       <details>
@@ -125,7 +125,7 @@ if (!in_array(basename($_SERVER['PHP_SELF']), ['landingpage.php', 'tentang.php',
           <!-- Drop Off -->
           <li>
             <?php if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true): ?>
-              <button onclick="window.location.href='../user/drop_off/dropoff.php'" class="btn btn-success flex-grow shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] rounded-[20px] flex items-center justify-center px-4 py-2 gap-2 min-w-[120px] max-w-[200px]">
+              <button onclick="window.location.href='../user/drop-off/dropoff.php'" class="btn btn-success flex-grow shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] rounded-[20px] flex items-center justify-center px-4 py-2 gap-2 min-w-[120px] max-w-[200px]">
                 <img src="../images/truck.png" class="w-8 h-8" alt="">
                 <p>Drop Off</p>
               </button>
@@ -139,7 +139,7 @@ if (!in_array(basename($_SERVER['PHP_SELF']), ['landingpage.php', 'tentang.php',
           <!-- Rewards -->
           <li>
             <?php if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true): ?>
-              <button onclick="window.location.href='../user/drop_off/poin.php'" class="btn btn-success flex-grow shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] rounded-[20px] flex items-center justify-center px-4 py-2 gap-2 min-w-[120px] max-w-[200px]">
+              <button onclick="window.location.href='../user/drop-off/poin.php'" class="btn btn-success flex-grow shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] rounded-[20px] flex items-center justify-center px-4 py-2 gap-2 min-w-[120px] max-w-[200px]">
                 <img src="../images/reward.png" class="w-8 h-8" alt="">
                 <p>Rewards</p>
               </button>
@@ -169,7 +169,7 @@ if (!in_array(basename($_SERVER['PHP_SELF']), ['landingpage.php', 'tentang.php',
       </details>
     </li>
     <li><a href="../user/blog.php">Blog</a></li>
-    <li><a href="../user/kontak_kami.php">Kontak Kami</a></li>
+    <li><a href="../user/kontak-kami.php">Kontak Kami</a></li>
   </ul>
 </div>
 
@@ -237,7 +237,7 @@ if (!in_array(basename($_SERVER['PHP_SELF']), ['landingpage.php', 'tentang.php',
 
     <div class="grid grid-cols-1 md:grid-cols-3 md:gap-6 md:mt-8 md:gap-2 gap-4 mt-4">
   <!-- Blog Card 1 -->
-  <a href="../user/blog_content/content1.php" class="block bg-white rounded-lg shadow overflow-hidden transform transition hover:scale-105 hover:shadow-lg">
+  <a href="../user/blog-content/5-cara-kreatif-mengolah-sampah-plastik-menjadi-barang-bernilai.php" class="block bg-white rounded-lg shadow overflow-hidden transform transition hover:scale-105 hover:shadow-lg">
     <img src="../images/user/blog/content1.png" alt="Blog Image" class="w-full">
     <div class="p-4">
       <span class="bg-green-100 text-green-600 text-xs font-medium px-2 py-1 rounded">Tips Daur Ulang</span>
@@ -251,7 +251,7 @@ if (!in_array(basename($_SERVER['PHP_SELF']), ['landingpage.php', 'tentang.php',
   </a>
 
   <!-- Blog Card 2 -->
-  <a href="../user/blog_content/content2.php" class="block bg-white rounded-lg shadow overflow-hidden transform transition hover:scale-105 hover:shadow-lg">
+  <a href="../user/blog-content/content2.php" class="block bg-white rounded-lg shadow overflow-hidden transform transition hover:scale-105 hover:shadow-lg">
     <img src="../images/user/blog/content2.png" alt="Blog Image" class="w-full">
     <div class="p-4">
       <span class="bg-green-100 text-green-600 text-xs font-medium px-2 py-1 rounded">Lingkungan</span>
@@ -265,7 +265,7 @@ if (!in_array(basename($_SERVER['PHP_SELF']), ['landingpage.php', 'tentang.php',
   </a>
 
   <!-- Blog Card 3 -->
-  <a href="../user/blog_content/content3.php" class="block bg-white rounded-lg shadow overflow-hidden transform transition hover:scale-105 hover:shadow-lg">
+  <a href="../user/blog-content/content3.php" class="block bg-white rounded-lg shadow overflow-hidden transform transition hover:scale-105 hover:shadow-lg">
     <img src="../images/user/blog/content3.png" alt="Blog Image" class="w-full">
     <div class="p-4">
       <span class="bg-green-100 text-green-600 text-xs font-medium px-2 py-1 rounded">Gaya Hidup</span>
@@ -303,7 +303,7 @@ if (!in_array(basename($_SERVER['PHP_SELF']), ['landingpage.php', 'tentang.php',
   <div class="container mx-auto px-12">
     <!-- Logo -->
     <div class="flex justify-center mb-6">
-      <a href="../landingpage.php">
+      <a href="../landing-page.php">
         <img src="../images/Logo.png" alt="Logo Lestari" class="h-20">
       </a>
     </div>
@@ -313,16 +313,16 @@ if (!in_array(basename($_SERVER['PHP_SELF']), ['landingpage.php', 'tentang.php',
       <!-- Bagian Lestari -->
       <div class="text-left col-span-1 md:col-span-1">
         <h4 class="font-bold mb-2">Lestari</h4>
-        <a href="../landingpage.php" class="block text-white hover:underline mb-1">Home</a>
+        <a href="../landing-page.php" class="block text-white hover:underline mb-1">Home</a>
         <a href="../user/tentang.php" class="block text-white hover:underline mb-1">Tentang Kami</a>
-        <a href="../landingpage.php" class="block text-white hover:underline mb-1">Layanan</a>
+        <a href="../landing-page.php" class="block text-white hover:underline mb-1">Layanan</a>
         <a href="../user/blog.php" class="block text-white hover:underline mb-1">Blog</a>
       </div>
 
       <!-- Bagian Informasi -->
       <div class="text-right md:text-center col-span-1 md:col-span-1">
         <h4 class="font-bold mb-2">Informasi</h4>
-        <a href="../user/kontak_kami.php" class="block text-white hover:underline mb-1">Kontak Kami</a>
+        <a href="../user/kontak-kami.php" class="block text-white hover:underline mb-1">Kontak Kami</a>
       </div>
 
       <!-- Bagian Hubungi Kami -->
