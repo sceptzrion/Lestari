@@ -215,6 +215,7 @@ if ($conn) {
             <!-- FORM -->
             <div class="bg-light rounded-[10px] w-full h-auto shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] flex flex-col py-[35px] px-[41px] mt-[46px] text-dark">
                 <h2 class="text-2xl font-bold text-center">Status Penerimaan Sampah</h2>
+                <input type="text" name="cari-user" id="cari-user" placeholder="Cari Nama" class="w-1/3 border-2 border-gray px-2 text-dark text-sm font-light bg-light py-1.5 rounded-lg mt-5">
                 <form action="" class="flex flex-row text-base font-medium mt-[21px] w-full gap-[20px] content-start">
                     <select id="status-sampah" name="status-sampah" class="w-[223px] h-auto bg-light border border-gray shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] rounded-[5px] px-[9px] text-base font-medium">
                         <option disabled selected>Semua Status</option>

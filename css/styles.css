@@ -8984,10 +8984,6 @@ html:has(.drawer-open.drawer-open){
   margin-top: 33px;
 }
 
-.mt-\[34px\]{
-  margin-top: 34px;
-}
-
 .mt-\[42px\]{
   margin-top: 42px;
 }
@@ -9173,6 +9169,10 @@ html:has(.drawer-open.drawer-open){
 
 .h-6{
   height: 1.5rem;
+}
+
+.h-60{
+  height: 15rem;
 }
 
 .h-64{
@@ -9595,6 +9595,18 @@ html:has(.drawer-open.drawer-open){
   min-width: 608px;
 }
 
+.min-w-64{
+  min-width: 16rem;
+}
+
+.min-w-72{
+  min-width: 18rem;
+}
+
+.min-w-full{
+  min-width: 100%;
+}
+
 .max-w-24{
   max-width: 6rem;
 }
@@ -9896,6 +9908,10 @@ html:has(.drawer-open.drawer-open){
 
 .list-decimal{
   list-style-type: decimal;
+}
+
+.list-disc{
+  list-style-type: disc;
 }
 
 .appearance-none{
@@ -11021,6 +11037,11 @@ html:has(.drawer-open.drawer-open){
   background-color: rgb(235 50 35 / var(--tw-bg-opacity, 1));
 }
 
+.bg-\[\#EB5757\]{
+  --tw-bg-opacity: 1;
+  background-color: rgb(235 87 87 / var(--tw-bg-opacity, 1));
+}
+
 .bg-\[\#F6AC0A\]{
   --tw-bg-opacity: 1;
   background-color: rgb(246 172 10 / var(--tw-bg-opacity, 1));
@@ -11073,11 +11094,6 @@ html:has(.drawer-open.drawer-open){
 
 .bg-transparent{
   background-color: transparent;
-}
-
-.bg-\[\#EB5757\]{
-  --tw-bg-opacity: 1;
-  background-color: rgb(235 87 87 / var(--tw-bg-opacity, 1));
 }
 
 .bg-opacity-25{
@@ -11294,10 +11310,6 @@ html:has(.drawer-open.drawer-open){
      object-fit: scale-down;
 }
 
-.p-0\.5{
-  padding: 0.125rem;
-}
-
 .p-1{
   padding: 0.25rem;
 }
@@ -11480,6 +11492,11 @@ html:has(.drawer-open.drawer-open){
   padding-right: 9px;
 }
 
+.py-0\.5{
+  padding-top: 0.125rem;
+  padding-bottom: 0.125rem;
+}
+
 .py-1{
   padding-top: 0.25rem;
   padding-bottom: 0.25rem;
@@ -11580,11 +11597,6 @@ html:has(.drawer-open.drawer-open){
   padding-bottom: 75px;
 }
 
-.py-0\.5{
-  padding-top: 0.125rem;
-  padding-bottom: 0.125rem;
-}
-
 .pb-10{
   padding-bottom: 2.5rem;
 }
@@ -11643,6 +11655,14 @@ html:has(.drawer-open.drawer-open){
 
 .pl-5{
   padding-left: 1.25rem;
+}
+
+.pl-6{
+  padding-left: 1.5rem;
+}
+
+.pl-7{
+  padding-left: 1.75rem;
 }
 
 .pl-\[23px\]{
@@ -11719,18 +11739,6 @@ html:has(.drawer-open.drawer-open){
 
 .pt-\[7px\]{
   padding-top: 7px;
-}
-
-.pl-0{
-  padding-left: 0px;
-}
-
-.pl-10{
-  padding-left: 2.5rem;
-}
-
-.pl-7{
-  padding-left: 1.75rem;
 }
 
 .text-left{
@@ -11998,11 +12006,6 @@ html:has(.drawer-open.drawer-open){
 
 .text-\[\#336699\]\/\[\.35\]{
   color: rgb(51 102 153 / .35);
-}
-
-.text-\[\#B3B3B3\]{
-  --tw-text-opacity: 1;
-  color: rgb(179 179 179 / var(--tw-text-opacity, 1));
 }
 
 .text-dark{
@@ -12684,6 +12687,14 @@ html:has(.drawer-open.drawer-open){
 }
 
 @media (min-width: 640px){
+  .sm\:h-5{
+    height: 1.25rem;
+  }
+
+  .sm\:max-w-96{
+    max-width: 24rem;
+  }
+
   .sm\:max-w-full{
     max-width: 100%;
   }
@@ -12692,16 +12703,17 @@ html:has(.drawer-open.drawer-open){
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
+  .sm\:text-xl{
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+  }
+
   .sm\:underline{
     text-decoration-line: underline;
   }
 }
 
 @media (min-width: 768px){
-  .md\:absolute{
-    position: absolute;
-  }
-
   .md\:left-\[-150px\]{
     left: -150px;
   }
@@ -12786,6 +12798,10 @@ html:has(.drawer-open.drawer-open){
     height: 1.25rem;
   }
 
+  .md\:h-6{
+    height: 1.5rem;
+  }
+
   .md\:h-\[375px\]{
     height: 375px;
   }
@@ -12804,10 +12820,6 @@ html:has(.drawer-open.drawer-open){
 
   .md\:w-1\/2{
     width: 50%;
-  }
-
-  .md\:w-12{
-    width: 3rem;
   }
 
   .md\:w-3\/4{
@@ -12830,8 +12842,16 @@ html:has(.drawer-open.drawer-open){
     width: auto;
   }
 
+  .md\:w-full{
+    width: 100%;
+  }
+
   .md\:min-w-\[100px\]{
     min-width: 100px;
+  }
+
+  .md\:max-w-\[610px\]{
+    max-width: 610px;
   }
 
   .md\:max-w-full{
@@ -12867,6 +12887,10 @@ html:has(.drawer-open.drawer-open){
     flex-direction: row;
   }
 
+  .md\:place-content-baseline{
+    place-content: baseline;
+  }
+
   .md\:items-start{
     align-items: flex-start;
   }
@@ -12895,8 +12919,16 @@ html:has(.drawer-open.drawer-open){
     gap: 1rem;
   }
 
+  .md\:gap-5{
+    gap: 1.25rem;
+  }
+
   .md\:gap-6{
     gap: 1.5rem;
+  }
+
+  .md\:place-self-auto{
+    place-self: auto;
   }
 
   .md\:rounded-full{
@@ -12947,6 +12979,11 @@ html:has(.drawer-open.drawer-open){
     padding-right: 0px;
   }
 
+  .md\:px-10{
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
+  }
+
   .md\:px-16{
     padding-left: 4rem;
     padding-right: 4rem;
@@ -12965,6 +13002,11 @@ html:has(.drawer-open.drawer-open){
   .md\:px-9{
     padding-left: 2.25rem;
     padding-right: 2.25rem;
+  }
+
+  .md\:py-0{
+    padding-top: 0px;
+    padding-bottom: 0px;
   }
 
   .md\:py-1{
@@ -12995,6 +13037,10 @@ html:has(.drawer-open.drawer-open){
   .md\:py-8{
     padding-top: 2rem;
     padding-bottom: 2rem;
+  }
+
+  .md\:pl-12{
+    padding-left: 3rem;
   }
 
   .md\:pl-9{
@@ -13107,12 +13153,28 @@ html:has(.drawer-open.drawer-open){
     display: none;
   }
 
+  .lg\:aspect-auto{
+    aspect-ratio: auto;
+  }
+
+  .lg\:h-7{
+    height: 1.75rem;
+  }
+
+  .lg\:h-9{
+    height: 2.25rem;
+  }
+
   .lg\:h-\[500px\]{
     height: 500px;
   }
 
   .lg\:h-auto{
     height: auto;
+  }
+
+  .lg\:h-full{
+    height: 100%;
   }
 
   .lg\:w-\[450px\]{
@@ -13123,8 +13185,16 @@ html:has(.drawer-open.drawer-open){
     width: 500px;
   }
 
+  .lg\:min-w-72{
+    min-width: 18rem;
+  }
+
   .lg\:max-w-28{
     max-width: 7rem;
+  }
+
+  .lg\:max-w-\[500px\]{
+    max-width: 500px;
   }
 
   .lg\:grid-cols-2{
@@ -13133,6 +13203,10 @@ html:has(.drawer-open.drawer-open){
 
   .lg\:grid-cols-3{
     grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .lg\:flex-row{
+    flex-direction: row;
   }
 
   .lg\:justify-normal{
@@ -13151,6 +13225,11 @@ html:has(.drawer-open.drawer-open){
   .lg\:text-2xl{
     font-size: 1.5rem;
     line-height: 2rem;
+  }
+
+  .lg\:text-3xl{
+    font-size: 1.875rem;
+    line-height: 2.25rem;
   }
 
   .lg\:text-4xl{
@@ -13190,6 +13269,10 @@ html:has(.drawer-open.drawer-open){
     width: auto;
   }
 
+  .xl\:max-w-\[600px\]{
+    max-width: 600px;
+  }
+
   .xl\:items-baseline{
     align-items: baseline;
   }
@@ -13219,6 +13302,11 @@ html:has(.drawer-open.drawer-open){
     padding-right: 3rem;
   }
 
+  .xl\:text-5xl{
+    font-size: 3rem;
+    line-height: 1;
+  }
+
   .xl\:text-lg{
     font-size: 1.125rem;
     line-height: 1.75rem;
@@ -13227,6 +13315,10 @@ html:has(.drawer-open.drawer-open){
   .xl\:text-xl{
     font-size: 1.25rem;
     line-height: 1.75rem;
+  }
+
+  .xl\:leading-relaxed{
+    line-height: 1.625;
   }
 }
 

@@ -28,7 +28,7 @@ $redeem_result = $conn->query($sql);
     <title>Kelola Reward | Admin Lestari</title>
 </head>
 <body>
-    <div class="flex flex-row h-full w-full">
+    <div class="flex flex-row min-h-[1024px] w-full">
         <!-- SIDEBAR -->
         <div class="bg-gradient-to-t from-green-admin to-dark-green-admin w-[345px] h-auto text-light">
             <div class="flex flex-col pt-10 items-center">
