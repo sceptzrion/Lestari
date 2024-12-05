@@ -105,21 +105,24 @@ if (!isset($_SESSION['admin_id'])) {
             
             <!-- BUTTONS -->
             <div class="mt-7 w-1/3">
-                <form action="" class="flex flex-col gap-4 w-auto">
-                    <input type="text" name="cari-user" id="cari-user" placeholder="Cari Produk" class="w-auto px-1 text-dark text-sm font-light bg-light rounded-[5px] py-1.5 h-[34px]">
-                    <div class="flex flex-row gap-4">
-                        <select id="kategori" name="kategori" class="w-auto h-[34px] bg-light border border-gray rounded-[5px] text-sm px-3 py-1.5 font-medium text-dark">
-                            <option disabled selected>Semua Kategori</option>
-                            <option>Option 1</option>
-                            <option>Option 2</option>
-                        </select>
-                        <select id="urutkan" name="urutkan" class="w-auto h-[34px] bg-light border border-gray rounded-[5px] text-sm px-3 py-1.5 font-medium text-dark">
-                            <option disabled selected>Urutkan Berdasarkan</option>
-                            <option>Option 1</option>
-                            <option>Option 2</option>
-                        </select>
-                    </div>
-                </form>
+                <div class="flex flex-col lg:flex-row gap-4">
+                    <input type="text" name="cari-user" id="cari-user" placeholder="Cari Produk" class="min-w-72 px-1 text-dark text-sm font-light bg-light rounded-[5px] py-1.5 h-[34px]">
+                    <form action="" class="flex flex-row gap-4 w-auto">
+                        <div class="flex flex-row gap-4">
+                            <select id="kategori" name="kategori" class="w-auto h-[34px] bg-light border border-gray rounded-[5px] text-sm px-3 py-1.5 font-medium text-dark">
+                                <option disabled selected>Semua Kategori</option>
+                                <option>Option 1</option>
+                                <option>Option 2</option>
+                            </select>
+                            <select id="urutkan" name="urutkan" class="w-auto h-[34px] bg-light border border-gray rounded-[5px] text-sm px-3 py-1.5 font-medium text-dark">
+                                <option disabled selected>Urutkan Berdasarkan</option>
+                                <option>Option 1</option>
+                                <option>Option 2</option>
+                            </select>
+                            <button class="btn-success bg-[#2E9E5D] rounded-[5px] w-auto h-full px-8 text-base font-semibold text-light shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] border border-gray">Cari</button>
+                        </div>
+                    </form>
+                </div>
             </div>
             <!-- BUTTONS END -->
 
