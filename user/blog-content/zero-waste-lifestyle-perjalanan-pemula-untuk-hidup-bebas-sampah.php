@@ -1,4 +1,4 @@
-<!-- lingkungan -->
+<!-- gaya Hidup -->
 <?php
 session_start();
 
@@ -224,104 +224,89 @@ if (!in_array(basename($_SERVER['PHP_SELF']), ['landing-page.php', 'tentang.php'
         });
     </script>
   <!-- NAVBAR END -->
-
 <!-- Content -->
-    <main class=" bg-light container mx-auto px-16 py-12">
-        <p class="text-sm bg-green-100 text-[#1B5E20] font-medium inline-block px-3 py-1 rounded">Lingkungan</p>
-        <h1 class="text-3xl font-bold text-[#1B5E20] mt-4">5 Cara Kreatif Mengolah Sampah Plastik Menjadi Barang Bernilai</h1>
-        <p class="text-gray-500 mt-2">Dipublikasikan 2 Hari yang Lalu</p>
-        <img src="../../images/user/blog/content1.png" alt="Gambar ilustrasi daur ulang" class="mt-4 mb-6 w-[500px] rounded-lg">
-        <p class="text-gray-700 mb-6 text-justify">
-            Sampah plastik telah menjadi salah satu masalah lingkungan yang paling serius di era modern. Namun, dengan sedikit kreativitas dan inovasi, kita dapat mengubah sampah plastik menjadi produk yang bernilai dan bermanfaat.      </p>
+    <main class="bg-light container mx-auto px-16 py-12">
+        <p class="text-sm bg-green-100 text-[#1B5E20] font-medium inline-block px-3 py-1 rounded">Gaya Hidup</p>
+        <h1 class="text-3xl font-bold text-[#1B5E20] mt-4">Zero Waste Lifestyle: Perjalanan Pemula untuk Hidup Bebas Sampah</h1>
+        <p class="text-gray-500 mt-2">Dipublikasikan 2 Desember 2024</p>
+        <img src="../../images/user/blog/content3.png" alt="Gambar ilustrasi daur ulang" class="mt-4 mb-6 w-[500px] rounded-lg">
+        <p class="text-gray-700 mb-1 text-justify">
+        Terwujudnya lingkungan yang bebih bersih dimulai dari langkah-langkah kecil yang konsisten. Zero waste lifestyle bukan hanya tentang mengurangi sampah, tetapi juga tentang mengubah pola pikir dan kebiasaan kita sehari-hari.      </p>
         <div class="mt-8 space-y-10">
-            <!-- Section 1 -->
-            <section>
-                <h2 class="text-xl font-bold text-[#1B5E20]">1. Membuat Pot Bunga dari Botol Plastik</h2>
-                <div class="bg-gray-50 border rounded-lg p-4 mt-2 text-gray-700">
-                <p class="mb-4">Botol plastik bekas dapat diubah menjadi pot bunga yang menarik dengan mengikuti langkah-langkah berikut :</p>
-                    <ol class="list-decimal pl-5 space-y-2">
-                    <li>Bersihkan botol plastik hingga benar-benar bersih.</li>
-                    <li>Potong botol plastik menjadi dua bagian secara horizontal (sekitar 1/3 dari bawah).</li>
-                    <li>Buat 4-5 lubang kecil di bagian bawah untuk drainase.</li>
-                    <li>Buat pola sesuai desain yang diinginkan (bisa berbentuk hewan, geometris, dll).</li>
-                    <li>Cat permukaan botol sesuai selera (tunggu hingga benar-benar kering).</li>
-                    <li>Isi dengan media tanam.</li>
-                    <li>Tanam tanaman yang diinginkan.</li>
-                    </ol>
-                </div>
-            </section>
+      </main>
+  <!-- Main Content -->
+<main class="max-w-6xl mx-auto bg-white rounded-lg md:p-8 md:px-1 px-8 py-1 mt-1">
+  <section class="mb-12">
+    <h1 class="text-2xl font-extrabold text-[#1B5E20] mb-1 text-left">
+      Apa itu Zero Waste Lifestyle?
+    </h1>
+    <p class="text-gray-700  text-lg leading-relaxed">
+    Zero Waste Lifestyle adalah gaya hidup yang bertujuan untuk meminimalkan produksi sampah dalam kehidupan sehari-hari. Konsep ini berfokus pada prinsip 5R:    </p>
+  </section>
 
-            <!-- Section 2 -->
-            <section>
-                <h2 class="text-xl font-bold text-[#1B5E20]">2. Tas Belanja dari Kemasan Plastik</h2>
-                <div class="bg-gray-50 border rounded-lg p-4 mt-2 text-gray-700">
-                <p class="mb-4">Kemasan plastik bekas dapat dianyam menjadi tas belanja yang kuat dan stylish. Berikut langkah langkah nya</p>
-                    <ol class="list-decimal pl-5 space-y-2">
-                        <li>Bersihkan kemasan plastik dari debu dan kotoran</li>
-                        <li>Potong kemasan menjadi lembaran-lembaran sama besar</li>
-                        <li>Susun dan setrika dengan kertas minyak sebagai pelapis</li>
-                        <li>Jahit sesuai pola tas yang diinginkan</li>
-                        <li>Tambahkan tali untuk pegangan tas</li>
-                    </ol>
-                </div>
-            </section>
+  <!-- Prinsip Zero Waste -->
+  <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+    <!-- Refuse -->
+    <div class="bg-green-50 border border-green-200 rounded-lg p-6 shadow-sm">
+      <h2 class="text-xl font-semibold text-[#1B5E20] mb-2">Refuse (Menolak)</h2>
+      <p class="text-gray-600">
+        Menolak barang-barang yang tidak diperlukan, seperti sedotan plastik, brosur kertas, atau barang promosi gratis, yang berpotensi menjadi sampah.
+      </p>
+    </div>
+    <!-- Reduce -->
+    <div class="bg-green-50 border border-green-200 rounded-lg p-6 shadow-sm">
+      <h2 class="text-xl font-semibold text-[#1B5E20] mb-2">Reduce (Mengurangi)</h2>
+      <p class="text-gray-600">
+        Kurangi pembelian barang-barang baru dengan memprioritaskan kualitas daripada kuantitas. Fokus pada barang yang benar-benar esensial.
+      </p>
+    </div>
+    <!-- Reuse -->
+    <div class="bg-green-50 border border-green-200 rounded-lg p-6 shadow-sm">
+      <h2 class="text-xl font-semibold text-[#1B5E20] mb-2">Reuse (Menggunakan Kembali)</h2>
+      <p class="text-gray-600">
+        Gunakan kembali barang-barang yang Anda miliki, seperti tas kain, botol minum, dan kotak makan, untuk mengurangi konsumsi barang sekali pakai.
+      </p>
+    </div>
+    <!-- Recycle -->
+    <div class="bg-green-50 border border-green-200 rounded-lg p-6 shadow-sm">
+      <h2 class="text-xl font-semibold text-[#1B5E20] mb-2">Recycle (Mendaur Ulang)</h2>
+      <p class="text-gray-600">
+        Mendaur ulang barang-barang seperti kertas, kaca, atau plastik dengan memilah sampah rumah tangga sesuai jenis materialnya.
+      </p>
+    </div>
+    <!-- Rot -->
+    <div class="bg-green-50 border border-green-200 rounded-lg p-6 shadow-sm">
+      <h2 class="text-xl font-semibold text-[#1B5E20] mb-2">Rot (Membusuk)</h2>
+      <p class="text-gray-600">
+        Ubah sampah organik seperti sisa makanan atau daun kering menjadi kompos yang berguna untuk menyuburkan tanah.
+      </p>
+    </div>
+  </section>
 
-            <!-- Section 3 -->
-            <section>
-                <h2 class="text-xl font-bold text-[#1B5E20]">3. Hiasan Dinding dari Tutup Botol</h2>
-                <div class="bg-gray-50 border rounded-lg p-4 mt-2 text-gray-700">
-                <p class="mb-4">Tutup botol plastik dapat disusun menjadi hiasan dinding yang artistik dengan mengikuti langkah-langkah berikut :</p>
-                    <ol class="list-decimal pl-5 space-y-2">
-                    <li>Kumpulkan tutup botol dalam jumlah banyak.</li>
-                    <li>Buat pola atau desain di papan.</li>
-                    <li>Tempelkan tutup botol sesuai pola.</li>
-                    <li>Semprot dengan clear coat untuk hasil mengkilap.</li>
-                    </ol>
-                </div>
-            </section>
+  <!-- Tips Memulai -->
+  <section class="mt-16 bg-green-50 border border-green-200 rounded-lg p-8 shadow-md">
+    <h2 class="text-xl font-bold text-[#1B5E20] mb-6">
+      Tips Memulai Zero Waste Lifestyle
+    </h2>
+    <ul class="list-disc list-inside space-y-3 text-gray-700">
+      <li>Membawa tas belanja kain untuk menggantikan plastik.</li>
+      <li>Menggunakan botol minum atau cangkir kopi yang dapat digunakan kembali.</li>
+      <li>Menghindari penggunaan alat makan sekali pakai seperti sendok atau sedotan plastik.</li>
+      <li>Memilah sampah berdasarkan jenisnya: organik dan anorganik.</li>
+      <li>Membuat kompos dari sisa dapur seperti kulit buah dan sayuran.</li>
+    </ul>
+    <p class="text-gray-600 mt-4">
+      Ingat, setiap langkah kecil yang Anda ambil membantu menciptakan perubahan besar. Jadilah bagian dari solusi untuk menjaga bumi kita tetap hijau dan sehat!
+    </p>
+  </section>
 
-            <!-- Section 4 -->
-            <section>
-                <h2 class="text-xl font-bold text-[#1B5E20]">4. Tempat Pensil dari Botol Sampo</h2>
-                <div class="bg-gray-50 border rounded-lg p-4 mt-2 text-gray-700">
-                <p class="mb-4">Botol sampo bekas dapat diubah menjadi tempat pensil yang unik dengan mengikuti langkah langkah dibawah ini :</p>
-                    <ol class="list-decimal pl-5 space-y-2">
-                    <li>Bersihkan botol sampo hingga benar-benar bersih dari sisa sampo.</li>
-                    <li>Potong botol sesuai ketinggian yang diinginkan (biasanya 15-20 cm).</li>
-                    <li>Amplas permukaan botol agar cat dapat menempel dengan baik.</li>
-                    <li>Buat pola atau desain yang diinginkan.</li>
-                    <li>Cat dasar seluruh permukaan botol (2-3 lapis).</li>
-                    <li>Tambahkan detail dan hiasan sesuai selera.</li>
-                    <li>Aplikasikan clear coat untuk hasil yang tahan lama.</li>
-                    </ol>
-                </div>
-            </section>
-
-            <!-- Section 5 -->
-            <section>
-                <h2 class="text-xl font-bold text-[#1B5E20]">5. Vas Bunga dari Plastik Daur Ulang</h2>
-                <div class="bg-gray-50 border rounded-lg p-4 mt-2 text-gray-700">
-                <p class="mb-4">Berbagai jenis plastik dapat dilelehkan dan dibentuk ulang menjadi vas bunga dengan mengikuti langkah langkah dibawah ini :</p>
-                    <ol class="list-decimal pl-5 space-y-2">
-                        <li>Potong plastik menjadi potongan-potongan kecil</li>
-                        <li>Siapkan cetakan dari botol plastik, lapisi dengan aluminium foil</li>
-                        <li>Susun potongan plastik pada cetakan dengan pola yang diinginkan</li>
-                        <li>Panaskan dengan hati-hati menggunakan heat gun atau oven dengan suhu rendah (~150°C)</li>
-                        <li>Tunggu hingga plastik meleleh dan menyatu</li>
-                        <li>Biarkan dingin secara alami</li>
-                        <li>Lepaskan dari cetakan dengan hati-hati</li>
-                    </ol>
-                </div>
-            </section>
-
-            <!-- Back Button -->
-            <div class="mt-6">
-                <a href="../../user/blog.php" class="bg-gradient-to-r from-green to-dark-green text-white px-6 py-2 rounded shadow hover:bg-green-800">
-                    Kembali
-                </a>
-            </div>
-        </div>
-    </main>
+   <!-- Back Button -->
+   <div class="mt-6">
+      <a href="../../user/blog.php" class="bg-gradient-to-r from-green to-dark-green text-white px-6 py-2 rounded shadow hover:bg-green-800">
+          Kembali
+      </a>
+    </div>
+</main>
 
 <!-- modal  -->
 <div id="loginModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">

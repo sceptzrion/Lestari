@@ -283,10 +283,18 @@ if (basename($_SERVER['PHP_SELF']) != 'landing-page.php') {
             </div>
           </div>
         </div>
+        <div class="block">
+          <?php if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true): ?>
+              <a href="./user/drop-off/dropoff.php" class="md:mt-4 text-black font-bold cursor-pointer hover:text-green-700">
+                  Lihat Selengkapnya →
+              </a>
+          <?php else: ?>
+              <a href="javascript:void(0)" onclick="showModal()" class="block md:mt-4 text-black font-bold cursor-pointer hover:text-green-700">
+                  Lihat Selengkapnya →
+              </a>
+          <?php endif; ?>
+      </div>
 
-        <a href="./user/tentang.php" class="md:mt-4 text-black font-bold cursor-pointer hover:text-green-700">
-          Lihat Selengkapnya →
-        </a>
       </div>
     </div>
   </div>
@@ -337,7 +345,7 @@ if (basename($_SERVER['PHP_SELF']) != 'landing-page.php') {
             <!-- Card Marketplace -->
             <div class="block">
                 <?php if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true): ?>
-                    <a href="../user/marketplace/marketplace.php" class="block">
+                    <a href="./user/marketplace/marketplace.php" class="block">
                         <div class="bg-white p-6 rounded-lg shadow-md cursor-pointer hover:bg-green-200 h-full justify-between">
                             <h5 class="text-xl mb-2">🛍️ Marketplace</h5>
                             <p>Marketplace LESTARI menyediakan produk berkualitas daur ulang. Dukungan nyata untuk gerakan ramah lingkungan.</p>
@@ -365,49 +373,65 @@ if (basename($_SERVER['PHP_SELF']) != 'landing-page.php') {
     <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
       
       <!-- Kertas -->
-      <a href="./user/sampah/kertas.php" class="bg-white p-4 rounded-lg shadow-md text-center hover:bg-green-100 transition-all">
+      <a href="<?php echo isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true ? './user/sampah/kertas.php' : 'javascript:void(0)'; ?>" 
+         onclick="<?php echo isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true ? '' : 'showModal()'; ?>" 
+         class="bg-white p-4 rounded-lg shadow-md text-center hover:bg-green-100 transition-all">
         <div class="text-4xl mb-2">📄</div>
         <p>Kertas</p>
       </a>
 
       <!-- Plastik -->
-      <a href="./user/sampah/plastik.php" class="bg-white p-4 rounded-lg shadow-md text-center hover:bg-green-100 transition-all">
+      <a href="<?php echo isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true ? './user/sampah/plastik.php' : 'javascript:void(0)'; ?>" 
+         onclick="<?php echo isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true ? '' : 'showModal()'; ?>" 
+         class="bg-white p-4 rounded-lg shadow-md text-center hover:bg-green-100 transition-all">
         <div class="text-4xl mb-2">🛢️</div>
         <p>Plastik</p>
       </a>
 
       <!-- Aluminium -->
-      <a href="./user/sampah/aluminium.php" class="bg-white p-4 rounded-lg shadow-md text-center hover:bg-green-100 transition-all">
+      <a href="<?php echo isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true ? './user/sampah/aluminium.php' : 'javascript:void(0)'; ?>" 
+         onclick="<?php echo isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true ? '' : 'showModal()'; ?>" 
+         class="bg-white p-4 rounded-lg shadow-md text-center hover:bg-green-100 transition-all">
         <div class="text-4xl mb-2">🥫</div>
         <p>Aluminium</p>
       </a>
 
       <!-- Besi & Logam -->
-      <a href="./user/sampah/besi.php" class="bg-white p-4 rounded-lg shadow-md text-center hover:bg-green-100 transition-all">
+      <a href="<?php echo isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true ? './user/sampah/besi.php' : 'javascript:void(0)'; ?>" 
+         onclick="<?php echo isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true ? '' : 'showModal()'; ?>" 
+         class="bg-white p-4 rounded-lg shadow-md text-center hover:bg-green-100 transition-all">
         <div class="text-4xl mb-2">🔩</div>
         <p>Besi & Logam</p>
       </a>
 
       <!-- Elektronik -->
-      <a href="./user/sampah/elektronik.php" class="bg-white p-4 rounded-lg shadow-md text-center hover:bg-green-100 transition-all">
+      <a href="<?php echo isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true ? './user/sampah/elektronik.php' : 'javascript:void(0)'; ?>" 
+         onclick="<?php echo isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true ? '' : 'showModal()'; ?>" 
+         class="bg-white p-4 rounded-lg shadow-md text-center hover:bg-green-100 transition-all">
         <div class="text-4xl mb-2">💻</div>
         <p>Elektronik</p>
       </a>
 
       <!-- Botol Kaca -->
-      <a href="./user/sampah/botol.php" class="bg-white p-4 rounded-lg shadow-md text-center hover:bg-green-100 transition-all">
+      <a href="<?php echo isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true ? './user/sampah/botol.php' : 'javascript:void(0)'; ?>" 
+         onclick="<?php echo isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true ? '' : 'showModal()'; ?>" 
+         class="bg-white p-4 rounded-lg shadow-md text-center hover:bg-green-100 transition-all">
         <div class="text-4xl mb-2">🍾</div>
         <p>Botol Kaca</p>
       </a>
 
       <!-- Merek -->
-      <a href="./user/sampah/merek.php" class="bg-white p-4 rounded-lg shadow-md text-center hover:bg-green-100 transition-all">
+      <a href="<?php echo isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true ? './user/sampah/merek.php' : 'javascript:void(0)'; ?>" 
+         onclick="<?php echo isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true ? '' : 'showModal()'; ?>" 
+         class="bg-white p-4 rounded-lg shadow-md text-center hover:bg-green-100 transition-all">
         <div class="text-4xl mb-2">🏷️</div>
         <p>Merek</p>
       </a>
 
       <!-- Khusus -->
-      <a href="./user/sampah/khusus.php" class="bg-white p-4 rounded-lg shadow-md text-center hover:bg-green-100 transition-all">
+      <a href="<?php echo isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true ? './user/sampah/khusus.php' : 'javascript:void(0)'; ?>" 
+         onclick="<?php echo isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true ? '' : 'showModal()'; ?>" 
+         class="bg-white p-4 rounded-lg shadow-md text-center hover:bg-green-100 transition-all">
         <div class="text-4xl mb-2">🍃</div>
         <p>Khusus</p>
       </a>
@@ -415,6 +439,7 @@ if (basename($_SERVER['PHP_SELF']) != 'landing-page.php') {
     </div>
   </div>
 </section>
+
 
 
 <!-- modal  -->
