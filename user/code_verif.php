@@ -1,3 +1,35 @@
+<?php 
+
+// Function to generate OTP 
+function generateNumericOTP($n) { 
+	
+	// Take a generator string which consist of 
+	// all numeric digits 
+	$generator = "1357902468"; 
+
+	// Iterate for n-times and pick a single character 
+	// from generator and append it to $result 
+	
+	// Login for generating a random character from generator 
+	//	 ---generate a random number 
+	//	 ---take modulus of same with length of generator (say i) 
+	//	 ---append the character at place (i) from generator to result 
+
+	$result = ""; 
+
+	for ($i = 1; $i <= $n; $i++) { 
+		$result .= substr($generator, (rand()%(strlen($generator))), 1); 
+	} 
+
+	// Return result 
+	return $result; 
+} 
+
+// Main program 
+$n = 6; 
+$OTP = generateNumericOTP($n)
+
+?> 
 
 <!DOCTYPE html>
 <html lang="en">
@@ -37,7 +69,7 @@
                 </div>
 
                 <!-- Title -->
-                <h1 class="text-2xl font-bold text-lg-start text-gray-800 mb-8">Code Verification</h1>
+                <h1 class="text-2xl font-bold text-lg-start text-gray-800 mb-8">Code Verification <?= $OTP ?></h1>
                 <!-- Form -->
                 <form action="./newpw.php" method="POST" class="space-y-4">
                     <!-- code -->
