@@ -10,7 +10,7 @@ if (!in_array(basename($_SERVER['PHP_SELF']), ['landingpage.php', 'tentang.php',
 
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"class="bg-light dark:[color-scheme:light]">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -281,9 +281,9 @@ if (!in_array(basename($_SERVER['PHP_SELF']), ['landingpage.php', 'tentang.php',
 
 
     <!-- Load More Button -->
-    <div class="flex justify-center mt-8">
+    <!-- <div class="flex justify-center mt-8">
       <button class="bg-gradient-to-r from-green to-dark-green text-white px-6 py-2 rounded hover:bg-green-700">See More</button>
-    </div>
+    </div> -->
   </main>
 
 <!-- modal  -->
