@@ -30,8 +30,9 @@ if (!$bank_id) {
 $query_total_sampah = "
     SELECT SUM(dr.waste_weight) AS total_berat 
     FROM detail_request dr
-    JOIN drop-off_request dor ON dr.request_id = dor.request_id
-    WHERE dor.bank_id = ?";
+    JOIN drop_off_request dor ON dr.request_id = dor.request_id
+    WHERE dor.bank_id = ?
+    AND dor.status = 'accepted'";
 $stmt = $conn->prepare($query_total_sampah);
 $stmt->bind_param("i", $bank_id);
 $stmt->execute();
@@ -41,7 +42,7 @@ $total_sampah = $total_sampah ?? 0;
 $stmt->close();
 
 // Query untuk menghitung jumlah Drop-off Requests
-$requestQuery = "SELECT COUNT(*) AS total_requests FROM drop-off_request WHERE bank_id = ?";
+$requestQuery = "SELECT COUNT(*) AS total_requests FROM drop_off_request WHERE bank_id = ?";
 $stmt = $conn->prepare($requestQuery);
 $stmt->bind_param("i", $bank_id);
 $stmt->execute();
@@ -51,8 +52,8 @@ $total_requests = $requestData['total_requests'] ?? 0;
 $stmt->close();
 
 // Query untuk menghitung jumlah Drop-off Requests yang menunggu
-$query_drop-off_menunggu = "SELECT COUNT(*) AS total_menunggu FROM drop-off_request WHERE status = 'waiting' AND bank_id = ?";
-$stmt = $conn->prepare($query_drop-off_menunggu);
+$query_drop_off_menunggu = "SELECT COUNT(*) AS total_menunggu FROM drop_off_request WHERE status = 'waiting' AND bank_id = ?";
+$stmt = $conn->prepare($query_drop_off_menunggu);
 $stmt->bind_param("i", $bank_id);
 $stmt->execute();
 $stmt->bind_result($total_menunggu);
@@ -65,8 +66,9 @@ $query_kategori_populer = "
     SELECT w.waste_name AS waste_category, COUNT(w.waste_name) AS jumlah
     FROM detail_request dr
     JOIN waste w ON dr.waste_id = w.waste_id
-    JOIN drop-off_request dor ON dr.request_id = dor.request_id
+    JOIN drop_off_request dor ON dr.request_id = dor.request_id
     WHERE dor.bank_id = ?
+    AND dor.status = 'accepted'
     GROUP BY w.waste_name
     ORDER BY jumlah DESC
     LIMIT 1";
@@ -85,12 +87,12 @@ $query = "
         dr.waste_weight,
         w.waste_name,
         dor.status
-    FROM drop-off_request dor
+    FROM drop_off_request dor
     JOIN detail_request dr ON dor.request_id = dr.request_id
     JOIN waste w ON dr.waste_id = w.waste_id
     JOIN users u ON dor.user_id = u.user_id
-    WHERE dor.status IN ('waiting', 'accepted', 'rejected')
-    ORDER BY dor.drop-off_request_created_at DESC;
+    WHERE dor.status = 'accepted'
+    ORDER BY dor.drop_off_request_created_at DESC;
 
 ";
 $result = $conn->query($query);
