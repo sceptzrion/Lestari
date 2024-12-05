@@ -11,13 +11,20 @@ if (!isset($_SESSION['admin_id'])) {
     exit();
 }
 
+// Flash message
+if (isset($_SESSION['flash_message'])): ?>
+    <div class="alert alert-success">
+        <?= htmlspecialchars($_SESSION['flash_message']); ?>
+    </div>
+    <?php unset($_SESSION['flash_message']);
+endif;
+
 // Inisialisasi variabel
 $rows = [];
 $error_message = "";
 
 // Periksa koneksi database
 if ($conn) {
-    // Ambil admin_id dari sesi
     $admin_id = $_SESSION['admin_id'];
 
     // Query untuk mendapatkan bank_id berdasarkan admin_id
@@ -30,69 +37,54 @@ if ($conn) {
         $stmt->fetch();
         $stmt->close();
     } else {
-        $error_message = "Kesalahan dalam query database.";
+        die("Query Error: " . $conn->error);
     }
 
-    // Jika bank_id ditemukan, ambil data permintaan sampah
     if (!empty($bank_id)) {
-        // Persiapkan query utama
+        // Query utama
         $query = "
             SELECT 
                 dr.request_id, 
-                dr.drop-off_request_created_at, 
+                dr.drop_off_request_created_at, 
                 u.user_name, 
                 w.waste_name AS waste_type, 
                 wr.waste_weight, 
                 dr.status, 
                 wr.points_earned
-            FROM drop-off_request dr
+            FROM drop_off_request dr
             JOIN users u ON dr.user_id = u.user_id
             LEFT JOIN detail_request wr ON dr.request_id = wr.request_id
             LEFT JOIN waste w ON wr.waste_id = w.waste_id
             WHERE dr.bank_id = ?
         ";
 
-        // Filter tambahan berdasarkan parameter GET
+        // Tambahkan filter berdasarkan parameter GET
         $filters = [];
+        $bind_params = [];
+        
         if (!empty($_GET['status-sampah'])) {
             $filters[] = "dr.status = ?";
+            $bind_params[] = htmlspecialchars($_GET['status-sampah']);
         }
         if (!empty($_GET['jenis-sampah'])) {
             $filters[] = "w.waste_name = ?";
+            $bind_params[] = htmlspecialchars($_GET['jenis-sampah']);
         }
         if (!empty($_GET['date'])) {
-            $filters[] = "DATE(dr.drop-off_request_created_at) = ?";
+            $filters[] = "DATE(dr.drop_off_request_created_at) = ?";
+            $bind_params[] = htmlspecialchars($_GET['date']);
         }
 
         if ($filters) {
             $query .= " AND " . implode(" AND ", $filters);
         }
 
-        $query .= " ORDER BY dr.drop-off_request_created_at DESC";
+        $query .= " ORDER BY dr.drop_off_request_created_at DESC";
 
-        // Persiapkan query untuk menghindari SQL Injection
         $stmt = $conn->prepare($query);
-
         if ($stmt) {
-            // Bind parameter secara dinamis
-            $bind_types = "i";
-            $bind_params = [$bank_id];
-
-            if (!empty($_GET['status-sampah'])) {
-                $bind_types .= "s";
-                $bind_params[] = $_GET['status-sampah'];
-            }
-            if (!empty($_GET['jenis-sampah'])) {
-                $bind_types .= "s";
-                $bind_params[] = $_GET['jenis-sampah'];
-            }
-            if (!empty($_GET['date'])) {
-                $bind_types .= "s";
-                $bind_params[] = $_GET['date'];
-            }
-
-            // Bind parameter
-            $stmt->bind_param($bind_types, ...$bind_params);
+            $bind_types = "i" . str_repeat('s', count($bind_params));
+            $stmt->bind_param($bind_types, $bank_id, ...$bind_params);
             $stmt->execute();
 
             // Ambil hasil
@@ -100,13 +92,13 @@ if ($conn) {
             $rows = $result->fetch_all(MYSQLI_ASSOC);
             $stmt->close();
         } else {
-            $error_message = "Kesalahan dalam query filter.";
+            die("Query Filter Error: " . $conn->error);
         }
     } else {
         $error_message = "Bank ID tidak ditemukan. Silakan login kembali.";
     }
 } else {
-    $error_message = "Koneksi database gagal. Periksa konfigurasi Anda.";
+    die("Koneksi database gagal: " . $conn->connect_error);
 }
 ?>
 
@@ -216,7 +208,7 @@ if ($conn) {
             <div class="bg-light rounded-[10px] w-full h-auto shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] flex flex-col py-[35px] px-[41px] mt-[46px] text-dark">
                 <h2 class="text-2xl font-bold text-center">Status Penerimaan Sampah</h2>
                 <input type="text" name="cari-user" id="cari-user" placeholder="Cari Nama" class="w-1/3 border-2 border-gray px-2 text-dark text-sm font-light bg-light py-1.5 rounded-lg mt-5">
-                <form action="" class="flex flex-row text-base font-medium mt-[21px] w-full gap-[20px] content-start">
+                <form method="GET" class="flex flex-row text-base font-medium mt-[21px] w-full gap-[20px] content-start">
                     <select id="status-sampah" name="status-sampah" class="w-[223px] h-auto bg-light border border-gray shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] rounded-[5px] px-[9px] text-base font-medium">
                         <option disabled selected>Semua Status</option>
                         <option>waiting</option>
@@ -230,7 +222,7 @@ if ($conn) {
                         <option>Logam</option>
                     </select>
                     <input type="date" id="date" name="date" class="w-[223px] h-auto bg-light text-dark dark:[color-scheme:light] border border-gray shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] px-[9px] text-base font-medium">
-                    <button class="btn btn-success bg-[#2E9E5D] rounded-[5px] w-[101px] h-[34px] text-base font-semibold text-light shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] border border-gray">Filter</button>
+                    <button type="submit" class="btn btn-success bg-[#2E9E5D] rounded-[5px] w-[101px] h-[34px] text-base font-semibold text-light shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] border border-gray">Filter</button>
                 </form>
                 <div class="table mt-10">
                     <div class="overflow-auto h-[400px]">
@@ -253,7 +245,7 @@ if ($conn) {
                                     <?php foreach ($rows as $row): ?>
                                         <tr>
                                             <td class="border border-[#828282]"><?= htmlspecialchars($row['request_id']) ?></td>
-                                            <td class="border border-[#828282]"><?= htmlspecialchars($row['drop-off_request_created_at']) ?></td>
+                                            <td class="border border-[#828282]"><?= htmlspecialchars($row['drop_off_request_created_at']) ?></td>
                                             <td class="border border-[#828282]"><?= htmlspecialchars($row['user_name']) ?></td>
                                             <td class="border border-[#828282]"><?= htmlspecialchars($row['waste_type']) ?></td>
                                             <td class="border border-[#828282]"><?= htmlspecialchars($row['waste_weight']) ?> Kg</td>
@@ -275,10 +267,11 @@ if ($conn) {
                                             <td class="border border-[#828282]"><?= htmlspecialchars($row['points_earned']) ?></td>
                                             <td class="border border-[#828282]">
                                                 <div class="flex flex-row gap-[18px] justify-center items-center">
-                                                    <?php if ($row['status'] !== 'Selesai'): ?>
+                                                    <?php if (isset($row['request_id']) && $row['status'] !== 'accepted' && $row['status'] !== 'rejected'): ?>
                                                         <button onclick="location.href='add.php?id=<?= isset($row['request_id']) ? $row['request_id'] : '' ?>'" class="bg-[#2ECC71] w-[72px] h-[25px] rounded-[10px] text-light text-[10px] font-semibold text-center">
                                                             Hitung
                                                         </button>
+
                                                     <?php else: ?>
                                                         <p>-</p>
                                                     <?php endif; ?>
