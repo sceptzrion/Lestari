@@ -1,11 +1,11 @@
 <?php
 session_start();  // Start session untuk memeriksa status login
 
-// Halaman yang tidak memerlukan login (seperti landingpage.php)
-if (basename($_SERVER['PHP_SELF']) != 'landingpage.php') {
+// Halaman yang tidak memerlukan login (seperti landing-page.php)
+if (basename($_SERVER['PHP_SELF']) != 'landing-page.php') {
     // Jika user belum login, arahkan ke halaman login atau lainnya
     if (!isset($_SESSION['loggedin'])) {
-        header("Location: landingpage.php");
+        header("Location: landing-page.php");
         exit();  // Jangan lupa exit setelah redirect
     }
 }
@@ -57,7 +57,7 @@ if (basename($_SERVER['PHP_SELF']) != 'landingpage.php') {
             <ul
             id="dropdown-menu"
             class="menu menu-sm dropdown-content bg-white rounded-box z-[1] mt-3 w-52 p-2 shadow hidden">
-            <li><a href="./landingpage.php">Home</a></li>
+            <li><a href="./landing-page.php">Home</a></li>
             <li><a href="./user/tentang.php">Tentang kami</a></li>
             <li>
               <a>Layanan</a>
@@ -65,7 +65,7 @@ if (basename($_SERVER['PHP_SELF']) != 'landingpage.php') {
                 <!-- Drop Off -->
                 <li>
                     <?php if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true): ?>
-                    <button onclick="window.location.href='./user/drop_off/dropoff.php'" >
+                    <button onclick="window.location.href='./user/drop-off/dropoff.php'" >
                         <p>Drop Off</p>
                     </button>
                     <?php else: ?>
@@ -77,7 +77,7 @@ if (basename($_SERVER['PHP_SELF']) != 'landingpage.php') {
                  <!-- Rewards -->
                 <li>
                     <?php if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true): ?>
-                    <button onclick="window.location.href='./user/drop_off/poin.php'" >
+                    <button onclick="window.location.href='./user/drop-off/poin.php'" >
                         <p>Rewards</p>
                     </button>
                     <?php else: ?>
@@ -102,18 +102,18 @@ if (basename($_SERVER['PHP_SELF']) != 'landingpage.php') {
                     </ul>
                 </li>
             <li><a href="./user/blog.php">Blog</a></li>
-            <li><a href="./user/kontak_kami.php">Kontak Kami</a></li>
+            <li><a href="./user/kontak-kami.php">Kontak Kami</a></li>
           </ul>
         </div>
         <!-- BRAND LOGO -->
-        <a href="./landingpage.php" class="ml-1">
+        <a href="./landing-page.php" class="ml-1">
           <img src="./images/logo-crop.png" class="h-4 sm:h-5 md:h-6 lg:h-7" alt="Logo Lestari">
         </a>
       </div>
 <!-- DESKTOP MODE -->
 <div class="navbar-center hidden lg:flex">
   <ul class="menu menu-horizontal px-1 text-dark text-base">
-    <li><a href="./landingpage.php">Home</a></li>
+    <li><a href="./landing-page.php">Home</a></li>
     <li><a href="./user/tentang.php">Tentang kami</a></li>
     <li>
       <details>
@@ -122,7 +122,7 @@ if (basename($_SERVER['PHP_SELF']) != 'landingpage.php') {
           <!-- Drop Off -->
           <li>
             <?php if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true): ?>
-              <button onclick="window.location.href='./user/drop_off/dropoff.php'" class="btn btn-success flex-grow shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] rounded-[20px] flex items-center justify-center px-4 py-2 gap-2 min-w-[120px] max-w-[200px]">
+              <button onclick="window.location.href='./user/drop-off/dropoff.php'" class="btn btn-success flex-grow shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] rounded-[20px] flex items-center justify-center px-4 py-2 gap-2 min-w-[120px] max-w-[200px]">
                 <img src="./images/truck.png" class="w-8 h-8" alt="">
                 <p>Drop Off</p>
               </button>
@@ -136,7 +136,7 @@ if (basename($_SERVER['PHP_SELF']) != 'landingpage.php') {
           <!-- Rewards -->
           <li>
             <?php if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true): ?>
-              <button onclick="window.location.href='./user/drop_off/poin.php'" class="btn btn-success flex-grow shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] rounded-[20px] flex items-center justify-center px-4 py-2 gap-2 min-w-[120px] max-w-[200px]">
+              <button onclick="window.location.href='./user/drop-off/poin.php'" class="btn btn-success flex-grow shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] rounded-[20px] flex items-center justify-center px-4 py-2 gap-2 min-w-[120px] max-w-[200px]">
                 <img src="./images/reward.png" class="w-8 h-8" alt="">
                 <p>Rewards</p>
               </button>
@@ -166,7 +166,7 @@ if (basename($_SERVER['PHP_SELF']) != 'landingpage.php') {
       </details>
     </li>
     <li><a href="./user/blog.php">Blog</a></li>
-    <li><a href="./user/kontak_kami.php">Kontak Kami</a></li>
+    <li><a href="./user/kontak-kami.php">Kontak Kami</a></li>
   </ul>
 </div>
 
@@ -301,7 +301,7 @@ if (basename($_SERVER['PHP_SELF']) != 'landingpage.php') {
             <!-- Card Rewards -->
             <div class="block">
                 <?php if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true): ?>
-                    <a href="./user/drop_off/poin.php" class="block">
+                    <a href="./user/drop-off/poin.php" class="block">
                         <div class="bg-white p-6 rounded-lg shadow-md cursor-pointer hover:bg-green-200 h-full justify-between">
                             <h5 class="text-xl mb-2">🎁 Rewards</h5>
                             <p>LESTARI mengubah sampahmu menjadi poin yang bisa kamu kumpulkan dan tukarkan dengan hadiah ramah lingkungan.</p>
@@ -434,7 +434,7 @@ if (basename($_SERVER['PHP_SELF']) != 'landingpage.php') {
   <div class="container mx-auto px-12">
     <!-- Logo -->
     <div class="flex justify-center mb-6 py-4">
-      <a href="./landingpage.php">
+      <a href="./landing-page.php">
         <img src="./images/logo-crop-white.png" alt="Logo Lestari" class="h-7 lg:h-9">
       </a>
     </div>
@@ -444,16 +444,16 @@ if (basename($_SERVER['PHP_SELF']) != 'landingpage.php') {
       <!-- Bagian Lestari -->
       <div class="text-left col-span-1 md:col-span-1">
         <h4 class="font-bold mb-2">Lestari</h4>
-        <a href="./landingpage.php" class="block text-white hover:underline mb-1">Home</a>
+        <a href="./landing-page.php" class="block text-white hover:underline mb-1">Home</a>
         <a href="./user/tentang.php" class="block text-white hover:underline mb-1">Tentang Kami</a>
-        <a href="./landingpage.php" class="block text-white hover:underline mb-1">Layanan</a>
+        <a href="./landing-page.php" class="block text-white hover:underline mb-1">Layanan</a>
         <a href="./user/blog.php" class="block text-white hover:underline mb-1">Blog</a>
       </div>
 
       <!-- Bagian Informasi -->
       <div class="text-right md:text-center col-span-1 md:col-span-1">
         <h4 class="font-bold mb-2">Informasi</h4>
-        <a href="./user/kontak_kami.php" class="block text-white hover:underline mb-1">Kontak Kami</a>
+        <a href="./user/kontak-kami.php" class="block text-white hover:underline mb-1">Kontak Kami</a>
       </div>
 
       <!-- Bagian Hubungi Kami -->

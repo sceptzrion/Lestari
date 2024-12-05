@@ -1,45 +1,56 @@
 <?php
 session_start();  // Start session untuk memeriksa status login
 
-// Halaman yang tidak memerlukan login (seperti landingpage.php)
-if (basename($_SERVER['PHP_SELF']) != 'landingpage.php') {
+// Halaman yang tidak memerlukan login (seperti landing-page.php)
+if (basename($_SERVER['PHP_SELF']) != 'landing-page.php') {
     // Jika user belum login, arahkan ke halaman login atau lainnya
     if (!isset($_SESSION['loggedin'])) {
-        header("Location: ../../landingpage.php");
+        header("Location: landing-page.php");
         exit();  // Jangan lupa exit setelah redirect
     }
 }
-// Koneksi ke database
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "db_sampah_4";
 
-$conn = new mysqli($servername, $username, $password, $dbname);
+$host = 'localhost'; // Change to your database host
+$username = 'root';  // Change to your database username
+$password = '';      // Change to your database password
+$database = 'db_sampah_4'; // Change to your database name
 
-// Cek koneksi
+$conn = new mysqli($host, $username, $password, $database);
+
+// Check connection
 if ($conn->connect_error) {
-    die("Koneksi gagal: " . $conn->connect_error);
+    die("Connection failed: " . $conn->connect_error);
 }
 
-// Ambil region dari URL
-$region = isset($_GET['region']) ? urldecode($_GET['region']) : "";
+$user_id = $_SESSION['user_id']; // Ensure 'user_id' is stored in session
 
-// Query untuk mendapatkan detail bank sampah berdasarkan region
-$sql = "SELECT bank_name, bank_address FROM bank_locations WHERE region = ?";
-$stmt = $conn->prepare($sql);
-$stmt->bind_param("s", $region);
+// Query to get total points for the user
+$query = "SELECT SUM(dr.waste_weight * w.waste_point) AS total_points
+          FROM drop_off_request d
+          LEFT JOIN detail_request dr ON d.request_id = dr.request_id
+          LEFT JOIN waste w ON dr.waste_id = w.waste_id
+          WHERE d.user_id = ? AND d.status = 'accepted'";
+
+$stmt = $conn->prepare($query);
+$stmt->bind_param("i", $user_id);
 $stmt->execute();
 $result = $stmt->get_result();
+$row = $result->fetch_assoc();
+$total_points = $row['total_points'] ?? 0;  // Set to 0 if no points are found
 
-// Query untuk menghitung jumlah bank sampah berdasarkan region
-$count_sql = "SELECT COUNT(*) AS total_banks FROM bank_locations WHERE region = ?";
-$count_stmt = $conn->prepare($count_sql);
-$count_stmt->bind_param("s", $region);
-$count_stmt->execute();
-$count_result = $count_stmt->get_result();
-$count_row = $count_result->fetch_assoc();
-$total_banks = $count_row['total_banks'];
+// Fetch the user's drop_off history
+$query = "SELECT d.request_id, d.drop_off_request_created_at, SUM(dr.waste_weight * w.waste_point) AS points 
+          FROM drop_off_request d
+          LEFT JOIN detail_request dr ON d.request_id = dr.request_id
+          LEFT JOIN waste w ON dr.waste_id = w.waste_id
+          WHERE d.user_id = ? 
+          GROUP BY d.request_id 
+          ORDER BY d.drop_off_request_created_at DESC";
+
+$stmt = $conn->prepare($query);
+$stmt->bind_param("i", $user_id);
+$stmt->execute();
+$requests_result = $stmt->get_result();
 ?>
 
 <!DOCTYPE html>
@@ -63,12 +74,13 @@ $total_banks = $count_row['total_banks'];
       }
     }
   </script>
-    <script>
-        function toggleModal() {
-            const modal = document.getElementById("location-modal");
-            modal.classList.toggle("hidden");
-        }
-    </script>
+  <script>
+    function toggleModal() {
+        const modal = document.getElementById("rewardModal");
+        modal.classList.toggle("hidden");
+    }
+</script>
+
 </head>
 <body class="font-poppins">
 <!-- NAVBAR -->
@@ -93,7 +105,7 @@ $total_banks = $count_row['total_banks'];
             <ul
             id="dropdown-menu"
             class="menu menu-sm dropdown-content bg-white rounded-box z-[1] mt-3 w-52 p-2 shadow hidden">
-            <li><a href="../../landingpage.php">Home</a></li>
+            <li><a href="../../landing-page.php">Home</a></li>
             <li><a href="../../user/tentang.php">Tentang kami</a></li>
             <li>
               <a>Layanan</a>
@@ -101,7 +113,7 @@ $total_banks = $count_row['total_banks'];
                 <!-- Drop Off -->
                 <li>
                     <?php if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true): ?>
-                    <button onclick="window.location.href='../../user/drop_off/dropoff.php'" >
+                    <button onclick="window.location.href='../../user/drop-off/dropoff.php'" >
                         <p>Drop Off</p>
                     </button>
                     <?php else: ?>
@@ -113,7 +125,7 @@ $total_banks = $count_row['total_banks'];
                  <!-- Rewards -->
                 <li>
                     <?php if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true): ?>
-                    <button onclick="window.location.href='../../user/drop_off/poin.php'" >
+                    <button onclick="window.location.href='../../user/drop-off/poin.php'" >
                         <p>Rewards</p>
                     </button>
                     <?php else: ?>
@@ -122,7 +134,7 @@ $total_banks = $count_row['total_banks'];
                     </button>
                     <?php endif; ?>
                 </li>
-              
+                
                 <!-- Marketplace -->
                 <li>
                     <?php if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true): ?>
@@ -138,7 +150,7 @@ $total_banks = $count_row['total_banks'];
                     </ul>
                 </li>
             <li><a href="../../user/blog.php">Blog</a></li>
-            <li><a href="../../user/kontak_kami.php">Kontak Kami</a></li>
+            <li><a href="../../user/kontak-kami.php">Kontak Kami</a></li>
           </ul>
         </div>
         <!-- BRAND LOGO -->
@@ -149,7 +161,7 @@ $total_banks = $count_row['total_banks'];
 <!-- DESKTOP MODE -->
 <div class="navbar-center hidden lg:flex">
   <ul class="menu menu-horizontal px-1 text-dark text-base">
-    <li><a href="../../landingpage.php">Home</a></li>
+    <li><a href="../../landing-page.php">Home</a></li>
     <li><a href="../../user/tentang.php">Tentang kami</a></li>
     <li>
       <details>
@@ -158,7 +170,7 @@ $total_banks = $count_row['total_banks'];
           <!-- Drop Off -->
           <li>
             <?php if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true): ?>
-              <button onclick="window.location.href='../../user/drop_off/dropoff.php'" class="btn btn-success flex-grow shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] rounded-[20px] flex items-center justify-center px-4 py-2 gap-2 min-w-[120px] max-w-[200px]">
+              <button onclick="window.location.href='../../user/drop-off/dropoff.php'" class="btn btn-success flex-grow shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] rounded-[20px] flex items-center justify-center px-4 py-2 gap-2 min-w-[120px] max-w-[200px]">
                 <img src="../../images/truck.png" class="w-8 h-8" alt="">
                 <p>Drop Off</p>
               </button>
@@ -172,7 +184,7 @@ $total_banks = $count_row['total_banks'];
           <!-- Rewards -->
           <li>
             <?php if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true): ?>
-              <button onclick="window.location.href='../../user/drop_off/poin.php'" class="btn btn-success flex-grow shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] rounded-[20px] flex items-center justify-center px-4 py-2 gap-2 min-w-[120px] max-w-[200px]">
+              <button onclick="window.location.href='../../user/drop-off/poin.php'" class="btn btn-success flex-grow shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] rounded-[20px] flex items-center justify-center px-4 py-2 gap-2 min-w-[120px] max-w-[200px]">
                 <img src="../../images/reward.png" class="w-8 h-8" alt="">
                 <p>Rewards</p>
               </button>
@@ -202,7 +214,7 @@ $total_banks = $count_row['total_banks'];
       </details>
     </li>
     <li><a href="../../user/blog.php">Blog</a></li>
-    <li><a href="../../user/kontak_kami.php">Kontak Kami</a></li>
+    <li><a href="../../user/kontak-kami.php">Kontak Kami</a></li>
   </ul>
 </div>
 
@@ -263,52 +275,42 @@ $total_banks = $count_row['total_banks'];
     </script>
   <!-- NAVBAR END -->
 
-<script>
-    // Toggle dropdown visibility
-    function toggleDropdown() {
-        const dropdown = document.getElementById('dropdownMenu');
-        dropdown.classList.toggle('hidden');
-    }
 
-    // Close dropdown if clicked outside
-    window.addEventListener('click', function(event) {
-        const dropdown = document.getElementById('dropdownMenu');
-        const button = event.target.closest('button');
-        // Jika yang diklik bukan tombol atau dropdown, sembunyikan dropdown
-        if (!button || button.getAttribute('onclick') !== 'toggleDropdown()') {
-            dropdown.classList.add('hidden');
-        }
-    });
-</script>
-<!-- main -->
-  <main class="bg-white container mx-auto md:pt-8 pt-4 md:px-16 px-12 pb-12">
-  <div id="selected-location" class="text-2xl text-[#1B5E20] font-bold mb-3 flex items-center">
-    <img src="../../images/user/Loc.png" alt="Location Icon" class="w-[31px] h-[44px] mr-2"> 
-    <?php echo htmlspecialchars($region); ?>
-  </div>
-  <div class="bg-gradient-to-r from-green to-dark-green text-white rounded-lg p-6 text-center h-32 flex items-center">
-    <div class="text-white text-center relative"> 
-      <h2 class="text-3xl font-bold flex items-center">
-        <img src="../../images/user/recycle.png" alt="Recycle Icon" class="w-12 h-12 mr-2">
-        Drop Off Location
-      </h2>
+ <!-- section -->
+<!-- section -->
+<section class="bg-gray-100 w-full min-h-screen">
+  <main class="container mx-auto md:px-16 px-6 py-6">
+    <div class="flex justify-between items-center mb-4">
+      <span class="inline-flex justify-between w-2/4 bg-gradient-to-r from-green to-dark-green text-white rounded-full px-4 py-2 text-sm">
+        <span class="font-bold">Poin Reward</span>
+        <span class="font-bold"><?= number_format($total_points); ?> Poin</span>
+      </span>
+      <a href="../drop-off/tukar-poin.php">
+        <button class="bg-gradient-to-r from-green to-dark-green text-white px-6 py-2 rounded-full shadow hover:bg-green-600 focus:outline-none flex items-center gap-2">
+          Tukar Poin
+        </button>
+      </a>
     </div>
-  </div>
-  <p class="text-sm text-[#1B5E20] mt-4">
-    <span class="inline-block bg-gradient-to-r from-green to-dark-green text-white rounded-full px-3 py-1 text-sm">
-    <?php echo $total_banks; ?> Bank sampah tersedia.
-    </span>
-  </p>
 
-<!-- Locations -->
-<div class="drop-off-list mt-8 space-y-4">
-            <?php while ($row = $result->fetch_assoc()) { ?>
-              <a href="./select_kota.php?bank_name=<?php echo urlencode($row['bank_name']); ?>" class="block bg-white p-4 rounded-lg shadow-md hover:bg-gray-100 cursor-pointer">
-                    <h3 class="text-xl font-bold text-[#1B5E20]"><?php echo htmlspecialchars($row['bank_name']); ?></h3>
-                    <p class="text-sm text-gray-600"><?php echo htmlspecialchars($row['bank_address']); ?></p>
-                </a>
-            <?php } ?>
-        </div>
-    </main>
-</body>
-</html>
+    <!-- Riwayat Drop Off -->
+    <div class="bg-white rounded-lg shadow-lg p-6">
+      <h1 class="text-2xl font-bold text-green-700 text-center mb-4">Riwayat Drop Off</h1>
+      <div class="space-y-4">
+        <?php while ($request = $requests_result->fetch_assoc()) : ?>
+          <div class="flex justify-between items-center bg-gray-100 rounded-lg p-4 shadow">
+            <div class="flex items-center space-x-4">
+              <div class="w-12 h-12 bg-[#1B5E20] rounded-full flex items-center justify-center mb-3">
+                <img src="../../images/user/recycle.png" class="w-7" alt="Recycle Icon">
+              </div>
+              <div>
+                <h2 class="font-bold text-[#1B5E20]">Reward Drop Off</h2>
+                <p class="text-sm text-gray-500"><?= date('d M Y, H:i', strtotime($request['drop_off_request_created_at'])); ?></p>
+              </div>
+            </div>
+            <span class="text-xl font-bold text-green-700"><?= number_format($request['points']); ?> Poin</span>
+          </div>
+        <?php endwhile; ?>
+      </div>
+    </div>
+  </main>
+</section>

@@ -113,7 +113,7 @@ $conn->close();
                 <?php endif; ?>
 
                 <!-- Form -->
-                <form action="../BackEnd/signup_email.php" method="POST" class="space-y-4">
+                <form action="../BackEnd/signup-email.php" method="POST" class="space-y-4">
                 <!-- Nama Lengkap -->
                     <div>
                         <label for="name" class="block text-sm font-medium text-gray-700">Nama Lengkap</label>

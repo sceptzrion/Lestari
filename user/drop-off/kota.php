@@ -1,22 +1,54 @@
 <?php
 session_start();  // Start session untuk memeriksa status login
 
-// Halaman yang tidak memerlukan login (seperti landingpage.php)
-if (basename($_SERVER['PHP_SELF']) != 'landingpage.php') {
+// Halaman yang tidak memerlukan login (seperti landing-page.php)
+if (basename($_SERVER['PHP_SELF']) != 'landing-page.php') {
     // Jika user belum login, arahkan ke halaman login atau lainnya
     if (!isset($_SESSION['loggedin'])) {
-        header("Location: ../../landingpage.php");
+        header("Location: ../../landing-page.php");
         exit();  // Jangan lupa exit setelah redirect
     }
 }
+// Koneksi ke database
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "db_sampah_4";
+
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// Cek koneksi
+if ($conn->connect_error) {
+    die("Koneksi gagal: " . $conn->connect_error);
+}
+
+// Ambil region dari URL
+$region = isset($_GET['region']) ? urldecode($_GET['region']) : "";
+
+// Query untuk mendapatkan detail bank sampah berdasarkan region
+$sql = "SELECT bank_name, bank_address FROM bank_locations WHERE region = ?";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("s", $region);
+$stmt->execute();
+$result = $stmt->get_result();
+
+// Query untuk menghitung jumlah bank sampah berdasarkan region
+$count_sql = "SELECT COUNT(*) AS total_banks FROM bank_locations WHERE region = ?";
+$count_stmt = $conn->prepare($count_sql);
+$count_stmt->bind_param("s", $region);
+$count_stmt->execute();
+$count_result = $count_stmt->get_result();
+$count_row = $count_result->fetch_assoc();
+$total_banks = $count_row['total_banks'];
 ?>
+
 <!DOCTYPE html>
-<html lang="en" class="bg-light dark:[color-scheme:light]">
+<html lang="en"class="bg-light dark:[color-scheme:light]">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="../../css/styles.css" rel="stylesheet">
-    <title>Lestari - Marketplace</title>
+    <title>Lestari - Drop Off</title>
       <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
     <script src="https://cdn.tailwindcss.com"></script>
@@ -61,7 +93,7 @@ if (basename($_SERVER['PHP_SELF']) != 'landingpage.php') {
             <ul
             id="dropdown-menu"
             class="menu menu-sm dropdown-content bg-white rounded-box z-[1] mt-3 w-52 p-2 shadow hidden">
-            <li><a href="../../landingpage.php">Home</a></li>
+            <li><a href="../../landing-page.php">Home</a></li>
             <li><a href="../../user/tentang.php">Tentang kami</a></li>
             <li>
               <a>Layanan</a>
@@ -69,7 +101,7 @@ if (basename($_SERVER['PHP_SELF']) != 'landingpage.php') {
                 <!-- Drop Off -->
                 <li>
                     <?php if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true): ?>
-                    <button onclick="window.location.href='../../user/drop_off/dropoff.php'" >
+                    <button onclick="window.location.href='../../user/drop-off/dropoff.php'" >
                         <p>Drop Off</p>
                     </button>
                     <?php else: ?>
@@ -81,7 +113,7 @@ if (basename($_SERVER['PHP_SELF']) != 'landingpage.php') {
                  <!-- Rewards -->
                 <li>
                     <?php if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true): ?>
-                    <button onclick="window.location.href='../../user/drop_off/poin.php'" >
+                    <button onclick="window.location.href='../../user/drop-off/poin.php'" >
                         <p>Rewards</p>
                     </button>
                     <?php else: ?>
@@ -90,7 +122,7 @@ if (basename($_SERVER['PHP_SELF']) != 'landingpage.php') {
                     </button>
                     <?php endif; ?>
                 </li>
-                
+              
                 <!-- Marketplace -->
                 <li>
                     <?php if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true): ?>
@@ -106,7 +138,7 @@ if (basename($_SERVER['PHP_SELF']) != 'landingpage.php') {
                     </ul>
                 </li>
             <li><a href="../../user/blog.php">Blog</a></li>
-            <li><a href="../../user/kontak_kami.php">Kontak Kami</a></li>
+            <li><a href="../../user/kontak-kami.php">Kontak Kami</a></li>
           </ul>
         </div>
         <!-- BRAND LOGO -->
@@ -117,7 +149,7 @@ if (basename($_SERVER['PHP_SELF']) != 'landingpage.php') {
 <!-- DESKTOP MODE -->
 <div class="navbar-center hidden lg:flex">
   <ul class="menu menu-horizontal px-1 text-dark text-base">
-    <li><a href="../../landingpage.php">Home</a></li>
+    <li><a href="../../landing-page.php">Home</a></li>
     <li><a href="../../user/tentang.php">Tentang kami</a></li>
     <li>
       <details>
@@ -126,7 +158,7 @@ if (basename($_SERVER['PHP_SELF']) != 'landingpage.php') {
           <!-- Drop Off -->
           <li>
             <?php if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true): ?>
-              <button onclick="window.location.href='../../user/drop_off/dropoff.php'" class="btn btn-success flex-grow shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] rounded-[20px] flex items-center justify-center px-4 py-2 gap-2 min-w-[120px] max-w-[200px]">
+              <button onclick="window.location.href='../../user/drop-off/dropoff.php'" class="btn btn-success flex-grow shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] rounded-[20px] flex items-center justify-center px-4 py-2 gap-2 min-w-[120px] max-w-[200px]">
                 <img src="../../images/truck.png" class="w-8 h-8" alt="">
                 <p>Drop Off</p>
               </button>
@@ -140,7 +172,7 @@ if (basename($_SERVER['PHP_SELF']) != 'landingpage.php') {
           <!-- Rewards -->
           <li>
             <?php if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true): ?>
-              <button onclick="window.location.href='../../user/drop_off/poin.php'" class="btn btn-success flex-grow shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] rounded-[20px] flex items-center justify-center px-4 py-2 gap-2 min-w-[120px] max-w-[200px]">
+              <button onclick="window.location.href='../../user/drop-off/poin.php'" class="btn btn-success flex-grow shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] rounded-[20px] flex items-center justify-center px-4 py-2 gap-2 min-w-[120px] max-w-[200px]">
                 <img src="../../images/reward.png" class="w-8 h-8" alt="">
                 <p>Rewards</p>
               </button>
@@ -151,7 +183,7 @@ if (basename($_SERVER['PHP_SELF']) != 'landingpage.php') {
               </button>
             <?php endif; ?>
           </li>
-         
+          
           <!-- Marketplace -->
           <li>
             <?php if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true): ?>
@@ -170,7 +202,7 @@ if (basename($_SERVER['PHP_SELF']) != 'landingpage.php') {
       </details>
     </li>
     <li><a href="../../user/blog.php">Blog</a></li>
-    <li><a href="../../user/kontak_kami.php">Kontak Kami</a></li>
+    <li><a href="../../user/kontak-kami.php">Kontak Kami</a></li>
   </ul>
 </div>
 
@@ -231,50 +263,52 @@ if (basename($_SERVER['PHP_SELF']) != 'landingpage.php') {
     </script>
   <!-- NAVBAR END -->
 
-<!-- Main Content -->
-<main class="container mx-auto px-6 py-12 grid grid-cols-1 md:grid-cols-2 gap-8">
-    <!-- Product Image -->
-    <div class="text-center">
-      <img src="https://placehold.co/400x400" alt="Bunga Hias Mawar Plastik" class="rounded-lg shadow-md mx-auto">
-      <h2 class="mt-6 text-green-700 text-xl font-bold">Bunga Hias Mawar Plastik</h2>
-      <p class="text-lg text-gray-700 font-semibold">Rp 15.000</p>
+<script>
+    // Toggle dropdown visibility
+    function toggleDropdown() {
+        const dropdown = document.getElementById('dropdownMenu');
+        dropdown.classList.toggle('hidden');
+    }
+
+    // Close dropdown if clicked outside
+    window.addEventListener('click', function(event) {
+        const dropdown = document.getElementById('dropdownMenu');
+        const button = event.target.closest('button');
+        // Jika yang diklik bukan tombol atau dropdown, sembunyikan dropdown
+        if (!button || button.getAttribute('onclick') !== 'toggleDropdown()') {
+            dropdown.classList.add('hidden');
+        }
+    });
+</script>
+<!-- main -->
+  <main class="bg-white container mx-auto md:pt-8 pt-4 md:px-16 px-12 pb-12">
+  <div id="selected-location" class="text-2xl text-[#1B5E20] font-bold mb-3 flex items-center">
+    <img src="../../images/user/Loc.png" alt="Location Icon" class="w-[31px] h-[44px] mr-2"> 
+    <?php echo htmlspecialchars($region); ?>
+  </div>
+  <div class="bg-gradient-to-r from-green to-dark-green text-white rounded-lg p-6 text-center h-32 flex items-center">
+    <div class="text-white text-center relative"> 
+      <h2 class="text-3xl font-bold flex items-center">
+        <img src="../../images/user/recycle.png" alt="Recycle Icon" class="w-12 h-12 mr-2">
+        Drop Off Location
+      </h2>
     </div>
+  </div>
+  <p class="text-sm text-[#1B5E20] mt-4">
+    <span class="inline-block bg-gradient-to-r from-green to-dark-green text-white rounded-full px-3 py-1 text-sm">
+    <?php echo $total_banks; ?> Bank sampah tersedia.
+    </span>
+  </p>
 
-    <!-- Product Details -->
-    <div>
-      <!-- Product Title Outside Card -->
-      <h2 class="text-green-700 text-2xl font-bold mb-4 hidden md:block">Bunga Hias Mawar Plastik</h2>
-      <p class="text-lg text-gray-700 font-semibold mb-4 hidden md:block">Rp 15.000</p>
-
-
-      <!-- Description Card -->
-      <div class="bg-white shadow-md rounded-lg p-6">
-        <h3 class="text-green-700 text-xl font-bold">Deskripsi Produk</h3>
-        <p class="text-gray-700 mt-4">
-          Bunga Hias Mawar Plastik adalah rangkaian bunga mawar yang terbuat dari bahan plastik berkualitas tinggi.
-          Bunga ini memiliki tampilan yang sangat realistis dan indah, sehingga dapat menjadi pilihan yang sempurna untuk
-          dekorasi rumah atau kantor Anda. Bunga ini juga sangat mudah dirawat, karena tidak memerlukan air atau sinar matahari.
-        </p>
-      </div>
-
-      <div class="bg-white shadow-md rounded-lg p-6 mt-6">
-        <h3 class="text-green-700 text-xl font-bold">Detail Produk</h3>
-        <ul class="list-disc pl-6 mt-4 space-y-2 text-gray-700">
-          <li>75% bahan daur ulang botol plastik</li>
-          <li>Terbuat dari bahan plastik berkualitas tinggi</li>
-          <li>Tampilan yang sangat realistis dan indah</li>
-          <li>Tidak memerlukan air atau sinar matahari</li>
-          <li>Cocok untuk dekorasi rumah atau kantor</li>
-        </ul>
-      </div>
-
-      <!-- Contact Button -->
-      <div class="mt-6">
-        <a href="#" class="w-full inline-block text-center bg-green-600 text-white py-3 rounded-lg shadow-md hover:bg-green-700">
-          Chat dengan penjual
-        </a>
-      </div>
-    </div>
-  </main>
+<!-- Locations -->
+<div class="drop-off-list mt-8 space-y-4">
+            <?php while ($row = $result->fetch_assoc()) { ?>
+              <a href="./select-kota.php?bank_name=<?php echo urlencode($row['bank_name']); ?>" class="block bg-white p-4 rounded-lg shadow-md hover:bg-gray-100 cursor-pointer">
+                    <h3 class="text-xl font-bold text-[#1B5E20]"><?php echo htmlspecialchars($row['bank_name']); ?></h3>
+                    <p class="text-sm text-gray-600"><?php echo htmlspecialchars($row['bank_address']); ?></p>
+                </a>
+            <?php } ?>
+        </div>
+    </main>
 </body>
 </html>

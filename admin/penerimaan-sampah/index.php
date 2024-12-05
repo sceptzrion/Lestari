@@ -39,13 +39,13 @@ if ($conn) {
         $query = "
             SELECT 
                 dr.request_id, 
-                dr.drop_off_request_created_at, 
+                dr.drop-off_request_created_at, 
                 u.user_name, 
                 w.waste_name AS waste_type, 
                 wr.waste_weight, 
                 dr.status, 
                 wr.points_earned
-            FROM drop_off_request dr
+            FROM drop-off_request dr
             JOIN users u ON dr.user_id = u.user_id
             LEFT JOIN detail_request wr ON dr.request_id = wr.request_id
             LEFT JOIN waste w ON wr.waste_id = w.waste_id
@@ -61,14 +61,14 @@ if ($conn) {
             $filters[] = "w.waste_name = ?";
         }
         if (!empty($_GET['date'])) {
-            $filters[] = "DATE(dr.drop_off_request_created_at) = ?";
+            $filters[] = "DATE(dr.drop-off_request_created_at) = ?";
         }
 
         if ($filters) {
             $query .= " AND " . implode(" AND ", $filters);
         }
 
-        $query .= " ORDER BY dr.drop_off_request_created_at DESC";
+        $query .= " ORDER BY dr.drop-off_request_created_at DESC";
 
         // Persiapkan query untuk menghindari SQL Injection
         $stmt = $conn->prepare($query);
@@ -253,7 +253,7 @@ if ($conn) {
                                     <?php foreach ($rows as $row): ?>
                                         <tr>
                                             <td class="border border-[#828282]"><?= htmlspecialchars($row['request_id']) ?></td>
-                                            <td class="border border-[#828282]"><?= htmlspecialchars($row['drop_off_request_created_at']) ?></td>
+                                            <td class="border border-[#828282]"><?= htmlspecialchars($row['drop-off_request_created_at']) ?></td>
                                             <td class="border border-[#828282]"><?= htmlspecialchars($row['user_name']) ?></td>
                                             <td class="border border-[#828282]"><?= htmlspecialchars($row['waste_type']) ?></td>
                                             <td class="border border-[#828282]"><?= htmlspecialchars($row['waste_weight']) ?> Kg</td>

@@ -9567,6 +9567,10 @@ html:has(.drawer-open.drawer-open){
   width: 100%;
 }
 
+.min-w-72{
+  min-width: 18rem;
+}
+
 .min-w-\[100px\]{
   min-width: 100px;
 }
@@ -9593,18 +9597,6 @@ html:has(.drawer-open.drawer-open){
 
 .min-w-\[608px\]{
   min-width: 608px;
-}
-
-.min-w-64{
-  min-width: 16rem;
-}
-
-.min-w-72{
-  min-width: 18rem;
-}
-
-.min-w-full{
-  min-width: 100%;
 }
 
 .max-w-24{
@@ -13183,10 +13175,6 @@ html:has(.drawer-open.drawer-open){
 
   .lg\:w-\[500px\]{
     width: 500px;
-  }
-
-  .lg\:min-w-72{
-    min-width: 18rem;
   }
 
   .lg\:max-w-28{

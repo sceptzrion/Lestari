@@ -37,7 +37,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (!empty($error_email) || !empty($error_phone)) {
         $_SESSION['error_email'] = $error_email;
         $_SESSION['error_phone'] = $error_phone;
-        header("Location: ../user/signup_email.php"); // Kembali ke halaman signup
+        header("Location: ../user/signup-email.php"); // Kembali ke halaman signup
         exit;
     }
 

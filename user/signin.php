@@ -65,7 +65,7 @@
                         </label>
                         <input type="password" id="password" name="password" placeholder="Password"
                             class="mt-1 block w-full px-3 py-2 border rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
-                        <a href="resetpw.php" class="block mt-2 text-sm text-indigo-600 hover:underline">Forgot password?</a>
+                        <a href="reset-password.php" class="block mt-2 text-sm text-indigo-600 hover:underline">Forgot password?</a>
                     </div>
 
                     <!-- Sign In Button -->
