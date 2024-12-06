@@ -10,6 +10,54 @@ if (!isset($_SESSION['admin_id'])) {
     exit();
 }
 
+// Proses hapus produk
+if (isset($_GET['delete_id'])) {
+    $delete_id = $_GET['delete_id'];
+
+    // Query untuk menghapus data
+    $sql = "DELETE FROM marketplace WHERE marketplace_id = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $delete_id);
+    if ($stmt->execute()) {
+        // Beri pesan jika penghapusan berhasil
+        $message = "Produk berhasil dihapus.";
+    } else {
+        // Pesan error jika penghapusan gagal
+        $message = "Gagal menghapus Produk. " . $stmt->error;
+    }
+    $stmt->close();
+    
+    // Redirect kembali ke halaman kelola reward setelah penghapusan
+    header("Location: index.php");
+    exit();
+}
+
+
+// Filter pencarian dan pengurutan
+$search = isset($_GET['search']) ? trim($_GET['search']) : '';
+$kategori = isset($_GET['kategori']) ? trim($_GET['kategori']) : '';
+$urutkan = isset($_GET['urutkan']) ? trim($_GET['urutkan']) : '';
+
+// Menyiapkan query dasar
+$sql = "SELECT * FROM marketplace WHERE marketplace_product_name LIKE ?";
+$params = ['%' . $search . '%'];
+$types = 's';
+
+// Menambahkan urutan berdasarkan pilihan
+if ($urutkan === 'harga_asc') {
+    $sql .= " ORDER BY marketplace_price ASC";
+} elseif ($urutkan === 'harga_desc') {
+    $sql .= " ORDER BY marketplace_price DESC";
+} elseif ($urutkan === 'nama') {
+    $sql .= " ORDER BY marketplace_product_name ASC";
+}
+
+// Menyiapkan dan menjalankan query
+$stmt = $conn->prepare($sql);
+$stmt->bind_param($types, ...$params);
+$stmt->execute();
+$result = $stmt->get_result();
+
 ?>
 
 <!DOCTYPE html>
@@ -94,184 +142,145 @@ if (!isset($_SESSION['admin_id'])) {
                             <p class="text-xl font-normal">Pengaturan</p>
                         </a></li>
                         <hr class="h-[2px] w-full text-gray my-6">
-                        <li><a class="flex flex-row gap-[10px]">
-                            <img src="../../images/admin/sign-out.png" class="w-[30px]" alt="Sign Out">
-                            <p class="text-xl font-normal">Sign Out</p>
-                        </a></li>
-                    </ul>
+                        <li>
+                              <form action="../signout.php" method="POST" id="signOutForm" class="flex flex-row gap-[10px]">
+                                <button type="submit" style="display: none;" id="signOutButton"></button>
+                                <a href="javascript:void(0);" onclick="document.getElementById('signOutForm').submit();" class="flex flex-row gap-[10px]">
+                                    <img src="../../images/admin/sign-out.png" class="w-[30px]" alt="Sign Out">
+                                    <p class="text-xl font-normal">Sign Out</p>
+                                </a>
+                              </form>
+                           </li>
+                        </ul>
+                   </div>
                 </div>
-            </div>
             <!-- HEADER END -->
             
-            <!-- BUTTONS -->
-            <div class="mt-7 w-1/3">
-                <form action="" class="flex flex-col gap-4 w-auto">
-                    <input type="text" name="cari-user" id="cari-user" placeholder="Cari Produk" class="w-auto px-1 text-dark text-sm font-light bg-light rounded-[5px] py-1.5 h-[34px]">
-                    <div class="flex flex-row gap-4">
-                        <select id="kategori" name="kategori" class="w-auto h-[34px] bg-light border border-gray rounded-[5px] text-sm px-3 py-1.5 font-medium text-dark">
-                            <option disabled selected>Semua Kategori</option>
-                            <option>Option 1</option>
-                            <option>Option 2</option>
-                        </select>
-                        <select id="urutkan" name="urutkan" class="w-auto h-[34px] bg-light border border-gray rounded-[5px] text-sm px-3 py-1.5 font-medium text-dark">
-                            <option disabled selected>Urutkan Berdasarkan</option>
-                            <option>Option 1</option>
-                            <option>Option 2</option>
-                        </select>
-                    </div>
+          <!-- BUTTONS -->
+          <div class="mt-7 w-1/3">
+                <form action="index.php" method="get" class="flex flex-col lg:flex-row gap-4">
+                    <!-- Input Pencarian -->
+                    <input 
+                        type="text" 
+                        name="search" 
+                        placeholder="Cari produk..." 
+                        value="<?= htmlspecialchars($search) ?>" 
+                        class="min-w-72 px-1 text-dark text-sm font-light bg-light rounded-[5px] py-1.5 h-[34px]">
+                    
+                    <!-- Pilihan Urutkan -->
+                    <select 
+                        name="urutkan" 
+                        class="w-auto h-[34px] bg-light border border-gray rounded-[5px] text-sm px-3 py-1.5 font-medium text-dark">
+                            <option value="">Urutkan Berdasarkan</option>
+                            <option value="harga_asc" <?= $urutkan === 'harga_asc' ? 'selected' : '' ?>>Harga Termurah</option>
+                            <option value="harga_desc" <?= $urutkan === 'harga_desc' ? 'selected' : '' ?>>Harga Termahal</option>
+                            <option value="nama" <?= $urutkan === 'nama' ? 'selected' : '' ?>>Nama Produk</option>
+                    </select>
+                    <!-- Tombol Cari -->
+                      <button type="submit" class="btn-success bg-[#2E9E5D] text-light w-auto py-2 px-4 text-base font-medium rounded-md shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] border border-gray">
+                         Cari
+                     </button>
                 </form>
             </div>
             <!-- BUTTONS END -->
 
             <!-- TABLE -->
-             <div class="bg-light rounded-[10px] w-full h-auto shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] p-10 mt-10 text-dark gap-[18px] flex flex-col">
+            <div class="bg-light rounded-[10px] w-full h-auto shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] p-10 mt-10 text-dark gap-[18px] flex flex-col">
                 <div class="grid grid-cols-3 gap-[30px]">
                     <!-- CARDS -->
-                <?php 
-                    // LOOPING DYNAMIC CARDS
-                    for ($i = 0; $i < 4; $i++) {?>
-                        <div class=" bg-light w-auto h-auto shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] px-3 pb-[15px]">
-                        <figure class="pt-[7px] justify-self-center">
-                            <img
-                            src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
-                            alt="Shoes"
-                            class="rounded-[15px]" />
-                        </figure>
-                        <div class="mt-[31px] gap-[5px] flex flex-col">
-                            <h3 class="text-dark text-[15px] font-extrabold">Tas Daur Ulang Plastik</h3>
-                            <h2 class="text-xl text-[#077E46] font-semibold max-w-[238px]">Rp150.000</h2>
-                            <p class="text-[10px] opacity-50 font-normal text-dark">Kategori : Aksesoris</p>
-                            <p class="text-[10px] opacity-50 font-normal text-dark">Stok : 15 pcs</p>
-                        </div>
-                        <div class="mt-[21px] h-[21px] flex justify-center">
-                            <button onclick="getElementById('delete').showModal()" class="bg-[#C0392B] h-full w-[77px] rounded-[10px] text-[10px] font-semibold text-light flex flex-row gap-1 justify-center items-center">
-                                <img class="w-[10px]" src="../../images/admin/trash.png" alt="">
-                                <span>Hapus</span>
-                            </button>
-                        </div>
-                    </div> 
-                    <?php } ?>
+                    <?php if ($result->num_rows > 0): ?>
+                        <?php while ($row = $result->fetch_assoc()): ?>
+                            <div class="bg-light w-auto h-auto shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] px-3 pb-[15px]">
+                                <figure class="pt-[7px] justify-self-center">
+                                    <img src="<?= htmlspecialchars($row['marketplace_image'] ? '../../images/user/products/' . $row['marketplace_image'] : '../../images/default.jpg'); ?>" 
+                                         alt="Product Image" 
+                                         class="rounded-[15px]" />
+                                </figure>
+                                <div class="mt-[31px] gap-[5px] flex flex-col">
+                                    <h3 class="text-dark text-[15px] font-extrabold"><?= htmlspecialchars($row['marketplace_product_name']) ?></h3>
+                                    <h2 class="text-xl text-[#077E46] font-semibold max-w-[238px]">Rp <?= number_format($row['marketplace_price'], 0, ',', '.') ?></h2>
+                                    <p class="text-[10px] opacity-50 font-normal text-dark"><?= $row['marketplace_description'] ?></p>
+                                </div>
+
+                                <div class="mt-[21px] h-[21px] flex justify-center">
+                                     <a href="javascript:void(0)" onclick="showDeleteDialog(<?= $row['marketplace_id']; ?>)">
+                                          <button class="bg-[#C0392B] h-full w-[77px] rounded-[10px] text-[10px] font-semibold text-light flex flex-row gap-1 justify-center items-center">
+                                             <img class="w-[10px]" src="../../images/admin/trash.png" alt="">
+                                             <span>Hapus</span>
+                                          </button>
+                                     </a>
+                                </div>
+                            </div> 
+                        <?php endwhile; ?>
+                    <?php else: ?>
+                        <p>Tidak ada produk ditemukan.</p>
+                    <?php endif; ?>
+                </div> 
             <!-- CARDS END  -->
-                </div>
-                <button class="rounded-[5px] border border-gray py-1.5 w-[90px] self-end h-auto text-sm font-medium text-dark">See All</button>
-                 <!-- BIKIN SEE ALL -->
-            </div>
 
-            <!-- dialogs -->
-            <dialog id="delete" class="modal">
-                <div class="modal-box bg-light w-[550px] h-auto rounded-[20px] gap-[42px] flex flex-col p-[30px]">
-                    <h3 class="text-2xl font-bold text-dark">Hapus Produk</h3>
-                    <div class="flex flex-col font-normal text-dark text-base gap-4">
-                        <p>Apakah Anda yakin ingin Menghapus produk ini?</p>
-                        <div class="flex flex-row gap-0.5">
-                            <span class="font-bold">Nama Produk</span>
-                            <p>: Tas Daur Ulang Plastik</p>
-                        </div>
-                        <div class="flex flex-row gap-0.5">
-                            <span class="font-bold">Kategori</span>
-                            <p>: Aksesoris</p>
-                        </div>
-                        <div class="flex flex-row gap-0.5">
-                            <span class="font-bold">Harga</span>
-                            <p>: Rp150.000</p>
-                        </div>
-                        <div class="flex flex-row gap-0.5">
-                            <span class="font-bold">Stok</span>
-                            <p>: 15 pcs</p>
-                        </div>
-                    </div>
-                    <div class="mt-10">
-                        <form method="dialog" class="flex flex-row-reverse items-end gap-[18px]">
-                            <button onclick="getElementById('deleted').showModal()" class="bg-[#EB3223] h-auto w-auto px-[14px] py-2 rounded-[10px] text-xs font-semibold text-light">Ya, Hapus</button>
-                            <button class="bg-[#95A5A6] h-auto w-auto px-[14px] py-2 rounded-[10px] text-xs font-semibold text-light">Batal</button>
-                        </form>
-                    </div>
-                </div>                
-            </dialog>
-
-            <dialog id="verified" class="modal">
-                <div class="modal-box bg-light w-[593px] h-auto rounded-[20px] gap-10 flex flex-col items-center py-[75px]">
-                    <h3 class="text-[32px] font-bold text-center text-dark">Berhasil Verifikasi</h3>
-                    <img src="../../images/admin/checklist.png" class="w-[100px]" alt="">
-                </div>
-                <form method="dialog" class="modal-backdrop bg-light bg-opacity-25">
-                    <button> </button>
-                </form>
-            </dialog>
-
-            <dialog id="denied" class="modal">
-                <div class="modal-box bg-light w-[593px] h-auto rounded-[20px] gap-10 flex flex-col items-center py-[75px]">
-                    <h3 class="text-[32px] font-bold text-center text-dark">Data ditolak</h3>
-                    <img src="../../images/admin/denied.png" class="w-[100px]" alt="">
-                </div>
-                <form method="dialog" class="modal-backdrop bg-light bg-opacity-25">
-                    <button> </button>
-                </form>
-            </dialog>
-
-            <dialog id="edit" class="modal">
-                <div class="modal-box bg-light min-w-[550px] h-auto rounded-[20px] gap-[18px] flex flex-col px-10 py-7">
-                    <h3 class="text-2xl font-bold text-dark">Edit Produk</h3>
-                    <form class="flex flex-col gap-[18px] w-full text-dark">
-                        <div class="flex flex-col gap-[9px]">
-                            <label for="nama-produk" class="text-sm font-medium">Nama Produk</label>
-                            <input type="text" id="nama-produk" name="nama-produk" value="Kantong Plastik Sampah Roll" class="w-full h-7 bg-light border border-gray px-1.5 font-normal text-xs">
-                        </div>
-                        <div class="flex flex-col gap-[9px]">
-                            <label for="jumlah-poin" class="text-sm font-medium">Jumlah Poin</label>
-                            <input type="number" id="jumlah-poin" name="jumlah-poin" min="0" value="1000" class="w-full h-7 bg-light border border-gray px-1.5 font-normal text-xs dark:[color-scheme:light]">
-                        </div>
-                        <div class="flex flex-col gap-[9px]">
-                            <label for="stok-produk" class="text-sm font-medium">Stok</label>
-                            <input type="number" id="stok-produk" name="stok-produk" min="0" value="20" class="w-full h-7 bg-light border border-gray px-1.5 font-normal text-xs dark:[color-scheme:light]">
-                        </div>
-                        <div class="flex flex-row-reverse gap-[15px] mt-2 items-end">
-                            <button onclick="getElementById('saved').showModal()" class="bg-[#2ECC71] h-auto w-auto px-[14px] py-2 rounded-[10px] text-xs font-semibold text-light">Simpan Perubahan</button>
-                    </form>
-                            <form method="dialog">
-                                <button class="bg-[#95A5A6] h-auto w-auto px-[14px] py-2 rounded-[10px] text-xs font-semibold text-light">Batal</button>
-                            </form>
-                        </div>
-                </div>
-            </dialog>
-
-            <dialog id="saved" class="modal">
-                <div class="modal-box bg-light w-[593px] h-auto rounded-[20px] gap-10 flex flex-col items-center py-[75px]">
-                    <h3 class="text-[32px] font-bold text-center text-dark">Data berhasil disimpan</h3>
-                    <img src="../../images/admin/checklist.png" class="w-[100px]" alt="">
-                </div>
-                <form method="dialog" class="modal-backdrop bg-light bg-opacity-25">
-                    <button> </button>
-                </form>
-            </dialog>
-
-            <dialog id="unactive" class="modal">
-                <div class="modal-box bg-light w-auto h-auto rounded-[20px] gap-[17px] flex flex-col items-center py-[42px] px-[83px]">
+              <!-- Dialog Konfirmasi Hapus -->
+           <dialog id="delete" class="modal">
+               <div class="modal-box bg-light w-auto h-auto rounded-[20px] gap-[17px] flex flex-col items-center py-[42px] px-[83px]">
                     <img src="../../images/admin/delete-alert.png" class="w-[60px]" alt="">
-                    <h3 class="text-[20px] font-bold text-center text-dark">Nonaktifkan User</h3>
-                    <div class="flex flex-col font-bold text-dark text-xs text-center">
-                        <p class="text-center text-xs font-normal text-dark leading-relaxed">Apakah Anda yakin ingin menonaktifkan user ini?</p>
-                        <p>ID : 001</p>
-                        <p>Nama : Ahmad Sudrajat</p>
-                    </div>
+                    <h3 class="text-[20px] font-bold text-center text-dark">Konfirmasi Hapus</h3>
+                    <p class="text-center text-xs font-normal text-dark leading-relaxed">Apakah Anda yakin ingin menghapus informasi ini?<br>
+                      Tindakan ini tidak dapat dibatalkan</p>
                     <div class="mt-10">
                         <form method="dialog" class="flex flex-row-reverse items-end gap-[18px]">
-                            <button onclick="getElementById('deleted').showModal()" class="bg-[#EB3223] h-auto w-auto px-[14px] py-2 rounded-[10px] text-xs font-semibold text-light">Nonaktifkan</button>
-                            <button class="bg-[#95A5A6] h-auto w-auto px-[14px] py-2 rounded-[10px] text-xs font-semibold text-light">Batal</button>
+                          <!-- Tombol Ya, Hapus -->
+                          <button type="button" onclick="confirmDelete()" class="bg-[#EB3223] h-auto w-auto px-[14px] py-2 rounded-[10px] text-xs font-semibold text-light">Ya, Hapus</button>
+                          <!-- Tombol Batal -->
+                          <button type="button" onclick="closeDeleteDialog()" class="bg-[#95A5A6] h-auto w-auto px-[14px] py-2 rounded-[10px] text-xs font-semibold text-light">Batal</button>
                         </form>
                     </div>
                 </div>                
             </dialog>
 
-            <dialog id="deleted" class="modal">
-                <div class="modal-box bg-light w-[531px] h-auto py-24 rounded-[20px] gap-6 flex flex-col items-center align-middle content-center">
+           <!-- Dialog Data Berhasil Dihapus -->
+           <dialog id="deleted" class="modal">
+               <div class="modal-box bg-light w-[531px] h-auto py-24 rounded-[20px] gap-6 flex flex-col items-center align-middle content-center">
                     <h3 class="text-[32px] font-bold text-center text-dark">Data berhasil dihapus</h3>
                     <img src="../../images/admin/checklist.png" class="w-[100px]" alt="">
                 </div>
                 <form method="dialog" class="modal-backdrop bg-light bg-opacity-25">
-                    <button> </button>
+                    <button type="button" onclick="closeDeletedDialog()"> </button>
                 </form>
-            </dialog>
+           </dialog>
+
+        <script>
+           let rewardIdToDelete = null;
+
+            // Menampilkan dialog konfirmasi hapus
+            function showDeleteDialog(rewardId) {
+                 rewardIdToDelete = rewardId;  // Menyimpan reward_id yang akan dihapus
+                 document.getElementById('delete').showModal();
+            }
+
+            // Menutup dialog konfirmasi hapus
+            function closeDeleteDialog() {
+                  document.getElementById('delete').close();
+            }
+
+            // Menampilkan dialog "Data berhasil dihapus"
+            function showDeletedDialog() {
+                  document.getElementById('delete').close();  // Menutup dialog konfirmasi
+                  document.getElementById('deleted').showModal();  // Menampilkan dialog sukses
+            }
+
+            // Fungsi Konfirmasi Penghapusan
+            function confirmDelete() {
+                if (rewardIdToDelete) {
+                   // Redirect ke halaman PHP untuk menghapus data
+                    window.location.href = "?delete_id=" + rewardIdToDelete;
+                }
+            }
+
+            // Menutup dialog "Data berhasil dihapus"
+              function closeDeletedDialog() {
+                 document.getElementById('deleted').close();
+            }
+        </script>
+
         </div>
     </div>
 </body>

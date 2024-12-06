@@ -220,7 +220,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update_reward'])) {
                         <div class="mt-[31px] gap-[9px] flex flex-col">
                             <h2 class="text-dark text-[15px] font-extrabold"><?= htmlspecialchars($row['reward_name']); ?></h2>
                             <p class="text-xs text-dark font-normal max-w-[238px]">Poin: <?= $row['reward_points_required']; ?></p>
-                            <p class="text-dark text-[10px] font-light text-dark"><?= htmlspecialchars($row['reward_description']); ?></p>
                         </div>
                         <div class="mt-[50px] h-5 flex flex-row justify-between align-middle">
                             <a href="?edit_id=<?= $row['reward_id']; ?>">
@@ -271,10 +270,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update_reward'])) {
                             <div class="flex flex-col gap-[9px]">
                                 <label for="jumlah-poin" class="text-sm font-medium">Jumlah Poin</label>
                                 <input type="number" id="reward_points_required" name="reward_points_required" value="<?= $edit_data['reward_points_required']; ?>" class="w-full h-7 bg-light border border-gray px-1.5 font-normal text-xs" required>
-                            </div>
-                            <div class="flex flex-col gap-[9px]">
-                                <label for="reward_description" class="text-sm font-medium">Deskripsi</label>
-                                <textarea id="reward_description" name="reward_description" class="w-full bg-light border border-gray px-1.5 font-normal text-xs" rows="3" required><?= htmlspecialchars($edit_data['reward_description']); ?></textarea>
                             </div>
                             <div class="flex flex-row-reverse gap-[15px] mt-2 items-end">
                                  <button type="submit" onclick="getElementById('saved').showModal()" name="update_reward" class="bg-[#2ECC71] h-auto w-auto px-[14px] py-2 rounded-[10px] text-xs font-semibold text-light">Simpan Perubahan</button>

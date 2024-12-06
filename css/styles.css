@@ -9287,10 +9287,6 @@ html:has(.drawer-open.drawer-open){
   height: 100vh;
 }
 
-.h-0{
-  height: 0px;
-}
-
 .min-h-\[100px\]{
   min-height: 100px;
 }
@@ -9569,6 +9565,10 @@ html:has(.drawer-open.drawer-open){
 
 .w-full{
   width: 100%;
+}
+
+.min-w-72{
+  min-width: 18rem;
 }
 
 .min-w-\[100px\]{
@@ -11088,6 +11088,11 @@ html:has(.drawer-open.drawer-open){
   background-color: transparent;
 }
 
+.bg-dark-green{
+  --tw-bg-opacity: 1;
+  background-color: rgb(15 56 35 / var(--tw-bg-opacity, 1));
+}
+
 .bg-opacity-25{
   --tw-bg-opacity: 0.25;
 }
@@ -12000,11 +12005,6 @@ html:has(.drawer-open.drawer-open){
   color: rgb(51 102 153 / .35);
 }
 
-.text-\[\#B3B3B3\]{
-  --tw-text-opacity: 1;
-  color: rgb(179 179 179 / var(--tw-text-opacity, 1));
-}
-
 .text-dark{
   --tw-text-opacity: 1;
   color: rgb(0 0 0 / var(--tw-text-opacity, 1));
@@ -12795,6 +12795,10 @@ html:has(.drawer-open.drawer-open){
     height: 1.25rem;
   }
 
+  .md\:h-6{
+    height: 1.5rem;
+  }
+
   .md\:h-\[375px\]{
     height: 375px;
   }
@@ -12809,14 +12813,6 @@ html:has(.drawer-open.drawer-open){
 
   .md\:h-full{
     height: 100%;
-  }
-
-  .md\:h-6{
-    height: 1.5rem;
-  }
-
-  .md\:h-7{
-    height: 1.75rem;
   }
 
   .md\:w-1\/2{
@@ -12980,6 +12976,11 @@ html:has(.drawer-open.drawer-open){
     padding-right: 0px;
   }
 
+  .md\:px-10{
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
+  }
+
   .md\:px-16{
     padding-left: 4rem;
     padding-right: 4rem;
@@ -13033,11 +13034,6 @@ html:has(.drawer-open.drawer-open){
   .md\:py-8{
     padding-top: 2rem;
     padding-bottom: 2rem;
-  }
-
-  .md\:px-10{
-    padding-left: 2.5rem;
-    padding-right: 2.5rem;
   }
 
   .md\:pl-12{
@@ -13158,6 +13154,14 @@ html:has(.drawer-open.drawer-open){
     aspect-ratio: auto;
   }
 
+  .lg\:h-7{
+    height: 1.75rem;
+  }
+
+  .lg\:h-9{
+    height: 2.25rem;
+  }
+
   .lg\:h-\[500px\]{
     height: 500px;
   }
@@ -13168,14 +13172,6 @@ html:has(.drawer-open.drawer-open){
 
   .lg\:h-full{
     height: 100%;
-  }
-
-  .lg\:h-9{
-    height: 2.25rem;
-  }
-
-  .lg\:h-7{
-    height: 1.75rem;
   }
 
   .lg\:w-\[450px\]{
@@ -13200,6 +13196,10 @@ html:has(.drawer-open.drawer-open){
 
   .lg\:grid-cols-3{
     grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .lg\:flex-row{
+    flex-direction: row;
   }
 
   .lg\:justify-normal{
