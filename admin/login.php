@@ -72,9 +72,6 @@ if (isset($_SESSION['login_message'])) {
           </div>
         <?php endif; ?>
 
-        <!-- Tombol untuk lupa kata sandi -->
-        <a href="password-reset/index.php" class="underline self-end">Lupa kata sandi?</a>
-
       </div>
     </div>
   </div>

@@ -9507,10 +9507,6 @@ html:has(.drawer-open.drawer-open){
   width: 531px;
 }
 
-.w-\[550px\]{
-  width: 550px;
-}
-
 .w-\[593px\]{
   width: 593px;
 }
@@ -10241,10 +10237,6 @@ html:has(.drawer-open.drawer-open){
   justify-items: stretch;
 }
 
-.gap-0\.5{
-  gap: 0.125rem;
-}
-
 .gap-1{
   gap: 0.25rem;
 }
@@ -10347,10 +10339,6 @@ html:has(.drawer-open.drawer-open){
 
 .gap-\[31px\]{
   gap: 31px;
-}
-
-.gap-\[42px\]{
-  gap: 42px;
 }
 
 .gap-\[5px\]{
@@ -11088,11 +11076,6 @@ html:has(.drawer-open.drawer-open){
   background-color: transparent;
 }
 
-.bg-dark-green{
-  --tw-bg-opacity: 1;
-  background-color: rgb(15 56 35 / var(--tw-bg-opacity, 1));
-}
-
 .bg-opacity-25{
   --tw-bg-opacity: 0.25;
 }
@@ -11349,10 +11332,6 @@ html:has(.drawer-open.drawer-open){
 
 .p-8{
   padding: 2rem;
-}
-
-.p-\[30px\]{
-  padding: 30px;
 }
 
 .p-\[34px\]{
