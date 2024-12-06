@@ -247,8 +247,8 @@ if ($conn) {
                                             <td class="border border-[#828282]"><?= htmlspecialchars($row['request_id']) ?></td>
                                             <td class="border border-[#828282]"><?= htmlspecialchars($row['drop_off_request_created_at']) ?></td>
                                             <td class="border border-[#828282]"><?= htmlspecialchars($row['user_name']) ?></td>
-                                            <td class="border border-[#828282]"><?= htmlspecialchars($row['waste_type']) ?></td>
-                                            <td class="border border-[#828282]"><?= htmlspecialchars($row['waste_weight']) ?> Kg</td>
+                                            <td class="border border-[#828282]"><?= ($row['waste_type'] != null) ? htmlspecialchars($row['waste_type']) : "-"; ?></td>
+                                            <td class="border border-[#828282]"><?= ($row['waste_weight'] != null) ? htmlspecialchars($row['waste_weight']) . " kg" : "-"; ?></td>
                                             <td class="border border-[#828282]">
                                                 <?php if ($row['status'] == 'accepted'): ?>
                                                     <p class="bg-[#299E63] text-light rounded-[10px] border border-gray w-auto h-auto text-sm font-medium text-center py-0.5 px-2">
@@ -264,7 +264,7 @@ if ($conn) {
                                                     </p>
                                                 <?php endif; ?>
                                             </td>
-                                            <td class="border border-[#828282]"><?= htmlspecialchars($row['points_earned']) ?></td>
+                                            <td class="border border-[#828282]"><?= ($row['points_earned'] != null) ? htmlspecialchars($row['points_earned']) : "-"; ?></td>
                                             <td class="border border-[#828282]">
                                                 <div class="flex flex-row gap-[18px] justify-center items-center">
                                                     <?php if (isset($row['request_id']) && $row['status'] !== 'accepted' && $row['status'] !== 'rejected'): ?>
