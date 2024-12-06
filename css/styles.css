@@ -11098,6 +11098,11 @@ html:has(.drawer-open.drawer-open){
   background-color: transparent;
 }
 
+.bg-dark-green{
+  --tw-bg-opacity: 1;
+  background-color: rgb(15 56 35 / var(--tw-bg-opacity, 1));
+}
+
 .bg-opacity-25{
   --tw-bg-opacity: 0.25;
 }

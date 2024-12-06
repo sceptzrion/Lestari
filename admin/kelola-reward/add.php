@@ -14,16 +14,15 @@ if (!isset($_SESSION['admin_id'])) {
 $message = '';
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['add_reward'])) {
     $reward_name = $_POST['reward_name'];
-    $reward_description = $_POST['reward_description'];
     $reward_points_required = $_POST['reward_points_required'];
 
     // Proses upload gambar
     $target_dir = "uploads/";
     $reward_image = $target_dir . basename($_FILES['reward_image']['name']);
     if (move_uploaded_file($_FILES['reward_image']['tmp_name'], $reward_image)) {
-        $sql = "INSERT INTO rewards (reward_name, reward_description, reward_points_required, reward_image) VALUES (?, ?, ?, ?)";
+        $sql = "INSERT INTO rewards (reward_name, reward_points_required, reward_image) VALUES (?, ?, ?)";
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param("ssis", $reward_name, $reward_description, $reward_points_required, $reward_image);
+        $stmt->bind_param("sis", $reward_name, $reward_points_required, $reward_image);
         if ($stmt->execute()) {
             $message = "Reward berhasil ditambahkan.";
         } else {
@@ -160,10 +159,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['add_reward'])) {
                     <div class="flex flex-col gap-[10px] w-full">
                         <label for="reward_points_required"  class="px-1 text-2xl font-medium">Jumlah Poin</label>
                         <input type="number" id="reward_points_required" name="reward_points_required"  min="0" placeholder="Masukkan Jumlah Poin" class="w-full h-12 bg-light border border-gray px-3 font-light dark:[color-scheme:light] shadow-[0px_4px_4px_rgba(0,0,0,0.25)]" required>
-                    </div>
-                    <div class="flex flex-col gap-[10px] w-full">
-                        <label for="reward_description" class="px-1 text-2xl font-medium">Deskripsi</label>
-                        <input type="text" id="reward_description"  name="reward_description"  min="0" placeholder="Masukkan Deskripsi Produk" class="w-full h-12 bg-light border border-gray px-3 font-light dark:[color-scheme:light] shadow-[0px_4px_4px_rgba(0,0,0,0.25)]" required>
                     </div>
                     <div class="flex flex-col gap-[10px] w-full">
                         <label for="reward_image" class="px-1 text-2xl font-medium">Gambar Produk</label>
