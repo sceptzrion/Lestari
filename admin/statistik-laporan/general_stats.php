@@ -5,9 +5,9 @@ include 'connect_admin.php';
 // Query untuk total berat sampah sepanjang tahun
 $queryTotalWeight = "
     SELECT SUM(dr.waste_weight) AS total_weight
-    FROM drop-off_request dor
+    FROM drop_off_request dor
     JOIN detail_request dr ON dor.request_id = dr.request_id
-    WHERE YEAR(dor.drop-off_request_created_at) = YEAR(CURDATE()) AND dor.status = 'accepted' AND bank_id='$bank_id';
+    WHERE YEAR(dor.drop_off_request_created_at) = YEAR(CURDATE()) AND dor.status = 'accepted' AND bank_id='$bank_id';
 ";
 $resultTotalWeight = $conn->query($queryTotalWeight);
 $totalWeight = $resultTotalWeight->fetch_assoc()['total_weight'] ?? 0;
@@ -16,10 +16,10 @@ $totalWeight = $resultTotalWeight->fetch_assoc()['total_weight'] ?? 0;
 $queryMaxWeight = "
     SELECT 
         SUM(dr.waste_weight) AS max_weight
-    FROM drop-off_request dor
+    FROM drop_off_request dor
     JOIN detail_request dr ON dor.request_id = dr.request_id
-    WHERE YEAR(dor.drop-off_request_created_at) = YEAR(CURDATE()) AND bank_id='$bank_id' AND dor.status = 'accepted'
-    GROUP BY MONTH(dor.drop-off_request_created_at)
+    WHERE YEAR(dor.drop_off_request_created_at) = YEAR(CURDATE()) AND bank_id='$bank_id' AND dor.status = 'accepted'
+    GROUP BY MONTH(dor.drop_off_request_created_at)
     ORDER BY max_weight DESC
     LIMIT 1;
 ";
@@ -29,14 +29,14 @@ $maxWeight = $resultMaxWeight->fetch_assoc()['max_weight'] ?? 0;
 // Query untuk semua bulan dengan kontribusi tertinggi
 $queryTopMonths = "
     SELECT 
-        MONTHNAME(dor.drop-off_request_created_at) AS month_name,
+        MONTHNAME(dor.drop_off_request_created_at) AS month_name,
         SUM(dr.waste_weight) AS total_weight
-    FROM drop-off_request dor
+    FROM drop_off_request dor
     JOIN detail_request dr ON dor.request_id = dr.request_id
-    WHERE YEAR(dor.drop-off_request_created_at) = YEAR(CURDATE()) AND bank_id='$bank_id' AND dor.status = 'accepted'
-    GROUP BY MONTH(dor.drop-off_request_created_at)
+    WHERE YEAR(dor.drop_off_request_created_at) = YEAR(CURDATE()) AND bank_id='$bank_id' AND dor.status = 'accepted'
+    GROUP BY MONTH(dor.drop_off_request_created_at)
     HAVING total_weight = $maxWeight
-    ORDER BY MONTH(dor.drop-off_request_created_at);
+    ORDER BY MONTH(dor.drop_off_request_created_at);
 ";
 $resultTopMonths = $conn->query($queryTopMonths);
 $topMonths = [];
@@ -54,8 +54,8 @@ $queryTopWasteType = "
         SUM(dr.waste_weight) AS total_weight
     FROM detail_request dr
     JOIN waste w ON dr.waste_id = w.waste_id
-    JOIN drop-off_request dor ON dr.request_id = dor.request_id
-    WHERE YEAR(dor.drop-off_request_created_at) = YEAR(CURDATE()) AND bank_id='$bank_id' AND dor.status = 'accepted'
+    JOIN drop_off_request dor ON dr.request_id = dor.request_id
+    WHERE YEAR(dor.drop_off_request_created_at) = YEAR(CURDATE()) AND bank_id='$bank_id' AND dor.status = 'accepted'
     GROUP BY dr.waste_id
     ORDER BY total_weight DESC
     LIMIT 1;

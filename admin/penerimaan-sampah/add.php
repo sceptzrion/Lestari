@@ -20,59 +20,68 @@ if ($conn) {
     // Cek jika form disubmit
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $status = $_POST['status'];
-        $waste_types = $_POST['waste_type']; // Array untuk jenis sampah
-        $waste_weights = $_POST['waste_weight']; // Array untuk berat sampah
 
-        // Update status request
-        $query = "UPDATE drop_off_request SET status = ? WHERE request_id = ?";
-        $stmt = $conn->prepare($query);
-        $stmt->bind_param('si', $status, $request_id);
-        if (!$stmt->execute()) {
-            $error_message = "Error updating status.";
-        }
+        // Jika tombol Verifikasi ditekan
+        if ($status === 'accepted') {
+            // Ambil input waste_type dan waste_weight
+            $waste_types = isset($_POST['waste_type']) ? $_POST['waste_type'] : [];
+            $waste_weights = isset($_POST['waste_weight']) ? $_POST['waste_weight'] : [];
 
-        // Insert data ke tabel detail_request untuk setiap jenis sampah dan beratnya
-        if (!empty($waste_types) && !empty($waste_weights)) {
-            for ($i = 0; $i < count($waste_types); $i++) {
-                $waste_type = $waste_types[$i];
-                $waste_weight = $waste_weights[$i];
+            // Validasi: pastikan inputan tidak kosong
+            if (empty($waste_types) || empty($waste_weights)) {
+                $error_message = "Please add at least one waste type and weight.";
+            } else {
+                // Proses input jika valid
+                for ($i = 0; $i < count($waste_types); $i++) {
+                    $waste_type = $waste_types[$i];
+                    $waste_weight = $waste_weights[$i];
 
-                // Pastikan jenis sampah dan beratnya valid
-                if (is_numeric($waste_weight) && $waste_weight > 0) {
-                    // Ambil points_per_kg dari waste untuk jenis sampah yang dipilih
-                    $points_query = "SELECT waste_point FROM waste WHERE waste_id = ?";
-                    $points_stmt = $conn->prepare($points_query);
-                    $points_stmt->bind_param('i', $waste_type);
-                    $points_stmt->execute();
-                    $points_stmt->bind_result($waste_point);
-                    $points_stmt->fetch();
-                    $points_stmt->close();
+                    // Pastikan jenis sampah dan beratnya valid
+                    if (is_numeric($waste_weight) && $waste_weight > 0) {
+                        // Ambil points_per_kg dari waste untuk jenis sampah yang dipilih
+                        $points_query = "SELECT waste_point FROM waste WHERE waste_id = ?";
+                        $points_stmt = $conn->prepare($points_query);
+                        $points_stmt->bind_param('i', $waste_type);
+                        $points_stmt->execute();
+                        $points_stmt->bind_result($waste_point);
+                        $points_stmt->fetch();
+                        $points_stmt->close();
 
-                    if ($waste_point) {
-                        $points_earned = $waste_weight * $waste_point; // Menghitung poin yang diperoleh
+                        if ($waste_point) {
+                            $points_earned = $waste_weight * $waste_point; // Menghitung poin yang diperoleh
 
-                        // Insert ke detail_request
-                        $detail_query = "INSERT INTO detail_request (request_id, waste_id, waste_weight, points_earned) VALUES (?, ?, ?, ?)";
-                        $detail_stmt = $conn->prepare($detail_query);
-                        $detail_stmt->bind_param('iiii', $request_id, $waste_type, $waste_weight, $points_earned);
-                        if (!$detail_stmt->execute()) {
-                            $error_message = "Error inserting detail request.";
+                            // Insert ke detail_request
+                            $detail_query = "INSERT INTO detail_request (request_id, waste_id, waste_weight, points_earned) VALUES (?, ?, ?, ?)";
+                            $detail_stmt = $conn->prepare($detail_query);
+                            $detail_stmt->bind_param('iiii', $request_id, $waste_type, $waste_weight, $points_earned);
+                            if (!$detail_stmt->execute()) {
+                                $error_message = "Error inserting detail request.";
+                            }
+                            $detail_stmt->close();
+                        } else {
+                            $error_message = "Invalid waste type selected.";
                         }
-                        $detail_stmt->close();
                     } else {
-                        $error_message = "Invalid waste type selected.";
+                        $error_message = "Invalid waste weight input.";
                     }
-                } else {
-                    $error_message = "Invalid waste weight input.";
                 }
             }
-        } else {
-            $error_message = "Please add at least one waste type and weight.";
+        }
+
+        // Jika tombol Tolak ditekan
+        if ($status === 'rejected' && empty($error_message)) {
+            // Update status menjadi rejected tanpa memeriksa input waste_type atau waste_weight
+            $query = "UPDATE drop_off_request SET status = ? WHERE request_id = ?";
+            $stmt = $conn->prepare($query);
+            $stmt->bind_param('si', $status, $request_id);
+            if (!$stmt->execute()) {
+                $error_message = "Error updating status.";
+            }
+            $stmt->close();
         }
 
         // Redirect setelah berhasil
         if (empty($error_message)) {
-            $_SESSION['flash_message'] = "Penerimaan sampah berhasil diperbarui.";
             header('Location: index.php'); // Redirect ke halaman penerimaan setelah sukses
             exit();
         }
@@ -81,6 +90,11 @@ if ($conn) {
     // Query untuk mendapatkan data jenis sampah
     $waste_query = "SELECT waste_id, waste_name FROM waste";
     $waste_result = $conn->query($waste_query);
+
+    if (!$waste_result) {
+        die("Error fetching waste data: " . $conn->error);
+    }
+
 } else {
     die("Koneksi database gagal: " . $conn->connect_error);
 }
@@ -178,12 +192,27 @@ if ($conn) {
         }
 
         document.querySelector('form').addEventListener('submit', function (e) {
-            const wasteItems = document.querySelectorAll('.waste-item');
+        const wasteItems = document.querySelectorAll('.waste-item');
+        const status = document.querySelector('button[type="submit"][name="status"]:focus').value;
+
+        // Jika tombol Verifikasi ditekan
+        if (status === 'accepted') {
             if (wasteItems.length === 0) {
                 alert('Anda harus menambahkan setidaknya satu jenis sampah.');
                 e.preventDefault();
+            } else {
+                // Periksa apakah semua input berat sampah valid
+                for (const item of wasteItems) {
+                    const weightInput = item.querySelector('input[name="waste_weight[]"]');
+                    if (!weightInput.value || parseFloat(weightInput.value) <= 0) {
+                        alert('Berat sampah harus diisi dan lebih dari 0.');
+                        e.preventDefault();
+                        return;
+                    }
             }
-        });
+        }
+    }
+});
     </script>
 </head>
 <body>
@@ -255,8 +284,7 @@ if ($conn) {
                     <!-- Tombol Tolak -->
                     <button 
                         class="btn btn-error bg-[#C0392B] rounded-[20px] text-[15px] font-semibold px-[41px] text-light shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] border border-gray" 
-                        type="submit" name="status" value="accepted"
-                        onclick="document.getElementById('denied').showModal()">
+                        type="submit" name="status" value="rejected">
                         Tolak
                     </button>
                     </div>
@@ -265,7 +293,7 @@ if ($conn) {
         </div>
     </div>
 
-    <!-- DIALOGS -->
+    <!-- DIALOGS
     <dialog id="denied" class="modal">
         <div class="modal-box bg-light w-[593px] h-auto rounded-[20px] gap-10 flex flex-col items-center py-[75px]">
             <h3 class="text-[32px] font-bold text-center text-dark">Data ditolak</h3>
@@ -274,6 +302,6 @@ if ($conn) {
         <form method="dialog" class="modal-backdrop bg-light bg-opacity-25">
             <button> </button>
         </form>
-    </dialog>
+    </dialog> -->
 </body>
 </html>

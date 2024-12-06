@@ -5,7 +5,7 @@ include 'connect_admin.php';
 $query_total_sampah = "
     SELECT SUM(dr.waste_weight) AS total_berat 
     FROM detail_request dr
-    JOIN drop-off_request dor ON dr.request_id = dor.request_id
+    JOIN drop_off_request dor ON dr.request_id = dor.request_id
     WHERE dor.bank_id = ? AND dor.status = 'accepted'
 ";
 $stmt = $conn->prepare($query_total_sampah);
@@ -16,17 +16,16 @@ $stmt->fetch();
 $total_sampah = $total_sampah ?? 0; // Default ke 0 jika null
 $stmt->close();
 
-// Query untuk total berat sampah per bulan berdasarkan drop-off_request_updated_at dengan status "accepted"
 $query_per_month = "
     SELECT 
-        MONTH(dor.drop-off_request_updated_at) AS month, 
-        YEAR(dor.drop-off_request_updated_at) AS year,
+        MONTH(dor.drop_off_request_updated_at) AS month, 
+        YEAR(dor.drop_off_request_updated_at) AS year,
         SUM(dr.waste_weight) AS total_weight
     FROM detail_request dr
-    JOIN drop-off_request dor ON dr.request_id = dor.request_id
+    JOIN drop_off_request dor ON dr.request_id = dor.request_id
     WHERE dor.bank_id = ? AND dor.status = 'accepted'
-    GROUP BY YEAR(dor.drop-off_request_updated_at), MONTH(dor.drop-off_request_updated_at)
-    ORDER BY YEAR(dor.drop-off_request_updated_at), MONTH(dor.drop-off_request_updated_at)
+    GROUP BY YEAR(dor.drop_off_request_updated_at), MONTH(dor.drop_off_request_updated_at)
+    ORDER BY YEAR(dor.drop_off_request_updated_at), MONTH(dor.drop_off_request_updated_at)
 ";
 $stmt = $conn->prepare($query_per_month);
 $stmt->bind_param("i", $bank_id);
