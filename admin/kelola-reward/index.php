@@ -118,10 +118,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update_reward'])) {
                     <img src="../../images/admin/Truck.png" alt="">
                     <p class="text-lg">Penerimaan Sampah</p>
                 </button>
-                <button class="btn btn-success bg-transparent border-0 text-light font-bold text-xl justify-start pl-[9px] w-[271px] h-[59px] flex flex-row gap-[13px]" onclick="location.href='../informasi-tutorial/'">
-                    <img src="../../images/admin/Recycling.png" alt="">
-                    <p>Informasi Tutorial</p>
-                </button>
                 <button class="btn btn-success bg-transparent border-0 text-light font-bold text-xl justify-start pl-[9px] w-[271px] h-[59px] flex flex-row gap-[13px]" onclick="location.href='../statistik-laporan/'">
                     <img src="../../images/admin/Graph.png" alt="">
                     <p>Statistik & Laporan</p>
@@ -130,17 +126,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update_reward'])) {
                     <img src="../../images/admin/prize.png" class="w-[30px]" alt="">
                     <p>Kelola Reward</p>
                 </button>
-                <button class="btn btn-success bg-transparent border-0 text-light font-bold text-xl justify-start pl-[9px] w-[271px] h-[59px] flex flex-row gap-[13px]" onclick="location.href='../manajemen-user/'">
-                    <img src="../../images/admin/Management.png" alt="">
-                    <p>Manajemen User</p>
-                </button>
                 <button class="btn btn-success bg-transparent border-0 text-light font-bold text-xl justify-start pl-[9px] w-[271px] h-[59px] flex flex-row gap-[13px]" onclick="location.href='../marketplace/'">
                     <img src="../../images/admin/WhatsApp.png" alt="">
                     <p>Marketplace</p>
-                </button>
-                <button class="btn btn-success bg-transparent border-0 text-light font-bold text-xl justify-start pl-[9px] w-[271px] h-[59px] flex flex-row gap-[13px]" onclick="location.href='../kelola-blog/'">
-                    <img src="../../images/admin/Blog.png" alt="">
-                    <p>Kelola Blog</p>
                 </button>
                 <button class="btn btn-success bg-transparent border-0 text-light font-bold text-xl justify-start pl-[9px] w-[271px] h-[59px] flex flex-row gap-[13px]" onclick="location.href='../pengaturan/'">
                     <img src="../../images/admin/Settings.png" alt="">
@@ -175,10 +163,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update_reward'])) {
                             <p class="text-xl font-normal">Pengaturan</p>
                         </a></li>
                         <hr class="h-[2px] w-full text-gray my-6">
-                        <li><a class="flex flex-row gap-[10px]">
-                            <img src="../../images/admin/sign-out.png" class="w-[30px]" alt="Sign Out">
-                            <p class="text-xl font-normal">Sign Out</p>
-                        </a></li>
+                        <li>
+                              <form action="../signout.php" method="POST" id="signOutForm" class="flex flex-row gap-[10px]">
+                                <button type="submit" style="display: none;" id="signOutButton"></button>
+                                <a href="javascript:void(0);" onclick="document.getElementById('signOutForm').submit();" class="flex flex-row gap-[10px]">
+                                    <img src="../../images/admin/sign-out.png" class="w-[30px]" alt="Sign Out">
+                                    <p class="text-xl font-normal">Sign Out</p>
+                                </a>
+                              </form>
+                           </li>
                     </ul>
                 </div>
             </div>
