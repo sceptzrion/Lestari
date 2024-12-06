@@ -1,75 +1,40 @@
 <?php
 session_start();  // Start session untuk memeriksa status login
 
-// Halaman yang tidak memerlukan login (seperti landingpage.php)
-if (basename($_SERVER['PHP_SELF']) != 'landingpage.php') {
+// Halaman yang tidak memerlukan login (seperti landing-page.php)
+if (basename($_SERVER['PHP_SELF']) != 'landing-page.php') {
     // Jika user belum login, arahkan ke halaman login atau lainnya
     if (!isset($_SESSION['loggedin'])) {
-        header("Location: ../../landingpage.php");
+        header("Location: ../../landing-page.php");
         exit();  // Jangan lupa exit setelah redirect
     }
 }
-
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "db_sampah_4";
-
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-// Cek koneksi
-if ($conn->connect_error) {
-    die("Koneksi gagal: " . $conn->connect_error);
-}
-
-// Query untuk mengambil data wilayah (region) dan bank sampah
-$sql = "SELECT region, COUNT(bank_id) as total_banks, bank_operating_hours 
-        FROM bank_locations 
-        GROUP BY region";
-
-$result = $conn->query($sql);
 ?>
-
 <!DOCTYPE html>
-<html lang="en"  class="bg-light dark:[color-scheme:light]">
+<html lang="en"class="bg-light dark:[color-scheme:light]">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="../../css/styles.css" rel="stylesheet">
     <title>Lestari - Drop Off</title>
-    <!-- Google Fonts -->
+      <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
-        tailwind.config = {
-          theme: {
-            extend: {
-              fontFamily: {
-                'poppins': ['Poppins', 'sans-serif']
-              }
-            }
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            'poppins': ['Poppins', 'sans-serif']
           }
-        };
-    </script>
+        }
+      }
+    }
+  </script>
     <script>
         function toggleModal() {
             const modal = document.getElementById("location-modal");
             modal.classList.toggle("hidden");
-        }
-
-        // Fungsi Pencarian
-        function handleSearch(query) {
-            const searchQuery = query.toLowerCase();
-            const items = document.querySelectorAll('.grid .bg-white'); // Semua elemen yang ingin disaring
-            
-            items.forEach(item => {
-                const locationName = item.querySelector('h3').textContent.toLowerCase();
-                if (locationName.includes(searchQuery)) {
-                    item.style.display = ''; // Tampilkan item
-                } else {
-                    item.style.display = 'none'; // Sembunyikan item
-                }
-            });
         }
     </script>
 </head>
@@ -96,7 +61,7 @@ $result = $conn->query($sql);
             <ul
             id="dropdown-menu"
             class="menu menu-sm dropdown-content bg-white rounded-box z-[1] mt-3 w-52 p-2 shadow hidden">
-            <li><a href="../../landingpage.php">Home</a></li>
+            <li><a href="../../landing-page.php">Home</a></li>
             <li><a href="../../user/tentang.php">Tentang kami</a></li>
             <li>
               <a>Layanan</a>
@@ -104,7 +69,7 @@ $result = $conn->query($sql);
                 <!-- Drop Off -->
                 <li>
                     <?php if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true): ?>
-                    <button onclick="window.location.href='../../user/drop_off/dropoff.php'" >
+                    <button onclick="window.location.href='../../user/drop-off/dropoff.php'" >
                         <p>Drop Off</p>
                     </button>
                     <?php else: ?>
@@ -116,7 +81,7 @@ $result = $conn->query($sql);
                  <!-- Rewards -->
                 <li>
                     <?php if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true): ?>
-                    <button onclick="window.location.href='../../user/drop_off/poin.php'" >
+                    <button onclick="window.location.href='../../user/drop-off/poin.php'" >
                         <p>Rewards</p>
                     </button>
                     <?php else: ?>
@@ -125,7 +90,7 @@ $result = $conn->query($sql);
                     </button>
                     <?php endif; ?>
                 </li>
-               
+                
                 <!-- Marketplace -->
                 <li>
                     <?php if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true): ?>
@@ -141,7 +106,7 @@ $result = $conn->query($sql);
                     </ul>
                 </li>
             <li><a href="../../user/blog.php">Blog</a></li>
-            <li><a href="../../user/kontak_kami.php">Kontak Kami</a></li>
+            <li><a href="../../user/kontak-kami.php">Kontak Kami</a></li>
           </ul>
         </div>
         <!-- BRAND LOGO -->
@@ -152,7 +117,7 @@ $result = $conn->query($sql);
 <!-- DESKTOP MODE -->
 <div class="navbar-center hidden lg:flex">
   <ul class="menu menu-horizontal px-1 text-dark text-base">
-    <li><a href="../../landingpage.php">Home</a></li>
+    <li><a href="../../landing-page.php">Home</a></li>
     <li><a href="../../user/tentang.php">Tentang kami</a></li>
     <li>
       <details>
@@ -161,7 +126,7 @@ $result = $conn->query($sql);
           <!-- Drop Off -->
           <li>
             <?php if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true): ?>
-              <button onclick="window.location.href='../../user/drop_off/dropoff.php'" class="btn btn-success flex-grow shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] rounded-[20px] flex items-center justify-center px-4 py-2 gap-2 min-w-[120px] max-w-[200px]">
+              <button onclick="window.location.href='../../user/drop-off/dropoff.php'" class="btn btn-success flex-grow shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] rounded-[20px] flex items-center justify-center px-4 py-2 gap-2 min-w-[120px] max-w-[200px]">
                 <img src="../../images/truck.png" class="w-8 h-8" alt="">
                 <p>Drop Off</p>
               </button>
@@ -175,7 +140,7 @@ $result = $conn->query($sql);
           <!-- Rewards -->
           <li>
             <?php if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true): ?>
-              <button onclick="window.location.href='../../user/drop_off/poin.php'" class="btn btn-success flex-grow shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] rounded-[20px] flex items-center justify-center px-4 py-2 gap-2 min-w-[120px] max-w-[200px]">
+              <button onclick="window.location.href='../../user/drop-off/poin.php'" class="btn btn-success flex-grow shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] rounded-[20px] flex items-center justify-center px-4 py-2 gap-2 min-w-[120px] max-w-[200px]">
                 <img src="../../images/reward.png" class="w-8 h-8" alt="">
                 <p>Rewards</p>
               </button>
@@ -205,7 +170,7 @@ $result = $conn->query($sql);
       </details>
     </li>
     <li><a href="../../user/blog.php">Blog</a></li>
-    <li><a href="../../user/kontak_kami.php">Kontak Kami</a></li>
+    <li><a href="../../user/kontak-kami.php">Kontak Kami</a></li>
   </ul>
 </div>
 
@@ -266,70 +231,74 @@ $result = $conn->query($sql);
     </script>
   <!-- NAVBAR END -->
 
-<!-- MAIN CONTENT -->
-<main class="bg-light container mx-auto px-12 md:py-8 pb-12">
-    <div class="text-center mb-8">
-        <h2 class="text-green-700 text-3xl font-bold">Lokasi Bank Sampah</h2>
-        <p class="text-gray-600">Pilih kota terdekat dengan lokasi anda</p>
+<!-- Main Section -->
+<section class="md:py-16 bg-gray-100 flex items-center justify-center min-h-screen">
+    <div class="relative bg-gradient-to-r from-green to-dark-green rounded-lg shadow-lg p-8 flex justify-center items-center w-3/4 h-64">
+        <div class="text-white text-center relative"> 
+            <!-- Gambar Truck di Posisi Responsif -->
+            <div class="absolute top-[-40px] left-1/2 transform -translate-x-1/2 md:top-[20px] md:left-[-150px] md:transform-none bg-white rounded-full flex justify-center items-center w-24 h-24 md:w-32 md:h-32">
+                <img src="../../images/truck.png" alt="Truck Icon" class="w-24 h-24">
+            </div>
+            <h2 class="text-3xl font-bold flex items-center justify-center mt-16 md:mt-0">
+                <img src="../../images/user/recycle.png" alt="Recycle Icon" class="w-6 h-6 mr-2">
+                Drop Off
+            </h2>
+            <p class="mt-4 text-lg"> Antar Langsung Sampahmu <br> ke Bank Sampah Terdekat</p>
+            <button 
+                onclick="redirectToLocation()" 
+                class="mt-4 bg-gradient-to-r from-green to-dark-green text-white px-6 py-2 rounded-full shadow hover:bg-green-600 focus:outline-none">
+                Lihat Lokasi
+            </button>
+            <script>
+                function redirectToLocation() {
+                    window.location.href = '../../user/drop-off/lokasi.php';
+                }
+            </script>
+        </div>
     </div>
-<!-- SEARCH -->
-<div class="bg-light flex justify-end items-center pt-1 pr-1 space-x-4 py-2">
-    <input
-        type="text"
-        placeholder="Search..."
-        class="bg-light border rounded-full px-10 py-1 focus:outline-none focus:ring focus:ring-green-600"
-        oninput="handleSearch(this.value)"
-    />
-</div>
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" id="bank-sampah-list">
-        <?php
-        if ($result->num_rows > 0) {
-            while ($row = $result->fetch_assoc()) {
-                $region = $row['region'];
-                $total_banks = $row['total_banks'];
-                $bank_hours = $row['bank_operating_hours'];
-                ?>
-                <div class="bank-sampah-item bg-white shadow-md rounded-lg p-6">
-                    <h3 class="text-green-700 font-bold text-lg"><?php echo htmlspecialchars($region); ?></h3>
-                    <p class="text-gray-600 text-sm"><?php echo $total_banks; ?> Bank Sampah Tersedia</p>
-                    <p class="text-gray-600 text-sm">Jam Operasional: <?php echo htmlspecialchars($bank_hours); ?></p>
-                    <a href="kota.php?region=<?php echo urlencode($region); ?>" 
-                        class="mt-4 bg-gradient-to-r from-green to-dark-green text-white py-2 px-4 rounded hover:bg-green-800 inline-block">
-                         Lihat Detail
-                    </a>
-                </div>
-                <?php
-            }
-        } else {
-            echo "<p class='text-center text-gray-600'>Tidak ada bank sampah ditemukan.</p>";
-        }
-        ?>
+</section>
+
+
+<!-- Footer -->
+<footer class="bg-gradient-to-r from-green to-dark-green text-white py-7">
+  <div class="container mx-auto px-12">
+    <!-- Logo -->
+    <div class="flex justify-center mb-6">
+      <a href="../../landing-page.php">
+        <img src="../../images/Logo.png" alt="Logo Lestari" class="h-20">
+      </a>
     </div>
-</main>
+    
+    <!-- Grid Container -->
+    <div class="grid grid-cols-2 md:grid-cols-3 gap-4 text-center md:text-left">
+      <!-- Bagian Lestari -->
+      <div class="text-left col-span-1 md:col-span-1">
+        <h4 class="font-bold mb-2">Lestari</h4>
+        <a href="../../landing-page.php" class="block text-white hover:underline mb-1">Home</a>
+        <a href="../../user/tentang.php" class="block text-white hover:underline mb-1">Tentang Kami</a>
+        <a href="../../landing-page.php" class="block text-white hover:underline mb-1">Layanan</a>
+        <a href="../../user/blog.php" class="block text-white hover:underline mb-1">Blog</a>
+      </div>
 
-<!-- search java -->
-<script>
-    function handleSearch(query) {
-        // Ambil semua elemen dengan class 'bank-sampah-item'
-        const items = document.querySelectorAll('.bank-sampah-item');
+      <!-- Bagian Informasi -->
+      <div class="text-right md:text-center col-span-1 md:col-span-1">
+        <h4 class="font-bold mb-2">Informasi</h4>
+        <a href="../../user/kontak-kami.php" class="block text-white hover:underline mb-1">Kontak Kami</a>
+      </div>
 
-        // Jika query kosong, tampilkan semua elemen
-        if (query.trim() === "") {
-            items.forEach(item => item.style.display = 'block');
-            return;
-        }
-
-        // Filter berdasarkan query
-        items.forEach(item => {
-            const region = item.querySelector('h3').textContent.toLowerCase();
-            if (region.includes(query.toLowerCase())) {
-                item.style.display = 'block'; // Tampilkan elemen yang cocok
-            } else {
-                item.style.display = 'none'; // Sembunyikan elemen yang tidak cocok
-            }
-        });
-    }
-</script>
-
+      <!-- Bagian Hubungi Kami -->
+      <div class="col-span-2 md:col-span-1 text-center">
+        <h4 class="font-bold mb-2">Hubungi Kami</h4>
+        <div class="flex justify-center space-x-4 mt-2">
+          <a href="#"><img src="../../images/user/sosmed/instagram.png" alt="Instagram"></a>
+          <a href="#"><img src="../../images/user/sosmed/fb.png" alt="Facebook"></a>
+          <a href="#"><img src="../../images/user/sosmed/x.png" alt="Twitter"></a>
+          <a href="#"><img src="../../images/user/sosmed/wa.png" alt="Whatsapp"></a>
+          <a href="#"><img src="../../images/user/sosmed/yt.png" alt="YouTube"></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
 </body>
 </html>

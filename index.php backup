@@ -80,7 +80,7 @@
         <!-- if user not login -->
         <div class="navbar-end ml-[56px] flex flex-row gap-[30px] w-auto">
           <a href="user/signin.php" class="btn px-5 h-[42px] shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] rounded-[20px] bg-gradient-to-r from-green to-dark-green text-[20px] border-dark border-[1px] font-medium text-light">Sign In</a>
-          <a href="user/signup_email.php" class="btn btn-outline px-4 h-[42px] shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] border-dark border-2 rounded-[20px] text-[20px] font-medium text-dark">Sign up</a>
+          <a href="user/signup-email.php" class="btn btn-outline px-4 h-[42px] shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] border-dark border-2 rounded-[20px] text-[20px] font-medium text-dark">Sign up</a>
         </div>
         <!-- endif -->
 

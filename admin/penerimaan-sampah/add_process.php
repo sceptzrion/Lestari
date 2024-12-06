@@ -8,8 +8,8 @@ if (isset($_GET['id'])) {
 
     // Query untuk mengambil data drop-off request berdasarkan request_id
     $query = "
-        SELECT dr.request_id, dr.drop_off_request_created_at, u.user_name, dr.status, dr.bank_id
-        FROM drop_off_request dr
+        SELECT dr.request_id, dr.drop-off_request_created_at, u.user_name, dr.status, dr.bank_id
+        FROM drop-off_request dr
         JOIN users u ON dr.user_id = u.user_id
         WHERE dr.request_id = '$request_id'
     ";
@@ -37,7 +37,7 @@ if (isset($_GET['id'])) {
 
         // Update status permintaan drop-off
         if ($status === 'accepted' || $status === 'rejected') {
-            $update_status_query = "UPDATE drop_off_request SET status = '$status' WHERE request_id = '$request_id'";
+            $update_status_query = "UPDATE drop-off_request SET status = '$status' WHERE request_id = '$request_id'";
             mysqli_query($conn, $update_status_query);
         }
 

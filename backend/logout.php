@@ -8,6 +8,6 @@ session_unset();
 session_destroy();
 
 // Redirect ke landing page setelah logout
-header("Location: ../landingpage.php");
+header("Location: ../landing-page.php");
 exit();  // Pastikan proses keluar setelah redirect
 ?>

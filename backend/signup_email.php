@@ -37,17 +37,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (!empty($error_email) || !empty($error_phone)) {
         $_SESSION['error_email'] = $error_email;
         $_SESSION['error_phone'] = $error_phone;
-        header("Location: ../user/signup_email.php"); // Kembali ke halaman signup
+        header("Location: ../user/signup-email.php"); // Kembali ke halaman signup
         exit;
     }
 
     // Proses penyimpanan data user baru jika tidak ada error
-    $hashed_password = password_hash($password, PASSWORD_DEFAULT);
-    $sql = "INSERT INTO users (user_name, user_email, user_password, user_address, user_phone_number) 
-            VALUES (?, ?, ?, ?, ?)";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("sssss", $name, $email, $hashed_password, $address, $phone);
-    $stmt->execute();
+        $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+        $sql = "INSERT INTO users (user_name, user_email, user_password, user_address, user_phone_number, created_at, updated_at) 
+                VALUES (?, ?, ?, ?, ?, NOW(), NOW())";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("sssss", $name, $email, $hashed_password, $address, $phone);
+        $stmt->execute();
+
 
     // Redirect ke halaman login atau halaman sukses
     header("Location: ../user/signin.php");

@@ -4,7 +4,7 @@ session_start();
 
 // Check if the user is logged in
 if (!isset($_SESSION['loggedin'])) {
-    header("Location: ../../landingpage.php");
+    header("Location: ../../landing-page.php");
     exit();
 }
 
@@ -34,7 +34,7 @@ $result_user = $stmt->get_result();
 $user = $result_user->fetch_assoc();
 
 // Ambil total berat sampah (total waste weight)
-$sql_waste = "SELECT SUM(waste_weight) AS total_weight FROM detail_request WHERE request_id IN (SELECT request_id FROM drop_off_request WHERE user_id = ?)";
+$sql_waste = "SELECT SUM(waste_weight) AS total_weight FROM detail_request WHERE request_id IN (SELECT request_id FROM drop-off_request WHERE user_id = ?)";
 $stmt_waste = $conn->prepare($sql_waste);
 $stmt_waste->bind_param("i", $user_id);
 $stmt_waste->execute();
@@ -42,7 +42,7 @@ $result_waste = $stmt_waste->get_result();
 $waste = $result_waste->fetch_assoc();
 
 // Ambil total poin yang sudah dikumpulkan
-$sql_points = "SELECT SUM(points_earned) AS total_points FROM detail_request WHERE request_id IN (SELECT request_id FROM drop_off_request WHERE user_id = ?)";
+$sql_points = "SELECT SUM(points_earned) AS total_points FROM detail_request WHERE request_id IN (SELECT request_id FROM drop-off_request WHERE user_id = ?)";
 $stmt_points = $conn->prepare($sql_points);
 $stmt_points->bind_param("i", $user_id);
 $stmt_points->execute();
@@ -50,7 +50,7 @@ $result_points = $stmt_points->get_result();
 $points = $result_points->fetch_assoc();
 
 // Ambil jumlah total drop off yang sudah dilakukan
-$sql_drop_off = "SELECT COUNT(request_id) AS total_drop_off FROM drop_off_request WHERE user_id = ?";
+$sql_drop_off = "SELECT COUNT(request_id) AS total_drop-off FROM drop-off_request WHERE user_id = ?";
 $stmt_drop_off = $conn->prepare($sql_drop_off);
 $stmt_drop_off->bind_param("i", $user_id);
 $stmt_drop_off->execute();
@@ -109,7 +109,7 @@ $drop_off = $result_drop_off->fetch_assoc();
             <ul
             id="dropdown-menu"
             class="menu menu-sm dropdown-content bg-white rounded-box z-[1] mt-3 w-52 p-2 shadow hidden">
-            <li><a href="../landingpage.php">Home</a></li>
+            <li><a href="../landing-page.php">Home</a></li>
             <li><a href="../user/tentang.php">Tentang kami</a></li>
             <li>
               <a>Layanan</a>
@@ -117,7 +117,7 @@ $drop_off = $result_drop_off->fetch_assoc();
                 <!-- Drop Off -->
                 <li>
                     <?php if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true): ?>
-                    <button onclick="window.location.href='../user/drop_off/dropoff.php'" >
+                    <button onclick="window.location.href='../user/drop-off/dropoff.php'" >
                         <p>Drop Off</p>
                     </button>
                     <?php else: ?>
@@ -129,7 +129,7 @@ $drop_off = $result_drop_off->fetch_assoc();
                  <!-- Rewards -->
                 <li>
                     <?php if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true): ?>
-                    <button onclick="window.location.href='../user/drop_off/poin.php'" >
+                    <button onclick="window.location.href='../user/drop-off/poin.php'" >
                         <p>Rewards</p>
                     </button>
                     <?php else: ?>
@@ -154,7 +154,7 @@ $drop_off = $result_drop_off->fetch_assoc();
                     </ul>
                 </li>
             <li><a href="../user/blog.php">Blog</a></li>
-            <li><a href="../user/kontak_kami.php">Kontak Kami</a></li>
+            <li><a href="../user/kontak-kami.php">Kontak Kami</a></li>
           </ul>
         </div>
         <!-- BRAND LOGO -->
@@ -165,7 +165,7 @@ $drop_off = $result_drop_off->fetch_assoc();
 <!-- DESKTOP MODE -->
 <div class="navbar-center hidden lg:flex">
   <ul class="menu menu-horizontal px-1 text-dark text-base">
-    <li><a href="../landingpage.php">Home</a></li>
+    <li><a href="../landing-page.php">Home</a></li>
     <li><a href="../user/tentang.php">Tentang kami</a></li>
     <li>
       <details>
@@ -174,7 +174,7 @@ $drop_off = $result_drop_off->fetch_assoc();
           <!-- Drop Off -->
           <li>
             <?php if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true): ?>
-              <button onclick="window.location.href='../user/drop_off/dropoff.php'" class="btn btn-success flex-grow shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] rounded-[20px] flex items-center justify-center px-4 py-2 gap-2 min-w-[120px] max-w-[200px]">
+              <button onclick="window.location.href='../user/drop-off/dropoff.php'" class="btn btn-success flex-grow shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] rounded-[20px] flex items-center justify-center px-4 py-2 gap-2 min-w-[120px] max-w-[200px]">
                 <img src="../images/truck.png" class="w-8 h-8" alt="">
                 <p>Drop Off</p>
               </button>
@@ -188,7 +188,7 @@ $drop_off = $result_drop_off->fetch_assoc();
           <!-- Rewards -->
           <li>
             <?php if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true): ?>
-              <button onclick="window.location.href='../user/drop_off/poin.php'" class="btn btn-success flex-grow shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] rounded-[20px] flex items-center justify-center px-4 py-2 gap-2 min-w-[120px] max-w-[200px]">
+              <button onclick="window.location.href='../user/drop-off/poin.php'" class="btn btn-success flex-grow shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] rounded-[20px] flex items-center justify-center px-4 py-2 gap-2 min-w-[120px] max-w-[200px]">
                 <img src="../images/reward.png" class="w-8 h-8" alt="">
                 <p>Rewards</p>
               </button>
@@ -218,7 +218,7 @@ $drop_off = $result_drop_off->fetch_assoc();
       </details>
     </li>
     <li><a href="../user/blog.php">Blog</a></li>
-    <li><a href="../user/kontak_kami.php">Kontak Kami</a></li>
+    <li><a href="../user/kontak-kami.php">Kontak Kami</a></li>
   </ul>
 </div>
 
@@ -297,7 +297,7 @@ $drop_off = $result_drop_off->fetch_assoc();
                 <p class="text-sm text-gray-600">Point Reward</p>
             </div>
             <div class="bg-white rounded-lg shadow p-4 text-center">
-                <p class="text-lg font-bold text-green-600"><?= $drop_off['total_drop_off']; ?></p>
+                <p class="text-lg font-bold text-green-600"><?= $drop_off['total_drop-off']; ?></p>
                 <p class="text-sm text-gray-600">Drop Off</p>
             </div>
         </div>
@@ -339,7 +339,7 @@ $drop_off = $result_drop_off->fetch_assoc();
   <div class="container mx-auto px-12">
     <!-- Logo -->
     <div class="flex justify-center mb-6">
-      <a href="../landingpage.php">
+      <a href="../landing-page.php">
         <img src="../images/Logo.png" alt="Logo Lestari" class="h-20">
       </a>
     </div>
@@ -349,16 +349,16 @@ $drop_off = $result_drop_off->fetch_assoc();
       <!-- Bagian Lestari -->
       <div class="text-left col-span-1 md:col-span-1">
         <h4 class="font-bold mb-2">Lestari</h4>
-        <a href="../landingpage.php" class="block text-white hover:underline mb-1">Home</a>
+        <a href="../landing-page.php" class="block text-white hover:underline mb-1">Home</a>
         <a href="../user/tentang.php" class="block text-white hover:underline mb-1">Tentang Kami</a>
-        <a href="../landingpage.php" class="block text-white hover:underline mb-1">Layanan</a>
+        <a href="../landing-page.php" class="block text-white hover:underline mb-1">Layanan</a>
         <a href="../user/blog.php" class="block text-white hover:underline mb-1">Blog</a>
       </div>
 
       <!-- Bagian Informasi -->
       <div class="text-right md:text-center col-span-1 md:col-span-1">
         <h4 class="font-bold mb-2">Informasi</h4>
-        <a href="../user/kontak_kami.php" class="block text-white hover:underline mb-1">Kontak Kami</a>
+        <a href="../user/kontak-kami.php" class="block text-white hover:underline mb-1">Kontak Kami</a>
       </div>
 
       <!-- Bagian Hubungi Kami -->

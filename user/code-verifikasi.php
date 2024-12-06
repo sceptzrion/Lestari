@@ -1,13 +1,35 @@
-<?php
-// Proses logika backend
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Validasi dan proses lainnya
-    header('Location: ./code_verif'); // Redirect ke halaman code_verif
-    exit();
-}
+<?php 
 
-?>
+// Function to generate OTP 
+function generateNumericOTP($n) { 
+	
+	// Take a generator string which consist of 
+	// all numeric digits 
+	$generator = "1357902468"; 
 
+	// Iterate for n-times and pick a single character 
+	// from generator and append it to $result 
+	
+	// Login for generating a random character from generator 
+	//	 ---generate a random number 
+	//	 ---take modulus of same with length of generator (say i) 
+	//	 ---append the character at place (i) from generator to result 
+
+	$result = ""; 
+
+	for ($i = 1; $i <= $n; $i++) { 
+		$result .= substr($generator, (rand()%(strlen($generator))), 1); 
+	} 
+
+	// Return result 
+	return $result; 
+} 
+
+// Main program 
+$n = 6; 
+$OTP = generateNumericOTP($n)
+
+?> 
 
 <!DOCTYPE html>
 <html lang="en">
@@ -15,7 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reset Password - Lestari</title>
+    <title>Code Verification - Lestari</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -47,27 +69,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </div>
 
                 <!-- Title -->
-                <h1 class="text-2xl font-bold text-lg-start text-gray-800 mb-8">Reset Password</h1>
+                <h1 class="text-2xl font-bold text-lg-start text-gray-800 mb-8">Code Verification <?= $OTP ?></h1>
                 <!-- Form -->
-                <form action="./code_verif.php" method="POST" class="space-y-4">                    
-                    <!-- Email -->
+                <form action="./new-password.php" method="POST" class="space-y-4">
+                    <!-- code -->
                     <div>
-                        <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
-                        <input type="email" id="email" name="email" placeholder="Email"
+                        <input type="code" id="code" name="code" placeholder="Enter Code"
                             class="mt-1 block w-full px-3 py-2 border rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
                     </div>
                     <!-- Sign In Button -->
                     <div>
-                    <form action="./code_verif" method="post">
+                    <form action="./new-password.php" method="post">
                         <button type="submit"
                                 class="w-full mt-4 bg-black text-white py-2 rounded-lg shadow-md hover:bg-gray-800 transition">
-                            Reset Password
+                            Submit
                         </button>
                     </form>
-                        <a href="./signin.php" 
-                            class="w-full mt-4 bg-gray-600 text-white py-2 rounded-lg shadow-md hover:bg-gray-800 transition text-center block">
-                            Back to Sign in
-                        </a>
                     </div>
                 </form>
             </div>

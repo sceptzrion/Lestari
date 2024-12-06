@@ -1,17 +1,17 @@
 <?php
 session_start();  // Start session untuk memeriksa status login
 
-// Halaman yang tidak memerlukan login (seperti landingpage.php)
-if (basename($_SERVER['PHP_SELF']) != 'landingpage.php') {
+// Halaman yang tidak memerlukan login (seperti landing-page.php)
+if (basename($_SERVER['PHP_SELF']) != 'landing-page.php') {
     // Jika user belum login, arahkan ke halaman login atau lainnya
     if (!isset($_SESSION['loggedin'])) {
-        header("Location: .././landingpage.php");
+        header("Location: .././landing-page.php");
         exit();  // Jangan lupa exit setelah redirect
     }
 }
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"class="bg-light dark:[color-scheme:light]">
 
 <head>
     <meta charset="UTF-8">
@@ -54,7 +54,7 @@ if (basename($_SERVER['PHP_SELF']) != 'landingpage.php') {
                 <form id="changeForm" class="space-y-4">
                     <!-- New Password -->
                     <div>
-                        <input type="password" id="newpw" name="newpw" placeholder="Create New Password"
+                        <input type="password" id="new-password" name="new-password" placeholder="Create New Password"
                             class="mt-1 block w-full px-3 py-2 border rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
                     </div>
                     <!-- Confirm Password -->
@@ -84,7 +84,7 @@ if (basename($_SERVER['PHP_SELF']) != 'landingpage.php') {
     <script>
         document.getElementById('changeButton').addEventListener('click', function () {
             // Get input values
-            const newPassword = document.getElementById('newpw').value;
+            const newPassword = document.getElementById('new-password').value;
             const confirmPassword = document.getElementById('confirm').value;
 
             // Validate inputs

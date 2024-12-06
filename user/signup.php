@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"class="bg-light dark:[color-scheme:light]">
 
 <head>
     <meta charset="UTF-8">
@@ -50,7 +50,7 @@
                 </div>
                 
                 <!-- Email Sign Up -->
-                <a href="./signup_email.php" class="flex items-center justify-center w-full border border-gray-00 py-2 rounded-[20px] shadow-sm hover:bg-gray-200 transition mb-6">
+                <a href="./signup-email.php" class="flex items-center justify-center w-full border border-gray-00 py-2 rounded-[20px] shadow-sm hover:bg-gray-200 transition mb-6">
                     <span class="text-sm font-medium text-gray-700">Continue with email</span>
                 </a>
 
