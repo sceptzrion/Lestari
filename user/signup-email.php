@@ -1,64 +1,6 @@
+
 <?php
-// Database connection setup
-$servername = "localhost";
-$username = "root"; // Your MySQL username
-$password = ""; // Your MySQL password
-$dbname = "db_sampah_4"; // Your database name
-
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-
-$error_message = "";
-$success_message = "";
-
-// Check if the form was submitted
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Get form data
-    $name = $_POST['name'];
-    $email = $_POST['email'];
-    $password = $_POST['password'];
-    $phone = $_POST['phone'];
-    $address = $_POST['address'];
-    
-    // Current timestamp
-    $created_at = date("Y-m-d H:i:s");
-    $updated_at = date("Y-m-d H:i:s");
-
-    // Validate form data
-    if (empty($name) || empty($email) || empty($password) || empty($address) || empty($phone)) {
-        $error_message = "All fields are required!";
-    } else {
-        // Hash the password
-        $hashed_password = password_hash($password, PASSWORD_DEFAULT);
-
-        // Prepare SQL query
-        $stmt = $conn->prepare("INSERT INTO users (user_name, user_email, user_password, user_phone_number, user_address, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?)");
-        if (!$stmt) {
-            $error_message = "Query preparation failed: " . $conn->error;
-        } else {
-            $stmt->bind_param("sssssss", $name, $email, $hashed_password, $phone, $address, $created_at, $updated_at);
-
-            // Execute query
-            if ($stmt->execute()) {
-                $success_message = "Registration successful! Redirecting to login...";
-                header("Refresh: 3; URL=signin.php"); 
-            } else {
-                $error_message = "Error: " . $stmt->error;
-            }
-
-            // Close statement
-            $stmt->close();
-        }
-    }
-}
-
-// Close the database connection
-$conn->close();
+session_start();
 ?>
 
 <!DOCTYPE html>
@@ -113,7 +55,7 @@ $conn->close();
                 <?php endif; ?>
 
                 <!-- Form -->
-                <form action="../BackEnd/signup-email.php" method="POST" class="space-y-4">
+                <form action="../BackEnd/signup_email.php" method="POST" class="space-y-4">
                 <!-- Nama Lengkap -->
                     <div>
                         <label for="name" class="block text-sm font-medium text-gray-700">Nama Lengkap</label>
