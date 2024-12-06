@@ -1,17 +1,17 @@
+<!-- gaya Hidup -->
 <?php
-session_start();  // Start session untuk memeriksa status login
+session_start();
 
-// Halaman yang tidak memerlukan login (seperti landingpage.php)
-if (basename($_SERVER['PHP_SELF']) != 'landingpage.php') {
-    // Jika user belum login, arahkan ke halaman login atau lainnya
-    if (!isset($_SESSION['loggedin'])) {
-        header("Location: ../../landingpage.php");
-        exit();  // Jangan lupa exit setelah redirect
-    }
+if (!in_array(basename($_SERVER['PHP_SELF']), ['landing-page.php', 'tentang.php', 'blog.php'])) {
+  if (!isset($_SESSION['loggedin'])) {
+      header("Location: landing-page.php");
+      exit();
+  }
 }
+
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"class="bg-light dark:[color-scheme:light]">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -31,12 +31,6 @@ if (basename($_SERVER['PHP_SELF']) != 'landingpage.php') {
       }
     }
   </script>
-    <script>
-        function toggleModal() {
-            const modal = document.getElementById("location-modal");
-            modal.classList.toggle("hidden");
-        }
-    </script>
 </head>
 <body class="font-poppins">
 <!-- NAVBAR -->
@@ -61,7 +55,7 @@ if (basename($_SERVER['PHP_SELF']) != 'landingpage.php') {
             <ul
             id="dropdown-menu"
             class="menu menu-sm dropdown-content bg-white rounded-box z-[1] mt-3 w-52 p-2 shadow hidden">
-            <li><a href="../../landingpage.php">Home</a></li>
+            <li><a href="../../landing-page.php">Home</a></li>
             <li><a href="../../user/tentang.php">Tentang kami</a></li>
             <li>
               <a>Layanan</a>
@@ -69,7 +63,7 @@ if (basename($_SERVER['PHP_SELF']) != 'landingpage.php') {
                 <!-- Drop Off -->
                 <li>
                     <?php if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true): ?>
-                    <button onclick="window.location.href='../../user/drop_off/dropoff.php'" >
+                    <button onclick="window.location.href='../../user/drop-off/dropoff.php'" >
                         <p>Drop Off</p>
                     </button>
                     <?php else: ?>
@@ -81,7 +75,7 @@ if (basename($_SERVER['PHP_SELF']) != 'landingpage.php') {
                  <!-- Rewards -->
                 <li>
                     <?php if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true): ?>
-                    <button onclick="window.location.href='../../user/drop_off/poin.php'" >
+                    <button onclick="window.location.href='../../user/drop-off/poin.php'" >
                         <p>Rewards</p>
                     </button>
                     <?php else: ?>
@@ -90,7 +84,7 @@ if (basename($_SERVER['PHP_SELF']) != 'landingpage.php') {
                     </button>
                     <?php endif; ?>
                 </li>
-                
+               
                 <!-- Marketplace -->
                 <li>
                     <?php if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true): ?>
@@ -106,7 +100,7 @@ if (basename($_SERVER['PHP_SELF']) != 'landingpage.php') {
                     </ul>
                 </li>
             <li><a href="../../user/blog.php">Blog</a></li>
-            <li><a href="../../user/kontak_kami.php">Kontak Kami</a></li>
+            <li><a href="../../user/kontak-kami.php">Kontak Kami</a></li>
           </ul>
         </div>
         <!-- BRAND LOGO -->
@@ -117,7 +111,7 @@ if (basename($_SERVER['PHP_SELF']) != 'landingpage.php') {
 <!-- DESKTOP MODE -->
 <div class="navbar-center hidden lg:flex">
   <ul class="menu menu-horizontal px-1 text-dark text-base">
-    <li><a href="../../landingpage.php">Home</a></li>
+    <li><a href="../../landing-page.php">Home</a></li>
     <li><a href="../../user/tentang.php">Tentang kami</a></li>
     <li>
       <details>
@@ -126,7 +120,7 @@ if (basename($_SERVER['PHP_SELF']) != 'landingpage.php') {
           <!-- Drop Off -->
           <li>
             <?php if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true): ?>
-              <button onclick="window.location.href='../../user/drop_off/dropoff.php'" class="btn btn-success flex-grow shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] rounded-[20px] flex items-center justify-center px-4 py-2 gap-2 min-w-[120px] max-w-[200px]">
+              <button onclick="window.location.href='../../user/drop-off/dropoff.php'" class="btn btn-success flex-grow shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] rounded-[20px] flex items-center justify-center px-4 py-2 gap-2 min-w-[120px] max-w-[200px]">
                 <img src="../../images/truck.png" class="w-8 h-8" alt="">
                 <p>Drop Off</p>
               </button>
@@ -140,7 +134,7 @@ if (basename($_SERVER['PHP_SELF']) != 'landingpage.php') {
           <!-- Rewards -->
           <li>
             <?php if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true): ?>
-              <button onclick="window.location.href='../../user/drop_off/poin.php'" class="btn btn-success flex-grow shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] rounded-[20px] flex items-center justify-center px-4 py-2 gap-2 min-w-[120px] max-w-[200px]">
+              <button onclick="window.location.href='../../user/drop-off/poin.php'" class="btn btn-success flex-grow shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] rounded-[20px] flex items-center justify-center px-4 py-2 gap-2 min-w-[120px] max-w-[200px]">
                 <img src="../../images/reward.png" class="w-8 h-8" alt="">
                 <p>Rewards</p>
               </button>
@@ -151,7 +145,7 @@ if (basename($_SERVER['PHP_SELF']) != 'landingpage.php') {
               </button>
             <?php endif; ?>
           </li>
-         
+          
           <!-- Marketplace -->
           <li>
             <?php if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true): ?>
@@ -170,7 +164,7 @@ if (basename($_SERVER['PHP_SELF']) != 'landingpage.php') {
       </details>
     </li>
     <li><a href="../../user/blog.php">Blog</a></li>
-    <li><a href="../../user/kontak_kami.php">Kontak Kami</a></li>
+    <li><a href="../../user/kontak-kami.php">Kontak Kami</a></li>
   </ul>
 </div>
 
@@ -230,41 +224,108 @@ if (basename($_SERVER['PHP_SELF']) != 'landingpage.php') {
         });
     </script>
   <!-- NAVBAR END -->
+<!-- Content -->
+    <main class="bg-light container mx-auto px-16 py-12">
+        <p class="text-sm bg-green-100 text-[#1B5E20] font-medium inline-block px-3 py-1 rounded">Gaya Hidup</p>
+        <h1 class="text-3xl font-bold text-[#1B5E20] mt-4">Zero Waste Lifestyle: Perjalanan Pemula untuk Hidup Bebas Sampah</h1>
+        <p class="text-gray-500 mt-2">Dipublikasikan 2 Desember 2024</p>
+        <img src="../../images/user/blog/content3.png" alt="Gambar ilustrasi daur ulang" class="mt-4 mb-6 w-[500px] rounded-lg">
+        <p class="text-gray-700 mb-1 text-justify">
+        Terwujudnya lingkungan yang bebih bersih dimulai dari langkah-langkah kecil yang konsisten. Zero waste lifestyle bukan hanya tentang mengurangi sampah, tetapi juga tentang mengubah pola pikir dan kebiasaan kita sehari-hari.      </p>
+        <div class="mt-8 space-y-10">
+      </main>
+  <!-- Main Content -->
+<main class="max-w-6xl mx-auto bg-white rounded-lg md:p-8 md:px-1 px-8 py-1 mt-1">
+  <section class="mb-12">
+    <h1 class="text-2xl font-extrabold text-[#1B5E20] mb-1 text-left">
+      Apa itu Zero Waste Lifestyle?
+    </h1>
+    <p class="text-gray-700  text-lg leading-relaxed">
+    Zero Waste Lifestyle adalah gaya hidup yang bertujuan untuk meminimalkan produksi sampah dalam kehidupan sehari-hari. Konsep ini berfokus pada prinsip 5R:    </p>
+  </section>
 
-<!-- Main Section -->
-<section class="md:py-16 bg-gray-100 flex items-center justify-center min-h-screen">
-    <div class="relative bg-gradient-to-r from-green to-dark-green rounded-lg shadow-lg p-8 flex justify-center items-center w-3/4 h-64">
-        <div class="text-white text-center relative"> 
-            <!-- Gambar Truck di Posisi Responsif -->
-            <div class="absolute top-[-40px] left-1/2 transform -translate-x-1/2 md:top-[20px] md:left-[-150px] md:transform-none bg-white rounded-full flex justify-center items-center w-24 h-24 md:w-32 md:h-32">
-                <img src="../../images/truck.png" alt="Truck Icon" class="w-24 h-24">
-            </div>
-            <h2 class="text-3xl font-bold flex items-center justify-center mt-16 md:mt-0">
-                <img src="../../images/user/recycle.png" alt="Recycle Icon" class="w-6 h-6 mr-2">
-                Drop Off
-            </h2>
-            <p class="mt-4 text-lg"> Antar Langsung Sampahmu <br> ke Bank Sampah Terdekat</p>
-            <button 
-                onclick="redirectToLocation()" 
-                class="mt-4 bg-gradient-to-r from-green to-dark-green text-white px-6 py-2 rounded-full shadow hover:bg-green-600 focus:outline-none">
-                Lihat Lokasi
-            </button>
-            <script>
-                function redirectToLocation() {
-                    window.location.href = '../../user/drop_off/lokasi.php';
-                }
-            </script>
+  <!-- Prinsip Zero Waste -->
+  <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+    <!-- Refuse -->
+    <div class="bg-green-50 border border-green-200 rounded-lg p-6 shadow-sm">
+      <h2 class="text-xl font-semibold text-[#1B5E20] mb-2">Refuse (Menolak)</h2>
+      <p class="text-gray-600">
+        Menolak barang-barang yang tidak diperlukan, seperti sedotan plastik, brosur kertas, atau barang promosi gratis, yang berpotensi menjadi sampah.
+      </p>
+    </div>
+    <!-- Reduce -->
+    <div class="bg-green-50 border border-green-200 rounded-lg p-6 shadow-sm">
+      <h2 class="text-xl font-semibold text-[#1B5E20] mb-2">Reduce (Mengurangi)</h2>
+      <p class="text-gray-600">
+        Kurangi pembelian barang-barang baru dengan memprioritaskan kualitas daripada kuantitas. Fokus pada barang yang benar-benar esensial.
+      </p>
+    </div>
+    <!-- Reuse -->
+    <div class="bg-green-50 border border-green-200 rounded-lg p-6 shadow-sm">
+      <h2 class="text-xl font-semibold text-[#1B5E20] mb-2">Reuse (Menggunakan Kembali)</h2>
+      <p class="text-gray-600">
+        Gunakan kembali barang-barang yang Anda miliki, seperti tas kain, botol minum, dan kotak makan, untuk mengurangi konsumsi barang sekali pakai.
+      </p>
+    </div>
+    <!-- Recycle -->
+    <div class="bg-green-50 border border-green-200 rounded-lg p-6 shadow-sm">
+      <h2 class="text-xl font-semibold text-[#1B5E20] mb-2">Recycle (Mendaur Ulang)</h2>
+      <p class="text-gray-600">
+        Mendaur ulang barang-barang seperti kertas, kaca, atau plastik dengan memilah sampah rumah tangga sesuai jenis materialnya.
+      </p>
+    </div>
+    <!-- Rot -->
+    <div class="bg-green-50 border border-green-200 rounded-lg p-6 shadow-sm">
+      <h2 class="text-xl font-semibold text-[#1B5E20] mb-2">Rot (Membusuk)</h2>
+      <p class="text-gray-600">
+        Ubah sampah organik seperti sisa makanan atau daun kering menjadi kompos yang berguna untuk menyuburkan tanah.
+      </p>
+    </div>
+  </section>
+
+  <!-- Tips Memulai -->
+  <section class="mt-16 bg-green-50 border border-green-200 rounded-lg p-8 shadow-md">
+    <h2 class="text-xl font-bold text-[#1B5E20] mb-6">
+      Tips Memulai Zero Waste Lifestyle
+    </h2>
+    <ul class="list-disc list-inside space-y-3 text-gray-700">
+      <li>Membawa tas belanja kain untuk menggantikan plastik.</li>
+      <li>Menggunakan botol minum atau cangkir kopi yang dapat digunakan kembali.</li>
+      <li>Menghindari penggunaan alat makan sekali pakai seperti sendok atau sedotan plastik.</li>
+      <li>Memilah sampah berdasarkan jenisnya: organik dan anorganik.</li>
+      <li>Membuat kompos dari sisa dapur seperti kulit buah dan sayuran.</li>
+    </ul>
+    <p class="text-gray-600 mt-4">
+      Ingat, setiap langkah kecil yang Anda ambil membantu menciptakan perubahan besar. Jadilah bagian dari solusi untuk menjaga bumi kita tetap hijau dan sehat!
+    </p>
+  </section>
+
+   <!-- Back Button -->
+   <div class="mt-6">
+      <a href="../../user/blog.php" class="bg-gradient-to-r from-green to-dark-green text-white px-6 py-2 rounded shadow hover:bg-green-800">
+          Kembali
+      </a>
+    </div>
+</main>
+
+<!-- modal  -->
+<div id="loginModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+    <div class="bg-white p-6 rounded-lg shadow-lg text-center max-w-sm">
+        <h2 class="text-lg font-bold text-gray-800 mb-4">Yuk Login dulu</h2>
+        <p class="text-gray-600 mb-6">Silakan login terlebih dahulu untuk mengakses layanan ini.</p>
+        <div class="flex justify-center gap-4">
+            <button onclick="closeModal()" class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300">Batal</button>
+            <a href="../../user/signin.php" class="px-4 py-2 bg-gradient-to-r from-green to-dark-green text-white rounded-lg hover:bg-green-700">Login</a>
         </div>
     </div>
-</section>
-
+</div>
 
 <!-- Footer -->
 <footer class="bg-gradient-to-r from-green to-dark-green text-white py-7">
   <div class="container mx-auto px-12">
     <!-- Logo -->
     <div class="flex justify-center mb-6">
-      <a href="../../landingpage.php">
+      <a href="../../landing-page.php">
         <img src="../../images/Logo.png" alt="Logo Lestari" class="h-20">
       </a>
     </div>
@@ -274,16 +335,16 @@ if (basename($_SERVER['PHP_SELF']) != 'landingpage.php') {
       <!-- Bagian Lestari -->
       <div class="text-left col-span-1 md:col-span-1">
         <h4 class="font-bold mb-2">Lestari</h4>
-        <a href="../../landingpage.php" class="block text-white hover:underline mb-1">Home</a>
+        <a href="../../landing-page.php" class="block text-white hover:underline mb-1">Home</a>
         <a href="../../user/tentang.php" class="block text-white hover:underline mb-1">Tentang Kami</a>
-        <a href="../../landingpage.php" class="block text-white hover:underline mb-1">Layanan</a>
+        <a href="../../landing-page.php" class="block text-white hover:underline mb-1">Layanan</a>
         <a href="../../user/blog.php" class="block text-white hover:underline mb-1">Blog</a>
       </div>
 
       <!-- Bagian Informasi -->
       <div class="text-right md:text-center col-span-1 md:col-span-1">
         <h4 class="font-bold mb-2">Informasi</h4>
-        <a href="../../user/kontak_kami.php" class="block text-white hover:underline mb-1">Kontak Kami</a>
+        <a href="../../user/kontak-kami.php" class="block text-white hover:underline mb-1">Kontak Kami</a>
       </div>
 
       <!-- Bagian Hubungi Kami -->
@@ -300,5 +361,20 @@ if (basename($_SERVER['PHP_SELF']) != 'landingpage.php') {
     </div>
   </div>
 </footer>
+<script>
+    // Notifikasi jika belum login
+    function alertLogin() {
+        alert("Silakan login untuk mengakses layanan ini.");
+    }
+    //modal
+    function showModal() {
+    document.getElementById('loginModal').classList.remove('hidden');
+    }
+
+    function closeModal() {
+        document.getElementById('loginModal').classList.add('hidden');
+    }
+
+</script>
 </body>
 </html>

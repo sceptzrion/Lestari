@@ -7,7 +7,7 @@ $query = "
         w.waste_name, 
         SUM(dr.waste_weight) AS total_weight
     FROM detail_request dr
-    JOIN drop_off_request dor ON dr.request_id = dor.request_id
+    JOIN drop-off_request dor ON dr.request_id = dor.request_id
     JOIN waste w ON dr.waste_id = w.waste_id
     WHERE dor.bank_id = ? AND dor.status = 'accepted'
     GROUP BY w.waste_name

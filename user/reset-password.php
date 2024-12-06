@@ -1,11 +1,21 @@
+<?php
+// Proses logika backend
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Validasi dan proses lainnya
+    header('Location: ./code-verifikasi'); // Redirect ke halaman code-verifikasi
+    exit();
+}
+
+?>
+
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"class="bg-light dark:[color-scheme:light]">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Code Verification - Lestari</title>
+    <title>Reset Password - Lestari</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -37,22 +47,27 @@
                 </div>
 
                 <!-- Title -->
-                <h1 class="text-2xl font-bold text-lg-start text-gray-800 mb-8">Code Verification</h1>
+                <h1 class="text-2xl font-bold text-lg-start text-gray-800 mb-8">Reset Password</h1>
                 <!-- Form -->
-                <form action="./newpw.php" method="POST" class="space-y-4">
-                    <!-- code -->
+                <form action="./code-verifikasi.php" method="POST" class="space-y-4">                    
+                    <!-- Email -->
                     <div>
-                        <input type="code" id="code" name="code" placeholder="Enter Code"
+                        <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+                        <input type="email" id="email" name="email" placeholder="Email"
                             class="mt-1 block w-full px-3 py-2 border rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
                     </div>
                     <!-- Sign In Button -->
                     <div>
-                    <form action="./newpw.php" method="post">
+                    <form action="./code-verifikasi" method="post">
                         <button type="submit"
                                 class="w-full mt-4 bg-black text-white py-2 rounded-lg shadow-md hover:bg-gray-800 transition">
-                            Submit
+                            Reset Password
                         </button>
                     </form>
+                        <a href="./signin.php" 
+                            class="w-full mt-4 bg-gray-600 text-white py-2 rounded-lg shadow-md hover:bg-gray-800 transition text-center block">
+                            Back to Sign in
+                        </a>
                     </div>
                 </form>
             </div>

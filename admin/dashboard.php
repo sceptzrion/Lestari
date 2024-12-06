@@ -31,7 +31,8 @@ $query_total_sampah = "
     SELECT SUM(dr.waste_weight) AS total_berat 
     FROM detail_request dr
     JOIN drop_off_request dor ON dr.request_id = dor.request_id
-    WHERE dor.bank_id = ?";
+    WHERE dor.bank_id = ?
+    AND dor.status = 'accepted'";
 $stmt = $conn->prepare($query_total_sampah);
 $stmt->bind_param("i", $bank_id);
 $stmt->execute();
@@ -67,6 +68,7 @@ $query_kategori_populer = "
     JOIN waste w ON dr.waste_id = w.waste_id
     JOIN drop_off_request dor ON dr.request_id = dor.request_id
     WHERE dor.bank_id = ?
+    AND dor.status = 'accepted'
     GROUP BY w.waste_name
     ORDER BY jumlah DESC
     LIMIT 1";
@@ -89,7 +91,7 @@ $query = "
     JOIN detail_request dr ON dor.request_id = dr.request_id
     JOIN waste w ON dr.waste_id = w.waste_id
     JOIN users u ON dor.user_id = u.user_id
-    WHERE dor.status IN ('waiting', 'accepted', 'rejected')
+    WHERE dor.status = 'accepted'
     ORDER BY dor.drop_off_request_created_at DESC;
 
 ";

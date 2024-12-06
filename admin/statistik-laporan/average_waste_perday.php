@@ -6,9 +6,9 @@ include 'connect_admin.php';
 // Query untuk mengambil total berat sampah dan jumlah hari unik
 $query = "
     SELECT 
-        COUNT(DISTINCT DATE(d.drop_off_request_created_at)) AS total_days, 
+        COUNT(DISTINCT DATE(d.drop-off_request_created_at)) AS total_days, 
         SUM(dr.waste_weight) AS total_weight
-    FROM drop_off_request d
+    FROM drop-off_request d
     JOIN detail_request dr ON d.request_id = dr.request_id
     WHERE d.status = 'accepted' AND d.bank_id = ?
 ";

@@ -1,11 +1,11 @@
 <?php
 session_start();  // Start session untuk memeriksa status login
 
-// Halaman yang tidak memerlukan login (seperti landingpage.php)
-if (basename($_SERVER['PHP_SELF']) != 'landingpage.php') {
+// Halaman yang tidak memerlukan login (seperti landing-page.php)
+if (basename($_SERVER['PHP_SELF']) != 'landing-page.php') {
     // Jika user belum login, arahkan ke halaman login atau lainnya
     if (!isset($_SESSION['loggedin'])) {
-        header("Location: ../../landingpage.php");
+        header("Location: ../../landing-page.php");
         exit();  // Jangan lupa exit setelah redirect
     }
 }
@@ -62,7 +62,7 @@ if (basename($_SERVER['PHP_SELF']) != 'landingpage.php') {
             <ul
             id="dropdown-menu"
             class="menu menu-sm dropdown-content bg-white rounded-box z-[1] mt-3 w-52 p-2 shadow hidden">
-            <li><a href="../../landingpage.php">Home</a></li>
+            <li><a href="../../landing-page.php">Home</a></li>
             <li><a href="../../user/tentang.php">Tentang kami</a></li>
             <li>
               <a>Layanan</a>
@@ -107,7 +107,7 @@ if (basename($_SERVER['PHP_SELF']) != 'landingpage.php') {
                     </ul>
                 </li>
             <li><a href="../../user/blog.php">Blog</a></li>
-            <li><a href="../../user/kontak_kami.php">Kontak Kami</a></li>
+            <li><a href="../../user/kontak-kami.php">Kontak Kami</a></li>
           </ul>
         </div>
         <!-- BRAND LOGO -->
@@ -118,7 +118,7 @@ if (basename($_SERVER['PHP_SELF']) != 'landingpage.php') {
 <!-- DESKTOP MODE -->
 <div class="navbar-center hidden lg:flex">
   <ul class="menu menu-horizontal px-1 text-dark text-base">
-    <li><a href="../../landingpage.php">Home</a></li>
+    <li><a href="../../landing-page.php">Home</a></li>
     <li><a href="../../user/tentang.php">Tentang kami</a></li>
     <li>
       <details>
@@ -171,7 +171,7 @@ if (basename($_SERVER['PHP_SELF']) != 'landingpage.php') {
       </details>
     </li>
     <li><a href="../../user/blog.php">Blog</a></li>
-    <li><a href="../../user/kontak_kami.php">Kontak Kami</a></li>
+    <li><a href="../../user/kontak-kami.php">Kontak Kami</a></li>
   </ul>
 </div>
 

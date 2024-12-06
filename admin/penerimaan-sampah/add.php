@@ -10,41 +10,80 @@ if (!isset($_SESSION['admin_id'])) {
     exit();
 }
 
-if (isset($_GET['id'])) {
-    $request_id = $_GET['id'];
+// Mengambil data request_id yang dikirimkan
+$request_id = isset($_GET['id']) ? $_GET['id'] : null;
+$error_message = "";
 
-$query = "
-    SELECT dr.request_id, dr.drop_off_request_created_at, u.user_name, dr.status, dr.bank_id
-    FROM drop_off_request dr
-    JOIN users u ON dr.user_id = u.user_id
-    WHERE dr.request_id = '$request_id'
-";
-$result = mysqli_query($conn, $query);
-$request = mysqli_fetch_assoc($result);
+// Periksa koneksi database
+if ($conn) {
 
-if (!$request) {
-    echo "Request tidak ditemukan.";
-    exit;
-}
+    // Cek jika form disubmit
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $status = $_POST['status'];
+        $waste_types = $_POST['waste_type']; // Array untuk jenis sampah
+        $waste_weights = $_POST['waste_weight']; // Array untuk berat sampah
+
+        // Update status request
+        $query = "UPDATE drop_off_request SET status = ? WHERE request_id = ?";
+        $stmt = $conn->prepare($query);
+        $stmt->bind_param('si', $status, $request_id);
+        if (!$stmt->execute()) {
+            $error_message = "Error updating status.";
+        }
+
+        // Insert data ke tabel detail_request untuk setiap jenis sampah dan beratnya
+        if (!empty($waste_types) && !empty($waste_weights)) {
+            for ($i = 0; $i < count($waste_types); $i++) {
+                $waste_type = $waste_types[$i];
+                $waste_weight = $waste_weights[$i];
+
+                // Pastikan jenis sampah dan beratnya valid
+                if (is_numeric($waste_weight) && $waste_weight > 0) {
+                    // Ambil points_per_kg dari waste untuk jenis sampah yang dipilih
+                    $points_query = "SELECT waste_point FROM waste WHERE waste_id = ?";
+                    $points_stmt = $conn->prepare($points_query);
+                    $points_stmt->bind_param('i', $waste_type);
+                    $points_stmt->execute();
+                    $points_stmt->bind_result($waste_point);
+                    $points_stmt->fetch();
+                    $points_stmt->close();
+
+                    if ($waste_point) {
+                        $points_earned = $waste_weight * $waste_point; // Menghitung poin yang diperoleh
+
+                        // Insert ke detail_request
+                        $detail_query = "INSERT INTO detail_request (request_id, waste_id, waste_weight, points_earned) VALUES (?, ?, ?, ?)";
+                        $detail_stmt = $conn->prepare($detail_query);
+                        $detail_stmt->bind_param('iiii', $request_id, $waste_type, $waste_weight, $points_earned);
+                        if (!$detail_stmt->execute()) {
+                            $error_message = "Error inserting detail request.";
+                        }
+                        $detail_stmt->close();
+                    } else {
+                        $error_message = "Invalid waste type selected.";
+                    }
+                } else {
+                    $error_message = "Invalid waste weight input.";
+                }
+            }
+        } else {
+            $error_message = "Please add at least one waste type and weight.";
+        }
+
+        // Redirect setelah berhasil
+        if (empty($error_message)) {
+            $_SESSION['flash_message'] = "Penerimaan sampah berhasil diperbarui.";
+            header('Location: index.php'); // Redirect ke halaman penerimaan setelah sukses
+            exit();
+        }
+    }
+
+    // Query untuk mendapatkan data jenis sampah
+    $waste_query = "SELECT waste_id, waste_name FROM waste";
+    $waste_result = $conn->query($waste_query);
 } else {
-// Jika 'id' tidak ditemukan dalam URL
-echo "Error: request_id tidak ditemukan.";
-exit;
+    die("Koneksi database gagal: " . $conn->connect_error);
 }
-
-// Ambil detail jenis sampah
-$detail_query = "
-    SELECT dr.waste_id, w.waste_name, dr.waste_weight
-    FROM detail_request dr
-    JOIN waste w ON dr.waste_id = w.waste_id
-    WHERE dr.request_id = '$request_id'
-";
-$detail_result = mysqli_query($conn, $detail_query);
-$detail_requests = mysqli_fetch_all($detail_result, MYSQLI_ASSOC);
-
-// Ambil daftar jenis sampah
-$waste_query = "SELECT * FROM waste";
-$waste_result = mysqli_query($conn, $waste_query);
 ?>
 
 <!DOCTYPE html>
@@ -113,18 +152,19 @@ $waste_result = mysqli_query($conn, $waste_query);
             var newWasteItem = document.createElement('div');
             newWasteItem.classList.add('flex', 'flex-col', 'gap-[5px]', 'w-full', 'waste-item');
             
-            newWasteItem.innerHTML = `
+            newWasteItem.innerHTML = ` 
                 <label for="jenis-sampah-${wasteCount}" class="px-1">Jenis Sampah</label>
-                <select id="jenis-sampah-${wasteCount}" name="jenis-sampah[]" class="select select-bordered w-full h-12 bg-light border border-gray px-[14px] text-base font-normal">
+                <select id="jenis-sampah-${wasteCount}" name="waste_type[]" class="select select-bordered w-full h-12 bg-light border border-gray px-[14px] text-base font-normal">
                     <option disabled selected>Pilih Jenis Sampah</option>
-                    <option value="plastik">Plastik</option>
-                    <option value="kertas">Kertas</option>
-                    <option value="logam">Logam</option>
-                    <option value="organik">Organik</option>
+                    <?php while ($row = $waste_result->fetch_assoc()): ?>
+                        <option value="<?= htmlspecialchars($row['waste_id']) ?>">
+                            <?= htmlspecialchars($row['waste_name']) ?>
+                        </option>
+                    <?php endwhile; ?>
                 </select>
                 <label for="berat-sampah-${wasteCount}" class="px-1">Berat Sampah</label>
                 <div class="flex flex-row gap-[9px] items-center w-full justify-between">
-                    <input type="number" id="berat-sampah-${wasteCount}" name="berat-sampah[]" min="0" placeholder="0" class="w-full h-12 bg-light border border-gray px-[14px] font-light">
+                    <input type="number" id="berat-sampah-${wasteCount}" name="waste_weight[]" min="0" placeholder="0" class="w-full h-12 bg-light border border-gray px-[14px] font-light">
                     <span class="text-base font-light justify-self-end">Kg</span>
                     <button type="button" class="btn btn-error text-white" onclick="removeWasteItem(this)">X</button>
                 </div>
@@ -136,6 +176,14 @@ $waste_result = mysqli_query($conn, $waste_query);
         function removeWasteItem(button) {
             button.parentElement.parentElement.remove();
         }
+
+        document.querySelector('form').addEventListener('submit', function (e) {
+            const wasteItems = document.querySelectorAll('.waste-item');
+            if (wasteItems.length === 0) {
+                alert('Anda harus menambahkan setidaknya satu jenis sampah.');
+                e.preventDefault();
+            }
+        });
     </script>
 </head>
 <body>
@@ -189,10 +237,10 @@ $waste_result = mysqli_query($conn, $waste_query);
                     </div>
                     <p class="text-sm font-light">Silakan isi data penerimaan sampah dengan lengkap</p>
                 </div>
-                <form action="add.process.php" method="POST" class="flex flex-col text-base font-medium mt-[50px] w-full px-[90px] gap-[31px]">
+                <form action="" method="POST" class="flex flex-col text-base font-medium mt-[50px] w-full px-[90px] gap-[31px]">
                     <!-- Waste Inputs -->
+                    <input type="hidden" name="request_id" value="<?= htmlspecialchars($request_id); ?>">
                     <div id="waste-container" class="flex flex-col gap-[5px]">
-                        <!-- Input Jenis Sampah akan ditambahkan di sini -->
                     </div>
 
                     <button type="button" id="add-more-waste" class="btn btn-info text-light rounded-[10px] py-2 px-5" onclick="addMoreWaste()">Tambah Jenis Sampah</button>
@@ -200,14 +248,14 @@ $waste_result = mysqli_query($conn, $waste_query);
                     <div class="flex flex-row justify-center gap-12 w-full">
                     <button 
                         class="btn btn-success bg-[#2ECC71] rounded-[20px] text-[15px] font-semibold px-[41px] text-light shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] border border-gray" 
-                        type="submit">
+                        type="submit" name="status" value="accepted">
                         Verifikasi
                     </button>
                     
                     <!-- Tombol Tolak -->
                     <button 
                         class="btn btn-error bg-[#C0392B] rounded-[20px] text-[15px] font-semibold px-[41px] text-light shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] border border-gray" 
-                        type="button" 
+                        type="submit" name="status" value="accepted"
                         onclick="document.getElementById('denied').showModal()">
                         Tolak
                     </button>

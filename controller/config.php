@@ -1,7 +1,7 @@
 <?php
 $host = "localhost";
-$user = "root";
-$password = "";
+$user = "admin";
+$password = "admin";
 $dbname = "db_sampah_4";
 
 $conn = new mysqli($host, $user, $password, $dbname);

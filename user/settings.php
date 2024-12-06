@@ -1,17 +1,17 @@
 <?php
 session_start();  // Start session untuk memeriksa status login
 
-// Halaman yang tidak memerlukan login (seperti landingpage.php)
-if (basename($_SERVER['PHP_SELF']) != 'landingpage.php') {
+// Halaman yang tidak memerlukan login (seperti landing-page.php)
+if (basename($_SERVER['PHP_SELF']) != 'landing-page.php') {
     // Jika user belum login, arahkan ke halaman login atau lainnya
     if (!isset($_SESSION['loggedin'])) {
-        header("Location: .././landingpage.php");
+        header("Location: .././landing-page.php");
         exit();  // Jangan lupa exit setelah redirect
     }
 }
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"class="bg-light dark:[color-scheme:light]">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -80,20 +80,20 @@ if (basename($_SERVER['PHP_SELF']) != 'landingpage.php') {
 <!-- DESKTOP MODE -->
 <div class="navbar-center hidden lg:flex">
   <ul class="menu menu-horizontal px-1 text-dark text-base">
-  <li><a href="../landingpage.php">Home</a></li>
+  <li><a href="../landing-page.php">Home</a></li>
   <li><a href="./tentang.php">Tentang kami</a></li>
     <li>
       <details>
         <summary>Layanan</summary>
         <ul class="bg-light absolute left-1/2 transform -translate-x-1/2 rounded-[10px] border-[1px] shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] border-gray px-[14px] py-[20px] flex flex-wrap items-center gap-3 min-w-[300px] max-w-[600px]">
           <li>
-            <button onclick="window.location.href='.././user/drop_off/dropoff.php'" class="btn btn-success flex-grow shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] rounded-[20px] flex items-center justify-center px-4 py-2 gap-2 min-w-[120px] max-w-[200px]">
+            <button onclick="window.location.href='.././user/drop-off/dropoff.php'" class="btn btn-success flex-grow shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] rounded-[20px] flex items-center justify-center px-4 py-2 gap-2 min-w-[120px] max-w-[200px]">
               <img src="../images/truck.png" class="w-8 h-8" alt="">
               <p>Drop Off</p>
             </button>
           </li>
           <li>
-            <button onclick="window.location.href='.././user/drop_off/poin.php'" class="btn btn-success flex-grow shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] rounded-[20px] flex items-center justify-center px-4 py-2 gap-2 min-w-[120px] max-w-[200px]">
+            <button onclick="window.location.href='.././user/drop-off/poin.php'" class="btn btn-success flex-grow shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] rounded-[20px] flex items-center justify-center px-4 py-2 gap-2 min-w-[120px] max-w-[200px]">
               <img src="../images/reward.png" class="w-8 h-8" alt="">
               <p>Rewards</p>
             </button>
@@ -114,7 +114,7 @@ if (basename($_SERVER['PHP_SELF']) != 'landingpage.php') {
       </details>
     </li>
     <li><a href=".././user/blog.php">Blog</a></li>
-    <li><a href=".././user/kontak_kami.php">Kontak Kami</a></li>
+    <li><a href=".././user/kontak-kami.php">Kontak Kami</a></li>
   </ul>
 </div>
 
@@ -174,7 +174,7 @@ if (basename($_SERVER['PHP_SELF']) != 'landingpage.php') {
 <footer class="bg-gradient-to-r from-green to-dark-green text-white py-7">
   <div class="container mx-auto px-4 text-center">
     <div class="flex justify-center">
-      <a href="../landingpage.php">
+      <a href="../landing-page.php">
         <img src="../images/Logo.png" alt="Logo Lestari" class="h-20">
       </a>
     </div>
@@ -182,16 +182,16 @@ if (basename($_SERVER['PHP_SELF']) != 'landingpage.php') {
       <!-- Bagian Lestari -->
       <div class="text-left">
         <h4 class="font-bold">Lestari</h4>
-        <a href="../landingpage.php" class="block text-white hover:underline mb-1">Home</a>
+        <a href="../landing-page.php" class="block text-white hover:underline mb-1">Home</a>
         <a href="../user/tentang.php" class="block text-white hover:underline mb-1">Tentang Kami</a>
-        <a href="../landingpage.php" class="block text-white hover:underline mb-1">Layanan</a>
+        <a href="../landing-page.php" class="block text-white hover:underline mb-1">Layanan</a>
         <a href="../user/blog.php" class="block text-white hover:underline mb-1">Blog</a>
       </div>
 
       <!-- Bagian Informasi -->
       <div>
         <h4 class="font-bold">Informasi</h4>
-        <a href="../user/kontak_kami.php" class="block text-white hover:underline mb-1">Kontak Kami</a>
+        <a href="../user/kontak-kami.php" class="block text-white hover:underline mb-1">Kontak Kami</a>
       </div>
       <!-- Bagian Hubungi Kami -->
       <div>

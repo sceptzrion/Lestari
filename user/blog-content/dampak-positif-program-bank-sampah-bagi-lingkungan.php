@@ -2,16 +2,16 @@
 <?php
 session_start();
 
-if (!in_array(basename($_SERVER['PHP_SELF']), ['landingpage.php', 'tentang.php', 'blog.php'])) {
+if (!in_array(basename($_SERVER['PHP_SELF']), ['landing-page.php', 'tentang.php', 'blog.php'])) {
   if (!isset($_SESSION['loggedin'])) {
-      header("Location: landingpage.php");
+      header("Location: landing-page.php");
       exit();
   }
 }
 
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"class="bg-light dark:[color-scheme:light]">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -55,7 +55,7 @@ if (!in_array(basename($_SERVER['PHP_SELF']), ['landingpage.php', 'tentang.php',
             <ul
             id="dropdown-menu"
             class="menu menu-sm dropdown-content bg-white rounded-box z-[1] mt-3 w-52 p-2 shadow hidden">
-            <li><a href="../../landingpage.php">Home</a></li>
+            <li><a href="../../landing-page.php">Home</a></li>
             <li><a href="../../user/tentang.php">Tentang kami</a></li>
             <li>
               <a>Layanan</a>
@@ -63,7 +63,7 @@ if (!in_array(basename($_SERVER['PHP_SELF']), ['landingpage.php', 'tentang.php',
                 <!-- Drop Off -->
                 <li>
                     <?php if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true): ?>
-                    <button onclick="window.location.href='../../user/drop_off/dropoff.php'" >
+                    <button onclick="window.location.href='../../user/drop-off/dropoff.php'" >
                         <p>Drop Off</p>
                     </button>
                     <?php else: ?>
@@ -75,7 +75,7 @@ if (!in_array(basename($_SERVER['PHP_SELF']), ['landingpage.php', 'tentang.php',
                  <!-- Rewards -->
                 <li>
                     <?php if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true): ?>
-                    <button onclick="window.location.href='../../user/drop_off/poin.php'" >
+                    <button onclick="window.location.href='../../user/drop-off/poin.php'" >
                         <p>Rewards</p>
                     </button>
                     <?php else: ?>
@@ -100,7 +100,7 @@ if (!in_array(basename($_SERVER['PHP_SELF']), ['landingpage.php', 'tentang.php',
                     </ul>
                 </li>
             <li><a href="../../user/blog.php">Blog</a></li>
-            <li><a href="../../user/kontak_kami.php">Kontak Kami</a></li>
+            <li><a href="../../user/kontak-kami.php">Kontak Kami</a></li>
           </ul>
         </div>
         <!-- BRAND LOGO -->
@@ -111,7 +111,7 @@ if (!in_array(basename($_SERVER['PHP_SELF']), ['landingpage.php', 'tentang.php',
 <!-- DESKTOP MODE -->
 <div class="navbar-center hidden lg:flex">
   <ul class="menu menu-horizontal px-1 text-dark text-base">
-    <li><a href="../../landingpage.php">Home</a></li>
+    <li><a href="../../landing-page.php">Home</a></li>
     <li><a href="../../user/tentang.php">Tentang kami</a></li>
     <li>
       <details>
@@ -120,7 +120,7 @@ if (!in_array(basename($_SERVER['PHP_SELF']), ['landingpage.php', 'tentang.php',
           <!-- Drop Off -->
           <li>
             <?php if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true): ?>
-              <button onclick="window.location.href='../../user/drop_off/dropoff.php'" class="btn btn-success flex-grow shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] rounded-[20px] flex items-center justify-center px-4 py-2 gap-2 min-w-[120px] max-w-[200px]">
+              <button onclick="window.location.href='../../user/drop-off/dropoff.php'" class="btn btn-success flex-grow shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] rounded-[20px] flex items-center justify-center px-4 py-2 gap-2 min-w-[120px] max-w-[200px]">
                 <img src="../../images/truck.png" class="w-8 h-8" alt="">
                 <p>Drop Off</p>
               </button>
@@ -134,7 +134,7 @@ if (!in_array(basename($_SERVER['PHP_SELF']), ['landingpage.php', 'tentang.php',
           <!-- Rewards -->
           <li>
             <?php if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true): ?>
-              <button onclick="window.location.href='../../user/drop_off/poin.php'" class="btn btn-success flex-grow shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] rounded-[20px] flex items-center justify-center px-4 py-2 gap-2 min-w-[120px] max-w-[200px]">
+              <button onclick="window.location.href='../../user/drop-off/poin.php'" class="btn btn-success flex-grow shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] rounded-[20px] flex items-center justify-center px-4 py-2 gap-2 min-w-[120px] max-w-[200px]">
                 <img src="../../images/reward.png" class="w-8 h-8" alt="">
                 <p>Rewards</p>
               </button>
@@ -164,7 +164,7 @@ if (!in_array(basename($_SERVER['PHP_SELF']), ['landingpage.php', 'tentang.php',
       </details>
     </li>
     <li><a href="../../user/blog.php">Blog</a></li>
-    <li><a href="../../user/kontak_kami.php">Kontak Kami</a></li>
+    <li><a href="../../user/kontak-kami.php">Kontak Kami</a></li>
   </ul>
 </div>
 
@@ -226,94 +226,54 @@ if (!in_array(basename($_SERVER['PHP_SELF']), ['landingpage.php', 'tentang.php',
   <!-- NAVBAR END -->
 
 <!-- Content -->
-    <main class=" bg-light container mx-auto px-16 py-12">
+    <main class="bg-light container mx-auto px-16 py-12">
         <p class="text-sm bg-green-100 text-[#1B5E20] font-medium inline-block px-3 py-1 rounded">Lingkungan</p>
-        <h1 class="text-3xl font-bold text-[#1B5E20] mt-4">5 Cara Kreatif Mengolah Sampah Plastik Menjadi Barang Bernilai</h1>
-        <p class="text-gray-500 mt-2">Dipublikasikan 2 Hari yang Lalu</p>
-        <img src="../../images/user/blog/content1.png" alt="Gambar ilustrasi daur ulang" class="mt-4 mb-6 w-[500px] rounded-lg">
+        <h1 class="text-3xl font-bold text-[#1B5E20] mt-4">Dampak Positif Program Bank Sampah bagi Lingkungan</h1>
+        <p class="text-gray-500 mt-2">Dipublikasikan 2 Desember 2024</p>
+        <img src="../../images/user/blog/content2.png" alt="Gambar ilustrasi daur ulang" class="mt-4 mb-6 w-[500px] rounded-lg">
         <p class="text-gray-700 mb-6 text-justify">
-            Sampah plastik telah menjadi salah satu masalah lingkungan yang paling serius di era modern. Namun, dengan sedikit kreativitas dan inovasi, kita dapat mengubah sampah plastik menjadi produk yang bernilai dan bermanfaat.      </p>
+        Program bank sampah telah terbukti memberikan berbagai dampak positif bagi lingkungan dan masyarakat. Berikut adalah beberapa manfaat utama dari program ini:      </p>
         <div class="mt-8 space-y-10">
             <!-- Section 1 -->
             <section>
-                <h2 class="text-xl font-bold text-[#1B5E20]">1. Membuat Pot Bunga dari Botol Plastik</h2>
+                <h2 class="text-xl font-bold text-[#1B5E20]">1. Pengurangan Sampah di TPA</h2>
                 <div class="bg-gray-50 border rounded-lg p-4 mt-2 text-gray-700">
-                <p class="mb-4">Botol plastik bekas dapat diubah menjadi pot bunga yang menarik dengan mengikuti langkah-langkah berikut :</p>
-                    <ol class="list-decimal pl-5 space-y-2">
-                    <li>Bersihkan botol plastik hingga benar-benar bersih.</li>
-                    <li>Potong botol plastik menjadi dua bagian secara horizontal (sekitar 1/3 dari bawah).</li>
-                    <li>Buat 4-5 lubang kecil di bagian bawah untuk drainase.</li>
-                    <li>Buat pola sesuai desain yang diinginkan (bisa berbentuk hewan, geometris, dll).</li>
-                    <li>Cat permukaan botol sesuai selera (tunggu hingga benar-benar kering).</li>
-                    <li>Isi dengan media tanam.</li>
-                    <li>Tanam tanaman yang diinginkan.</li>
-                    </ol>
+                <p class="mb-4">Bank sampah membantu mengurangi volume sampah yang masuk ke Tempat Pembuangan Akhir (TPA) melalui sistem pemilahan dan daur ulang yang terorganisir.</p>
                 </div>
             </section>
 
             <!-- Section 2 -->
             <section>
-                <h2 class="text-xl font-bold text-[#1B5E20]">2. Tas Belanja dari Kemasan Plastik</h2>
+                <h2 class="text-xl font-bold text-[#1B5E20]">2. Peningkatan Kebersihan Lingkungan</h2>
                 <div class="bg-gray-50 border rounded-lg p-4 mt-2 text-gray-700">
-                <p class="mb-4">Kemasan plastik bekas dapat dianyam menjadi tas belanja yang kuat dan stylish. Berikut langkah langkah nya</p>
-                    <ol class="list-decimal pl-5 space-y-2">
-                        <li>Bersihkan kemasan plastik dari debu dan kotoran</li>
-                        <li>Potong kemasan menjadi lembaran-lembaran sama besar</li>
-                        <li>Susun dan setrika dengan kertas minyak sebagai pelapis</li>
-                        <li>Jahit sesuai pola tas yang diinginkan</li>
-                        <li>Tambahkan tali untuk pegangan tas</li>
-                    </ol>
+                <p class="mb-4">Dengan adanya sistem pengumpulan sampah yang teratur, lingkungan sekitar menjadi lebih bersih dan terhindar dari penumpukan sampah liar.</p>
                 </div>
             </section>
 
             <!-- Section 3 -->
             <section>
-                <h2 class="text-xl font-bold text-[#1B5E20]">3. Hiasan Dinding dari Tutup Botol</h2>
+                <h2 class="text-xl font-bold text-[#1B5E20]">3. Edukasi Masyarakat</h2>
                 <div class="bg-gray-50 border rounded-lg p-4 mt-2 text-gray-700">
-                <p class="mb-4">Tutup botol plastik dapat disusun menjadi hiasan dinding yang artistik dengan mengikuti langkah-langkah berikut :</p>
-                    <ol class="list-decimal pl-5 space-y-2">
-                    <li>Kumpulkan tutup botol dalam jumlah banyak.</li>
-                    <li>Buat pola atau desain di papan.</li>
-                    <li>Tempelkan tutup botol sesuai pola.</li>
-                    <li>Semprot dengan clear coat untuk hasil mengkilap.</li>
-                    </ol>
+                <p class="mb-4">Program ini meningkatkan kesadaran masyarakat tentang pentingnya pengelolaan sampah dan mendorong partisipasi aktif dalam menjaga lingkungan.</p>
                 </div>
             </section>
 
             <!-- Section 4 -->
             <section>
-                <h2 class="text-xl font-bold text-[#1B5E20]">4. Tempat Pensil dari Botol Sampo</h2>
+                <h2 class="text-xl font-bold text-[#1B5E20]">4. Pengurangan Emisi Karbon</h2>
                 <div class="bg-gray-50 border rounded-lg p-4 mt-2 text-gray-700">
-                <p class="mb-4">Botol sampo bekas dapat diubah menjadi tempat pensil yang unik dengan mengikuti langkah langkah dibawah ini :</p>
-                    <ol class="list-decimal pl-5 space-y-2">
-                    <li>Bersihkan botol sampo hingga benar-benar bersih dari sisa sampo.</li>
-                    <li>Potong botol sesuai ketinggian yang diinginkan (biasanya 15-20 cm).</li>
-                    <li>Amplas permukaan botol agar cat dapat menempel dengan baik.</li>
-                    <li>Buat pola atau desain yang diinginkan.</li>
-                    <li>Cat dasar seluruh permukaan botol (2-3 lapis).</li>
-                    <li>Tambahkan detail dan hiasan sesuai selera.</li>
-                    <li>Aplikasikan clear coat untuk hasil yang tahan lama.</li>
-                    </ol>
+                <p class="mb-4">Melalui proses daur ulang, bank sampah membantu mengurangi emisi karbon yang dihasilkan dari pembakaran sampah atau penumpukan di TPA.</p>
                 </div>
             </section>
 
             <!-- Section 5 -->
             <section>
-                <h2 class="text-xl font-bold text-[#1B5E20]">5. Vas Bunga dari Plastik Daur Ulang</h2>
+                <h2 class="text-xl font-bold text-[#1B5E20]">5.  Pemberdayaan Ekonomi</h2>
                 <div class="bg-gray-50 border rounded-lg p-4 mt-2 text-gray-700">
-                <p class="mb-4">Berbagai jenis plastik dapat dilelehkan dan dibentuk ulang menjadi vas bunga dengan mengikuti langkah langkah dibawah ini :</p>
-                    <ol class="list-decimal pl-5 space-y-2">
-                        <li>Potong plastik menjadi potongan-potongan kecil</li>
-                        <li>Siapkan cetakan dari botol plastik, lapisi dengan aluminium foil</li>
-                        <li>Susun potongan plastik pada cetakan dengan pola yang diinginkan</li>
-                        <li>Panaskan dengan hati-hati menggunakan heat gun atau oven dengan suhu rendah (~150°C)</li>
-                        <li>Tunggu hingga plastik meleleh dan menyatu</li>
-                        <li>Biarkan dingin secara alami</li>
-                        <li>Lepaskan dari cetakan dengan hati-hati</li>
-                    </ol>
+                <p class="mb-3">Selain manfaat lingkungan, bank sampah juga memberikan nilai ekonomi bagi masyarakat melalui sistem tabungan sampah dan penjualan material daur ulang.</p>
                 </div>
             </section>
-
+            <p class="mb-4 text-gray-700">Program bank sampah bukan hanya solusi untuk masalah sampah, tetapi juga menjadi gerakan yang memberdayakan masyarakat untuk lebih peduli terhadap lingkungan. Dengan dukungan aktif dari semua pihak, program ini dapat terus berkembang dan memberikan manfaat yang lebih besar.</p>
             <!-- Back Button -->
             <div class="mt-6">
                 <a href="../../user/blog.php" class="bg-gradient-to-r from-green to-dark-green text-white px-6 py-2 rounded shadow hover:bg-green-800">
@@ -340,7 +300,7 @@ if (!in_array(basename($_SERVER['PHP_SELF']), ['landingpage.php', 'tentang.php',
   <div class="container mx-auto px-12">
     <!-- Logo -->
     <div class="flex justify-center mb-6">
-      <a href="../../landingpage.php">
+      <a href="../../landing-page.php">
         <img src="../../images/Logo.png" alt="Logo Lestari" class="h-20">
       </a>
     </div>
@@ -350,16 +310,16 @@ if (!in_array(basename($_SERVER['PHP_SELF']), ['landingpage.php', 'tentang.php',
       <!-- Bagian Lestari -->
       <div class="text-left col-span-1 md:col-span-1">
         <h4 class="font-bold mb-2">Lestari</h4>
-        <a href="../../landingpage.php" class="block text-white hover:underline mb-1">Home</a>
+        <a href="../../landing-page.php" class="block text-white hover:underline mb-1">Home</a>
         <a href="../../user/tentang.php" class="block text-white hover:underline mb-1">Tentang Kami</a>
-        <a href="../../landingpage.php" class="block text-white hover:underline mb-1">Layanan</a>
+        <a href="../../landing-page.php" class="block text-white hover:underline mb-1">Layanan</a>
         <a href="../../user/blog.php" class="block text-white hover:underline mb-1">Blog</a>
       </div>
 
       <!-- Bagian Informasi -->
       <div class="text-right md:text-center col-span-1 md:col-span-1">
         <h4 class="font-bold mb-2">Informasi</h4>
-        <a href="../../user/kontak_kami.php" class="block text-white hover:underline mb-1">Kontak Kami</a>
+        <a href="../../user/kontak-kami.php" class="block text-white hover:underline mb-1">Kontak Kami</a>
       </div>
 
       <!-- Bagian Hubungi Kami -->
