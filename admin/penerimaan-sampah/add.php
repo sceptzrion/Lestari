@@ -31,6 +31,8 @@ if ($conn) {
             if (empty($waste_types) || empty($waste_weights)) {
                 $error_message = "Please add at least one waste type and weight.";
             } else {
+                $valid = true; // Flag untuk memeriksa apakah semua data valid
+
                 // Proses input jika valid
                 for ($i = 0; $i < count($waste_types); $i++) {
                     $waste_type = $waste_types[$i];
@@ -56,14 +58,28 @@ if ($conn) {
                             $detail_stmt->bind_param('iiii', $request_id, $waste_type, $waste_weight, $points_earned);
                             if (!$detail_stmt->execute()) {
                                 $error_message = "Error inserting detail request.";
+                                $valid = false; // Set valid ke false jika ada error
                             }
                             $detail_stmt->close();
                         } else {
                             $error_message = "Invalid waste type selected.";
+                            $valid = false;
                         }
                     } else {
                         $error_message = "Invalid waste weight input.";
+                        $valid = false;
                     }
+                }
+
+                // Update status jika semua input valid
+                if ($valid) {
+                    $update_query = "UPDATE drop_off_request SET status = ? WHERE request_id = ?";
+                    $update_stmt = $conn->prepare($update_query);
+                    $update_stmt->bind_param('si', $status, $request_id);
+                    if (!$update_stmt->execute()) {
+                        $error_message = "Error updating status.";
+                    }
+                    $update_stmt->close();
                 }
             }
         }
