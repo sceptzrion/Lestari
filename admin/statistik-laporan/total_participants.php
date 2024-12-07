@@ -6,7 +6,7 @@ include 'connect_admin.php';
 $query = "
     SELECT COUNT(DISTINCT u.user_id) AS total_participants
     FROM users u
-    JOIN drop-off_request d ON u.user_id = d.user_id
+    JOIN drop_off_request d ON u.user_id = d.user_id
     WHERE d.bank_id = '$bank_id'
 ";
 

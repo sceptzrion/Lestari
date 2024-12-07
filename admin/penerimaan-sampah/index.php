@@ -199,110 +199,125 @@ if ($conn) {
 
             <!-- FORM -->
             <div class="bg-light rounded-[10px] w-full h-auto shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] flex flex-col py-[35px] px-[41px] mt-[46px] text-dark">
-                <h2 class="text-2xl font-bold text-center">Status Penerimaan Sampah</h2>
-                <input type="text" name="cari-user" id="cari-user" placeholder="Cari Nama" class="w-1/3 border-2 border-gray px-2 text-dark text-sm font-light bg-light py-1.5 rounded-lg mt-5">
-                <form method="GET" class="flex flex-row text-base font-medium mt-[21px] w-full gap-[20px] content-start">
-                    <select id="status-sampah" name="status-sampah" class="w-[223px] h-auto bg-light border border-gray shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] rounded-[5px] px-[9px] text-base font-medium">
-                        <option disabled selected>Semua Status</option>
-                        <option>waiting</option>
-                        <option>accepted</option>
-                        <option>rejected</option>
-                    </select>
-                    <select id="jenis-sampah" name="jenis-sampah" class="w-[223px] h-auto bg-light border border-gray shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] px-[9px] text-base font-medium">
-                        <option disabled selected>Semua Jenis Sampah</option>
-                        <option>Plastik</option>
-                        <option>Kertas</option>
-                        <option>Logam</option>
-                    </select>
-                    <input type="date" id="date" name="date" class="w-[223px] h-auto bg-light text-dark dark:[color-scheme:light] border border-gray shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] px-[9px] text-base font-medium">
-                    <button type="submit" class="btn btn-success bg-[#2E9E5D] rounded-[5px] w-[101px] h-[34px] text-base font-semibold text-light shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] border border-gray">Filter</button>
-                </form>
-                <div class="table mt-10">
-                    <div class="overflow-auto h-[400px]">
-                        <table class="table border-collapse border border-[#828282] text-center">
-                            <!-- head -->
-                            <thead class="bg-[#E5E5E5] text-dark text-sm font-bold">
-                                <tr class="border border-[#828282]">
-                                    <th class="border border-[#828282]">ID</th>
-                                    <th class="border border-[#828282]">Tanggal</th>
-                                    <th class="border border-[#828282]">Nama User</th>
-                                    <th class="border border-[#828282]">Jenis Sampah</th>
-                                    <th class="border border-[#828282]">Berat</th>
-                                    <th class="border border-[#828282]">Status</th>
-                                    <th class="border border-[#828282]">Poin</th>
-                                    <th class="border border-[#828282]">Aksi</th>
-                                </tr>
-                            </thead>
-                            <tbody class="font-medium">
-                                <?php if (count($rows) > 0): ?>
-                                    <?php foreach ($rows as $row): ?>
-                                        <tr>
-                                            <td class="border border-[#828282]"><?= htmlspecialchars($row['request_id']) ?></td>
-                                            <td class="border border-[#828282]"><?= htmlspecialchars($row['drop_off_request_created_at']) ?></td>
-                                            <td class="border border-[#828282]"><?= htmlspecialchars($row['user_name']) ?></td>
-                                            <td class="border border-[#828282]"><?= ($row['waste_type'] != null) ? htmlspecialchars($row['waste_type']) : "-"; ?></td>
-                                            <td class="border border-[#828282]"><?= ($row['waste_weight'] != null) ? htmlspecialchars($row['waste_weight']) . " kg" : "-"; ?></td>
-                                            <td class="border border-[#828282]">
-                                                <?php if ($row['status'] == 'accepted'): ?>
-                                                    <p class="bg-[#299E63] text-light rounded-[10px] border border-gray w-auto h-auto text-sm font-medium text-center py-0.5 px-2">
-                                                        <?= htmlspecialchars($row['status']) ?>
-                                                    </p>
-                                                <?php elseif ($row['status'] == 'rejected'): ?>
-                                                    <p class="bg-[#EB5757] text-light rounded-[10px] border border-gray w-auto h-auto text-sm font-medium text-center py-0.5 px-1">
-                                                        <?= htmlspecialchars($row['status']) ?>
-                                                    </p>
-                                                <?php else: ?>
-                                                    <p class="bg-[#FFDE75] rounded-[10px] border border-gray w-auto h-auto text-sm font-medium text-center py-0.5 px-1">
-                                                        <?= htmlspecialchars($row['status']) ?>
-                                                    </p>
-                                                <?php endif; ?>
-                                            </td>
-                                            <td class="border border-[#828282]"><?= ($row['points_earned'] != null) ? htmlspecialchars($row['points_earned']) : "-"; ?></td>
-                                            <td class="border border-[#828282]">
-                                                <div class="flex flex-row gap-[18px] justify-center items-center">
-                                                    <?php if (isset($row['request_id']) && $row['status'] !== 'accepted' && $row['status'] !== 'rejected'): ?>
-                                                        <button onclick="location.href='add.php?id=<?= isset($row['request_id']) ? $row['request_id'] : '' ?>'" class="bg-[#2ECC71] w-[72px] h-[25px] rounded-[10px] text-light text-[10px] font-semibold text-center">
-                                                            Hitung
-                                                        </button>
-
-                                                    <?php else: ?>
-                                                        <p>-</p>
-                                                    <?php endif; ?>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    <?php endforeach; ?>
-                                <?php else: ?>
-                                    <tr>
-                                        <td colspan="8" class="border border-[#828282] text-center">Tidak ada data tersedia</td>
-                                    </tr>
-                                <?php endif; ?>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-
-            <!-- dialogs -->
-            <dialog id="verified" class="modal">
-                <div class="modal-box bg-light w-[593px] h-auto rounded-[20px] gap-10 flex flex-col items-center py-[75px]">
-                    <h3 class="text-[32px] font-bold text-center text-dark">Berhasil Verifikasi</h3>
-                    <img src="../../images/admin/checklist.png" class="w-[100px]" alt="">
-                </div>
-                <form method="dialog" class="modal-backdrop bg-light bg-opacity-25">
-                    <button> </button>
-                </form>
-            </dialog>
-
-            <dialog id="denied" class="modal">
-                <div class="modal-box bg-light w-[593px] h-auto rounded-[20px] gap-10 flex flex-col items-center py-[75px]">
-                    <h3 class="text-[32px] font-bold text-center text-dark">Data ditolak</h3>
-                    <img src="../../images/admin/denied.png" class="w-[100px]" alt="">
-                </div>
-                <form method="dialog" class="modal-backdrop bg-light bg-opacity-25">
-                    <button> </button>
-                </form>
-            </dialog>
+    <h2 class="text-2xl font-bold text-center">Status Penerimaan Sampah</h2>
+    <!-- Input Pencarian -->
+    <input type="text" name="cari-user" id="cari-user" placeholder="Cari Nama User" class="w-1/3 border-2 border-gray px-2 text-dark text-sm font-light bg-light py-1.5 rounded-lg mt-5">
+    <form method="GET" class="flex flex-row text-base font-medium mt-[21px] w-full gap-[20px] content-start">
+        <select id="status-sampah" name="status-sampah" class="w-[223px] h-auto bg-light border border-gray shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] rounded-[5px] px-[9px] text-base font-medium">
+            <option disabled selected>Semua Status</option>
+            <option>waiting</option>
+            <option>accepted</option>
+            <option>rejected</option>
+        </select>
+        <select id="jenis-sampah" name="jenis-sampah" class="w-[223px] h-auto bg-light border border-gray shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] px-[9px] text-base font-medium">
+            <option disabled selected>Semua Jenis Sampah</option>
+            <option>Plastik</option>
+            <option>Kertas</option>
+            <option>Logam</option>
+        </select>
+        <input type="date" id="date" name="date" class="w-[223px] h-auto bg-light text-dark dark:[color-scheme:light] border border-gray shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] px-[9px] text-base font-medium">
+        <button type="submit" class="btn btn-success bg-[#2E9E5D] rounded-[5px] w-[101px] h-[34px] text-base font-semibold text-light shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] border border-gray">Filter</button>
+    </form>
+    <div class="table mt-10">
+        <div class="overflow-auto h-[400px]">
+            <table class="table border-collapse border border-[#828282] text-center">
+                <!-- head -->
+                <thead class="bg-[#E5E5E5] text-dark text-sm font-bold">
+                    <tr class="border border-[#828282]">
+                        <th class="border border-[#828282]">ID</th>
+                        <th class="border border-[#828282]">Tanggal</th>
+                        <th class="border border-[#828282]">Nama User</th>
+                        <th class="border border-[#828282]">Jenis Sampah</th>
+                        <th class="border border-[#828282]">Berat</th>
+                        <th class="border border-[#828282]">Status</th>
+                        <th class="border border-[#828282]">Poin</th>
+                        <th class="border border-[#828282]">Aksi</th>
+                    </tr>
+                </thead>
+                <tbody class="font-medium" id="data-tbody">
+                    <?php if (count($rows) > 0): ?>
+                        <?php foreach ($rows as $row): ?>
+                            <tr class="data-row">
+                                <td class="border border-[#828282]"><?= htmlspecialchars($row['request_id']) ?></td>
+                                <td class="border border-[#828282]"><?= htmlspecialchars($row['drop_off_request_created_at']) ?></td>
+                                <td class="border border-[#828282] user-name"><?= htmlspecialchars($row['user_name']) ?></td>
+                                <td class="border border-[#828282]"><?= ($row['waste_type'] != null) ? htmlspecialchars($row['waste_type']) : "-"; ?></td>
+                                <td class="border border-[#828282]"><?= ($row['waste_weight'] != null) ? htmlspecialchars($row['waste_weight']) . " kg" : "-"; ?></td>
+                                <td class="border border-[#828282]">
+                                    <?php if ($row['status'] == 'accepted'): ?>
+                                        <p class="bg-[#299E63] text-light rounded-[10px] border border-gray w-auto h-auto text-sm font-medium text-center py-0.5 px-2">
+                                            <?= htmlspecialchars($row['status']) ?>
+                                        </p>
+                                    <?php elseif ($row['status'] == 'rejected'): ?>
+                                        <p class="bg-[#EB5757] text-light rounded-[10px] border border-gray w-auto h-auto text-sm font-medium text-center py-0.5 px-1">
+                                            <?= htmlspecialchars($row['status']) ?>
+                                        </p>
+                                    <?php else: ?>
+                                        <p class="bg-[#FFDE75] rounded-[10px] border border-gray w-auto h-auto text-sm font-medium text-center py-0.5 px-1">
+                                            <?= htmlspecialchars($row['status']) ?>
+                                        </p>
+                                    <?php endif; ?>
+                                </td>
+                                <td class="border border-[#828282]"><?= ($row['points_earned'] != null) ? htmlspecialchars($row['points_earned']) : "-"; ?></td>
+                                <td class="border border-[#828282]">
+                                    <div class="flex flex-row gap-[18px] justify-center items-center">
+                                        <?php if (isset($row['request_id']) && $row['status'] !== 'accepted' && $row['status'] !== 'rejected'): ?>
+                                            <button onclick="location.href='add.php?id=<?= isset($row['request_id']) ? $row['request_id'] : '' ?>'" class="bg-[#2ECC71] w-[72px] h-[25px] rounded-[10px] text-light text-[10px] font-semibold text-center">
+                                                Hitung
+                                            </button>
+                                        <?php else: ?>
+                                            <p>-</p>
+                                        <?php endif; ?>
+                                    </div>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
+                    <?php else: ?>
+                        <tr>
+                            <td colspan="8" class="border border-[#828282] text-center">Tidak ada data tersedia</td>
+                        </tr>
+                    <?php endif; ?>
+                </tbody>
+            </table>
         </div>
     </div>
-</body>
-</html>
+
+    <!-- dialogs -->
+    <dialog id="verified" class="modal">
+        <div class="modal-box bg-light w-[593px] h-auto rounded-[20px] gap-10 flex flex-col items-center py-[75px]">
+            <h3 class="text-[32px] font-bold text-center text-dark">Berhasil Verifikasi</h3>
+            <img src="../../images/admin/checklist.png" class="w-[100px]" alt="">
+        </div>
+        <form method="dialog" class="modal-backdrop bg-light bg-opacity-25">
+            <button> </button>
+        </form>
+    </dialog>
+
+    <dialog id="denied" class="modal">
+        <div class="modal-box bg-light w-[593px] h-auto rounded-[20px] gap-10 flex flex-col items-center py-[75px]">
+            <h3 class="text-[32px] font-bold text-center text-dark">Data ditolak</h3>
+            <img src="../../images/admin/denied.png" class="w-[100px]" alt="">
+        </div>
+        <form method="dialog" class="modal-backdrop bg-light bg-opacity-25">
+            <button> </button>
+        </form>
+    </dialog>
+</div>
+</div>
+
+<script>
+    const searchInput = document.getElementById("cari-user");
+    const rows = document.querySelectorAll(".data-row");
+
+    searchInput.addEventListener("input", () => {
+        const query = searchInput.value.toLowerCase();
+        rows.forEach(row => {
+            const userName = row.querySelector(".user-name").textContent.toLowerCase();
+            if (userName.includes(query)) {
+                row.style.display = "";
+            } else {
+                row.style.display = "none";
+            }
+        });
+    });
+</script>

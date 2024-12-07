@@ -5,7 +5,7 @@ $query = "SELECT SUM(user_points) AS total_points
 FROM (
     SELECT u.user_id, MAX(u.user_total_points) AS user_points
     FROM users u
-    JOIN drop-off_request d ON u.user_id = d.user_id
+    JOIN drop_off_request d ON u.user_id = d.user_id
     WHERE d.bank_id = '$bank_id'
     GROUP BY u.user_id
 ) AS unique_user_points;

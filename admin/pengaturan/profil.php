@@ -64,6 +64,7 @@ if ($result->num_rows > 0) {
                     <p>Marketplace</p>
                 </button>
                 <button class="btn btn-success bg-transparent border-0 text-light font-bold text-xl justify-start pl-[9px] w-[271px] h-[59px] flex flex-row gap-[13px]" onclick="location.href='../pengaturan/'">
+                <button class="btn btn-success bg-green-btn text-light font-bold text-xl justify-start pl-[9px] w-[271px] h-[59px] flex flex-row gap-[13px]" onclick="location.href='../pengaturan/'">
                     <img src="../../images/admin/Settings.png" alt="">
                     <p>Pengaturan</p>
                 </button>

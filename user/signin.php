@@ -38,16 +38,6 @@
                 <!-- Title -->
                 <h1 class="text-2xl font-bold text-lg-start text-gray-800 mb-8">Sign In to Lestari</h1>
 
-                <!-- Google Sign In -->
-                <button class="flex items-center justify-center w-full border border-gray-00 py-2 rounded-[20px] shadow-sm hover:bg-gray-200 transition mb-4">
-                    <img src="../images/user/sosmed/google.png" alt="Google Logo" class="mr-2">
-                    <span class="text-sm font-medium text-gray-700">Sign In with Google</span>
-                </button>
-                <div class="flex items-center mb-4 justify-center">
-                    <hr class="w-1/4 border-gray-300">
-                    <span class="mx-2 text-gray-500 text-sm">Or sign in with email</span>
-                    <hr class="w-1/4 border-gray-300">
-                </div>
 
                 <!-- Form -->
                 <form action="../BackEnd/signin.php" method="POST" class="space-y-4">
@@ -79,7 +69,7 @@
 
                 <!-- Sign In -->
                 <p class="mt-2 mb-6 text-center text-sm text-gray-600">
-                Dont have an account? <a href="./signup.php" class="text-indigo-600 hover:underline">Sign up</a>
+                Dont have an account? <a href="./signup-email.php" class="text-indigo-600 hover:underline">Sign up</a>
                 </p>
             </div>
         </div>
