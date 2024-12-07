@@ -10,6 +10,20 @@ if (!isset($_SESSION['admin_id'])) {
     exit();
 }
 
+// Ambil data admin yang login
+$admin_id = $_SESSION['admin_id'];
+$sql = "SELECT * FROM admin WHERE admin_id = ?";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("i", $admin_id);
+$stmt->execute();
+$result = $stmt->get_result();
+
+if ($result->num_rows > 0) {
+    $admin = $result->fetch_assoc();
+} else {
+    echo "<p>Admin tidak ditemukan.</p>";
+    exit();
+}
 ?>
 
 <!DOCTYPE html>
@@ -23,7 +37,7 @@ if (!isset($_SESSION['admin_id'])) {
 <body>
     <div class="flex flex-row min-h-[1024px] w-full">
         <!-- SIDEBAR -->
-        <div class="bg-gradient-to-t from-green-admin to-dark-green-admin w-[345px] h-auto pb-[200px] text-light">
+        <div class="bg-gradient-to-t from-green-admin to-dark-green-admin w-[345px] h-auto text-light">
             <div class="flex flex-col pt-10 items-center">
                 <h1 class="text-[32px] font-extrabold">Admin Lestari</h1>
                 <hr class="w-[345px] h-[1px] bg-light mt-[33px]">
@@ -33,7 +47,7 @@ if (!isset($_SESSION['admin_id'])) {
                     <img src="../../images/admin/Home.png" alt="">
                     <p>Dashboard</p>
                 </button>
-                <button class="btn btn-success bg-transparent border-0 text-light font-bold justify-start pl-[9px] w-[271px] h-[59px] flex flex-row gap-[13px]" onclick="location.href='../penerimaan-sampah/'">
+                <button class="btn btn-success bg-green-btn text-light font-bold justify-start pl-[9px] w-[271px] h-[59px] flex flex-row gap-[13px]" onclick="location.href='../penerimaan-sampah/'">
                     <img src="../../images/admin/Truck.png" alt="">
                     <p class="text-lg">Penerimaan Sampah</p>
                 </button>
@@ -49,6 +63,7 @@ if (!isset($_SESSION['admin_id'])) {
                     <img src="../../images/admin/WhatsApp.png" alt="">
                     <p>Marketplace</p>
                 </button>
+                <button class="btn btn-success bg-transparent border-0 text-light font-bold text-xl justify-start pl-[9px] w-[271px] h-[59px] flex flex-row gap-[13px]" onclick="location.href='../pengaturan/'">
                 <button class="btn btn-success bg-green-btn text-light font-bold text-xl justify-start pl-[9px] w-[271px] h-[59px] flex flex-row gap-[13px]" onclick="location.href='../pengaturan/'">
                     <img src="../../images/admin/Settings.png" alt="">
                     <p>Pengaturan</p>
@@ -72,21 +87,26 @@ if (!isset($_SESSION['admin_id'])) {
                     </div>
                     <ul
                         tabindex="0"
-                        class="menu menu-sm dropdown-content bg-light rounded-[10px] z-[1] mt-3 w-[233px] py-6 border border-gray shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] text-dark">
-                        <li><a href="./profil.php" class="flex flex-row gap-[10px] mb-[15px]">
+                            class="menu menu-sm dropdown-content bg-light rounded-[10px] z-[1] mt-3 w-[233px] py-6 border border-gray shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] text-dark">
+                        <li><a href="../pengaturan/profil.php" class="flex flex-row gap-[10px] mb-[15px]">
                             <img src="../../images/admin/Profile.png" class="w-[30px]" alt="Profile">
                             <p class="text-xl font-normal">Profile</p>
                         </a></li>
-                        <li><a href="./" class="flex flex-row gap-[10px]">
+                        <li><a href="../pengaturan/" class="flex flex-row gap-[10px]">
                             <img src="../../images/admin/Settings-profile.png" class="w-[30px]" alt="Settings">
                             <p class="text-xl font-normal">Pengaturan</p>
                         </a></li>
-                        <hr class="h-[2px] w-full text-gray my-6">
-                        <li><a class="flex flex-row gap-[10px]">
-                            <img src="../../images/admin/sign-out.png" class="w-[30px]" alt="Sign Out">
-                            <p class="text-xl font-normal">Sign Out</p>
-                        </a></li>
-                    </ul>
+                            <hr class="h-[2px] w-full text-gray my-6">
+                            <li>
+                              <form action="../signout.php" method="POST" id="signOutForm" class="flex flex-row gap-[10px]">
+                                <button type="submit" style="display: none;" id="signOutButton"></button>
+                                <a href="javascript:void(0);" onclick="document.getElementById('signOutForm').submit();" class="flex flex-row gap-[10px]">
+                                    <img src="../../images/admin/sign-out.png" class="w-[30px]" alt="Sign Out">
+                                    <p class="text-xl font-normal">Sign Out</p>
+                                </a>
+                              </form>
+                           </li>
+                        </ul>
                 </div>
             </div>
             <!-- HEADER END -->
@@ -111,11 +131,11 @@ if (!isset($_SESSION['admin_id'])) {
                     <table class="w-full">
                         <tr class="border-b border-dark border-opacity-20 w-full">
                             <th class="text-start py-3">Email</th>
-                            <td>admin@gmail.com</td>
+                            <td><?= htmlspecialchars($admin['admin_email']); ?></td>
                         </tr>
                         <tr class="border-b border-dark border-opacity-20 w-full">
                             <th class="text-start py-3">Password</th>
-                            <td>******</td>
+                            <td>**********</td>
                         </tr>
                     </table>
                 </div>
