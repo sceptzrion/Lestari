@@ -10,6 +10,51 @@ if (!isset($_SESSION['admin_id'])) {
     exit();
 }
 
+
+// Inisialisasi nilai default untuk poin
+$plastikPoint = $kertasPoint = $logamPoint = 0;
+
+// Ambil data dari database
+$sql = "SELECT waste_name, waste_point FROM waste WHERE waste_name IN ('Plastik', 'Kertas', 'Logam')";
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        switch ($row['waste_name']) {
+            case 'Plastik':
+                $plastikPoint = $row['waste_point'];
+                break;
+            case 'Kertas':
+                $kertasPoint = $row['waste_point'];
+                break;
+            case 'Logam':
+                $logamPoint = $row['waste_point'];
+                break;
+        }
+    }
+}
+
+// Perbarui data saat form dikirim
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $plastikPoint = $_POST['poin-plastik'];
+    $kertasPoint = $_POST['poin-kertas'];
+    $logamPoint = $_POST['poin-logam'];
+
+    $updateQuery = "
+        UPDATE waste 
+        SET waste_point = CASE waste_name
+            WHEN 'Plastik' THEN $plastikPoint
+            WHEN 'Kertas' THEN $kertasPoint
+            WHEN 'Logam' THEN $logamPoint
+        END
+        WHERE waste_name IN ('Plastik', 'Kertas', 'Logam')";
+    
+    if ($conn->query($updateQuery) === TRUE) {
+        echo "<p style='color: green; text-align: center;'>Data berhasil diperbarui!</p>";
+    } else {
+        echo "<p style='color: red; text-align: center;'>Error: " . $conn->error . "</p>";
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -98,21 +143,21 @@ if (!isset($_SESSION['admin_id'])) {
 
             <!-- TABLE -->
              <div class="bg-light rounded-[10px] w-full h-auto shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] flex flex-col p-8 mt-[46px] text-dark gap-10">
-                <form action="" class="flex flex-col gap-11">
+                <form method="POST" action="" class="flex flex-col gap-11">
                     <div class="flex flex-col gap-2">
                         <h2 class="text-2xl font-bold text-dark">Pengaturan Poin</h2>
                         <div class="flex flex-row gap-10">
                             <div class="flex flex-col gap-2 w-[283px]">
                                 <label for="poin-plastik" class="text-sm font-medium">Point per Kg Plastik</label>
-                                <input type="number" id="poin-plastik" name="poin-plastik" min="0" value="100" class="w-full h-10 bg-light border border-gray px-1.5 font-normal rounded-[5px] text-base dark:[color-scheme:light]">
+                                <input type="number" id="poin-plastik" name="poin-plastik" min="0" value="<?= htmlspecialchars($plastikPoint); ?>" class="w-full h-10 bg-light border border-gray px-1.5 font-normal rounded-[5px] text-base dark:[color-scheme:light]">
                             </div>
                             <div class="flex flex-col gap-2 w-[283px]">
                                 <label for="poin-kertas" class="text-sm font-medium">Point per Kg Kertas</label>
-                                <input type="number" id="poin-kertas" name="poin-kertas" min="0" value="100" class="w-full h-10 bg-light border border-gray px-1.5 font-normal rounded-[5px] text-base dark:[color-scheme:light]">
+                                <input type="number" id="poin-kertas" name="poin-kertas" min="0" value="<?= htmlspecialchars($kertasPoint); ?>" class="w-full h-10 bg-light border border-gray px-1.5 font-normal rounded-[5px] text-base dark:[color-scheme:light]">
                             </div>
                             <div class="flex flex-col gap-2 w-[283px]">
                                 <label for="poin-logam" class="text-sm font-medium">Point per Kg Logam</label>
-                                <input type="number" id="poin-logam" name="poin-logam" min="0" value="100" class="w-full h-10 bg-light border border-gray px-1.5 font-normal rounded-[5px] text-base dark:[color-scheme:light]">
+                                <input type="number" id="poin-logam" name="poin-logam" min="0" value="<?= htmlspecialchars($logamPoint); ?>" class="w-full h-10 bg-light border border-gray px-1.5 font-normal rounded-[5px] text-base dark:[color-scheme:light]">
                             </div>
                         </div>
                     </div>
