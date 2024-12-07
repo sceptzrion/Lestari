@@ -328,8 +328,10 @@ $drop_off = $result_drop_off->fetch_assoc();
   </div>
 
             <div class="flex justify-between mt-6">
-                <button class="bg-gray-300 text-gray-800 px-4 py-2 rounded">Logout</button>
-                <button class="bg-gradient-to-r from-green to-dark-green text-white px-4 py-2 rounded">Pengaturan</button>
+                <a href="../backend/logout.php"  class="bg-gray-300 text-gray-800 px-4 py-2 rounded">Logout</a>
+                <a href="../user/settings.php" class="bg-gradient-to-r from-green to-dark-green text-white px-4 py-2 rounded">
+                    Pengaturan
+                </a>
             </div>
         </div>
     </main>

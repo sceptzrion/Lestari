@@ -37,31 +37,11 @@
 
                 <!-- Title -->
                 <h1 class="text-2xl font-bold text-lg-start text-gray-800 mb-8">Sign Up to Lestari</h1>
-
-                <!-- Google Sign Up -->
-                <button class="flex items-center justify-center w-full border border-gray-00 py-2 rounded-[20px] shadow-sm hover:bg-gray-200 transition mb-4">
-                    <img src="../images/user/sosmed/google.png" alt="Google Logo" class="mr-2">
-                    <span class="text-sm font-medium text-gray-700">Sign Up with Google</span>
-                </button>
-                <div class="flex items-center mb-4 justify-center">
-                    <hr class="w-1/4 border-gray-300">
-                    <span class="mx-2 text-gray-500 text-sm">Or</span>
-                    <hr class="w-1/4 border-gray-300">
-                </div>
                 
                 <!-- Email Sign Up -->
                 <a href="./signup-email.php" class="flex items-center justify-center w-full border border-gray-00 py-2 rounded-[20px] shadow-sm hover:bg-gray-200 transition mb-6">
                     <span class="text-sm font-medium text-gray-700">Continue with email</span>
                 </a>
-
-
-                <p class="mt-2 mb-6 text-center text-sm text-gray-600">
-                    By creating an account you agree with our 
-                    <a href="#" class="text-indigo-600 hover:underline">Terms of Service</a>, 
-                    <a href="#" class="text-indigo-600 hover:underline">Privacy Policy</a>, 
-                    and our default 
-                    <a href="#" class="text-indigo-600 hover:underline">Notification Settings</a>.
-                </p>
 
                  <!-- Term -->
                  <p class="mt-2 mb-6 text-center text-sm text-gray-600">
