@@ -34,7 +34,7 @@ $result_user = $stmt->get_result();
 $user = $result_user->fetch_assoc();
 
 // Ambil total berat sampah (total waste weight)
-$sql_waste = "SELECT SUM(waste_weight) AS total_weight FROM detail_request WHERE request_id IN (SELECT request_id FROM drop-off_request WHERE user_id = ?)";
+$sql_waste = "SELECT SUM(waste_weight) AS total_weight FROM detail_request WHERE request_id IN (SELECT request_id FROM drop_off_request WHERE user_id = ?)";
 $stmt_waste = $conn->prepare($sql_waste);
 $stmt_waste->bind_param("i", $user_id);
 $stmt_waste->execute();
@@ -42,7 +42,7 @@ $result_waste = $stmt_waste->get_result();
 $waste = $result_waste->fetch_assoc();
 
 // Ambil total poin yang sudah dikumpulkan
-$sql_points = "SELECT SUM(points_earned) AS total_points FROM detail_request WHERE request_id IN (SELECT request_id FROM drop-off_request WHERE user_id = ?)";
+$sql_points = "SELECT SUM(points_earned) AS total_points FROM detail_request WHERE request_id IN (SELECT request_id FROM drop_off_request WHERE user_id = ?)";
 $stmt_points = $conn->prepare($sql_points);
 $stmt_points->bind_param("i", $user_id);
 $stmt_points->execute();
@@ -50,7 +50,7 @@ $result_points = $stmt_points->get_result();
 $points = $result_points->fetch_assoc();
 
 // Ambil jumlah total drop off yang sudah dilakukan
-$sql_drop_off = "SELECT COUNT(request_id) AS total_drop-off FROM drop-off_request WHERE user_id = ?";
+$sql_drop_off = "SELECT COUNT(request_id) AS total_drop_off FROM drop_off_request WHERE user_id = ?";
 $stmt_drop_off = $conn->prepare($sql_drop_off);
 $stmt_drop_off->bind_param("i", $user_id);
 $stmt_drop_off->execute();
@@ -297,7 +297,7 @@ $drop_off = $result_drop_off->fetch_assoc();
                 <p class="text-sm text-gray-600">Point Reward</p>
             </div>
             <div class="bg-white rounded-lg shadow p-4 text-center">
-                <p class="text-lg font-bold text-green-600"><?= $drop_off['total_drop-off']; ?></p>
+                <p class="text-lg font-bold text-green-600"><?= $drop_off['total_drop_off']; ?></p>
                 <p class="text-sm text-gray-600">Drop Off</p>
             </div>
         </div>
@@ -328,8 +328,10 @@ $drop_off = $result_drop_off->fetch_assoc();
   </div>
 
             <div class="flex justify-between mt-6">
-                <button class="bg-gray-300 text-gray-800 px-4 py-2 rounded">Logout</button>
-                <button class="bg-gradient-to-r from-green to-dark-green text-white px-4 py-2 rounded">Pengaturan</button>
+                <a href="../backend/logout.php"  class="bg-gray-300 text-gray-800 px-4 py-2 rounded">Logout</a>
+                <a href="../user/settings.php" class="bg-gradient-to-r from-green to-dark-green text-white px-4 py-2 rounded">
+                    Pengaturan
+                </a>
             </div>
         </div>
     </main>
