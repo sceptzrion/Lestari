@@ -1,6 +1,6 @@
 <?php
 // Start session
-session_start();  
+session_start();
 
 // Check if the user is logged in
 if (!isset($_SESSION['loggedin'])) {
@@ -33,51 +33,49 @@ $stmt->execute();
 $result_user = $stmt->get_result();
 $user = $result_user->fetch_assoc();
 
-// Ambil total berat sampah (total waste weight)
-$sql_waste = "SELECT SUM(waste_weight) AS total_weight FROM detail_request WHERE request_id IN (SELECT request_id FROM drop_off_request WHERE user_id = ?)";
-$stmt_waste = $conn->prepare($sql_waste);
-$stmt_waste->bind_param("i", $user_id);
-$stmt_waste->execute();
-$result_waste = $stmt_waste->get_result();
-$waste = $result_waste->fetch_assoc();
+// Handle password update on form submission
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $new_password = $_POST['password'];
+    
+    if (!empty($new_password)) {
+        // Hash the new password before saving it
+        $hashed_password = password_hash($new_password, PASSWORD_DEFAULT);
 
-// Ambil total poin yang sudah dikumpulkan
-$sql_points = "SELECT SUM(points_earned) AS total_points FROM detail_request WHERE request_id IN (SELECT request_id FROM drop_off_request WHERE user_id = ?)";
-$stmt_points = $conn->prepare($sql_points);
-$stmt_points->bind_param("i", $user_id);
-$stmt_points->execute();
-$result_points = $stmt_points->get_result();
-$points = $result_points->fetch_assoc();
+        // Update the user's password in the database
+        $sql_update = "UPDATE users SET user_password = ? WHERE user_id = ?";
+        $stmt_update = $conn->prepare($sql_update);
+        $stmt_update->bind_param("si", $hashed_password, $user_id);
 
-// Ambil jumlah total drop off yang sudah dilakukan
-$sql_drop_off = "SELECT COUNT(request_id) AS total_drop_off FROM drop_off_request WHERE user_id = ?";
-$stmt_drop_off = $conn->prepare($sql_drop_off);
-$stmt_drop_off->bind_param("i", $user_id);
-$stmt_drop_off->execute();
-$result_drop_off = $stmt_drop_off->get_result();
-$drop_off = $result_drop_off->fetch_assoc();
+        if ($stmt_update->execute()) {
+            $message = "Password updated successfully!";
+        } else {
+            $message = "Error updating password!";
+        }
+    }
+}
 ?>
+
 <!DOCTYPE html>
-<html lang="en"class="bg-light dark:[color-scheme:light]">
+<html lang="en" class="bg-light dark:[color-scheme:light]">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="../css/styles.css" rel="stylesheet">
     <title>Lestari - Pengaturan</title>
-      <!-- Google Fonts -->
+    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          fontFamily: {
-            'poppins': ['Poppins', 'sans-serif']
-          }
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'poppins': ['Poppins', 'sans-serif']
+                    }
+                }
+            }
         }
-      }
-    }
-  </script>
+    </script>
     <script>
         function toggleModal() {
             const modal = document.getElementById("location-modal");
@@ -87,7 +85,7 @@ $drop_off = $result_drop_off->fetch_assoc();
 </head>
 <body class="font-poppins">
  <!-- NAVBAR -->
- <div class="navbar bg-light h-20 pr-10 justify-between sticky top-0 z-50">
+<div class="navbar bg-light h-20 pr-10 justify-between sticky top-0 z-50">
    <!-- MOBILE SCREEN MODE -->
    <div class="navbar-start pl-1/2">
         <div class="dropdown">
@@ -277,52 +275,60 @@ $drop_off = $result_drop_off->fetch_assoc();
         });
     </script>
   <!-- NAVBAR END -->
- 
-  <!-- Settings Section -->
-  <section class="container mx-auto mt-10 px-4 mb-12">
+
+<!-- Settings Section -->
+<section class="container mx-auto mt-10 px-4 mb-12">
     <div class="bg-white shadow-md rounded-lg p-6">
-    <h1 class="flex items-center text-2xl font-bold text-green-700 mb-4">
+        <h1 class="flex items-center text-2xl font-bold text-green-700 mb-4">
             <img src="../images/user/Settings.png" alt="Settings" class="w-8 h-8 mr-2">
             Pengaturan
-        </a>
-    </h1>
+        </h1>
 
-      <div class="bg-gray-50 p-6 rounded-lg shadow-inner">
-        <h2 class="text-lg font-bold mb-4">Keamanan Akun</h2>
-        <form class="space-y-4">
-        <div>
-          <label class="block text-gray-600 text-sm">Email</label>
-          <input type="text" value="<?php echo htmlspecialchars($user['user_email']); ?>" class="w-full border border-gray-300 rounded px-4 py-2" readonly>
+        <div class="bg-gray-50 p-6 rounded-lg shadow-inner">
+            <h2 class="text-lg font-bold mb-4">Keamanan Akun</h2>
+
+            <!-- Password Reset Form -->
+            <?php if (isset($message)): ?>
+                <div class="alert alert-info"><?= $message; ?></div>
+            <?php endif; ?>
+
+            <form method="POST" class="space-y-4">
+                <div>
+                    <label class="block text-gray-600 text-sm">Email</label>
+                    <input type="text" value="<?php echo htmlspecialchars($user['user_email']); ?>" class="w-full border border-gray-300 rounded px-4 py-2" readonly>
+                </div>
+                <div>
+                    <label for="password" class="block text-gray-600">Password Baru</label>
+                    <div class="relative">
+                        <input type="password" id="password" name="password" class="w-full mt-1 px-4 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-green-900">
+                    </div>
+                </div>
+                <div class="flex justify-between space-x-4">
+                    <a href="../user/profile.php" class="w-1/2 bg-gray-300 text-gray-700 py-2 rounded-lg hover:bg-gray-400 text-center">
+                        Kembali
+                    </a>
+                    <button type="submit" class="w-1/2 bg-gradient-to-r from-green to-dark-green text-white py-2 rounded-lg hover:bg-green-800">Simpan Perubahan</button>
+                </div>
+            </form>
         </div>
-          <div>
-            <label for="password" class="block text-gray-600">Password</label>
-            <div class="relative">
-              <input type="password" id="password" value="ahmad123" class="w-full mt-1 px-4 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-green-900">
-            </div>
-          </div>
-          <div class="flex justify-between space-x-4">
-          <a href="../user/profile.php" class="w-1/2 bg-gray-300 text-gray-700 py-2 rounded-lg hover:bg-gray-400 text-center">
-              Kembali
-          </a>
-            <button type="submit" class="w-1/2 bg-gradient-to-r from-green to-dark-green text-white py-2 rounded-lg hover:bg-green-800">Simpan Perubahan</button>
-          </div>
-        </form>
-      </div>
     </div>
-  </section>
+</section>
 
- <!-- Footer -->
+<!-- Footer -->
 <footer class="bg-gradient-to-r from-green to-dark-green text-white py-7">
-  <div class="container mx-auto px-4 text-center">
-    <div class="flex justify-center">
+  <div class="container mx-auto px-12">
+    <!-- Logo -->
+    <div class="flex justify-center mb-6">
       <a href="../landing-page.php">
         <img src="../images/Logo.png" alt="Logo Lestari" class="h-20">
       </a>
     </div>
-    <div class="container mx-auto grid grid-cols-3 gap-4">
+    
+    <!-- Grid Container -->
+    <div class="grid grid-cols-2 md:grid-cols-3 gap-4 text-center md:text-left">
       <!-- Bagian Lestari -->
-      <div class="text-left">
-        <h4 class="font-bold">Lestari</h4>
+      <div class="text-left col-span-1 md:col-span-1">
+        <h4 class="font-bold mb-2">Lestari</h4>
         <a href="../landing-page.php" class="block text-white hover:underline mb-1">Home</a>
         <a href="../user/tentang.php" class="block text-white hover:underline mb-1">Tentang Kami</a>
         <a href="../landing-page.php" class="block text-white hover:underline mb-1">Layanan</a>
@@ -330,13 +336,14 @@ $drop_off = $result_drop_off->fetch_assoc();
       </div>
 
       <!-- Bagian Informasi -->
-      <div>
-        <h4 class="font-bold">Informasi</h4>
+      <div class="text-right md:text-center col-span-1 md:col-span-1">
+        <h4 class="font-bold mb-2">Informasi</h4>
         <a href="../user/kontak-kami.php" class="block text-white hover:underline mb-1">Kontak Kami</a>
       </div>
+
       <!-- Bagian Hubungi Kami -->
-      <div>
-        <h4 class="font-bold">Hubungi Kami</h4>
+      <div class="col-span-2 md:col-span-1 text-center">
+        <h4 class="font-bold mb-2">Hubungi Kami</h4>
         <div class="flex justify-center space-x-4 mt-2">
           <a href="#"><img src="../images/user/sosmed/instagram.png" alt="Instagram"></a>
           <a href="#"><img src="../images/user/sosmed/fb.png" alt="Facebook"></a>
@@ -348,6 +355,21 @@ $drop_off = $result_drop_off->fetch_assoc();
     </div>
   </div>
 </footer>
+<script>
+    // Notifikasi jika belum login
+    function alertLogin() {
+        alert("Silakan login untuk mengakses layanan ini.");
+    }
+    //modal
+    function showModal() {
+    document.getElementById('loginModal').classList.remove('hidden');
+    }
+
+    function closeModal() {
+        document.getElementById('loginModal').classList.add('hidden');
+    }
+
+</script>
 
 </body>
 </html>

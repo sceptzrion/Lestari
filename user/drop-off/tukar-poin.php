@@ -1,23 +1,89 @@
 <?php
-session_start();  // Start session untuk memeriksa status login
+session_start();
 
-// Halaman yang tidak memerlukan login (seperti landing-page.php)
-if (basename($_SERVER['PHP_SELF']) != 'landing-page.php') {
-    // Jika user belum login, arahkan ke halaman login atau lainnya
-    if (!isset($_SESSION['loggedin'])) {
-        header("Location: ../../landing-page.php");
-        exit();  // Jangan lupa exit setelah redirect
+// Redirect ke landingpage jika user belum login
+if (!isset($_SESSION['loggedin'])) {
+    header("Location: ../../landingpage.php");
+    exit();
+}
+
+// Koneksi database
+$host = 'localhost';
+$username = 'root';
+$password = '';
+$database = 'db_sampah_4';
+
+$conn = new mysqli($host, $username, $password, $database);
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+// Ambil user_id dari session
+$userId = $_SESSION['user_id'] ?? null;
+
+// Hitung total poin pengguna
+$totalPoints = 0;
+if ($userId) {
+    $queryPoints = "
+        SELECT SUM(detail_request.points_earned) AS total_points
+        FROM drop_off_request
+        INNER JOIN detail_request ON drop_off_request.request_id = detail_request.request_id
+        WHERE drop_off_request.user_id = $userId
+    ";
+    $resultPoints = $conn->query($queryPoints);
+    if ($resultPoints && $resultPoints->num_rows > 0) {
+        $row = $resultPoints->fetch_assoc();
+        $totalPoints = $row['total_points'] ?? 0;
+    }
+}
+
+// Ambil daftar rewards
+$queryRewards = "SELECT reward_id, reward_name, reward_points_required, reward_image FROM rewards ORDER BY created_at DESC";
+$resultRewards = $conn->query($queryRewards);
+
+// Proses tukar poin
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['redeem'])) {
+    $rewardId = intval($_POST['reward_id']);
+    $rewardPointsRequired = intval($_POST['reward_points_required']);
+
+    if ($totalPoints >= $rewardPointsRequired) {
+        // Insert transaksi penukaran ke database
+        $stmt = $conn->prepare("INSERT INTO redeem (user_id, reward_id, status, created_at, updated_at) VALUES (?, ?, 'pending', NOW(), NOW())");
+        $stmt->bind_param("ii", $userId, $rewardId);
+
+        if ($stmt->execute()) {
+            // Kurangi total poin setelah berhasil ditukar
+            $totalPoints -= $rewardPointsRequired; 
+            // Kirimkan success response melalui JavaScript
+            echo "<script>
+                window.onload = function() {
+                    showSuccessPopup();
+                }
+              </script>";
+        } else {
+            // Gagal menyimpan data
+            echo "<script>
+                alert('Terjadi kesalahan saat memproses penukaran.');
+              </script>";
+        }
+
+        $stmt->close();
+    } else {
+        echo "<script>
+            alert('Poin Anda tidak mencukupi untuk menukarkan reward ini.');
+        </script>";
     }
 }
 ?>
+
 <!DOCTYPE html>
-<html lang="en"class="bg-light dark:[color-scheme:light]">
+<html lang="en" class="bg-light dark:[color-scheme:light]">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="../../css/styles.css" rel="stylesheet">
-    <title>Lestari - Drop Off</title>
-      <!-- Google Fonts -->
+    <title>Lestari - Tukar Poin</title>
+    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -31,14 +97,27 @@ if (basename($_SERVER['PHP_SELF']) != 'landing-page.php') {
       }
     }
   </script>
- <script>
-  function togglePopup() {
+    <script>
+        function togglePopup(rewardId, rewardPointsRequired, rewardName, rewardImage) {
     const popup = document.getElementById("popupReward");
+    const rewardIdInput = document.getElementById("reward_id");
+    const rewardPointsInput = document.getElementById("reward_points_required");
+    const rewardNameElement = document.getElementById("rewardName");
+    const rewardImageElement = document.getElementById("rewardImage");
+
+    rewardIdInput.value = rewardId;
+    rewardPointsInput.value = rewardPointsRequired;
+    rewardNameElement.textContent = rewardName;
+    rewardImageElement.src = rewardImage;
+
     popup.classList.toggle("hidden");
-  }
-</script>
+}
 
-
+        function closePopup() {
+            const popup = document.getElementById("popupReward");
+            popup.classList.add("hidden");
+        }
+    </script>
 </head>
 <body class="font-poppins">
 <!-- NAVBAR -->
@@ -231,203 +310,86 @@ if (basename($_SERVER['PHP_SELF']) != 'landing-page.php') {
             dropdownMenu.classList.toggle('hidden');
         });
     </script>
-  <!-- NAVBAR END -->
+  <!-- NAVBAR END -->->
 
-  <body class="bg-gray-100">
-  <!-- Page Wrapper -->
-  <div class="bg-light flex flex-col items-center py-10">
-    <!-- Title -->
-    <div class="text-3xl text-[#1B5E20] font-bold mb-12">
-         Tukar Poin Reward
+<body class="font-poppins bg-gray-100">
+    <!-- Kontainer -->
+    <div class="bg-light flex flex-col items-center py-10">
+        <!-- Judul Halaman -->
+        <h1 class="text-3xl text-[#1B5E20] font-bold mb-8">Tukar Poin Reward</h1>
+
+        <!-- Pesan Status Penukaran -->
+        <?php if (!empty($redeemMessage)): ?>
+            <div class="bg-green-100 text-green-700 p-4 mb-6 rounded-lg shadow">
+                <?= htmlspecialchars($redeemMessage); ?>
+            </div>
+        <?php endif; ?>
+
+       <!-- Daftar Rewards -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-screen-lg mx-auto">
+            <?php while ($reward = $resultRewards->fetch_assoc()): ?>
+                <div class="bg-white shadow-md rounded-lg overflow-hidden w-80 flex flex-col h-full">
+                    <div class="relative flex-shrink-0">
+                    <img src="<?= htmlspecialchars($reward['reward_image']); ?>" alt="<?= htmlspecialchars($reward['reward_name']); ?>" class="w-full h-40 object-cover">
+                        <div class="absolute top-0 left-0 bg-gradient-to-r from-green to-dark-green text-white p-4 rounded-br-lg">
+                            <p class="font-bold"><?= htmlspecialchars($reward['reward_name']); ?></p>
+                        </div>
+                        <div class="p-4">
+    <h3 class="text-gray-800 font-semibold text-lg text-center">Tukarkan poin dengan <?= htmlspecialchars($reward['reward_name']); ?></h3>
+    <div class="flex justify-between items-center">
+        <p class="text-green-900 font-bold"><?= $reward['reward_points_required']; ?> Poin</p>
+        <button 
+            class="bg-gradient-to-r from-green to-dark-green text-white px-4 py-2 rounded-full hover:bg-green-700"
+            onclick="togglePopup(<?= $reward['reward_id']; ?>, <?= $reward['reward_points_required']; ?>)">
+            Tukar
+        </button>
     </div>
-      <!-- Wrapper for Cards -->
-      <div class="grid grid-cols-1 place-items-center sm:grid-cols-2 lg:grid-cols-3 gap-8 w-full max-w-screen-lg"> <!-- Mengubah grid untuk 2 kolom pada mobile -->
-      
-        <!-- Custom Reward Card 1 -->
-        <div class="bg-white shadow-md rounded-lg overflow-hidden w-80 mb-10">
-          <div class="relative">
-            <div class="absolute top-0 left-0 bg-gradient-to-r from-green to-dark-green text-white p-4 rounded-br-lg flex items-start w-1/2">
-              <div class="text-sm font-bold">
-                <p>Poin</p>
-                <p class="text-xs font-normal leading-snug">Tukarkan poin dengan<br>kantong plastik sampah roll</p>
-              </div>
-            </div>
-            <img src="https://placehold.co/300x200" alt="Kantong plastik sampah" class="w-full h-40 object-cover">
-          </div>
-          <div class="p-4">
-            <h3 class="text-gray-800 font-semibold text-lg text-center">
-              Tukarkan poin dengan kantong plastik sampah roll
-            </h3>
-            <div class="flex items-center justify-between mt-4">
-              <p class="text-green-900 font-bold">1000 Poin</p>
-              <button onclick="togglePopup()" class="bg-gradient-to-r from-green to-dark-green text-white px-4 py-2 rounded-full hover:bg-green-700">
-                Tukar
-              </button>
-            </div>
-          </div>
+</div>
+
+                    </div>
+                </div>
+            <?php endwhile; ?>
         </div>
 
-        <!-- Custom Reward Card 2 -->
-        <div class="bg-white shadow-md rounded-lg overflow-hidden w-80 mb-10">
-          <div class="relative">
-            <div class="absolute top-0 left-0 bg-gradient-to-r from-green to-dark-green text-white p-4 rounded-br-lg flex items-start w-1/2">
-              <div class="text-sm font-bold">
-                <p>Poin</p>
-                <p class="text-xs font-normal leading-snug">Tukarkan poin dengan<br>Voucher belanja</p>
-              </div>
-            </div>
-            <img src="https://placehold.co/300x200" alt="Voucher belanja" class="w-full h-40 object-cover">
-          </div>
-          <div class="p-4">
-            <h3 class="text-gray-800 font-semibold text-lg text-center">
-              Tukarkan poin dengan voucher belanja
-            </h3>
-            <div class="flex items-center justify-between mt-4">
-              <p class="text-green-900 font-bold">5000 Poin</p>
-              <button class="bg-gradient-to-r from-green to-dark-green text-white px-4 py-2 rounded-full hover:bg-green-700">
-                Tukar
-              </button>
-            </div>
-          </div>
-        </div>
+    <!-- Popup Konfirmasi -->
+    <div id="popupReward" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+  <div class="bg-white p-6 rounded-lg shadow-lg w-[700px]">
+  <div class="flex items-center justify-center mb-4">
+    <img id="rewardImage" src="https://placehold.co/300x150" alt="Reward Image" class="rounded-lg shadow-md" />
+</div>
+<h2 id="rewardName" class="text-center text-2xl font-bold text-green-900 mb-4"></h2>
+<p class="text-gray-700 text-center mb-6">
+    Apakah Anda yakin ingin menukarkan point Anda dengan <span id="rewardNameDisplay"></span>? Point akan langsung terpotong setelah konfirmasi.
+</p>
 
-        <!-- Custom Reward Card 3 -->
-        <div class="bg-white shadow-md rounded-lg overflow-hidden w-80 mb-10">
-          <div class="relative">
-            <div class="absolute top-0 left-0 bg-gradient-to-r from-green to-dark-green text-white p-4 rounded-br-lg flex items-start w-1/2">
-              <div class="text-sm font-bold">
-                <p>Poin</p>
-                <p class="text-xs font-normal leading-snug">Tukarkan poin dengan<br>Diskon produk eco</p>
-              </div>
-            </div>
-            <img src="https://placehold.co/300x200" alt="Diskon produk eco" class="w-full h-40 object-cover">
-          </div>
-          <div class="p-4">
-            <h3 class="text-gray-800 font-semibold text-lg text-center">
-              Tukarkan poin dengan diskon produk eco
-            </h3>
-            <div class="flex items-center justify-between mt-4">
-              <p class="text-green-900 font-bold">2000 Poin</p>
-              <button class="bg-gradient-to-r from-green to-dark-green text-white px-4 py-2 rounded-full hover:bg-green-700">
-                Tukar
-              </button>
-            </div>
-          </div>
-        </div>
 
-        <!-- Custom Reward Card 4 -->
-        <div class="bg-white shadow-md rounded-lg overflow-hidden w-80 mb-10">
-          <div class="relative">
-            <div class="absolute top-0 left-0 bg-gradient-to-r from-green to-dark-green text-white p-4 rounded-br-lg flex items-start w-1/2">
-              <div class="text-sm font-bold">
-                <p>Poin</p>
-                <p class="text-xs font-normal leading-snug">Tukarkan poin dengan<br>Tas belanja ramah lingkungan</p>
-              </div>
-            </div>
-            <img src="https://placehold.co/300x200" alt="Tas belanja" class="w-full h-40 object-cover">
-          </div>
-          <div class="p-4">
-            <h3 class="text-gray-800 font-semibold text-lg text-center">
-              Tukarkan poin dengan tas belanja ramah lingkungan
-            </h3>
-            <div class="flex items-center justify-between mt-4">
-              <p class="text-green-900 font-bold">1500 Poin</p>
-              <button class="bg-gradient-to-r from-green to-dark-green text-white px-4 py-2 rounded-full hover:bg-green-700">
-                Tukar
-              </button>
-            </div>
-          </div>
+            <form method="POST">
+                <input type="hidden" id="reward_id" name="reward_id">
+                <input type="hidden" id="reward_points_required" name="reward_points_required">
+                <div class="flex justify-center gap-4">
+                    <button type="button" class="bg-gray-300 text-gray-800 px-4 py-2 rounded-md hover:bg-gray-400" onclick="closePopup()">Batalkan</button>
+                    <button type="submit" name="redeem" class="bg-gradient-to-r from-green to-dark-green text-white px-4 py-2 rounded-md hover:bg-green-700">Ya, Tukar Sekarang</button>
+                </div>
+            </form>
         </div>
+    </div>
 
-        <!-- Custom Reward Card 5 -->
-        <div class="bg-white shadow-md rounded-lg overflow-hidden w-80 mb-10">
-          <div class="relative">
-            <div class="absolute top-0 left-0 bg-gradient-to-r from-green to-dark-green text-white p-4 rounded-br-lg flex items-start w-1/2">
-              <div class="text-sm font-bold">
-                <p>Poin</p>
-                <p class="text-xs font-normal leading-snug">Tukarkan poin dengan<br>Botol minum stainless</p>
-              </div>
-            </div>
-            <img src="https://placehold.co/300x200" alt="Botol minum" class="w-full h-40 object-cover">
-          </div>
-          <div class="p-4">
-            <h3 class="text-gray-800 font-semibold text-lg text-center">
-              Tukarkan poin dengan botol minum stainless
-            </h3>
-            <div class="flex items-center justify-between mt-4">
-              <p class="text-green-900 font-bold">3000 Poin</p>
-              <button class="bg-gradient-to-r from-green to-dark-green text-white px-4 py-2 rounded-full hover:bg-green-700">
-                Tukar
-              </button>
-            </div>
-          </div>
+    <!-- Popup untuk Pesan Sukses -->
+    <div id="popupSuccess" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+      <div class="bg-white p-6 rounded-lg shadow-lg w-[400px] text-center">
+        <div class="flex justify-center mb-4">
+          <!-- Tanda Checklist -->
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+          </svg>
         </div>
-
-        <!-- Custom Reward Card 6 -->
-        <div class="bg-white shadow-md rounded-lg overflow-hidden w-80 mb-10">
-          <div class="relative">
-            <div class="absolute top-0 left-0 bg-gradient-to-r from-green to-dark-green text-white p-4 rounded-br-lg flex items-start w-1/2">
-              <div class="text-sm font-bold">
-                <p>Poin</p>
-                <p class="text-xs font-normal leading-snug">Tukarkan poin dengan<br>Lampu tenaga surya</p>
-              </div>
-            </div>
-            <img src="https://placehold.co/300x200" alt="Lampu tenaga surya" class="w-full h-40 object-cover">
-          </div>
-          <div class="p-4">
-            <h3 class="text-gray-800 font-semibold text-lg text-center">
-              Tukarkan poin dengan lampu tenaga surya
-            </h3>
-            <div class="flex items-center justify-between mt-4">
-              <p class="text-green-900 font-bold">8000 Poin</p>
-              <button class="bg-gradient-to-r from-green to-dark-green text-white px-4 py-2 rounded-full hover:bg-green-700">
-                Tukar
-              </button>
-            </div>
-          </div>
-        </div>
+        <h2 class="text-xl font-bold text-green-900 mb-2">Berhasil!</h2>
+        <p class="text-gray-700 mb-4">Point Anda berhasil ditukarkan.</p>
+        <button onclick="closeSuccessPopup()" class="bg-gradient-to-r from-green to-dark-green text-white px-4 py-2 rounded-md hover:bg-green-700">
+          Tutup
+        </button>
       </div>
     </div>
-</body>
-
-
-<!-- pop up -->
-<div id="popupReward" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-  <div class="bg-white p-6 rounded-lg shadow-lg w-[700px]">
-    <div class="flex items-center justify-center mb-4">
-      <img src="https://placehold.co/300x150" alt="Reward Image" class="rounded-lg shadow-md" />
-    </div>
-    <h2 class="text-center text-2xl font-bold text-green-900 mb-4">Kantong Plastik Sampah Roll</h2>
-    <p class="text-gray-700 text-center mb-6">
-      Apakah Anda yakin ingin menukarkan point Anda dengan Kantong Plastik Sampah Roll? 
-      Point akan langsung terpotong setelah konfirmasi.
-    </p>
-    <div class="flex justify-center gap-4">
-      <button onclick="togglePopup()" class="bg-gray-300 text-gray-800 px-4 py-2 rounded-md hover:bg-gray-400">
-        Batalkan
-      </button>
-      <button class="bg-gradient-to-r from-green to-dark-green text-white px-4 py-2 rounded-md hover:bg-green-700">
-        Ya, Tukar Sekarang
-      </button>
-    </div>
-  </div>
-</div>
-<!-- Popup untuk Pesan Sukses -->
-<div id="popupSuccess" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-  <div class="bg-white p-6 rounded-lg shadow-lg w-[400px] text-center">
-    <div class="flex justify-center mb-4">
-      <!-- Tanda Checklist -->
-      <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-      </svg>
-    </div>
-    <h2 class="text-xl font-bold text-green-900 mb-2">Berhasil!</h2>
-    <p class="text-gray-700 mb-4">Point Anda berhasil ditukarkan.</p>
-    <button onclick="closeSuccessPopup()" class="bg-gradient-to-r from-green to-dark-green text-white px-4 py-2 rounded-md hover:bg-green-700">
-      Tutup
-    </button>
-  </div>
-</div>
 
 <script>
   // Fungsi untuk menampilkan popup sukses
@@ -436,26 +398,17 @@ if (basename($_SERVER['PHP_SELF']) != 'landing-page.php') {
     successPopup.classList.remove("hidden");
 
     // Sembunyikan popup sukses secara otomatis setelah 3 detik
-    setTimeout(() => {
+    setTimeout(function() {
       successPopup.classList.add("hidden");
     }, 3000);
   }
-
-  // Fungsi untuk menutup popup sukses secara manual
+  
+  // Fungsi untuk menutup popup sukses
   function closeSuccessPopup() {
     const successPopup = document.getElementById("popupSuccess");
     successPopup.classList.add("hidden");
   }
-
-  // Modifikasi tombol "Ya, Tukar Sekarang" untuk menampilkan popup sukses
-  document.querySelector('#popupReward button.bg-gradient-to-r').addEventListener('click', function () {
-    // Sembunyikan popup konfirmasi
-    togglePopup();
-    // Tampilkan popup sukses
-    showSuccessPopup();
-  });
 </script>
 
-  
 </body>
 </html>

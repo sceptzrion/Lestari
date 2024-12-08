@@ -302,11 +302,6 @@ $conn->close();
   </div>
 <!-- </div> -->
 </main>
-<<<<<<< HEAD
-=======
-
->>>>>>> 9a79ae23c3f8087453fb2d94c73afa26a6abc356
-
 
 
 
