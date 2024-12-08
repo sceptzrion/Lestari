@@ -50,7 +50,6 @@ if (isset($_GET['edit_id'])) {
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update_reward'])) {
     $reward_id = $_POST['reward_id'];
     $reward_name = $_POST['reward_name'];
-    $reward_description = $_POST['reward_description'];
     $reward_points_required = $_POST['reward_points_required'];
 
     // Proses upload gambar jika ada
@@ -66,13 +65,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update_reward'])) {
     // Ambil data dari form
         $reward_id = $_POST['reward_id'];
         $reward_name = $_POST['reward_name'];
-        $reward_description = $_POST['reward_description'];
         $reward_points_required = $_POST['reward_points_required'];
 
     // Query untuk memperbarui data di database
-        $sql = "UPDATE rewards SET reward_name = ?, reward_description = ?, reward_points_required = ?, reward_image = ? WHERE reward_id = ?";
+        $sql = "UPDATE rewards SET reward_name = ?, reward_points_required = ?, reward_image = ? WHERE reward_id = ?";
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param("ssisi", $reward_name, $reward_description, $reward_points_required, $reward_image, $reward_id);
+        $stmt->bind_param("sisi", $reward_name, $reward_points_required, $reward_image, $reward_id);
 
     // Eksekusi query dan cek apakah berhasil
     if ($stmt->execute()) {

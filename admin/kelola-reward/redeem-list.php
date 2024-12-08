@@ -112,34 +112,42 @@ $redeem_result = $conn->query($sql);
              <!-- GRID -->
                 <!-- TABLE -->
                 <div class="table w-full mt-7">
-                    <div class="overflow-x-auto">
-                        <table class="table border-collapse border border-[#828282] text-center text-dark">
-                            <!-- head -->
-                            <thead class="bg-[#E5E5E5] text-sm font-bold text-dark">
+                     <div class="overflow-x-auto">
+                         <table class="table border-collapse border border-[#828282] text-center text-dark">
+                        <!-- head -->
+                         <thead class="bg-[#E5E5E5] text-sm font-bold text-dark">
                             <tr class="border border-[#828282]">
                                 <th class="border border-[#828282]">Tanggal</th>
                                 <th class="border border-[#828282]">ID User</th>
                                 <th class="border border-[#828282]">Item Reward</th>
                                 <th class="border border-[#828282]">Poin</th>
                                 <th class="border border-[#828282]">Status</th>
+                                <th class="border border-[#828282]">Aksi</th>
                             </tr>
-                            </thead>
-                            <tbody class="font-medium">
-                                 <?php while ($row = $redeem_result->fetch_assoc()): ?>
-                                 <tr>
-                                    <td class="border border-[#828282]"><?= date("d/m/Y", strtotime($row['created_at'])); ?></td>
-                                    <td class="border border-[#828282]"><?= htmlspecialchars($row['user_id']); ?></td>
-                                    <td class="border border-[#828282]"><?= htmlspecialchars($row['reward_name']); ?></td>
-                                    <td class="border border-[#828282]"><?= htmlspecialchars($row['reward_points_required']); ?></td>
-                                    <td class="border border-[#828282]"><?= htmlspecialchars(ucfirst($row['status'])); ?></td>
-                                    <td class="border border-[#828282]">
-                                    <img src="../../images/admin/checklist-redeem.png" class="w-[30px] justify-self-center" alt="success">
-                                </td>
-                                 </tr>
-                                 <?php endwhile; ?>
-                            </tbody>
-                        </table>
-                    </div>
+                         </thead>
+                         <tbody class="font-medium">
+                              <?php while ($row = $redeem_result->fetch_assoc()): ?>
+                                   <tr>
+                                      <td class="border border-[#828282]"><?= date("d/m/Y", strtotime($row['created_at'])); ?></td>
+                                      <td class="border border-[#828282]"><?= htmlspecialchars($row['user_id']); ?></td>
+                                      <td class="border border-[#828282]"><?= htmlspecialchars($row['reward_name']); ?></td>
+                                      <td class="border border-[#828282]"><?= htmlspecialchars($row['reward_points_required']); ?></td>
+                                      <td class="border border-[#828282]"><?= htmlspecialchars(ucfirst($row['status'])); ?></td>
+                                      <td class="border border-[#828282]">
+                                        <img src="../../images/admin/checklist-redeem.png" class="w-[30px] justify-self-center" alt="success">
+                                           <?php if ($row['status'] === 'pending'): ?>
+                                              <button 
+                                                 class="btn-approve bg-green-500 text-white px-4 py-2 rounded" 
+                                                 data-redeem-id="<?= htmlspecialchars($row['redeem_id']); ?>">Approve</button>
+                                          <?php else: ?>
+                                                <span class="text-gray-500">Approved</span>
+                                         <?php endif; ?>
+                                      </td>
+                                   </tr>
+                              <?php endwhile; ?>
+                         </tbody>
+                       </table>
+                   </div>
                 </div>
                 <!-- TABLE END -->
 
@@ -226,5 +234,47 @@ $redeem_result = $conn->query($sql);
             </dialog>
         </div>
     </div>
+
+    <!-- JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const approveButtons = document.querySelectorAll('.btn-approve');
+            approveButtons.forEach(button => {
+               button.addEventListener('click', async () => {
+                   const redeemId = button.getAttribute('data-redeem-id');
+                   if (!redeemId) {
+                       alert("ID Redeem tidak ditemukan.");
+                       return;
+                    }
+                   try {
+                        const response = await fetch("approve-redeem.php", {
+                           method: "POST",
+                           headers: {
+                               "Content-Type": "application/json",
+                            },
+                            body: JSON.stringify({ redeem_id: redeemId }),
+                        });
+
+                        if (!response.ok) {
+                           throw new Error(`HTTP error: ${response.status}`);
+                        }
+
+                        const data = await response.json();
+
+                        if (data.success) {
+                           alert("Reward berhasil disetujui!");
+                           location.reload(); // reload untuk update status
+                        } else {
+                           alert("Gagal menyetujui reward: " + data.message);
+                        }
+                    } catch (error) {
+                        console.error("Kesalahan saat mengirim permintaan:", error);
+                        alert("Terjadi kesalahan saat mengirim permintaan. Cek console untuk info lebih lanjut.");
+                    }
+                });
+            });
+        });
+    </script>
+
 </body>
 </html>

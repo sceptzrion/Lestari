@@ -253,19 +253,22 @@ if (basename($_SERVER['PHP_SELF']) != 'landing-page.php') {
     $result = $conn->query($sql);
 
     if ($result->num_rows > 0) {
-        // Loop melalui setiap produk
-        while ($row = $result->fetch_assoc()) {
-            echo '<div class="bg-white border rounded-lg shadow hover:shadow-lg overflow-hidden marketplace-item">';
-            echo '<img src="../../images/user/products/' . htmlspecialchars($row['marketplace_image']) . '" alt="' . htmlspecialchars($row['marketplace_product_name']) . '" class="w-full">';
-            echo '<div class="p-4">';
-            echo '<h3 class="font-sm text-[#1B5E20]">' . htmlspecialchars($row['marketplace_product_name']) . '</h3>';
-            echo '<p class="text-[#1B5E20] font-bold text-xl">Rp ' . number_format($row['marketplace_price'], 0, ',', '.') . '</p>';
-            echo '</div>';
-            echo '</div>';
-        }
+      // Loop melalui setiap produk
+      while ($row = $result->fetch_assoc()) {
+          echo '<a href="../../user/marketplace/detail-product.php?id=' . htmlspecialchars($row['marketplace_id']) . '" class="block">'; // Gunakan ID produk
+          echo '<div class="bg-white border rounded-lg shadow hover:shadow-lg overflow-hidden marketplace-item">';
+          echo '<img src="../../images/user/products/' . htmlspecialchars($row['marketplace_image']) . '" alt="' . htmlspecialchars($row['marketplace_product_name']) . '" class="w-full">';
+          echo '<div class="p-4">';
+          echo '<h3 class="font-sm text-[#1B5E20]">' . htmlspecialchars($row['marketplace_product_name']) . '</h3>';
+          echo '<p class="text-[#1B5E20] font-bold text-xl">Rp ' . number_format($row['marketplace_price'], 0, ',', '.') . '</p>';
+          echo '</div>';
+          echo '</div>';
+          echo '</a>'; // Tutup elemen <a>
+      }
     } else {
         echo '<p class="text-center">Belum ada produk yang diunggah.</p>';
     }
+    
 
     $conn->close();
     ?>
