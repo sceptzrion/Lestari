@@ -256,59 +256,34 @@ if (!in_array(basename($_SERVER['PHP_SELF']), ['landing-page.php', 'tentang.php'
         </p>
       </div>
 
-     <!-- Tambahkan Swiper.js ke dalam file HTML -->
-<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
-<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-
-<!-- Testimonial Slider -->
-<div class="bg-white p-6 rounded-lg shadow-md">
-  <h2 class="text-xl font-semibold text-green-700 mb-4">Cek apa kata mereka</h2>
-
-  <!-- Swiper Container -->
-  <div class="swiper">
-    <div class="swiper-wrapper">
-      <!-- Slide 1 -->
-      <div class="swiper-slide p-4 bg-green-50 rounded-md shadow">
-        <p class="text-gray-700 mb-4">"Program daur ulang yang sangat terorganisir. Semua sampah dipilah dengan baik dan diproses secara profesional."</p>
-        <p class="font-semibold text-green-700">Siti Rahayu</p>
-      </div>
-      <!-- Slide 2 -->
-      <div class="swiper-slide p-4 bg-green-50 rounded-md shadow">
-        <p class="text-gray-700 mb-4">"Pelayanan sangat baik, selalu responsif terhadap pertanyaan. Terima kasih!"</p>
-        <p class="font-semibold text-green-700">Andi Wijaya</p>
-      </div>
-      <!-- Slide 3 -->
-      <div class="swiper-slide p-4 bg-green-50 rounded-md shadow">
-        <p class="text-gray-700 mb-4">"Lestari benar-benar berkontribusi untuk lingkungan yang lebih baik. Sukses selalu!"</p>
-        <p class="font-semibold text-green-700">Dewi Kurnia</p>
+      <!-- Contact Form -->
+      <div class="bg-white md:p-12 p-6 rounded-lg shadow-lg">
+        <form action="#" method="POST" class="space-y-6">
+          <div>
+            <label for="name" class="block text-gray-700 font-semibold">Nama Lengkap</label>
+            <input type="text" id="name" name="name" class="bg-white w-full py-2 pl-2 border border-gray-400 rounded-lg shadow-sm focus:ring-green-500 focus:border-green-500 md:placeholder:text-base md:placeholder:text-gray-400 placeholder:text-sm placeholder:text-gray-400" placeholder="Masukkan nama lengkap Anda">
+            </div>
+          <div>
+            <label for="email" class="block text-gray-700 font-semibold">Email</label>
+            <input type="email" id="email" name="email" class="bg-white w-full py-2 pl-2 border border-gray-400 rounded-lg shadow-sm focus:ring-green-500 focus:border-green-500 md:placeholder:text-base md:placeholder:text-gray-400 placeholder:text-sm placeholder:text-gray-400" placeholder="Masukkan alamat email Anda">
+          </div>
+          <div>
+            <label for="subject" class="block text-gray-700 font-semibold">Subjek</label>
+            <select id="subject" name="subject" class="bg-white w-full py-2 pl-2 border border-gray-400 rounded-lg shadow-sm focus:ring-green-500 focus:border-green-500 md:placeholder:text-base md:placeholder:text-gray-400 placeholder:text-sm placeholder:text-gray-400">
+            <option class="text-sm md:text-base">Pilih Subjek</option>
+            <option class="text-sm md:text-base">Kolaborasi</option>
+            <option class="text-sm md:text-base">Pertanyaan</option>
+            </select>
+          </div>
+          <div>
+            <label for="message" class="block text-gray-700 font-semibold">Pesan</label>
+            <textarea id="message" name="message" rows="5" class="bg-white w-full py-2 pl-2 border border-gray-400 rounded-lg shadow-sm focus:ring-green-500 focus:border-green-500 md:placeholder:text-base md:placeholder:text-gray-400 placeholder:text-sm placeholder:text-gray-400" placeholder="Tulis pesan Anda di sini..."></textarea>
+          </div>
+          <button type="submit" class="bg-white w-full py-3 bg-gradient-to-r from-green to-dark-green text-white font-semibold rounded-lg shadow hover:bg-green-600">Kirim Pesan</button>
+        </form>
       </div>
     </div>
-
-    <!-- Pagination -->
-    <div class="swiper-pagination mt-4"></div>
-
-    <!-- Navigation Buttons -->
-    <div class="swiper-button-prev"></div>
-    <div class="swiper-button-next"></div>
-  </div>
-</div>
-<script>
-  const swiper = new Swiper('.swiper', {
-    loop: true,
-    pagination: {
-      el: '.swiper-pagination',
-      clickable: true,
-    },
-    navigation: {
-      nextEl: '.swiper-button-next',
-      prevEl: '.swiper-button-prev',
-    },
-    autoplay: {
-      delay: 3000,
-    },
-  });
-</script>
-
+  </main>
 
 <!-- modal  -->
 <div id="loginModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
