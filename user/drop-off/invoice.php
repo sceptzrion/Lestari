@@ -306,15 +306,22 @@ $total_points = $request['total_points'];
                 <img src="../../images/Logo admin.png" alt="Icon" class="mx-auto mb-4">
             </div>
              <!-- Status Section -->
-            <div class="bg-gray-50 rounded-lg shadow p-4 mb-4">
-                <h3 class="text-green-700 font-semibold text-sm">Status Verifikasi</h3>
-                <p class="text-sm text-gray-600">
-                    Status: 
-                    <span class="<?= $request['status'] === 'waiting' ? 'text-yellow-500' : 'text-green-600'; ?> font-bold">
-                        <?= htmlspecialchars(ucfirst($request['status'])); ?>
-                    </span>
-                </p>
-            </div>
+              <div class="bg-gray-50 rounded-lg shadow p-4 mb-4">
+                  <h3 class="text-green-700 font-semibold text-sm">Status Verifikasi</h3>
+                  <p class="text-sm text-gray-600">
+                      Status: 
+                      <span class="<?= 
+                          $request['status'] === 'waiting' 
+                              ? 'text-yellow-500' 
+                              : ($request['status'] === 'rejected' 
+                                  ? 'text-red-500' 
+                                  : 'text-green-600'); 
+                      ?> font-bold">
+                          <?= htmlspecialchars(ucfirst($request['status'])); ?>
+                      </span>
+                  </p>
+              </div>
+
             <!-- Drop Off Information -->
             <div class="flex justify-between items-center text-sm text-green-600 font-semibold">
                 <span><?= date('d M Y · H:i', strtotime($request['drop_off_request_created_at'])); ?></span>
