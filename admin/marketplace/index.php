@@ -138,8 +138,8 @@ $result = $stmt->get_result();
                                     <p class="text-xl font-normal">Sign Out</p>
                                 </a>
                               </form>
-                           </li>
-                        </ul>
+                        </li>
+                    </ul>
                    </div>
                 </div>
             <!-- HEADER END -->
