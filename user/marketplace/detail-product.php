@@ -270,7 +270,7 @@ if (basename($_SERVER['PHP_SELF']) != 'landing-page.php') {
 
       <!-- Contact Button -->
       <div class="mt-6">
-        <a href="#" class="w-full inline-block text-center bg-green-600 text-white py-3 rounded-lg shadow-md hover:bg-green-700">
+        <a href="#" class="w-full inline-block text-center bg-gradient-to-r from-green to-dark-green text-white py-3 rounded-lg shadow-md hover:bg-green-700">
           Chat dengan penjual
         </a>
       </div>
