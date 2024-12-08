@@ -1,15 +1,51 @@
 <?php
-session_start();  // Start session untuk memeriksa status login
+session_start();
+require '../controller/config.php'; // pastikan ini adalah file untuk koneksi ke database
 
-// Halaman yang tidak memerlukan login (seperti landing-page.php)
-if (basename($_SERVER['PHP_SELF']) != 'landing-page.php') {
-    // Jika user belum login, arahkan ke halaman login atau lainnya
-    if (!isset($_SESSION['loggedin'])) {
-        header("Location: .././landing-page.php");
-        exit();  // Jangan lupa exit setelah redirect
+// Pastikan user sudah login dan session email tersedia
+if (!isset($_SESSION['user_email'])) {
+    header('Location: signin.php');
+    exit();
+}
+
+$user_email = $_SESSION['user_email']; // Ambil email pengguna yang sedang login
+
+// Proses form jika data dikirim
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $newPassword = $_POST['new-password'] ?? '';
+    $confirmPassword = $_POST['confirm'] ?? '';
+
+    // Validasi password
+    if (empty($newPassword) || empty($confirmPassword)) {
+        echo "Both fields are required.";
+        exit();
+    }
+
+    if ($newPassword !== $confirmPassword) {
+        echo "Passwords do not match.";
+        exit();
+    }
+
+    // Enkripsi password baru menggunakan bcrypt
+    $hashedPassword = password_hash($newPassword, PASSWORD_BCRYPT);
+
+    // Update password di database
+    $sql = "UPDATE users SET user_password = ? WHERE user_email = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("ss", $hashedPassword, $user_email);
+
+    if ($stmt->execute()) {
+        // Password berhasil diperbarui
+        echo "<script>
+                alert('Your password has been changed successfully!');
+                window.location.href = 'signin.php'; // Redirect ke login page
+              </script>";
+    } else {
+        echo "Error updating password: " . $stmt->error;
     }
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="en"class="bg-light dark:[color-scheme:light]">
 
@@ -51,31 +87,30 @@ if (basename($_SERVER['PHP_SELF']) != 'landing-page.php') {
                 <h1 class="text-2xl font-bold text-lg-start text-gray-800 mb-8">Create New Password</h1>
                 
                 <!-- Form -->
-                <form id="changeForm" class="space-y-4">
-                    <!-- New Password -->
-                    <div>
-                        <input type="password" id="new-password" name="new-password" placeholder="Create New Password"
-                            class="mt-1 block w-full px-3 py-2 border rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
-                    </div>
-                    <!-- Confirm Password -->
-                    <div>
-                        <input type="password" id="confirm" name="confirm" placeholder="Confirm your password"
-                            class="mt-1 block w-full px-3 py-2 border rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
-                    </div>
-                    <!-- Change Button -->
-                    <button type="button" id="changeButton"
-                            class="w-full mt-4 bg-black text-white py-2 rounded-lg shadow-md hover:bg-gray-800 transition">
-                        Change
-                    </button>
-                </form>
-            </div>
-        </div>
+                <form action="new-password.php" method="POST" class="space-y-4">
+    <!-- New Password -->
+    <div>
+        <input type="password" id="new-password" name="new-password" placeholder="Create New Password"
+            class="mt-1 block w-full px-3 py-2 border rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500" required>
+    </div>
+    <!-- Confirm Password -->
+    <div>
+        <input type="password" id="confirm" name="confirm" placeholder="Confirm your password"
+            class="mt-1 block w-full px-3 py-2 border rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500" required>
+    </div>
+    <!-- Change Button -->
+    <button type="submit" class="w-full mt-4 bg-black text-white py-2 rounded-lg shadow-md hover:bg-gray-800 transition">
+        Change
+    </button>
+</form>
+    </div>
+    </div>
 
         <!-- Right Section -->
         <div class="hidden md:flex w-1/2 bg-gradient-to-b from-[#299E63] to-[#0F3823] items-center justify-center p-16 text-white custom-shape">
             <div class="text-lg-start">
                 <h2 class="text-3xl font-bold mb-4">Be part of the solution, not the pollution</h2>
-                <img src="../images/sampah.png" alt="Recycling Bins" class="mx-auto">
+                <img src="../images/login.png" alt="Recycling Bins" class="mx-auto">
             </div>
         </div>
     </div>
