@@ -71,13 +71,8 @@ if ($conn) {
             $bind_params[] = htmlspecialchars($_GET['jenis-sampah']);
         }
         if (!empty($_GET['date'])) {
-            // Pisahkan tahun dan bulan dari input YYYY-MM
-            $date_parts = explode('-', htmlspecialchars($_GET['date']));
-            if (count($date_parts) === 2) {
-                $filters[] = "MONTH(dr.drop_off_request_created_at) = ? AND YEAR(dr.drop_off_request_created_at) = ?";
-                $bind_params[] = (int) $date_parts[1]; // Bulan
-                $bind_params[] = (int) $date_parts[0]; // Tahun
-            }
+            $filters[] = "DATE(dr.drop_off_request_created_at) = ?";
+            $bind_params[] = htmlspecialchars($_GET['date']);
         }
 
         if ($filters) {
@@ -220,7 +215,7 @@ if ($conn) {
             <option <?php if (isset($_GET['jenis-sampah']) && $_GET['jenis-sampah'] == 'Kertas') echo 'selected'; ?>>Kertas</option>
             <option <?php if (isset($_GET['jenis-sampah']) && $_GET['jenis-sampah'] == 'Logam') echo 'selected'; ?>>Logam</option>
         </select>
-        <input type="month" id="date" name="date" <?php if (isset($_GET['date'])) echo 'value="' . $_GET['date'] . '"'; ?> class="w-[223px] h-auto bg-light text-dark dark:[color-scheme:light] border border-gray shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] px-[9px] text-base font-medium">
+        <input type="date" id="date" name="date" <?php if (isset($_GET['date'])) echo 'value="' . $_GET['date'] . '"'; ?> class="w-[223px] h-auto bg-light text-dark dark:[color-scheme:light] border border-gray shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] px-[9px] text-base font-medium">
         <button type="submit" class="btn btn-success bg-[#2E9E5D] rounded-[5px] w-[101px] h-[34px] text-base font-semibold text-light shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] border border-gray">Filter</button>
     </form>
     <div class="table mt-10">
@@ -279,7 +274,7 @@ if ($conn) {
                         <?php endforeach; ?>
                     <?php else: ?>
                         <tr>
-                            <td colspan="8" class="border border-[#828282] text-center">Tidak ada data tersedia</td>
+                            <td colspan="8" class="border border-[#828282] text-center">Tidak ada data ditemukan</td>
                         </tr>
                     <?php endif; ?>
                 </tbody>
