@@ -126,26 +126,29 @@ $redeem_result = $conn->query($sql);
                             </tr>
                          </thead>
                          <tbody class="font-medium">
-                              <?php while ($row = $redeem_result->fetch_assoc()): ?>
-                                   <tr>
-                                      <td class="border border-[#828282]"><?= date("d/m/Y", strtotime($row['created_at'])); ?></td>
-                                      <td class="border border-[#828282]"><?= htmlspecialchars($row['user_id']); ?></td>
-                                      <td class="border border-[#828282]"><?= htmlspecialchars($row['reward_name']); ?></td>
-                                      <td class="border border-[#828282]"><?= htmlspecialchars($row['reward_points_required']); ?></td>
-                                      <td class="border border-[#828282]"><?= htmlspecialchars(ucfirst($row['status'])); ?></td>
-                                      <td class="border border-[#828282]">
-                                        <img src="../../images/admin/checklist-redeem.png" class="w-[30px] justify-self-center" alt="success">
-                                           <?php if ($row['status'] === 'pending'): ?>
-                                              <button 
-                                                 class="btn-approve bg-green-500 text-white px-4 py-2 rounded" 
-                                                 data-redeem-id="<?= htmlspecialchars($row['redeem_id']); ?>">Approve</button>
-                                          <?php else: ?>
-                                                <span class="text-gray-500">Approved</span>
-                                         <?php endif; ?>
-                                      </td>
-                                   </tr>
-                              <?php endwhile; ?>
-                         </tbody>
+    <?php while ($row = $redeem_result->fetch_assoc()): ?>
+        <tr>
+            <td class="border border-[#828282]"><?= date("d/m/Y", strtotime($row['created_at'])); ?></td>
+            <td class="border border-[#828282]"><?= htmlspecialchars($row['user_id']); ?></td>
+            <td class="border border-[#828282]"><?= htmlspecialchars($row['reward_name']); ?></td>
+            <td class="border border-[#828282]"><?= htmlspecialchars($row['reward_points_required']); ?></td>
+            <td class="border border-[#828282]"><?= htmlspecialchars(ucfirst($row['status'])); ?></td>
+            <td class="border border-[#828282]">
+                <?php if ($row['status'] === 'approved'): ?>
+                    <img src="../../images/admin/checklist-redeem.png" class="w-[30px] justify-self-center" alt="success">
+                <?php endif; ?>
+                <?php if ($row['status'] === 'pending'): ?>
+                    <button 
+                        class="btn-approve bg-green-500 text-white px-4 py-2 rounded" 
+                        data-redeem-id="<?= htmlspecialchars($row['redeem_id']); ?>">Verifikasi</button>
+                <?php else: ?>
+                    <!-- <span class="text-gray-500">Approved</span> -->
+                <?php endif; ?>
+            </td>
+        </tr>
+    <?php endwhile; ?>
+</tbody>
+
                        </table>
                    </div>
                 </div>
@@ -262,19 +265,23 @@ $redeem_result = $conn->query($sql);
                         const data = await response.json();
 
                         if (data.success) {
-                           alert("Reward berhasil disetujui!");
-                           location.reload(); // reload untuk update status
-                        } else {
-                           alert("Gagal menyetujui reward: " + data.message);
-                        }
-                    } catch (error) {
-                        console.error("Kesalahan saat mengirim permintaan:", error);
-                        alert("Terjadi kesalahan saat mengirim permintaan. Cek console untuk info lebih lanjut.");
+                        // Perbarui elemen tombol dan tampilkan status approved di UI
+                        button.parentElement.innerHTML = `
+                            <img src="../../images/admin/checklist-redeem.png" class="w-[30px] justify-self-center" alt="success">
+                            <span class="text-gray-500">Approved</span>
+                        `;
+                        alert("Reward berhasil disetujui!");
+                    } else {
+                        alert("Gagal menyetujui reward: " + data.message);
                     }
-                });
+                } catch (error) {
+                    console.error("Kesalahan saat mengirim permintaan:", error);
+                    alert("Terjadi kesalahan saat mengirim permintaan. Cek console untuk info lebih lanjut.");
+                }
             });
         });
-    </script>
+    });
+</script>
 
 </body>
 </html>
