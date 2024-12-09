@@ -25,10 +25,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['add_reward'])) {
         $stmt->bind_param("sis", $reward_name, $reward_points_required, $reward_image);
         if ($stmt->execute()) {
             $message = "Reward berhasil ditambahkan.";
+            $_SESSION['flash_message'] = "success";
         } else {
             $message = "Gagal menambahkan reward: " . $stmt->error;
         }
         $stmt->close();
+        header("Location: index.php");
+        exit();
     } else {
         $message = "Gagal mengupload gambar.";
     }
@@ -166,7 +169,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['add_reward'])) {
                             <input type="file" name="reward_image" accept="image/*" class="file-input file-input-ghost dark:[color-scheme:light]">
                         </div>
                     </div>
-                    <button type="submit" name="add_reward" onclick="getElementById('added').showModal()" class="btn btn-success bg-[#2ECC71] rounded-[20px] w-[327px] self-center text-xl font-extrabold text-light shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] border border-gray">Upload Produk</button>
+                    <button type="submit" name="add_reward" class="btn btn-success bg-[#2ECC71] rounded-[20px] w-[327px] self-center text-xl font-extrabold text-light shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] border border-gray">Upload Produk</button>
                 </form>
              </section>
 

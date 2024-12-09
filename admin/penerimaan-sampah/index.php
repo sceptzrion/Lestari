@@ -71,8 +71,13 @@ if ($conn) {
             $bind_params[] = htmlspecialchars($_GET['jenis-sampah']);
         }
         if (!empty($_GET['date'])) {
-            $filters[] = "DATE(dr.drop_off_request_created_at) = ?";
-            $bind_params[] = htmlspecialchars($_GET['date']);
+            // Pisahkan tahun dan bulan dari input YYYY-MM
+            $date_parts = explode('-', htmlspecialchars($_GET['date']));
+            if (count($date_parts) === 2) {
+                $filters[] = "MONTH(dr.drop_off_request_created_at) = ? AND YEAR(dr.drop_off_request_created_at) = ?";
+                $bind_params[] = (int) $date_parts[1]; // Bulan
+                $bind_params[] = (int) $date_parts[0]; // Tahun
+            }
         }
 
         if ($filters) {
@@ -204,18 +209,18 @@ if ($conn) {
     <input type="text" name="cari-user" id="cari-user" placeholder="Cari Nama User" class="w-1/3 border-2 border-gray px-2 text-dark text-sm font-light bg-light py-1.5 rounded-lg mt-5">
     <form method="GET" class="flex flex-row text-base font-medium mt-[21px] w-full gap-[20px] content-start">
         <select id="status-sampah" name="status-sampah" class="w-[223px] h-auto bg-light border border-gray shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] rounded-[5px] px-[9px] text-base font-medium">
-            <option disabled selected>Semua Status</option>
-            <option>waiting</option>
-            <option>accepted</option>
-            <option>rejected</option>
+            <option value="" <?php if (!isset($_GET['status-sampah'])) echo 'selected'; ?>>Semua Status</option>
+            <option <?php if (isset($_GET['status-sampah']) && $_GET['status-sampah'] == 'Waiting') echo 'selected'; ?>>Waiting</option>
+            <option <?php if (isset($_GET['status-sampah']) && $_GET['status-sampah'] == 'Accepted') echo 'selected'; ?>>Accepted</option>
+            <option <?php if (isset($_GET['status-sampah']) && $_GET['status-sampah'] == 'Rejected') echo 'selected'; ?>>Rejected</option>
         </select>
         <select id="jenis-sampah" name="jenis-sampah" class="w-[223px] h-auto bg-light border border-gray shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] px-[9px] text-base font-medium">
-            <option disabled selected>Semua Jenis Sampah</option>
-            <option>Plastik</option>
-            <option>Kertas</option>
-            <option>Logam</option>
+            <option value="" <?php if (!isset($_GET['jenis-sampah'])) echo 'selected'; ?>>Semua Jenis Sampah</option>
+            <option <?php if (isset($_GET['jenis-sampah']) && $_GET['jenis-sampah'] == 'Plastik') echo 'selected'; ?>>Plastik</option>
+            <option <?php if (isset($_GET['jenis-sampah']) && $_GET['jenis-sampah'] == 'Kertas') echo 'selected'; ?>>Kertas</option>
+            <option <?php if (isset($_GET['jenis-sampah']) && $_GET['jenis-sampah'] == 'Logam') echo 'selected'; ?>>Logam</option>
         </select>
-        <input type="date" id="date" name="date" class="w-[223px] h-auto bg-light text-dark dark:[color-scheme:light] border border-gray shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] px-[9px] text-base font-medium">
+        <input type="month" id="date" name="date" <?php if (isset($_GET['date'])) echo 'value="' . $_GET['date'] . '"'; ?> class="w-[223px] h-auto bg-light text-dark dark:[color-scheme:light] border border-gray shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] px-[9px] text-base font-medium">
         <button type="submit" class="btn btn-success bg-[#2E9E5D] rounded-[5px] w-[101px] h-[34px] text-base font-semibold text-light shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] border border-gray">Filter</button>
     </form>
     <div class="table mt-10">
@@ -246,15 +251,15 @@ if ($conn) {
                                 <td class="border border-[#828282]">
                                     <?php if ($row['status'] == 'accepted'): ?>
                                         <p class="bg-[#299E63] text-light rounded-[10px] border border-gray w-auto h-auto text-sm font-medium text-center py-0.5 px-2">
-                                            <?= htmlspecialchars($row['status']) ?>
+                                            <?= htmlspecialchars(ucfirst($row['status'])) ?>
                                         </p>
                                     <?php elseif ($row['status'] == 'rejected'): ?>
                                         <p class="bg-[#EB5757] text-light rounded-[10px] border border-gray w-auto h-auto text-sm font-medium text-center py-0.5 px-1">
-                                            <?= htmlspecialchars($row['status']) ?>
+                                            <?= htmlspecialchars(ucfirst($row['status'])) ?>
                                         </p>
                                     <?php else: ?>
                                         <p class="bg-[#FFDE75] rounded-[10px] border border-gray w-auto h-auto text-sm font-medium text-center py-0.5 px-1">
-                                            <?= htmlspecialchars($row['status']) ?>
+                                            <?= htmlspecialchars(ucfirst($row['status'])) ?>
                                         </p>
                                     <?php endif; ?>
                                 </td>

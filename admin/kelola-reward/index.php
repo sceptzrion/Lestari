@@ -28,7 +28,7 @@ if (isset($_GET['delete_id'])) {
     $stmt->close();
     
     // Redirect kembali ke halaman kelola reward setelah penghapusan
-    header("Location: index.php");
+    header("Location: index.php?delete=success");
     exit();
 }
 
@@ -45,6 +45,20 @@ if (isset($_GET['edit_id'])) {
     $stmt->close();
     $modal_open = true; // Modal akan terbuka jika ada data edit
 }
+
+if (isset($_GET['saved'])) {
+    $modal_open_edit = true; // Modal akan terbuka jika ada data edit
+}
+
+if (isset($_GET['delete'])) {
+    $modal_open_deleted = true; // Modal akan terbuka jika ada data dihapus
+}
+
+if (isset($_SESSION['flash_message'])) {
+    $modal_open_added = true;
+    unset($_SESSION['flash_message']);
+}
+
 
 // Proses update reward
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update_reward'])) {
@@ -214,7 +228,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update_reward'])) {
                         </div>
                         <div class="mt-[50px] h-5 flex flex-row justify-between align-middle">
                             <a href="?edit_id=<?= $row['reward_id']; ?>">
-                                <button onclick="getElementById('edit').showModal()" class="bg-[#2ECC71] h-full w-[72px] rounded-[10px] text-[10px] font-semibold text-light">Edit</button>
+                                <button class="bg-[#2ECC71] h-full w-[72px] rounded-[10px] text-[10px] font-semibold text-light">Edit</button>
                             </a>
                             <a href="javascript:void(0)" onclick="showDeleteDialog(<?= $row['reward_id']; ?>)">
                                 <button class="bg-[#C0392B] h-full w-[72px] rounded-[10px] text-[10px] font-semibold text-light">Hapus</button>
@@ -236,6 +250,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update_reward'])) {
                 </form>
             </dialog>
 
+            <dialog id="added" class="modal" <?= $modal_open_added ? 'open' : ''; ?>>
+                <div class="modal-box bg-light w-[531px] h-auto py-24 rounded-[20px] gap-6 flex flex-col items-center align-middle content-center">
+                    <h3 class="text-[32px] font-bold text-center text-dark">Berhasil Upload Produk</h3>
+                    <img src="../../images/admin/checklist.png" class="w-[100px]" alt="">
+                </div>
+                <form method="dialog" class="modal-backdrop bg-light bg-opacity-25">
+                    <button> </button>
+                </form>
+            </dialog>
+
             <dialog id="denied" class="modal">
                 <div class="modal-box bg-light w-[593px] h-auto rounded-[20px] gap-10 flex flex-col items-center py-[75px]">
                     <h3 class="text-[32px] font-bold text-center text-dark">Data ditolak</h3>
@@ -246,6 +270,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update_reward'])) {
                 </form>
             </dialog>
 
+            <dialog id="deleted" class="modal" <?= $modal_open_deleted ? 'open' : ''; ?>>
+                <div class="modal-box bg-light w-[531px] h-auto py-24 rounded-[20px] gap-6 flex flex-col items-center align-middle content-center">
+                    <h3 class="text-[32px] font-bold text-center text-dark">Data berhasil dihapus</h3>
+                    <img src="../../images/admin/checklist.png" class="w-[100px]" alt="">
+                </div>
+                <form method="dialog" class="modal-backdrop bg-light bg-opacity-25">
+                    <button> </button>
+                </form>
+            </dialog>
 
             <!-- Modal Edit Reward (form untuk mengedit data) -->
             <?php if ($edit_data): ?>
@@ -263,7 +296,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update_reward'])) {
                                 <input type="number" id="reward_points_required" name="reward_points_required" value="<?= $edit_data['reward_points_required']; ?>" class="w-full h-7 bg-light border border-gray px-1.5 font-normal text-xs" required>
                             </div>
                             <div class="flex flex-row-reverse gap-[15px] mt-2 items-end">
-                                 <button type="submit" onclick="getElementById('saved').showModal()" name="update_reward" class="bg-[#2ECC71] h-auto w-auto px-[14px] py-2 rounded-[10px] text-xs font-semibold text-light">Simpan Perubahan</button>
+                                 <button type="submit" name="update_reward" class="bg-[#2ECC71] h-auto w-auto px-[14px] py-2 rounded-[10px] text-xs font-semibold text-light">Simpan Perubahan</button>
                                  <button type="button" onclick="document.getElementById('edit').close();" class="bg-[#95A5A6] h-auto w-auto px-[14px] py-2 rounded-[10px] text-xs font-semibold text-light">Batal</button>
                             </div>
                         </form>
@@ -271,7 +304,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update_reward'])) {
                 </dialog>
             <?php endif; ?>
 
-            <dialog id="saved" class="modal">
+            <dialog id="saved" class="modal"  <?= $modal_open_edit ? 'open' : ''; ?>>
                 <div class="modal-box bg-light w-[593px] h-auto rounded-[20px] gap-10 flex flex-col items-center py-[75px]">
                     <h3 class="text-[32px] font-bold text-center text-dark">Data berhasil disimpan</h3>
                     <img src="../../images/admin/checklist.png" class="w-[100px]" alt="">

@@ -126,29 +126,39 @@ $redeem_result = $conn->query($sql);
                             </tr>
                          </thead>
                          <tbody class="font-medium">
-    <?php while ($row = $redeem_result->fetch_assoc()): ?>
-        <tr>
-            <td class="border border-[#828282]"><?= date("d/m/Y", strtotime($row['created_at'])); ?></td>
-            <td class="border border-[#828282]"><?= htmlspecialchars($row['user_id']); ?></td>
-            <td class="border border-[#828282]"><?= htmlspecialchars($row['reward_name']); ?></td>
-            <td class="border border-[#828282]"><?= htmlspecialchars($row['reward_points_required']); ?></td>
-            <td class="border border-[#828282]"><?= htmlspecialchars(ucfirst($row['status'])); ?></td>
-            <td class="border border-[#828282]">
-                <?php if ($row['status'] === 'approved'): ?>
-                    <img src="../../images/admin/checklist-redeem.png" class="w-[30px] justify-self-center" alt="success">
-                <?php endif; ?>
-                <?php if ($row['status'] === 'pending'): ?>
-                    <button 
-                        class="btn-approve bg-green-500 text-white px-4 py-2 rounded" 
-                        data-redeem-id="<?= htmlspecialchars($row['redeem_id']); ?>">Verifikasi</button>
-                <?php else: ?>
-                    <!-- <span class="text-gray-500">Approved</span> -->
-                <?php endif; ?>
-            </td>
-        </tr>
-    <?php endwhile; ?>
-</tbody>
-
+                            <?php while ($row = $redeem_result->fetch_assoc()): ?>
+                                <tr>
+                                    <td class="border border-[#828282]"><?= date("d/m/Y", strtotime($row['created_at'])); ?></td>
+                                    <td class="border border-[#828282]"><?= htmlspecialchars($row['user_id']); ?></td>
+                                    <td class="border border-[#828282]"><?= htmlspecialchars($row['reward_name']); ?></td>
+                                    <td class="border border-[#828282]"><?= htmlspecialchars($row['reward_points_required']); ?></td>
+                                    <td class="border border-[#828282]">
+                                        <?php if ($row['status'] === 'pending'): ?>
+                                            <p class="bg-[#FFDE75] rounded-[10px] px-4 py-1.5 w-auto place-self-center text-sm font-medium text-center">
+                                                <?= htmlspecialchars(ucfirst($row['status'])); ?>
+                                            </p>
+                                        <?php elseif ($row['status'] === 'approved'): ?>
+                                            <p class="bg-[#299E63] text-light rounded-[10px] px-4 py-1.5 w-auto place-self-center text-sm font-medium text-center">
+                                                <?= htmlspecialchars(ucfirst($row['status'])); ?>
+                                            </p>
+                                        <?php endif; ?>
+                                    </td>
+                                    <!-- <td class="border border-[#828282]"><?= htmlspecialchars(ucfirst($row['status'])); ?></td> -->
+                                    <td class="border border-[#828282]">
+                                        <?php if ($row['status'] === 'approved'): ?>
+                                            <img src="../../images/admin/checklist-redeem.png" class="w-[30px] justify-self-center" alt="success">
+                                        <?php endif; ?>
+                                        <?php if ($row['status'] === 'pending'): ?>
+                                            <button 
+                                                class="btn-approve bg-green-btn text-white px-4 py-2 rounded-lg text-light" 
+                                                data-redeem-id="<?= htmlspecialchars($row['redeem_id']); ?>">Verifikasi</button>
+                                        <?php else: ?>
+                                            <!-- <span class="text-gray-500">Approved</span> -->
+                                        <?php endif; ?>
+                                    </td>
+                                </tr>
+                            <?php endwhile; ?>
+                        </tbody>
                        </table>
                    </div>
                 </div>
@@ -201,9 +211,9 @@ $redeem_result = $conn->query($sql);
                 </div>
             </dialog>
 
-            <dialog id="saved" class="modal">
+            <dialog id="approved" class="modal">
                 <div class="modal-box bg-light w-[593px] h-auto rounded-[20px] gap-10 flex flex-col items-center py-[75px]">
-                    <h3 class="text-[32px] font-bold text-center text-dark">Data berhasil disimpan</h3>
+                    <h3 class="text-[32px] font-bold text-center text-dark">Reward berhasil disetujui</h3>
                     <img src="../../images/admin/checklist.png" class="w-[100px]" alt="">
                 </div>
                 <form method="dialog" class="modal-backdrop bg-light bg-opacity-25">
