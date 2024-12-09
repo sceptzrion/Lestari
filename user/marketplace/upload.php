@@ -233,39 +233,35 @@ if (basename($_SERVER['PHP_SELF']) != 'landing-page.php') {
   <main class="container mx-auto md:px-16 px-8 md:py-8 py-3">
     <h2 class="text-3xl font-bold text-[#1B5E20] mb-6">Marketplace</h2>
     <!-- Upload Box -->
-    <div class="bg-white shadow-lg rounded-lg p-6 mb-8">
-      <div class="border-2 border-dashed border-green-900 rounded-lg p-8 text-center">
-        <svg xmlns="http://www.w3.org/2000/svg" class="w-16 h-16 text-[#1B5E20] mx-auto mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 010-8h1a4 4 0 010 8h13m-3 0h-7m-4 0a4 4 0 01-.88-7.874M7 16v5a2 2 0 002 2h6a2 2 0 002-2v-5m-8-4l4-4m0 0l4 4m-4-4v12" />
-        </svg>
-        <p class="text-gray-500 font-medium">Drop Your File Here or <span class="text-[#1B5E20] font-semibold cursor-pointer">Browse</span></p>
+<div class="bg-white shadow-lg rounded-lg p-6 mb-8">
+  <div class="border-2 border-dashed border-green-900 rounded-lg p-8 flex flex-col items-center justify-center text-center">
+    <!-- Foto Produk -->
+    <div>
+      <label for="marketplace_image" class="block text-lg font-bold text-[#1B5E20]">Foto Produk</label>
+      <div class="mt-2 flex flex-col items-center">
+        <input
+          type="file"
+          name="marketplace_image"
+          id="product-photo"
+          accept="image/*"
+          class="hidden"
+          onchange="updateFileName(this)"
+        />
+        <label
+          for="product-photo"
+          class="px-4 py-2 bg-gradient-to-r from-green to-dark-green text-white rounded-lg shadow cursor-pointer hover:bg-green-900">
+          Pilih Gambar
+        </label>
+        <span id="file-name" class="text-gray-700 mt-2">Belum ada file yang dipilih</span>
       </div>
     </div>
+  </div>
+</div>
 
     <!-- Product Details Form -->
     <div class="bg-white shadow-lg rounded-lg p-6">
       <form action="../../backend/products.php" method="POST" enctype="multipart/form-data" class="space-y-6">
-        <!-- Foto Produk -->
-        <div>
-          <label for="marketplace_image" class="block text-lg font-bold text-[#1B5E20]">Foto Produk</label>
-          <div class="mt-2 flex items-center space-x-4">
-            <input
-              type="file"
-              name="marketplace_image"
-              id="product-photo"
-              accept="image/*"
-              class="hidden"
-              onchange="updateFileName(this)"
-            />
-            <label
-              for="product-photo"
-              class="px-4 py-2 bg-gradient-to-r from-green to-dark-green text-white rounded-lg shadow cursor-pointer hover:bg-green-900"
-            >
-              Pilih Gambar
-            </label>
-            <span id="file-name" class="text-gray-700">Belum ada file yang dipilih</span>
-          </div>
-        </div>
+        
 
         <!-- Nama Produk -->
         <div>
