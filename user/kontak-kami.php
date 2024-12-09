@@ -317,7 +317,7 @@
             <!-- Logo -->
             <div class="flex justify-center mb-6">
                <a class="py-3" href="../landing-page.php">
-               <img src="../images/logo-crop-white.png" alt="Logo Lestari" class="h-7">
+               <img src="../images/logo-crop-white.png" alt="Logo Lestari" class="h-7 lg:h-9">
                </a>
             </div>
             <!-- Grid Container -->

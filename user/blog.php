@@ -308,7 +308,7 @@ if (!in_array(basename($_SERVER['PHP_SELF']), ['landing-page.php', 'tentang.php'
     <!-- Logo -->
     <div class="flex justify-center mb-6">
       <a href="../landing-page.php">
-        <img src="../images/Logo.png" alt="Logo Lestari" class="h-20">
+      <img src="../images/logo-crop-white.png" alt="Logo Lestari" class="h-7 lg:h-9">
       </a>
     </div>
     

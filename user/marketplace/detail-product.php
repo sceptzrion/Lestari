@@ -274,6 +274,5 @@ $conn->close();
 </div>
     </div>
 </main>
-
 </body>
 </html>
