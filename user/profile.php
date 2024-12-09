@@ -42,7 +42,7 @@ $result_waste = $stmt_waste->get_result();
 $waste = $result_waste->fetch_assoc();
 
 // Ambil total poin yang sudah dikumpulkan
-$sql_points = "SELECT SUM(points_earned) AS total_points FROM detail_request WHERE request_id IN (SELECT request_id FROM drop_off_request WHERE user_id = ?)";
+$sql_points = "SELECT user_total_points AS total_points FROM users WHERE user_id= ?";
 $stmt_points = $conn->prepare($sql_points);
 $stmt_points->bind_param("i", $user_id);
 $stmt_points->execute();

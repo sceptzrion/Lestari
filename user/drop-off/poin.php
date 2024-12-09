@@ -25,11 +25,7 @@ if ($conn->connect_error) {
 $user_id = $_SESSION['user_id']; // Ensure 'user_id' is stored in session
 
 // Query to get total points for the user
-$query = "SELECT SUM(dr.waste_weight * w.waste_point) AS total_points
-          FROM drop_off_request d
-          LEFT JOIN detail_request dr ON d.request_id = dr.request_id
-          LEFT JOIN waste w ON dr.waste_id = w.waste_id
-          WHERE d.user_id = ? AND d.status = 'accepted'";
+$query = "SELECT user_total_points AS total_points FROM users WHERE user_id= ?";
 
 $stmt = $conn->prepare($query);
 $stmt->bind_param("i", $user_id);
@@ -38,19 +34,65 @@ $result = $stmt->get_result();
 $row = $result->fetch_assoc();
 $total_points = $row['total_points'] ?? 0;  // Set to 0 if no points are found
 
-// Fetch the user's drop_off history
-$query = "SELECT d.request_id, d.drop_off_request_created_at, SUM(dr.waste_weight * w.waste_point) AS points 
-          FROM drop_off_request d
-          LEFT JOIN detail_request dr ON d.request_id = dr.request_id
-          LEFT JOIN waste w ON dr.waste_id = w.waste_id
-          WHERE d.user_id = ? 
-          GROUP BY d.request_id 
-          ORDER BY d.drop_off_request_created_at DESC";
+$query = "SELECT 
+              d.request_id AS id, 
+              'Drop-off' AS type, 
+              NULL AS reward_name, 
+              SUM(dr.waste_weight * w.waste_point) AS points, 
+              d.drop_off_request_created_at AS created_at
+          FROM 
+              drop_off_request d
+          LEFT JOIN 
+              detail_request dr ON d.request_id = dr.request_id
+          LEFT JOIN 
+              waste w ON dr.waste_id = w.waste_id
+          WHERE 
+              d.user_id = ?
+          GROUP BY 
+              d.request_id, d.drop_off_request_created_at
+          UNION
+          SELECT 
+              r.redeem_id AS id, 
+              'Redeem' AS type, 
+              rw.reward_name, 
+              -rw.reward_points_required AS points, 
+              r.created_at AS created_at
+          FROM 
+              redeem r
+          LEFT JOIN 
+              rewards rw ON r.reward_id = rw.reward_id
+          WHERE 
+              r.user_id = ?
+          ORDER BY 
+              created_at DESC";
 
 $stmt = $conn->prepare($query);
-$stmt->bind_param("i", $user_id);
+$stmt->bind_param("ii", $user_id, $user_id); // Bind two parameters for both placeholders
 $stmt->execute();
-$requests_result = $stmt->get_result();
+$result = $stmt->get_result();
+
+// Fetching all results, in case there are multiple rows
+$rows = [];
+while ($row = $result->fetch_assoc()) {
+    // Process each row, for example:
+    $id = $row['id'] ?? 0;
+    $type = $row['type'] ?? '';
+    $reward_name = $row['reward_name'] ?? '';
+    $points = $row['points'] ?? 0;
+    $created_at = $row['created_at'] ?? '';
+
+    // Store or process the data as needed
+    $rows[] = [
+        'id' => $id,
+        'type' => $type,
+        'reward_name' => $reward_name,
+        'points' => $points,
+        'created_at' => $created_at
+    ];
+}
+
+// You can use the $rows array for further processing or display
+
 ?>
 
 <!DOCTYPE html>
@@ -292,25 +334,31 @@ $requests_result = $stmt->get_result();
       </a>
     </div>
 
-    <!-- Riwayat Drop Off -->
+    <!-- Riwayat Drop Off dan Redeem -->
     <div class="bg-white rounded-lg shadow-lg p-6">
-      <h1 class="text-2xl font-bold text-green-700 text-center mb-4">Riwayat Drop Off</h1>
-      <div class="space-y-4">
-        <?php while ($request = $requests_result->fetch_assoc()) : ?>
-          <div class="flex justify-between items-center bg-gray-100 rounded-lg p-4 shadow">
-            <div class="flex items-center space-x-4">
-              <div class="w-12 h-12 bg-[#1B5E20] rounded-full flex items-center justify-center mb-3">
-                <img src="../../images/user/recycle.png" class="w-7" alt="Recycle Icon">
-              </div>
-              <div>
-                <h2 class="font-bold text-[#1B5E20]">Reward Drop Off</h2>
-                <p class="text-sm text-gray-500"><?= date('d M Y, H:i', strtotime($request['drop_off_request_created_at'])); ?></p>
-              </div>
-            </div>
-            <span class="text-xl font-bold text-green-700"><?= number_format($request['points']); ?> Poin</span>
+  <h1 class="text-2xl font-bold text-green-700 text-center mb-4">Riwayat Drop Off dan Redeem</h1>
+  <div class="space-y-4">
+    <?php
+    // Loop through each row of results and display it in the HTML
+    foreach ($rows as $row) {
+    ?>
+      <div class="flex justify-between items-center bg-gray-100 rounded-lg p-4 shadow">
+        <div class="flex items-center space-x-4">
+          <!-- Ikon sesuai tipe -->
+          <div class="w-12 h-12 <?= $row['type'] === 'Redeem' ? 'bg-red-600' : 'bg-[#1B5E20]' ?> rounded-full flex items-center justify-center mb-3">
+            <img src="../../images/user/<?= $row['type'] === 'Redeem' ? 'redeem.png' : 'recycle.png' ?>" class="w-7" alt="<?= $row['type'] ?> Icon">
           </div>
-        <?php endwhile; ?>
+          <div>
+            <h2 class="font-bold <?= $row['type'] === 'Redeem' ? 'text-red-600' : 'text-[#1B5E20]' ?>"><?= $row['type'] === 'Redeem' ? 'Reward Redeem' : 'Reward Drop Off' ?></h2>
+            <p class="text-sm text-gray-500"><?= date('d M Y, H:i', strtotime($row['created_at'])); ?></p>
+          </div>
+        </div>
+        <span class="text-xl font-bold <?= $row['type'] === 'Redeem' ? 'text-red-600' : 'text-green-700' ?>"><?= number_format($row['points']); ?> Poin</span>
       </div>
-    </div>
+    <?php } ?>
+  </div>
+</div>
+
+    
   </main>
 </section>
