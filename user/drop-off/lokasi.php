@@ -145,7 +145,7 @@ $result = $conn->query($sql);
           </ul>
         </div>
         <!-- BRAND LOGO -->
-        <a href="." class="">
+        <a href="../../landing-page.php" class="">
           <img src="../../images/Logo.png" alt="Logo Lestari">
         </a>
       </div>
