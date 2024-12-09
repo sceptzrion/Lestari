@@ -27,22 +27,25 @@ if ($conn->connect_error) {
 // Get user_id from session
 $user_id = $_SESSION['user_id']; // Ensure 'user_id' is stored in session
 
-// Simulate bank_id (you can replace this with actual logic to fetch bank_id)
-$bank_id = 1; // Example static bank_id
+$bank_id = isset($_GET['id']) ? $_GET['id'] : null;
+
+if (!$bank_id) {
+    die('Bank ID tidak ditemukan. Silakan coba lagi.');
+}
 
 // Insert new drop_off request if not already inserted in this session
 if (!isset($_SESSION['drop_off_inserted'])) {
-    // Insert data into drop_off_request table
-    $stmt = $conn->prepare("INSERT INTO drop_off_request (user_id, bank_id, status, drop_off_request_created_at, drop_off_request_updated_at) VALUES (?, ?, 'waiting', NOW(), NOW())");
-    $stmt->bind_param("ii", $user_id, $bank_id);
-
-    if ($stmt->execute()) {
-        $request_id = $stmt->insert_id; // Get the last inserted request_id
-        $_SESSION['drop_off_inserted'] = true; // Set flag session
-        $_SESSION['request_id'] = $request_id; // Save request_id to session
-    } else {
-        die("Error inserting data: " . $stmt->error);
-    }
+  $stmt = $conn->prepare("INSERT INTO drop_off_request (user_id, bank_id, status, drop_off_request_created_at, drop_off_request_updated_at) VALUES (?, ?, 'waiting', NOW(), NOW())");
+  $stmt->bind_param("ii", $user_id, $bank_id); // Pastikan kedua parameter user_id dan bank_id diikat dengan benar
+  
+  if ($stmt->execute()) {
+      $request_id = $stmt->insert_id; // Ambil ID request terakhir
+      $_SESSION['drop_off_inserted'] = true; // Set session untuk menandai data sudah dimasukkan
+      $_SESSION['request_id'] = $request_id; // Simpan request_id di session
+  } else {
+      die("Error inserting data: " . $stmt->error);
+  }
+  
 
     $stmt->close();
 } else {
@@ -50,7 +53,6 @@ if (!isset($_SESSION['drop_off_inserted'])) {
     $request_id = $_SESSION['request_id'];
 }
 
-// Fetch the updated drop_off request data from the database
 $query = "SELECT d.request_id, d.status, d.drop_off_request_created_at, u.user_email, 
                  COALESCE(SUM(dr.waste_weight * w.waste_point), 0) AS total_points, 
                  GROUP_CONCAT(w.waste_name SEPARATOR ', ') AS waste_names,

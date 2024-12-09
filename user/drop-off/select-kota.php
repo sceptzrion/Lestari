@@ -26,7 +26,7 @@ if ($conn->connect_error) {
 $bank_name = isset($_GET['bank_name']) ? $_GET['bank_name'] : '';
 
 // Query untuk mendapatkan data bank
-$query = "SELECT bank_name, bank_address, bank_operating_hours FROM bank_locations WHERE bank_name = ?";
+$query = "SELECT bank_id, bank_name, bank_address, bank_operating_hours FROM bank_locations WHERE bank_name = ?";
 $stmt = $conn->prepare($query);
 $stmt->bind_param("s", $bank_name);
 $stmt->execute();
@@ -285,7 +285,8 @@ $conn->close();
             <p class="text-sm text-gray-700"><?= htmlspecialchars($row['bank_address']); ?></p>
             <p class="text-sm text-gray-700">Jam Operasional: <?= htmlspecialchars($row['bank_operating_hours']); ?></p>
     <div class="flex justify-center mt-4">
-    <form action="invoice.php" method="POST">
+    <form action="invoice.php" method="GET">
+    <input type="hidden" name="id" value="<?= htmlspecialchars($row['bank_id']); ?>"> 
     <button 
         type="submit"
         class="bg-gradient-to-r from-green to-dark-green text-white px-6 py-2 rounded-full shadow hover:bg-green-600 focus:outline-none flex items-center gap-2">
