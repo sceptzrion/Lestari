@@ -89,10 +89,15 @@ $redeem_result = $conn->query($sql);
                             <p class="text-xl font-normal">Pengaturan</p>
                         </a></li>
                         <hr class="h-[2px] w-full text-gray my-6">
-                        <li><a class="flex flex-row gap-[10px]">
-                            <img src="../../images/admin/sign-out.png" class="w-[30px]" alt="Sign Out">
-                            <p class="text-xl font-normal">Sign Out</p>
-                        </a></li>
+                        <li>
+                              <form action="../signout.php" method="POST" id="signOutForm" class="flex flex-row gap-[10px]">
+                                <button type="submit" style="display: none;" id="signOutButton"></button>
+                                <a href="javascript:void(0);" onclick="document.getElementById('signOutForm').submit();" class="flex flex-row gap-[10px]">
+                                    <img src="../../images/admin/sign-out.png" class="w-[30px]" alt="Sign Out">
+                                    <p class="text-xl font-normal">Sign Out</p>
+                                </a>
+                              </form>
+                           </li>
                     </ul>
                 </div>
             </div>
