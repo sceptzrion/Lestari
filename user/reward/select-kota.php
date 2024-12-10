@@ -1,88 +1,48 @@
 <?php
-session_start();  // Pastikan session sudah dimulai
+session_start();  // Start session untuk memeriksa status login
 
-// Koneksi ke database
-include '../../controller/config.php';  // Sesuaikan dengan path file database.php
+// Halaman yang tidak memerlukan login (seperti landing-page.php)
+if (basename($_SERVER['PHP_SELF']) != 'landing-page.php') {
+    // Jika user belum login, arahkan ke halaman login atau lainnya
+    if (!isset($_SESSION['loggedin'])) {
+        header("Location: ../../landing-page.php");
+        exit();  // Jangan lupa exit setelah redirect
+    }
+}
 
-// Cek apakah pengguna sudah login
-if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
-    header("Location: ../../landing-page.php");
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "db_sampah_4"; // Ganti dengan nama database Anda
+
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// Periksa koneksi
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+// Periksa jika ada parameter bank_name di URL
+$bank_name = isset($_GET['bank_name']) ? $_GET['bank_name'] : '';
+
+// Query untuk mendapatkan data bank
+$query = "SELECT bank_id, bank_name, bank_address, bank_operating_hours FROM bank_locations WHERE bank_name = ?";
+$stmt = $conn->prepare($query);
+$stmt->bind_param("s", $bank_name);
+$stmt->execute();
+$result = $stmt->get_result();
+
+// Periksa apakah ada data yang ditemukan
+if ($result->num_rows > 0) {
+    $row = $result->fetch_assoc();
+} else {
+    echo "Bank tidak ditemukan.";
     exit();
 }
 
-$user_id = $_SESSION['user_id']; // Ensure 'user_id' is stored in session
-
-// Query to get total points for the user
-$query = "SELECT user_total_points AS total_points FROM users WHERE user_id= ?";
-
-$stmt = $conn->prepare($query);
-$stmt->bind_param("i", $user_id);
-$stmt->execute();
-$result = $stmt->get_result();
-$row = $result->fetch_assoc();
-$total_points = $row['total_points'] ?? 0;  // Set to 0 if no points are found
-
-$query = "SELECT 
-              d.request_id AS id, 
-              'Drop-off' AS type, 
-              NULL AS reward_name, 
-              SUM(dr.waste_weight * w.waste_point) AS points, 
-              d.drop_off_request_created_at AS created_at
-          FROM 
-              drop_off_request d
-          LEFT JOIN 
-              detail_request dr ON d.request_id = dr.request_id
-          LEFT JOIN 
-              waste w ON dr.waste_id = w.waste_id
-          WHERE 
-              d.user_id = ?
-          GROUP BY 
-              d.request_id, d.drop_off_request_created_at
-          UNION
-          SELECT 
-              r.redeem_id AS id, 
-              'Redeem' AS type, 
-              rw.reward_name, 
-              -rw.reward_points_required AS points, 
-              r.created_at AS created_at
-          FROM 
-              redeem r
-          LEFT JOIN 
-              rewards rw ON r.reward_id = rw.reward_id
-          WHERE 
-              r.user_id = ?
-          ORDER BY 
-              created_at DESC";
-
-$stmt = $conn->prepare($query);
-$stmt->bind_param("ii", $user_id, $user_id); // Bind two parameters for both placeholders
-$stmt->execute();
-$result = $stmt->get_result();
-
-// Fetching all results, in case there are multiple rows
-$rows = [];
-while ($row = $result->fetch_assoc()) {
-    // Process each row, for example:
-    $id = $row['id'] ?? 0;
-    $type = $row['type'] ?? '';
-    $reward_name = $row['reward_name'] ?? '';
-    $points = $row['points'] ?? 0;
-    $created_at = $row['created_at'] ?? '';
-
-    // Store or process the data as needed
-    $rows[] = [
-        'id' => $id,
-        'type' => $type,
-        'reward_name' => $reward_name,
-        'points' => $points,
-        'created_at' => $created_at
-    ];
-}
-
-// You can use the $rows array for further processing or display
-
+$stmt->close();
+$conn->close();
 ?>
-
 <!DOCTYPE html>
 <html lang="en"class="bg-light dark:[color-scheme:light]">
 <head>
@@ -104,13 +64,12 @@ while ($row = $result->fetch_assoc()) {
       }
     }
   </script>
-  <script>
-    function toggleModal() {
-        const modal = document.getElementById("rewardModal");
-        modal.classList.toggle("hidden");
-    }
-</script>
-
+    <script>
+        function toggleModal() {
+            const modal = document.getElementById("location-modal");
+            modal.classList.toggle("hidden");
+        }
+    </script>
 </head>
 <body class="font-poppins">
 <!-- NAVBAR -->
@@ -225,7 +184,7 @@ while ($row = $result->fetch_assoc()) {
               </button>
             <?php endif; ?>
           </li>
-          
+         
           <!-- Marketplace -->
           <li>
             <?php if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true): ?>
@@ -305,48 +264,45 @@ while ($row = $result->fetch_assoc()) {
     </script>
   <!-- NAVBAR END -->
 
-
- <!-- section -->
-<!-- section -->
-<section class="bg-gray-100 w-full min-h-screen">
-  <main class="container mx-auto md:px-16 px-6 py-6">
-    <div class="flex justify-between items-center mb-4">
-      <span class="inline-flex justify-between w-2/4 bg-gradient-to-r from-green to-dark-green text-white rounded-full px-4 py-2 text-sm">
-        <span class="font-bold">Poin Reward</span>
-        <span class="font-bold"><?= number_format($total_points); ?> Poin</span>
-      </span>
-      <a href="../reward/lokasi.php">
-        <button class="bg-gradient-to-r from-green to-dark-green text-white px-6 py-2 rounded-full shadow hover:bg-green-600 focus:outline-none flex items-center gap-2">
-          Tukar Poin
-        </button>
-      </a>
+ <!-- card section -->
+<main class="bg-light container mx-auto pt-8 px-16 pb-40">
+  <div class="bg-gradient-to-r from-green to-dark-green text-white rounded-lg p-6 text-center h-32 flex items-center justify-center">
+    <div class="text-white flex items-center justify-center">
+      <h2 class="text-3xl font-bold flex items-center">
+        <img src="../../images/user/redeem.png" alt="Recycle Icon" class="w-12 h-12 mr-2">
+        Tukar Point
+      </h2>
     </div>
-
-    <!-- Riwayat Drop Off dan Redeem -->
-    <div class="bg-white rounded-lg shadow-lg p-6">
-  <h1 class="text-2xl font-bold text-green-700 text-center mb-4">Riwayat Drop Off dan Redeem</h1>
-  <div class="space-y-4">
-    <?php
-    // Loop through each row of results and display it in the HTML
-    foreach ($rows as $row) {
-    ?>
-      <div class="flex justify-between items-center bg-gray-100 rounded-lg p-4 shadow">
-        <div class="flex items-center space-x-4">
-          <!-- Ikon sesuai tipe -->
-          <div class="w-12 h-12 <?= $row['type'] === 'Redeem' ? 'bg-red-600' : 'bg-[#1B5E20]' ?> rounded-full flex items-center justify-center mb-3">
-            <img src="../../images/user/<?= $row['type'] === 'Redeem' ? 'redeem.png' : 'recycle.png' ?>" class="w-7" alt="<?= $row['type'] ?> Icon">
-          </div>
-          <div>
-            <h2 class="font-bold <?= $row['type'] === 'Redeem' ? 'text-red-600' : 'text-[#1B5E20]' ?>"><?= $row['type'] === 'Redeem' ? 'Reward Redeem' : 'Reward Drop Off' ?></h2>
-            <p class="text-sm text-gray-500"><?= date('d M Y, H:i', strtotime($row['created_at'])); ?></p>
-          </div>
-        </div>
-        <span class="text-xl font-bold <?= $row['type'] === 'Redeem' ? 'text-red-600' : 'text-green-700' ?>"><?= number_format($row['points']); ?> Poin</span>
-      </div>
-    <?php } ?>
   </div>
-</div>
 
-    
-  </main>
-</section>
+
+<!-- card loc -->
+<!-- <div class="bg-light container mx-auto pb-24 px-16 pt-1"> -->
+  <div class="bg-white p-6 pb-10 rounded-lg drop-shadow-xl relative">
+    <!-- Logo Checklist di Pojok Kanan Atas -->
+    <img src="../../images/user/checklist.png" alt="Checklist Icon" class="w-6 h-6 absolute top-4 right-4">
+    <h5 class="text-[#1B5E20] text-2xl font-bold"><?= htmlspecialchars($row['bank_name']); ?></h5>
+            <p class="text-sm text-gray-700"><?= htmlspecialchars($row['bank_address']); ?></p>
+            <p class="text-sm text-gray-700">Jam Operasional: <?= htmlspecialchars($row['bank_operating_hours']); ?></p>
+    <div class="flex justify-center mt-4">
+    <form action="tukar-poin.php" method="GET">
+    <input type="hidden" name="id" value="<?= htmlspecialchars($row['bank_id']); ?>"> 
+    <button 
+        type="submit"
+        class="bg-gradient-to-r from-green to-dark-green text-white px-6 py-2 rounded-full shadow hover:bg-green-600 focus:outline-none flex items-center gap-2">
+        <img src="../../images/user/redeem.png" alt="Recycle Icon" class="w-6 h-6">
+        Tukar Point
+    </button>
+</form>
+    </div>
+    <script>
+      function redirectToLocation() {
+        window.location.href = '../../user/reward/tukar-poin.php';
+      }
+    </script>
+  </div>
+<!-- </div> -->
+</main>
+
+
+

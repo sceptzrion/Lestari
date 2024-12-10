@@ -1,86 +1,45 @@
 <?php
-session_start();  // Pastikan session sudah dimulai
+session_start();  // Start session untuk memeriksa status login
 
+// Halaman yang tidak memerlukan login (seperti landing-page.php)
+if (basename($_SERVER['PHP_SELF']) != 'landing-page.php') {
+    // Jika user belum login, arahkan ke halaman login atau lainnya
+    if (!isset($_SESSION['loggedin'])) {
+        header("Location: ../../landing-page.php");
+        exit();  // Jangan lupa exit setelah redirect
+    }
+}
 // Koneksi ke database
-include '../../controller/config.php';  // Sesuaikan dengan path file database.php
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "db_sampah_4";
 
-// Cek apakah pengguna sudah login
-if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
-    header("Location: ../../landing-page.php");
-    exit();
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// Cek koneksi
+if ($conn->connect_error) {
+    die("Koneksi gagal: " . $conn->connect_error);
 }
 
-$user_id = $_SESSION['user_id']; // Ensure 'user_id' is stored in session
+// Ambil region dari URL
+$region = isset($_GET['region']) ? urldecode($_GET['region']) : "";
 
-// Query to get total points for the user
-$query = "SELECT user_total_points AS total_points FROM users WHERE user_id= ?";
-
-$stmt = $conn->prepare($query);
-$stmt->bind_param("i", $user_id);
-$stmt->execute();
-$result = $stmt->get_result();
-$row = $result->fetch_assoc();
-$total_points = $row['total_points'] ?? 0;  // Set to 0 if no points are found
-
-$query = "SELECT 
-              d.request_id AS id, 
-              'Drop-off' AS type, 
-              NULL AS reward_name, 
-              SUM(dr.waste_weight * w.waste_point) AS points, 
-              d.drop_off_request_created_at AS created_at
-          FROM 
-              drop_off_request d
-          LEFT JOIN 
-              detail_request dr ON d.request_id = dr.request_id
-          LEFT JOIN 
-              waste w ON dr.waste_id = w.waste_id
-          WHERE 
-              d.user_id = ?
-          GROUP BY 
-              d.request_id, d.drop_off_request_created_at
-          UNION
-          SELECT 
-              r.redeem_id AS id, 
-              'Redeem' AS type, 
-              rw.reward_name, 
-              -rw.reward_points_required AS points, 
-              r.created_at AS created_at
-          FROM 
-              redeem r
-          LEFT JOIN 
-              rewards rw ON r.reward_id = rw.reward_id
-          WHERE 
-              r.user_id = ?
-          ORDER BY 
-              created_at DESC";
-
-$stmt = $conn->prepare($query);
-$stmt->bind_param("ii", $user_id, $user_id); // Bind two parameters for both placeholders
+// Query untuk mendapatkan detail bank sampah berdasarkan region
+$sql = "SELECT bank_name, bank_address FROM bank_locations WHERE region = ?";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("s", $region);
 $stmt->execute();
 $result = $stmt->get_result();
 
-// Fetching all results, in case there are multiple rows
-$rows = [];
-while ($row = $result->fetch_assoc()) {
-    // Process each row, for example:
-    $id = $row['id'] ?? 0;
-    $type = $row['type'] ?? '';
-    $reward_name = $row['reward_name'] ?? '';
-    $points = $row['points'] ?? 0;
-    $created_at = $row['created_at'] ?? '';
-
-    // Store or process the data as needed
-    $rows[] = [
-        'id' => $id,
-        'type' => $type,
-        'reward_name' => $reward_name,
-        'points' => $points,
-        'created_at' => $created_at
-    ];
-}
-
-// You can use the $rows array for further processing or display
-
+// Query untuk menghitung jumlah bank sampah berdasarkan region
+$count_sql = "SELECT COUNT(*) AS total_banks FROM bank_locations WHERE region = ?";
+$count_stmt = $conn->prepare($count_sql);
+$count_stmt->bind_param("s", $region);
+$count_stmt->execute();
+$count_result = $count_stmt->get_result();
+$count_row = $count_result->fetch_assoc();
+$total_banks = $count_row['total_banks'];
 ?>
 
 <!DOCTYPE html>
@@ -104,13 +63,12 @@ while ($row = $result->fetch_assoc()) {
       }
     }
   </script>
-  <script>
-    function toggleModal() {
-        const modal = document.getElementById("rewardModal");
-        modal.classList.toggle("hidden");
-    }
-</script>
-
+    <script>
+        function toggleModal() {
+            const modal = document.getElementById("location-modal");
+            modal.classList.toggle("hidden");
+        }
+    </script>
 </head>
 <body class="font-poppins">
 <!-- NAVBAR -->
@@ -164,7 +122,7 @@ while ($row = $result->fetch_assoc()) {
                     </button>
                     <?php endif; ?>
                 </li>
-                
+              
                 <!-- Marketplace -->
                 <li>
                     <?php if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true): ?>
@@ -305,48 +263,52 @@ while ($row = $result->fetch_assoc()) {
     </script>
   <!-- NAVBAR END -->
 
+<script>
+    // Toggle dropdown visibility
+    function toggleDropdown() {
+        const dropdown = document.getElementById('dropdownMenu');
+        dropdown.classList.toggle('hidden');
+    }
 
- <!-- section -->
-<!-- section -->
-<section class="bg-gray-100 w-full min-h-screen">
-  <main class="container mx-auto md:px-16 px-6 py-6">
-    <div class="flex justify-between items-center mb-4">
-      <span class="inline-flex justify-between w-2/4 bg-gradient-to-r from-green to-dark-green text-white rounded-full px-4 py-2 text-sm">
-        <span class="font-bold">Poin Reward</span>
-        <span class="font-bold"><?= number_format($total_points); ?> Poin</span>
-      </span>
-      <a href="../reward/lokasi.php">
-        <button class="bg-gradient-to-r from-green to-dark-green text-white px-6 py-2 rounded-full shadow hover:bg-green-600 focus:outline-none flex items-center gap-2">
-          Tukar Poin
-        </button>
-      </a>
-    </div>
-
-    <!-- Riwayat Drop Off dan Redeem -->
-    <div class="bg-white rounded-lg shadow-lg p-6">
-  <h1 class="text-2xl font-bold text-green-700 text-center mb-4">Riwayat Drop Off dan Redeem</h1>
-  <div class="space-y-4">
-    <?php
-    // Loop through each row of results and display it in the HTML
-    foreach ($rows as $row) {
-    ?>
-      <div class="flex justify-between items-center bg-gray-100 rounded-lg p-4 shadow">
-        <div class="flex items-center space-x-4">
-          <!-- Ikon sesuai tipe -->
-          <div class="w-12 h-12 <?= $row['type'] === 'Redeem' ? 'bg-red-600' : 'bg-[#1B5E20]' ?> rounded-full flex items-center justify-center mb-3">
-            <img src="../../images/user/<?= $row['type'] === 'Redeem' ? 'redeem.png' : 'recycle.png' ?>" class="w-7" alt="<?= $row['type'] ?> Icon">
-          </div>
-          <div>
-            <h2 class="font-bold <?= $row['type'] === 'Redeem' ? 'text-red-600' : 'text-[#1B5E20]' ?>"><?= $row['type'] === 'Redeem' ? 'Reward Redeem' : 'Reward Drop Off' ?></h2>
-            <p class="text-sm text-gray-500"><?= date('d M Y, H:i', strtotime($row['created_at'])); ?></p>
-          </div>
-        </div>
-        <span class="text-xl font-bold <?= $row['type'] === 'Redeem' ? 'text-red-600' : 'text-green-700' ?>"><?= number_format($row['points']); ?> Poin</span>
-      </div>
-    <?php } ?>
+    // Close dropdown if clicked outside
+    window.addEventListener('click', function(event) {
+        const dropdown = document.getElementById('dropdownMenu');
+        const button = event.target.closest('button');
+        // Jika yang diklik bukan tombol atau dropdown, sembunyikan dropdown
+        if (!button || button.getAttribute('onclick') !== 'toggleDropdown()') {
+            dropdown.classList.add('hidden');
+        }
+    });
+</script>
+<!-- main -->
+  <main class="bg-white container mx-auto md:pt-8 pt-4 md:px-16 px-12 pb-12">
+  <div id="selected-location" class="text-2xl text-[#1B5E20] font-bold mb-3 flex items-center">
+    <img src="../../images/user/Loc.png" alt="Location Icon" class="w-[31px] h-[44px] mr-2"> 
+    <?php echo htmlspecialchars($region); ?>
   </div>
-</div>
+  <div class="bg-gradient-to-r from-green to-dark-green text-white rounded-lg p-6 text-center h-32 flex items-center">
+    <div class="text-white text-center relative"> 
+      <h2 class="text-3xl font-bold flex items-center">
+        <img src="../../images/user/recycle.png" alt="Recycle Icon" class="w-12 h-12 mr-2">
+        Tukar Point Location
+      </h2>
+    </div>
+  </div>
+  <p class="text-sm text-[#1B5E20] mt-4">
+    <span class="inline-block bg-gradient-to-r from-green to-dark-green text-white rounded-full px-3 py-1 text-sm">
+    <?php echo $total_banks; ?> Bank sampah tersedia.
+    </span>
+  </p>
 
-    
-  </main>
-</section>
+<!-- Locations -->
+<div class="drop-off-list mt-8 space-y-4">
+            <?php while ($row = $result->fetch_assoc()) { ?>
+              <a href="./select-kota.php?bank_name=<?php echo urlencode($row['bank_name']); ?>" class="block bg-white p-4 rounded-lg shadow-md hover:bg-gray-100 cursor-pointer">
+                    <h3 class="text-xl font-bold text-[#1B5E20]"><?php echo htmlspecialchars($row['bank_name']); ?></h3>
+                    <p class="text-sm text-gray-600"><?php echo htmlspecialchars($row['bank_address']); ?></p>
+                </a>
+            <?php } ?>
+        </div>
+    </main>
+</body>
+</html>
