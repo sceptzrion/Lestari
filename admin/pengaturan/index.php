@@ -172,16 +172,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                 <label for="jam-operasional-tutup" class="text-sm font-medium">Jam operasional (Tutup)</label>
                                 <input type="time" id="jam-operasional-tutup" name="jam-operasional-tutup" class="w-full h-10 bg-light border border-gray px-1.5 font-normal rounded-[5px] text-base dark:[color-scheme:light]">
                             </div>
-                            <div class="flex flex-col gap-2 w-[283px]">
-                                <label for="status-sistem" class="text-sm font-medium">Status Sistem</label>
-                                <select name="status-sistem" id="status-sistem" class="w-full h-10 bg-light border border-gray px-1.5 font-normal rounded-[5px] text-base dark:[color-scheme:light]">
-                                    <option>Aktif</option>
-                                    <option>Tidak Aktif</option>
-                                </select>
-                            </div>
                         </div>
                     </div>
-                    <div class="flex flex-col gap-2">
+                    <!-- <div class="flex flex-col gap-2">
                         <h2 class="text-2xl font-bold text-dark">Informasi Akun Admin</h2>
                         <div class="flex flex-row gap-10">
                             <div class="flex flex-col gap-2 w-[283px]">
@@ -193,8 +186,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                 <input type="password" id="password" name="password" value="Adminbank1" class="w-full h-10 bg-light border border-gray px-1.5 font-normal rounded-[5px] text-base dark:[color-scheme:light]">
                             </div>
                         </div>
-                    </div>
-                    <button type="submit" onclick="getElementById('saved').showModal()" class="bg-[#2ECC71] mt-10 h-auto w-auto place-self-center px-4 py-2 rounded-[10px] text-xs font-semibold text-light">Simpan Pengaturan</button>
+                    </div> -->
+                    <button type="submit" onclick="getElementById('saved').showModal()" class="bg-[#2ECC71] mt-10 h-auto w-auto place-self-center px-4 py-2 rounded-[10px] text-sm font-semibold text-light">Simpan Pengaturan</button>
                 </form>
             </div>
 
