@@ -55,61 +55,79 @@ session_start();
                 <?php endif; ?>
 
                 <!-- Form -->
-                <form action="../BackEnd/signup_email.php" method="POST" class="space-y-4">
-                <!-- Nama Lengkap -->
-                    <div>
-                        <label for="name" class="block text-sm font-medium text-gray-700">Nama Lengkap</label>
-                        <input type="text" id="name" name="name" placeholder="Masukkan Nama Lengkap"
-                            class="mt-1 block w-full px-3 py-2 border rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
-                            value="<?php echo isset($_POST['user_name']) ? $_POST['user_name'] : ''; ?>">
-                        </div>
-                    <!-- Email -->
-                    <div>
-                        <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
-                        <input type="email" id="email" name="email" placeholder="Email"
-                            class="mt-1 block w-full px-3 py-2 border rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
-                        
-                         <!-- Menampilkan pesan error email -->
-                         <?php if (isset($_SESSION['error_email'])): ?>
-                            <div class="text-red-500 text-sm mt-2"><?php echo $_SESSION['error_email']; ?></div>
-                            <?php unset($_SESSION['error_email']); // Hapus pesan error setelah ditampilkan ?>
-                        <?php endif; ?>
-                    </div>
-                    <!-- Password -->
-                    <div>
-                        <label for="password" class="block text-sm font-medium text-gray-700 flex justify-between">
-                            Password
-                        </label>
-                        <input type="password" id="password" name="password" placeholder="Password"
-                            class="mt-1 block w-full px-3 py-2 border rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
-                            minlength="8" required>
-                    </div>
-                    <!-- Alamat -->
-                    <div>
-                        <label for="address" class="block text-sm font-medium text-gray-700">Alamat</label>
-                        <input type="text" id="address" name="address" placeholder="Masukkan Alamat Lengkap"
-                            class="mt-1 block w-full px-3 py-2 border rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
-                    </div>
-                    <!-- Nomor HP -->
-                    <div>
-                        <label for="phone" class="block text-sm font-medium text-gray-700">Nomor HP</label>
-                        <input type="text" id="phone" name="phone" placeholder="Contoh : +628976537899"
-                            class="mt-1 block w-full px-3 py-2 border rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
-                        
-                      <!-- Menampilkan pesan error nomor HP -->
-                      <?php if (isset($_SESSION['error_phone'])): ?>
-                            <div class="text-red-500 text-sm mt-2"><?php echo $_SESSION['error_phone']; ?></div>
-                            <?php unset($_SESSION['error_phone']); // Hapus pesan error setelah ditampilkan ?>
-                        <?php endif; ?>
-                    </div>
-                    <!-- Sign Up Button -->
-                    <div>
-                        <button type="submit"
-                            class="w-full bg-black text-white py-2 rounded-lg shadow-md hover:bg-gray-800 transition">
-                            Register
-                        </button>
-                    </div>
-                </form>
+                <form action="../BackEnd/signup_email.php" method="POST" class="space-y-4" onsubmit="return validatePhone()">
+    <!-- Nama Lengkap -->
+    <div>
+        <label for="name" class="block text-sm font-medium text-gray-700">Nama Lengkap</label>
+        <input type="text" id="name" name="name" placeholder="Masukkan Nama Lengkap"
+            class="mt-1 block w-full px-3 py-2 border rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
+            value="<?php echo isset($_POST['user_name']) ? $_POST['user_name'] : ''; ?>">
+    </div>
+    <!-- Email -->
+    <div>
+        <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+        <input type="email" id="email" name="email" placeholder="Email"
+            class="mt-1 block w-full px-3 py-2 border rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
+        
+        <!-- Menampilkan pesan error email -->
+        <?php if (isset($_SESSION['error_email'])): ?>
+            <div class="text-red-500 text-sm mt-2"><?php echo $_SESSION['error_email']; ?></div>
+            <?php unset($_SESSION['error_email']); // Hapus pesan error setelah ditampilkan ?>
+        <?php endif; ?>
+    </div>
+    <!-- Password -->
+    <div>
+        <label for="password" class="block text-sm font-medium text-gray-700 flex justify-between">
+            Password
+        </label>
+        <input type="password" id="password" name="password" placeholder="Password"
+            class="mt-1 block w-full px-3 py-2 border rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
+            minlength="8" required>
+    </div>
+    <!-- Alamat -->
+    <div>
+        <label for="address" class="block text-sm font-medium text-gray-700">Alamat</label>
+        <input type="text" id="address" name="address" placeholder="Masukkan Alamat Lengkap"
+            class="mt-1 block w-full px-3 py-2 border rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
+    </div>
+    <!-- Nomor HP -->
+    <div>
+        <label for="phone" class="block text-sm font-medium text-gray-700">Nomor HP</label>
+        <input type="text" id="phone" name="phone" placeholder="Contoh : +628976537899"
+            class="mt-1 block w-full px-3 py-2 border rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
+        
+        <!-- Menampilkan pesan error nomor HP -->
+        <?php if (isset($_SESSION['error_phone'])): ?>
+            <div class="text-red-500 text-sm mt-2"><?php echo $_SESSION['error_phone']; ?></div>
+            <?php unset($_SESSION['error_phone']); // Hapus pesan error setelah ditampilkan ?>
+        <?php endif; ?>
+        <!-- Alert Error -->
+        <div id="phone-error" class="text-red-500 text-sm mt-2 hidden">Nomor HP harus dimulai dengan +62.</div>
+    </div>
+    <!-- Sign Up Button -->
+    <div>
+        <button type="submit"
+            class="w-full bg-black text-white py-2 rounded-lg shadow-md hover:bg-gray-800 transition">
+            Register
+        </button>
+    </div>
+</form>
+
+<script>
+    function validatePhone() {
+        var phone = document.getElementById('phone').value;
+        var phoneError = document.getElementById('phone-error');
+        
+        // Mengecek apakah nomor telepon dimulai dengan +62
+        if (!phone.startsWith('+62')) {
+            phoneError.classList.remove('hidden');
+            return false;  // Mencegah form submit jika ada error
+        } else {
+            phoneError.classList.add('hidden');
+            return true;  // Melanjutkan proses submit jika tidak ada error
+        }
+    }
+</script>
 
                 <!-- Sign Up -->
                 <p class="mt-2 mb-6 text-center text-sm text-gray-600">

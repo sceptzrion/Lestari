@@ -47,7 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 ?>
 
 <!DOCTYPE html>
-<html lang="en"class="bg-light dark:[color-scheme:light]">
+<html lang="en" class="bg-light dark:[color-scheme:light]">
 
 <head>
     <meta charset="UTF-8">
@@ -70,6 +70,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         .custom-shape {
             border-radius: 214px 0 0 214px;
         }
+
+        .alert {
+            background-color: #F44336; /* Red */
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            display: none;
+        }
     </style>
 </head>
 
@@ -86,25 +95,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <!-- Title -->
                 <h1 class="text-2xl font-bold text-lg-start text-gray-800 mb-8">Create New Password</h1>
                 
+                <!-- Alert Message -->
+                <div id="alert" class="alert">Passwords do not match.</div>
+
                 <!-- Form -->
-                <form action="new-password.php" method="POST" class="space-y-4">
-    <!-- New Password -->
-    <div>
-        <input type="password" id="new-password" name="new-password" placeholder="Create New Password"
-            class="mt-1 block w-full px-3 py-2 border rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500" required>
-    </div>
-    <!-- Confirm Password -->
-    <div>
-        <input type="password" id="confirm" name="confirm" placeholder="Confirm your password"
-            class="mt-1 block w-full px-3 py-2 border rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500" required>
-    </div>
-    <!-- Change Button -->
-    <button type="submit" class="w-full mt-4 bg-black text-white py-2 rounded-lg shadow-md hover:bg-gray-800 transition">
-        Change
-    </button>
-</form>
-    </div>
-    </div>
+                <form action="new-password.php" method="POST" class="space-y-4" id="passwordForm">
+                    <!-- New Password -->
+                    <div>
+                        <input type="password" id="new-password" name="new-password" placeholder="Create New Password"
+                            class="mt-1 block w-full px-3 py-2 border rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500" required>
+                    </div>
+                    <!-- Confirm Password -->
+                    <div>
+                        <input type="password" id="confirm" name="confirm" placeholder="Confirm your password"
+                            class="mt-1 block w-full px-3 py-2 border rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500" required>
+                    </div>
+                    <!-- Change Button -->
+                    <button type="submit" id="changeButton" class="w-full mt-4 bg-black text-white py-2 rounded-lg shadow-md hover:bg-gray-800 transition">
+                        Change
+                    </button>
+                </form>
+            </div>
+        </div>
 
         <!-- Right Section -->
         <div class="hidden md:flex w-1/2 bg-gradient-to-b from-[#299E63] to-[#0F3823] items-center justify-center p-16 text-white custom-shape">
@@ -117,10 +129,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     <!-- JavaScript for Handling Change -->
     <script>
-        document.getElementById('changeButton').addEventListener('click', function () {
+        document.getElementById('passwordForm').addEventListener('submit', function (event) {
+            event.preventDefault(); // Mencegah form dikirim otomatis
+
             // Get input values
             const newPassword = document.getElementById('new-password').value;
             const confirmPassword = document.getElementById('confirm').value;
+            const alertMessage = document.getElementById('alert');
 
             // Validate inputs
             if (!newPassword || !confirmPassword) {
@@ -129,42 +144,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
 
             if (newPassword !== confirmPassword) {
-                alert('Passwords do not match.');
+                // Show error message if passwords do not match
+                alertMessage.style.display = 'block';
                 return;
             }
 
-            // Show success popup
-            const popup = document.createElement('div');
-            popup.style.position = 'fixed';
-            popup.style.top = '0';
-            popup.style.left = '0';
-            popup.style.width = '100vw';
-            popup.style.height = '100vh';
-            popup.style.backgroundColor = 'rgba(0, 0, 0, 0.5)';
-            popup.style.display = 'flex';
-            popup.style.justifyContent = 'center';
-            popup.style.alignItems = 'center';
-            popup.style.zIndex = '1000';
+            // Hide alert message if passwords match
+            alertMessage.style.display = 'none';
 
-            popup.innerHTML = `
-                <div class="bg-white p-6 rounded-lg shadow-lg text-center">
-                    <h2 class="text-2xl font-bold mb-4 text-green-600">Success!</h2>
-                    <p class="text-gray-700 mb-4">Your password has been changed successfully.</p>
-                    <a href="./signin.php"
-                       class="bg-black text-white px-4 py-2 rounded-lg shadow-md hover:bg-gray-800 transition">
-                       Login Now
-                    </a>
-                </div>
-            `;
-
-            document.body.appendChild(popup);
-
-            // Remove popup when clicking outside
-            popup.addEventListener('click', function (event) {
-                if (event.target === popup) {
-                    document.body.removeChild(popup);
-                }
-            });
+            // Submit the form after validation
+            this.submit();
         });
     </script>
 </body>

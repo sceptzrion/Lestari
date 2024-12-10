@@ -1,21 +1,13 @@
 <?php
-session_start();
+session_start();  // Pastikan session sudah dimulai
 
-// Redirect ke landingpage jika user belum login
-if (!isset($_SESSION['loggedin'])) {
-    header("Location: ../../landingpage.php");
+// Koneksi ke database
+include '../../controller/config.php';  // Sesuaikan dengan path file database.php
+
+// Cek apakah pengguna sudah login
+if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
+    header("Location: ../../landing-page.php");
     exit();
-}
-
-// Koneksi database
-$host = 'localhost';
-$username = 'root';
-$password = '';
-$database = 'db_sampah_4';
-
-$conn = new mysqli($host, $username, $password, $database);
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
 }
 
 // Ambil user_id dari session

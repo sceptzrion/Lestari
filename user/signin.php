@@ -1,6 +1,9 @@
-<!DOCTYPE html>
-<html lang="en"class="bg-light dark:[color-scheme:light]">
+<?php
+session_start();
+?>
 
+<!DOCTYPE html>
+<html lang="en" class="bg-light dark:[color-scheme:light]">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,19 +11,19 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          fontFamily: {
-            'poppins': ['Poppins', 'sans-serif']
-          }
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'poppins': ['Poppins', 'sans-serif']
+                    }
+                }
+            }
         }
-      }
-    }
-  </script>
+    </script>
     <style>
         .custom-shape {
-            border-radius: 214px 0 0 214px; 
+            border-radius: 214px 0 0 214px;
         }
     </style>
 </head>
@@ -38,15 +41,22 @@
                 <!-- Title -->
                 <h1 class="text-2xl font-bold text-lg-start text-gray-800 mb-8">Sign In to Lestari</h1>
 
+                <!-- Display Alert if any error message -->
+                <?php if (isset($_SESSION['error_message'])): ?>
+                    <div class="mb-4 p-3 bg-red-600 text-white rounded">
+                        <?php echo $_SESSION['error_message']; ?>
+                    </div>
+                    <?php unset($_SESSION['error_message']); // Clear the session message after displaying it ?>
+                <?php endif; ?>
 
                 <!-- Form -->
-                <form action="../BackEnd/signin.php" method="POST" class="space-y-4">
+                <form action="../backend/signin.php" method="POST" class="space-y-4">
                     
                     <!-- Email -->
                     <div>
                         <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
                         <input type="email" id="email" name="email" placeholder="Email"
-                            class="mt-1 block w-full px-3 py-2 border rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
+                            class="mt-1 block w-full px-3 py-2 border rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500" required>
                     </div>
                     <!-- Password -->
                     <div>
@@ -54,7 +64,7 @@
                             Password
                         </label>
                         <input type="password" id="password" name="password" placeholder="Password"
-                            class="mt-1 block w-full px-3 py-2 border rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
+                            class="mt-1 block w-full px-3 py-2 border rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500" required>
                         <a href="reset-password.php" class="block mt-2 text-sm text-indigo-600 hover:underline">Forgot password?</a>
                     </div>
 
@@ -69,7 +79,7 @@
 
                 <!-- Sign In -->
                 <p class="mt-2 mb-6 text-center text-sm text-gray-600">
-                Dont have an account? <a href="./signup-email.php" class="text-indigo-600 hover:underline">Sign up</a>
+                Don't have an account? <a href="./signup-email.php" class="text-indigo-600 hover:underline">Sign up</a>
                 </p>
             </div>
         </div>
