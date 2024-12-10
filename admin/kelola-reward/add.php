@@ -1,14 +1,7 @@
 <?php
-session_start();
-// Sertakan konfigurasi database
-require_once('../../controller/config.php');
+include 'connect_admin.php';
 
-// Cek apakah admin sudah login
-if (!isset($_SESSION['admin_id'])) {
-    $_SESSION['login_message'] = "Not authorized";
-    header('Location: ../login.php');
-    exit();
-}
+
 
 // Proses tambah reward
 $message = '';
@@ -20,9 +13,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['add_reward'])) {
     $target_dir = "uploads/";
     $reward_image = $target_dir . basename($_FILES['reward_image']['name']);
     if (move_uploaded_file($_FILES['reward_image']['tmp_name'], $reward_image)) {
-        $sql = "INSERT INTO rewards (reward_name, reward_points_required, reward_image) VALUES (?, ?, ?)";
+        // Tambahkan bank_id ke dalam query INSERT
+        $sql = "INSERT INTO rewards (reward_name, reward_points_required, reward_image, bank_id) VALUES (?, ?, ?, ?)";
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param("sis", $reward_name, $reward_points_required, $reward_image);
+        $stmt->bind_param("sisi", $reward_name, $reward_points_required, $reward_image, $bank_id);
         if ($stmt->execute()) {
             $message = "Reward berhasil ditambahkan.";
             $_SESSION['flash_message'] = "success";
@@ -63,6 +57,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['add_reward'])) {
                     <img src="../../images/admin/Truck.png" alt="">
                     <p class="text-lg">Penerimaan Sampah</p>
                 </button>
+                <button class="btn btn-success bg-transparent border-0 text-light font-bold text-xl justify-start pl-[9px] w-[271px] h-[59px] flex flex-row gap-[13px]" onclick="location.href='../informasi-tutorial/'">
+                    <img src="../../images/admin/Recycling.png" alt="">
+                    <p>Informasi Tutorial</p>
+                </button>
                 <button class="btn btn-success bg-transparent border-0 text-light font-bold text-xl justify-start pl-[9px] w-[271px] h-[59px] flex flex-row gap-[13px]" onclick="location.href='../statistik-laporan/'">
                     <img src="../../images/admin/Graph.png" alt="">
                     <p>Statistik & Laporan</p>
@@ -71,9 +69,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['add_reward'])) {
                     <img src="../../images/admin/prize.png" class="w-[30px]" alt="">
                     <p>Kelola Reward</p>
                 </button>
+                <button class="btn btn-success bg-transparent border-0 text-light font-bold text-xl justify-start pl-[9px] w-[271px] h-[59px] flex flex-row gap-[13px]" onclick="location.href='../manajemen-user/'">
+                    <img src="../../images/admin/Management.png" alt="">
+                    <p>Manajemen User</p>
+                </button>
                 <button class="btn btn-success bg-transparent border-0 text-light font-bold text-xl justify-start pl-[9px] w-[271px] h-[59px] flex flex-row gap-[13px]" onclick="location.href='../marketplace/'">
                     <img src="../../images/admin/WhatsApp.png" alt="">
                     <p>Marketplace</p>
+                </button>
+                <button class="btn btn-success bg-transparent border-0 text-light font-bold text-xl justify-start pl-[9px] w-[271px] h-[59px] flex flex-row gap-[13px]" onclick="location.href='../kelola-blog/'">
+                    <img src="../../images/admin/Blog.png" alt="">
+                    <p>Kelola Blog</p>
                 </button>
                 <button class="btn btn-success bg-transparent border-0 text-light font-bold text-xl justify-start pl-[9px] w-[271px] h-[59px] flex flex-row gap-[13px]" onclick="location.href='../pengaturan/'">
                     <img src="../../images/admin/Settings.png" alt="">

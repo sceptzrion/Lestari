@@ -1,23 +1,16 @@
 <?php
-session_start();
-// Sertakan konfigurasi database
-require_once('../../controller/config.php');
+include 'connect_admin.php';
 
-// Cek apakah admin sudah login
-if (!isset($_SESSION['admin_id'])) {
-    $_SESSION['login_message'] = "Not authorized";
-    header('Location: ../login.php');
-    exit();
-}
+
 
 // Proses hapus reward
 if (isset($_GET['delete_id'])) {
     $delete_id = $_GET['delete_id'];
 
-    // Query untuk menghapus data
-    $sql = "DELETE FROM rewards WHERE reward_id = ?";
+    // Query untuk menghapus data dengan memeriksa bank_id yang login
+    $sql = "DELETE FROM rewards WHERE reward_id = ? AND bank_id = ?";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("i", $delete_id);
+    $stmt->bind_param("ii", $delete_id, $bank_id);  // Pastikan kedua parameter di-bind
     if ($stmt->execute()) {
         // Beri pesan jika penghapusan berhasil
         $message = "Reward berhasil dihapus.";
@@ -32,14 +25,16 @@ if (isset($_GET['delete_id'])) {
     exit();
 }
 
+
 // Ambil data reward untuk diedit jika tombol edit ditekan
 $edit_data = null;
 $modal_open = false; // Tambahkan variabel kontrol untuk modal
 if (isset($_GET['edit_id'])) {
     $edit_id = $_GET['edit_id'];
-    $sql = "SELECT * FROM rewards WHERE reward_id = ?";
+    // Pastikan query mengembalikan data hanya jika bank_id sesuai
+    $sql = "SELECT * FROM rewards WHERE reward_id = ? AND bank_id = ?";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("i", $edit_id);
+    $stmt->bind_param("ii", $edit_id, $bank_id);  // Bind parameter reward_id dan bank_id
     $stmt->execute();
     $edit_data = $stmt->get_result()->fetch_assoc();
     $stmt->close();
@@ -59,7 +54,6 @@ if (isset($_SESSION['flash_message'])) {
     unset($_SESSION['flash_message']);
 }
 
-
 // Proses update reward
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update_reward'])) {
     $reward_id = $_POST['reward_id'];
@@ -76,32 +70,28 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update_reward'])) {
 
     // Cek apakah form sudah disubmit
     if (isset($_POST['update_reward'])) {
-    // Ambil data dari form
-        $reward_id = $_POST['reward_id'];
-        $reward_name = $_POST['reward_name'];
-        $reward_points_required = $_POST['reward_points_required'];
-
-    // Query untuk memperbarui data di database
-        $sql = "UPDATE rewards SET reward_name = ?, reward_points_required = ?, reward_image = ? WHERE reward_id = ?";
+        // Query untuk memperbarui data di database, dengan memeriksa bank_id
+        $sql = "UPDATE rewards SET reward_name = ?, reward_points_required = ?, reward_image = ? WHERE reward_id = ? AND bank_id = ?";
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param("sisi", $reward_name, $reward_points_required, $reward_image, $reward_id);
+        $stmt->bind_param("sssis", $reward_name, $reward_points_required, $reward_image, $reward_id, $bank_id);
 
-    // Eksekusi query dan cek apakah berhasil
-    if ($stmt->execute()) {
-        // Jika berhasil, set flag sukses dan lakukan redirect
-        $save_successful = true;  // Flag untuk memicu modal
-        $stmt->close();
-        
-        // Redirect untuk menghindari pengiriman ulang form pada saat refresh dan untuk menampilkan modal
-        header("Location: index.php?saved=true");
-        exit;
-    } else {
-        // Jika gagal, set pesan error
-        $message = "Gagal memperbarui reward: " . $stmt->error;
-        $stmt->close();
+        // Eksekusi query dan cek apakah berhasil
+        if ($stmt->execute()) {
+            // Jika berhasil, set flag sukses dan lakukan redirect
+            $save_successful = true;  // Flag untuk memicu modal
+            $stmt->close();
+            
+            // Redirect untuk menghindari pengiriman ulang form pada saat refresh dan untuk menampilkan modal
+            header("Location: index.php?saved=true");
+            exit;
+        } else {
+            // Jika gagal, set pesan error
+            $message = "Gagal memperbarui reward: " . $stmt->error;
+            $stmt->close();
+        }
     }
 }
-}
+
 
 ?>
 
@@ -210,33 +200,70 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update_reward'])) {
             <?php endif; ?>
 
              <!-- GRID -->
-            <div class="bg-light w-full h-auto p-10 mt-7 border border-gray shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] grid-cols-3 grid gap-7 rounded-[10px]">
+             <div class="bg-light w-full h-auto p-10 mt-7 border border-gray shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] grid grid-cols-3 gap-7 rounded-[10px]">
                 <!-- CARDS -->
                 <?php
-                      $sql = "SELECT * FROM rewards";
-                      $result = $conn->query($sql);
-                      while ($row = $result->fetch_assoc()): ?>
-                        <div class=" bg-light w-auto h-auto shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] px-1.5 pb-[15px]">
-                        <figure class="pt-[7px]">
-                            <img src="<?= htmlspecialchars($row['reward_image'] ?? 'default.jpg'); ?>"
-                            alt="Reward Image"
-                            class="rounded-[15px]" />
-                        </figure>
-                        <div class="mt-[31px] gap-[9px] flex flex-col">
-                            <h2 class="text-dark text-[15px] font-extrabold"><?= htmlspecialchars($row['reward_name']); ?></h2>
-                            <p class="text-xs text-dark font-normal max-w-[238px]">Poin: <?= $row['reward_points_required']; ?></p>
+                // Periksa apakah admin sudah login
+                if (!isset($_SESSION['admin_id'])) {
+                    die("Anda tidak diizinkan mengakses data ini.");
+                }
+
+                // Ambil admin_id dari session
+                $admin_id = $_SESSION['admin_id'];
+
+                // Query untuk mengambil bank_id berdasarkan admin_id
+                $adminQuery = "SELECT bank_id FROM admin WHERE admin_id = ?";
+                $stmt = $conn->prepare($adminQuery);
+                $stmt->bind_param("i", $admin_id);
+                $stmt->execute();
+                $result = $stmt->get_result();
+                $adminData = $result->fetch_assoc();
+                $stmt->close();
+
+                $bank_id = $adminData['bank_id'] ?? null;
+
+                if (!$bank_id) {
+                    die("Admin tidak terkait dengan bank sampah.");
+                }
+
+                // Jika bank_id tersedia, ambil data rewards
+                $sql = "SELECT * FROM rewards WHERE bank_id=?";
+                $stmt = $conn->prepare($sql);
+                $stmt->bind_param("i", $bank_id); // Bind parameter (integer)
+                $stmt->execute();
+                $result = $stmt->get_result();
+
+                if ($result->num_rows > 0) {
+                    while ($row = $result->fetch_assoc()): ?>
+                        <div class="bg-light w-auto h-auto shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] px-1.5 pb-[15px]">
+                            <figure class="pt-[7px]">
+                                <img src="<?= htmlspecialchars($row['reward_image'] ?? 'default.jpg'); ?>"
+                                    alt="Reward Image"
+                                    class="rounded-[15px]" />
+                            </figure>
+                            <div class="mt-[31px] gap-[9px] flex flex-col">
+                                <h2 class="text-dark text-[15px] font-extrabold"><?= htmlspecialchars($row['reward_name']); ?></h2>
+                                <p class="text-xs text-dark font-normal max-w-[238px]">Poin: <?= htmlspecialchars($row['reward_points_required']); ?></p>
+                            </div>
+                            <div class="mt-[50px] h-5 flex flex-row justify-between align-middle">
+                                <a href="?edit_id=<?= htmlspecialchars($row['reward_id']); ?>">
+                                    <button class="bg-[#2ECC71] h-full w-[72px] rounded-[10px] text-[10px] font-semibold text-light">Edit</button>
+                                </a>
+                                <a href="javascript:void(0)" onclick="showDeleteDialog(<?= htmlspecialchars($row['reward_id']); ?>)">
+                                    <button class="bg-[#C0392B] h-full w-[72px] rounded-[10px] text-[10px] font-semibold text-light">Hapus</button>
+                                </a>
+                            </div>
                         </div>
-                        <div class="mt-[50px] h-5 flex flex-row justify-between align-middle">
-                            <a href="?edit_id=<?= $row['reward_id']; ?>">
-                                <button class="bg-[#2ECC71] h-full w-[72px] rounded-[10px] text-[10px] font-semibold text-light">Edit</button>
-                            </a>
-                            <a href="javascript:void(0)" onclick="showDeleteDialog(<?= $row['reward_id']; ?>)">
-                                <button class="bg-[#C0392B] h-full w-[72px] rounded-[10px] text-[10px] font-semibold text-light">Hapus</button>
-                            </a>
-                        </div>
-                    </div> 
-                <?php endwhile; ?>
+                    <?php endwhile;
+                } else {
+                    echo "<p>Tidak ada rewards untuk bank ini.</p>";
+                }
+
+                $stmt->close();
+                ?>
             </div>
+
+
             <!-- CARDS END  -->
 
             <!-- dialogs -->

@@ -1,7 +1,6 @@
 <?php
-session_start();
-// Sertakan konfigurasi database
-require_once('../../controller/config.php');
+include 'connect_admin.php';
+
 
 // Set header untuk JSON response
 header('Content-Type: application/json');
@@ -20,9 +19,9 @@ try {
     // Tentukan status yang valid
     $status = 'approved'; // Anda bisa sesuaikan dengan status yang valid, misalnya 'pending' atau 'approved'
 
-    // Query untuk update status redeem
-    $stmt = $conn->prepare("UPDATE redeem SET status = ? WHERE redeem_id = ?");
-    $stmt->bind_param("si", $status, $redeem_id); // Menggunakan 'si' karena status adalah string dan redeem_id adalah integer
+    // Query untuk update status redeem dan memastikan bank_id sesuai
+    $stmt = $conn->prepare("UPDATE redeem SET status = ? WHERE redeem_id = ? AND bank_id = ?");
+    $stmt->bind_param("sii", $status, $redeem_id, $bank_id); // Menggunakan 'sii' karena status adalah string, redeem_id dan bank_id adalah integer
 
     if ($stmt->execute()) {
         echo json_encode(['success' => true, 'message' => 'Reward berhasil disetujui.']);

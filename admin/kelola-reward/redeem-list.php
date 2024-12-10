@@ -1,22 +1,21 @@
 <?php
-session_start();
-// Sertakan konfigurasi database
-require_once('../../controller/config.php');
-
-// Cek apakah admin sudah login
-if (!isset($_SESSION['admin_id'])) {
-    $_SESSION['login_message'] = "Not authorized";
-    header('Location: ../login.php');
-    exit();
-}
+include 'connect_admin.php';
 
 // Mengambil data dari tabel redeem
 $sql = "SELECT redeem.*, rewards.reward_name, rewards.reward_points_required
-        FROM redeem
-        JOIN rewards ON redeem.reward_id = rewards.reward_id
-        ORDER BY redeem.created_at DESC";
-$redeem_result = $conn->query($sql);
+FROM redeem
+JOIN rewards ON redeem.reward_id = rewards.reward_id
+WHERE redeem.bank_id = ?
+ORDER BY redeem.created_at DESC;
+";
 
+// Pastikan koneksi ke database ($conn) sudah dibuat sebelumnya
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("i", $bank_id);
+$stmt->execute();
+
+// Simpan hasil dalam $redeem_result
+$redeem_result = $stmt->get_result();
 ?>
 
 <!DOCTYPE html>
@@ -89,15 +88,10 @@ $redeem_result = $conn->query($sql);
                             <p class="text-xl font-normal">Pengaturan</p>
                         </a></li>
                         <hr class="h-[2px] w-full text-gray my-6">
-                        <li>
-                              <form action="../signout.php" method="POST" id="signOutForm" class="flex flex-row gap-[10px]">
-                                <button type="submit" style="display: none;" id="signOutButton"></button>
-                                <a href="javascript:void(0);" onclick="document.getElementById('signOutForm').submit();" class="flex flex-row gap-[10px]">
-                                    <img src="../../images/admin/sign-out.png" class="w-[30px]" alt="Sign Out">
-                                    <p class="text-xl font-normal">Sign Out</p>
-                                </a>
-                              </form>
-                           </li>
+                        <li><a class="flex flex-row gap-[10px]">
+                            <img src="../../images/admin/sign-out.png" class="w-[30px]" alt="Sign Out">
+                            <p class="text-xl font-normal">Sign Out</p>
+                        </a></li>
                     </ul>
                 </div>
             </div>
