@@ -12,11 +12,17 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
 
 // Ambil data user_id dari session
 $user_id = $_SESSION['user_id'];  // Pastikan 'user_id' ada dalam session setelah login
+// Ambil marketplace_id dari URL
+$marketplace_id = isset($_GET['id']) ? intval($_GET['id']) : 0;
+// Validasi marketplace_id
+if ($marketplace_id <= 0) {
+  die("Marketplace ID tidak valid. Pastikan URL memiliki parameter id yang benar.");
+}
 
-// Query untuk mengambil data produk marketplace berdasarkan user_id
-$sql = "SELECT * FROM marketplace WHERE user_id = ?";
+// Query untuk mengambil data produk berdasarkan user_id dan marketplace_id
+$sql = "SELECT * FROM marketplace WHERE user_id = ? AND marketplace_id = ?";
 $stmt = $conn->prepare($sql);
-$stmt->bind_param("i", $user_id);  // Bind parameter untuk user_id
+$stmt->bind_param("ii", $user_id, $marketplace_id); // Bind parameter untuk user_id dan marketplace_id
 $stmt->execute();
 $result = $stmt->get_result();
 
@@ -48,7 +54,7 @@ $conn->close();
 ?>
 
 <!DOCTYPE html>
-<html lang="en" class="bg-light dark:bg-gray-800">
+<html lang="en" class="bg-light dark:[color-scheme:light]">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -273,31 +279,6 @@ $conn->close();
     </script>
   <!-- NAVBAR END -->
 
-    <!-- Profile -->
-    <div class="navbar-end ml-[5px] flex items-center gap-x-0 md:gap-4">
-        <?php if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true): ?>
-            <div class="relative">
-                <button class="font-medium text-sm text-green-600 focus:outline-none" onclick="toggleDropdown()">
-                    Halo, <?= htmlspecialchars($_SESSION['user_name']); ?> 
-                    <svg xmlns="http://www.w3.org/2000/svg" class="inline-block w-4 h-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-                    </svg>
-                </button>
-                <div id="dropdownMenu" class="hidden absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-md z-10">
-                    <a href="../../user/profile.php" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Profil</a>
-                    <a href="../../backend/logout.php" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Logout</a>
-                </div>
-            </div>
-        <?php else: ?>
-          <a href="../../user/signin.php" class="btn md:min-w-[100px] md:h-12 md:shadow-md md:rounded-full md:bg-gradient-to-r from-green-600 to-dark-green md:text-sm md:border md:border-to-r md:from-green-600 md:to-dark-green md:font-medium md:text-white md:text-center text-base bg-transparent text-sm text-[#1B5E20] border-0 shadow-none">
-            Sign In
-          </a>
-          <a href="../../user/signup.php" class="btn btn-outline md:min-w-[100px] md:h-12 md:shadow-md md:border border-to-r from-green-600 to-dark-green md:rounded-full md:text-sm md:font-medium md:text-[#1B5E20] md:text-center text-base bg-transparent text-sm text-[#1B5E20] border-0 shadow-none whitespace-nowrap">
-            Sign Up
-          </a>
-        <?php endif; ?>
-    </div>
-</div>
 
 <!-- Main Content -->
 <main class="container mx-auto px-6 py-12 grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -337,18 +318,16 @@ $conn->close();
         </div>
 
         <!-- Tombol Chat -->
-        <div class="mt-6">
-        <div class="w-full inline-block text-center bg-gradient-to-r from-green to-dark-green text-white py-3 rounded-lg shadow-md hover:bg-green-700">
+  <div class="mt-6">
     <?php if ($phone_number): ?>
         <a href="https://wa.me/<?= htmlspecialchars($phone_number); ?>?text=Hello,%20I%20am%20interested%20in%20your%20product%21" 
-           class="w-full inline-block text-center bg-gradient-to-r from-green-600 to-dark-green text-white py-3 rounded-lg shadow-md hover:bg-green-700">
+           class="w-full inline-block text-center bg-gradient-to-r from-green to-dark-green text-white py-3 rounded-lg shadow-md hover:bg-green-700">
             Chat dengan penjual
         </a>
     <?php else: ?>
         <p class="text-gray-700">Nomor telepon penjual tidak tersedia.</p>
     <?php endif; ?>
 </div>
-    </div>
 </main>
 </body>
 </html>
