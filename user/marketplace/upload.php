@@ -231,6 +231,7 @@ if (basename($_SERVER['PHP_SELF']) != 'landing-page.php') {
 
   <!-- main content -->
   <main class="container mx-auto md:px-16 px-8 md:py-8 py-3">
+  <form action="../../backend/products.php" method="POST" enctype="multipart/form-data" class="space-y-6">
     <h2 class="text-3xl font-bold text-[#1B5E20] mb-6">Marketplace</h2>
     <!-- Upload Box -->
 <div class="bg-white shadow-lg rounded-lg p-6 mb-8">
@@ -260,9 +261,7 @@ if (basename($_SERVER['PHP_SELF']) != 'landing-page.php') {
 
     <!-- Product Details Form -->
     <div class="bg-white shadow-lg rounded-lg p-6">
-      <form action="../../backend/products.php" method="POST" enctype="multipart/form-data" class="space-y-6">
         
-
         <!-- Nama Produk -->
         <div>
           <label for="marketplace_product_name" class="block text-lg font-bold text-[#1B5E20]">Nama Produk</label>
@@ -318,7 +317,7 @@ if (basename($_SERVER['PHP_SELF']) != 'landing-page.php') {
         <!-- Tombol Submit -->
         <button
           type="submit"
-          class="w-full py-3 bg-gradient-to-r from-green to-dark-green text-white font-semibold rounded-lg shadow hover:bg-green-900"
+          class="w-full py-3 mt-6 bg-gradient-to-r from-green to-dark-green text-white font-semibold rounded-lg shadow hover:bg-green-900"
         >
           Upload Produk
         </button>

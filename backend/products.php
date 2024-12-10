@@ -41,7 +41,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         echo "<script>alert('Format file gambar tidak valid. Hanya JPG, JPEG, PNG, dan GIF diperbolehkan.');</script>";
         exit;
     }
-
+    
+    
     // Batas ukuran file (contoh: 2MB)
     $max_file_size = 2 * 1024 * 1024; // 2MB
     if ($_FILES["marketplace_image"]["size"] > $max_file_size) {
