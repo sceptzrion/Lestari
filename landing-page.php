@@ -118,7 +118,7 @@ if (basename($_SERVER['PHP_SELF']) != 'landing-page.php') {
     <li>
       <details>
         <summary>Layanan</summary>
-        <ul class="bg-light absolute left-1/2 transform -translate-x-1/2 rounded-[10px] border-[1px] shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] border-gray px-[14px] py-[20px] flex flex-wrap items-center gap-3 min-w-[400px] max-w-[600px]">
+        <ul class="bg-light absolute left-1/2 transform -translate-x-1/2 rounded-[10px] border-[1px] shadow-[0px_4px_4px_-0px_rgba(0,0,0,0.25)] border-gray px-[14px] py-[20px] flex flex-wrap items-center gap-3 min-w-[300px] max-w-[600px]">
           <!-- Drop Off -->
           <li>
             <?php if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true): ?>
