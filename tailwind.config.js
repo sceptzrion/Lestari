@@ -1,6 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ["./**/*.{html,js,php}"],
+  content: ["./**/*.{html,js,php}"
+  ],
   theme: {
     colors: {
       'light': '#ffffff',
@@ -13,7 +14,8 @@ module.exports = {
       'green-admin': '#3EC384',
       'dark-green-admin': '#1E5D3F',
       'light-bg-content': '#F5F5F5',
-      'green-btn': '#2E9E5D'
+      'green-btn': '#2ECC71',
+      'red': '#FF0000'
     },
     extend: {},
   },
